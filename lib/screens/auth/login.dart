@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mokrabela/models/user_model.dart';
 import 'package:mokrabela/screens/auth/signup_screen.dart';
-import 'package:mokrabela/screens/child/child_dashboard.dart';
-import 'package:mokrabela/screens/parent/parent_dashboard.dart';
-import 'package:mokrabela/screens/teacher/teacher_dashboard.dart';
 import 'package:mokrabela/services/auth_service.dart';
+import 'package:mokrabela/components/inputfields/custom_text_form_field.dart';
+import 'package:mokrabela/components/buttons/custom_auth_button.dart';
+import 'package:sizer/sizer.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -29,9 +29,7 @@ class _LoginPageState extends State<LoginPage> {
           password: _passwordController.text.trim(),
         );
 
-        if (user != null && mounted) {
-          _navigateBasedOnRole(user.role);
-        } else {
+        if (user == null && mounted) {
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Login failed. User not found.')),
@@ -50,123 +48,149 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  void _navigateBasedOnRole(UserRole role) {
-    Widget destination;
-    switch (role) {
-      case UserRole.child:
-        destination = const ChildDashboard();
-        break;
-      case UserRole.parent:
-        destination = const ParentDashboard();
-        break;
-      case UserRole.teacher:
-        destination = const TeacherDashboard();
-        break;
-    }
-    Navigator.of(
-      context,
-    ).pushReplacement(MaterialPageRoute(builder: (context) => destination));
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 40.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const SizedBox(height: 40),
-                // Logo/Title Area
-                Center(
-                  child: Column(
+      body: Container(
+        width: double.infinity,
+        height: 100.h,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Colors.white,
+              Color(0xFF5DADE2), // Teal blue
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: 5.w),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  SizedBox(height: 3.h),
+                  // Logo/Title Area
+                  Center(
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(2.w),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withValues(alpha: 0.1),
+                                blurRadius: 20,
+                                offset: const Offset(0, 10),
+                              ),
+                            ],
+                          ),
+                          child: Image.asset(
+                            'assets/images/logos/Logo.png',
+                            width: 45.w,
+                            height: 45.w,
+                          ),
+                        ),
+                        SizedBox(height: 2.h),
+                        Text(
+                          'MokraBela',
+                          style: Theme.of(context).textTheme.displayLarge
+                              ?.copyWith(
+                                color: const Color(0xFF2C5F7C),
+                                fontSize: 28.sp,
+                                fontWeight: FontWeight.bold,
+                                shadows: [
+                                  Shadow(
+                                    color: Colors.black.withValues(alpha: 0.1),
+                                    offset: const Offset(0, 1),
+                                    blurRadius: 2,
+                                  ),
+                                ],
+                              ),
+                        ),
+                        Text(
+                          'Technological Therapy',
+                          style: Theme.of(context).textTheme.titleMedium
+                              ?.copyWith(
+                                color: const Color(0xFF5DADE2),
+                                fontSize: 14.sp,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 7.h),
+
+                  // Email Field
+                  CustomTextFormField(
+                    controller: _emailController,
+                    labelText: 'Email Address',
+                    prefixIcon: Icons.email_outlined,
+                    keyboardType: TextInputType.emailAddress,
+                    regexPattern: ValidationPatterns.email,
+                    errorMessage: 'Enter a valid email address',
+                  ),
+                  SizedBox(height: 1.5.h),
+
+                  // Password Field
+                  CustomTextFormField(
+                    controller: _passwordController,
+                    labelText: 'Password',
+                    prefixIcon: Icons.lock_outline,
+                    obscureText: true,
+                    regexPattern: ValidationPatterns.passwordMin6,
+                    errorMessage: 'Password must be at least 6 characters',
+                  ),
+                  SizedBox(height: 3.h),
+
+                  // Login Button
+                  CustomAuthButton(
+                    text: 'Log In',
+                    onPressed: _login,
+                    isLoading: _isLoading,
+                  ),
+
+                  SizedBox(height: 3.h),
+
+                  // Sign Up Link
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
-                        Icons.health_and_safety, // Placeholder icon
-                        size: 80,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                      const SizedBox(height: 16),
                       Text(
-                        'MokraBela',
-                        style: Theme.of(context).textTheme.displayLarge
-                            ?.copyWith(color: Theme.of(context).primaryColor),
+                        "Don't have an account?",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                      Text(
-                        'Technological Therapy',
-                        style: Theme.of(
-                          context,
-                        ).textTheme.titleMedium?.copyWith(color: Colors.grey),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SignUpScreen(),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          'Sign Up',
+                          style: TextStyle(
+                            color: Color(0xFF2C5F7C),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
                       ),
                     ],
                   ),
-                ),
-                const SizedBox(height: 60),
-
-                // Email Field
-                TextFormField(
-                  controller: _emailController,
-                  decoration: const InputDecoration(
-                    labelText: 'Email Address',
-                    prefixIcon: Icon(Icons.email_outlined),
-                  ),
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (value) => value == null || !value.contains('@')
-                      ? 'Enter a valid email'
-                      : null,
-                ),
-                const SizedBox(height: 20),
-
-                // Password Field
-                TextFormField(
-                  controller: _passwordController,
-                  decoration: const InputDecoration(
-                    labelText: 'Password',
-                    prefixIcon: Icon(Icons.lock_outline),
-                  ),
-                  obscureText: true,
-                  validator: (value) => value == null || value.length < 6
-                      ? 'Password too short'
-                      : null,
-                ),
-                const SizedBox(height: 32),
-
-                // Login Button
-                _isLoading
-                    ? const Center(child: CircularProgressIndicator())
-                    : ElevatedButton(
-                        onPressed: _login,
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(double.infinity, 56),
-                        ),
-                        child: const Text('Log In'),
-                      ),
-
-                const SizedBox(height: 24),
-
-                // Sign Up Link
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text("Don't have an account?"),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const SignUpScreen(),
-                          ),
-                        );
-                      },
-                      child: const Text('Sign Up'),
-                    ),
-                  ],
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

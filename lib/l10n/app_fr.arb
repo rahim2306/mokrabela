@@ -1,0 +1,51 @@
+{
+  "@@locale": "fr",
+  "appTitle": "MokraBela",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "welcome": "Bienvenue",
+  "@welcome": {
+    "description": "Welcome message"
+  },
+  "hello": "Bonjour, {name}!",
+  "@hello": {
+    "description": "Greeting message with user name",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Jean"
+      }
+    }
+  },
+  "languageSelector": "Sélectionner la langue",
+  "@languageSelector": {
+    "description": "Label for language selector"
+  },
+  "english": "Anglais",
+  "@english": {
+    "description": "English language option"
+  },
+  "french": "Français",
+  "@french": {
+    "description": "French language option"
+  },
+  "arabic": "Arabe",
+  "@arabic": {
+    "description": "Arabic language option"
+  },
+  "changeLanguage": "Changer de langue",
+  "@changeLanguage": {
+    "description": "Button to change language"
+  },
+  "currentLanguage": "Langue actuelle: {language}",
+  "@currentLanguage": {
+    "description": "Display current language",
+    "placeholders": {
+      "language": {
+        "type": "String",
+        "example": "Français"
+      }
+    }
+  }
+}

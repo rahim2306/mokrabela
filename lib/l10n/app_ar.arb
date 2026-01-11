@@ -1,0 +1,51 @@
+{
+  "@@locale": "ar",
+  "appTitle": "موكرابيلا",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "welcome": "مرحبا",
+  "@welcome": {
+    "description": "Welcome message"
+  },
+  "hello": "مرحبا، {name}!",
+  "@hello": {
+    "description": "Greeting message with user name",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "أحمد"
+      }
+    }
+  },
+  "languageSelector": "اختر اللغة",
+  "@languageSelector": {
+    "description": "Label for language selector"
+  },
+  "english": "الإنجليزية",
+  "@english": {
+    "description": "English language option"
+  },
+  "french": "الفرنسية",
+  "@french": {
+    "description": "French language option"
+  },
+  "arabic": "العربية",
+  "@arabic": {
+    "description": "Arabic language option"
+  },
+  "changeLanguage": "تغيير اللغة",
+  "@changeLanguage": {
+    "description": "Button to change language"
+  },
+  "currentLanguage": "اللغة الحالية: {language}",
+  "@currentLanguage": {
+    "description": "Display current language",
+    "placeholders": {
+      "language": {
+        "type": "String",
+        "example": "العربية"
+      }
+    }
+  }
+}

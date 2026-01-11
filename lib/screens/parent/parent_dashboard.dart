@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mokrabela/components/buttons/sign_out_button.dart';
+import 'package:sizer/sizer.dart';
 
 class ParentDashboard extends StatelessWidget {
   const ParentDashboard({super.key});
@@ -8,9 +9,12 @@ class ParentDashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Parent Dashboard'),
+        title: Text('Parent Dashboard', style: TextStyle(fontSize: 18.sp)),
         backgroundColor: Colors.green,
-        actions: const [SignOutButton(), SizedBox(width: 8)],
+        actions: [
+          SignOutButton(),
+          SizedBox(width: 2.w),
+        ],
       ),
       body: const Center(
         child: Text('Parent Dashboard - Multi-Child Supervision'),
