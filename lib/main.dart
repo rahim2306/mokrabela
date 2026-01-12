@@ -45,72 +45,12 @@ class _MyAppState extends State<MyApp> {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: const [Locale('en'), Locale('fr'), Locale('ar')],
-          home: LanguageSwitcherWrapper(
+          home: AuthGate(
             onLanguageChange: _changeLanguage,
-            child: const AuthGate(),
+            currentLocale: _locale,
           ),
         );
       },
-    );
-  }
-}
-
-class LanguageSwitcherWrapper extends StatelessWidget {
-  final Function(Locale) onLanguageChange;
-  final Widget child;
-
-  const LanguageSwitcherWrapper({
-    super.key,
-    required this.onLanguageChange,
-    required this.child,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.appTitle),
-        actions: [
-          PopupMenuButton<Locale>(
-            icon: const Icon(Icons.language),
-            tooltip: AppLocalizations.of(context)!.languageSelector,
-            onSelected: onLanguageChange,
-            itemBuilder: (BuildContext context) => [
-              PopupMenuItem(
-                value: const Locale('en'),
-                child: Row(
-                  children: [
-                    const Text('🇬🇧'),
-                    const SizedBox(width: 8),
-                    Text(AppLocalizations.of(context)!.english),
-                  ],
-                ),
-              ),
-              PopupMenuItem(
-                value: const Locale('fr'),
-                child: Row(
-                  children: [
-                    const Text('🇫🇷'),
-                    const SizedBox(width: 8),
-                    Text(AppLocalizations.of(context)!.french),
-                  ],
-                ),
-              ),
-              PopupMenuItem(
-                value: const Locale('ar'),
-                child: Row(
-                  children: [
-                    const Text('🇸🇦'),
-                    const SizedBox(width: 8),
-                    Text(AppLocalizations.of(context)!.arabic),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-      body: child,
     );
   }
 }

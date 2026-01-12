@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 /// A reusable custom text form field widget with regex validation support
 class CustomTextFormField extends StatelessWidget {
@@ -31,20 +32,24 @@ class CustomTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
         labelText: labelText,
-        prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
+        // Use theme's labelStyle, floatingLabelStyle, hintStyle, etc.
+        // No need to override - theme handles all states
+        prefixIcon: prefixIcon != null ? Icon(prefixIcon, size: 20.sp) : null,
       ),
       obscureText: obscureText,
       keyboardType: keyboardType,
       maxLines: obscureText ? 1 : maxLines,
       textCapitalization: textCapitalization,
       enabled: enabled,
-      style: const TextStyle(
-        color: Color(0xFF2C3E50),
-        fontSize: 16,
+      // Use theme's text style for typed text
+      style: theme.textTheme.bodyLarge?.copyWith(
+        fontSize: 16.sp,
         fontWeight: FontWeight.w500,
       ),
       validator: (value) {

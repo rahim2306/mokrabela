@@ -2,14 +2,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mokrabela/components/snackbars/custom_snackbar.dart';
-import 'package:mokrabela/screens/auth/login.dart';
 import 'package:mokrabela/screens/child/child_dashboard.dart';
 import 'package:mokrabela/screens/common/status_screens.dart';
+import 'package:mokrabela/screens/onboarding/onboarding_flow.dart';
 import 'package:mokrabela/screens/parent/parent_dashboard.dart';
 import 'package:mokrabela/screens/teacher/teacher_dashboard.dart';
 
 class AuthGate extends StatelessWidget {
-  const AuthGate({super.key});
+  final Function(Locale) onLanguageChange;
+  final Locale currentLocale;
+
+  const AuthGate({
+    super.key,
+    required this.onLanguageChange,
+    required this.currentLocale,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +28,12 @@ class AuthGate extends StatelessWidget {
           return const LoadingScreen();
         }
 
-        // Not authenticated
+        // Not authenticated - show onboarding flow
         if (!snapshot.hasData) {
-          return const LoginPage();
+          return OnboardingFlow(
+            onLanguageChanged: onLanguageChange,
+            currentLocale: currentLocale,
+          );
         }
 
         // Authenticated - check role

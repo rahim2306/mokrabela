@@ -47,5 +47,217 @@
         "example": "Français"
       }
     }
+  },
+  "welcomeToMokrabela": "Bienvenue sur MokraBela",
+  "@welcomeToMokrabela": {
+    "description": "Welcome screen title"
+  },
+  "welcomeSubtitle": "Aider les enfants à se sentir plus calmes, plus concentrés et mieux accompagnés, ensemble.",
+  "@welcomeSubtitle": {
+    "description": "Welcome screen subtitle"
+  },
+  "getStarted": "Commencer",
+  "@getStarted": {
+    "description": "Get started button"
+  },
+  "logIn": "Se connecter",
+  "@logIn": {
+    "description": "Log in button"
+  },
+  "welcomeBack": "Bon retour",
+  "@welcomeBack": {
+    "description": "Login screen title"
+  },
+  "loginSubtitle": "Connectez-vous pour continuer votre parcours.",
+  "@loginSubtitle": {
+    "description": "Login screen subtitle"
+  },
+  "loginFailed": "Échec de la connexion. Veuillez vérifier vos identifiants.",
+  "@loginFailed": {
+    "description": "Login failure message"
+  },
+  "dontHaveAccount": "Vous n'avez pas de compte?",
+  "@dontHaveAccount": {
+    "description": "Sign up prompt text"
+  },
+  "alreadyHaveAccount": "Vous avez déjà un compte?",
+  "@alreadyHaveAccount": {
+    "description": "Login prompt text"
+  },
+  "onboardingQuestion1": "Quelle phrasevous décrit le mieux?",
+  "@onboardingQuestion1": {
+    "description": "First onboarding question"
+  },
+  "optionParent": "Je suis un parent qui souhaite suivre les progrès de mon enfant.",
+  "@optionParent": {
+    "description": "Parent role option"
+  },
+  "optionTeacher": "Je suis un enseignant qui travaille avec des élèves.",
+  "@optionTeacher": {
+    "description": "Teacher role option"
+  },
+  "next": "Suivant",
+  "@next": {
+    "description": "Next button"
+  },
+  "back": "Retour",
+  "@back": {
+    "description": "Back button"
+  },
+  "skip": "Passer",
+  "@skip": {
+    "description": "Skip button"
+  },
+  "intro1Title": "Le soutien avant tout",
+  "@intro1Title": {
+    "description": "Title for first introduction screen"
+  },
+  "intro1Description": "Les enfants ne s'autorégulent pas seuls. Avec l'accompagnement des parents et des enseignants, le calme devient une habitude.",
+  "@intro1Description": {
+    "description": "Description for first introduction screen"
+  },
+  "intro2Title": "Construire le calme intérieur",
+  "@intro2Title": {
+    "description": "Title for second introduction screen"
+  },
+  "intro2Description": "Pas à pas, les enfants apprennent à se calmer, à mieux se concentrer et à se sentir en contrôle.",
+  "@intro2Description": {
+    "description": "Description for second introduction screen"
+  },
+  "onboardingQuestion2": "Quand souhaitez-vous vous enregistrer quotidiennement?",
+  "@onboardingQuestion2": {
+    "description": "Second onboarding question"
+  },
+  "reminderHabitText": "Un rappel doux vous aide à créer une habitude.",
+  "@reminderHabitText": {
+    "description": "Reminder card text"
+  },
+  "am": "AM",
+  "@am": {
+    "description": "AM time indicator"
+  },
+  "pm": "PM",
+  "@pm": {
+    "description": "PM time indicator"
+  },
+  "tellUsMoreTitle": "Parlez-nous de vous",
+  "@tellUsMoreTitle": {
+    "description": "Registration form title"
+  },
+  "tellUsMoreSubtitle": "Choisissez quelques mots qui vous correspondent",
+  "@tellUsMoreSubtitle": {
+    "description": "Registration form subtitle"
+  },
+  "profileImage": "Image de profil",
+  "@profileImage": {
+    "description": "Profile image label"
+  },
+  "fullName": "Nom complet",
+  "@fullName": {
+    "description": "Full name field label"
+  },
+  "firstName": "Prénom",
+  "@firstName": {
+    "description": "First name field label"
+  },
+  "familyName": "Nom de famille",
+  "@familyName": {
+    "description": "Family name field label"
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Email field label"
+  },
+  "password": "Mot de passe",
+  "@password": {
+    "description": "Password field label"
+  },
+  "phoneNumber": "Numéro de téléphone",
+  "@phoneNumber": {
+    "description": "Phone number field label"
+  },
+  "dateOfBirth": "Date de naissance",
+  "@dateOfBirth": {
+    "description": "Date of birth field label"
+  },
+  "gender": "Genre",
+  "@gender": {
+    "description": "Gender field label"
+  },
+  "male": "Homme",
+  "@male": {
+    "description": "Male gender option"
+  },
+  "female": "Femme",
+  "@female": {
+    "description": "Female gender option"
+  },
+  "other": "Autre",
+  "@other": {
+    "description": "Other gender option"
+  },
+  "preferNotToSay": "Préfère ne pas dire",
+  "@preferNotToSay": {
+    "description": "Prefer not to say option"
+  },
+  "goToFinalCheckIn": "Aller au contrôle final",
+  "@goToFinalCheckIn": {
+    "description": "Submit registration button"
+  },
+  "iAmA": "Je suis un...",
+  "@iAmA": {
+    "description": "Role selection label"
+  },
+  "signUp": "S'inscrire",
+  "@signUp": {
+    "description": "Sign up button text"
+  },
+  "fieldRequired": "Ce champ est obligatoire",
+  "@fieldRequired": {
+    "description": "Required field validation message"
+  },
+  "invalidEmail": "Veuillez entrer un email valide",
+  "@invalidEmail": {
+    "description": "Invalid email validation message"
+  },
+  "passwordTooShort": "Le mot de passe doit contenir au moins 6 caractères",
+  "@passwordTooShort": {
+    "description": "Password too short validation message"
+  },
+  "invalidPhoneNumber": "Veuillez entrer un numéro de téléphone valide",
+  "@invalidPhoneNumber": {
+    "description": "Invalid phone number validation message"
+  },
+  "registrationSuccess": "Inscription réussie!",
+  "@registrationSuccess": {
+    "description": "Registration success message"
+  },
+  "registrationFailed": "L'inscription a échoué. Veuillez réessayer.",
+  "@registrationFailed": {
+    "description": "Registration failed message"
+  },
+  "emailAlreadyInUse": "Cet email est déjà utilisé",
+  "@emailAlreadyInUse": {
+    "description": "Email already in use error"
+  },
+  "weakPassword": "Le mot de passe est trop faible",
+  "@weakPassword": {
+    "description": "Weak password error"
+  },
+  "networkError": "Erreur réseau. Veuillez vérifier votre connexion.",
+  "@networkError": {
+    "description": "Network error message"
+  },
+  "selectGender": "Sélectionner le genre",
+  "@selectGender": {
+    "description": "Gender dropdown placeholder"
+  },
+  "selectDate": "Sélectionner la date",
+  "@selectDate": {
+    "description": "Date picker placeholder"
+  },
+  "languageShort": "Fra",
+  "@languageShort": {
+    "description": "Short language code for display"
   }
 }

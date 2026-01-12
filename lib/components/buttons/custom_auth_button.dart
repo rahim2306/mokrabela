@@ -28,8 +28,9 @@ class CustomAuthButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Default colors
-    final bgColor = backgroundColor ?? const Color(0xFF2C5F7C);
+    // Therapeutic colors - soft, calming teal palette
+    final bgColor =
+        backgroundColor ?? const Color(0xFF4ECDC4); // Soft teal (primary)
     final fgColor = foregroundColor ?? Colors.white;
     final btnHeight = height ?? 7.h;
     final textSize = fontSize ?? 18.sp;
@@ -38,31 +39,39 @@ class CustomAuthButton extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: hPadding),
       child: isLoading
-          ? Center(child: CircularProgressIndicator(color: bgColor))
+          ? Center(
+              child: CircularProgressIndicator(color: bgColor, strokeWidth: 3),
+            )
           : Container(
               height: btnHeight,
               decoration: BoxDecoration(
-                gradient: LinearGradient(
+                // Soft therapeutic gradient - teal to light aqua
+                gradient: const LinearGradient(
                   colors: [
-                    bgColor,
-                    Color.lerp(bgColor, const Color(0xFF5DADE2), 0.3)!,
+                    Color(0xFF4ECDC4), // Soft teal
+                    Color(0xFF6FD9D1), // Light aqua
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
                 borderRadius: BorderRadius.circular(16),
+                // Gentle, therapeutic shadows
                 boxShadow: [
                   BoxShadow(
-                    color: bgColor.withValues(alpha: 0.5),
-                    blurRadius: 20,
-                    offset: const Offset(0, 8),
+                    color: const Color(
+                      0xFF4ECDC4,
+                    ).withValues(alpha: 0.25), // Softer shadow
+                    blurRadius: 16,
+                    offset: const Offset(0, 6),
                     spreadRadius: 0,
                   ),
                   BoxShadow(
-                    color: bgColor.withValues(alpha: 0.3),
-                    blurRadius: 40,
-                    offset: const Offset(0, 4),
-                    spreadRadius: -5,
+                    color: const Color(
+                      0xFF4ECDC4,
+                    ).withValues(alpha: 0.15), // Very soft glow
+                    blurRadius: 24,
+                    offset: const Offset(0, 2),
+                    spreadRadius: -2,
                   ),
                 ],
               ),
@@ -71,6 +80,10 @@ class CustomAuthButton extends StatelessWidget {
                 child: InkWell(
                   onTap: onPressed,
                   borderRadius: BorderRadius.circular(16),
+                  splashColor: Colors.white.withValues(
+                    alpha: 0.2,
+                  ), // Gentle ripple
+                  highlightColor: Colors.white.withValues(alpha: 0.1),
                   child: Center(
                     child: icon != null
                         ? Row(
@@ -82,8 +95,10 @@ class CustomAuthButton extends StatelessWidget {
                                 text,
                                 style: TextStyle(
                                   fontSize: textSize,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight:
+                                      FontWeight.w700, // Bold but not too heavy
                                   color: fgColor,
+                                  letterSpacing: 0.5,
                                 ),
                               ),
                             ],
@@ -92,8 +107,10 @@ class CustomAuthButton extends StatelessWidget {
                             text,
                             style: TextStyle(
                               fontSize: textSize,
-                              fontWeight: FontWeight.bold,
+                              fontWeight:
+                                  FontWeight.w700, // Bold but not too heavy
                               color: fgColor,
+                              letterSpacing: 0.5,
                             ),
                           ),
                   ),

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mokrabela/models/user_model.dart';
@@ -29,26 +30,22 @@ class AuthService {
 
       if (user != null) {
         // Create user doc in Firestore
-        UserModel newUser = UserModel(
-          uid: user.uid,
-          email: email,
-          name: name,
-          role: role,
-        );
-
         await _firestore.collection('users').doc(user.uid).set({
-          'uid': newUser.uid,
-          'email': newUser.email,
-          'name': newUser.name,
-          'role': newUser.role.toString().split('.').last, // Store as string
+          'uid': user.uid,
+          'email': email,
+          'name': name,
+          'role': role.toString().split('.').last,
           'createdAt': FieldValue.serverTimestamp(),
         });
 
-        return newUser;
+        return UserModel(uid: user.uid, email: email, name: name, role: role);
       }
       return null;
+    } on FirebaseAuthException catch (e) {
+      debugPrint('SignUp FirebaseAuthException: ${e.code} - ${e.message}');
+      rethrow;
     } catch (e) {
-      print(e.toString());
+      debugPrint('SignUp Error: ${e.toString()}');
       rethrow;
     }
   }
@@ -69,8 +66,11 @@ class AuthService {
         return await getUserDetails(user.uid);
       }
       return null;
+    } on FirebaseAuthException catch (e) {
+      debugPrint('SignIn FirebaseAuthException: ${e.code} - ${e.message}');
+      rethrow;
     } catch (e) {
-      print(e.toString());
+      debugPrint('SignIn Error: ${e.toString()}');
       rethrow;
     }
   }
@@ -97,7 +97,7 @@ class AuthService {
       }
       return null;
     } catch (e) {
-      print(e.toString());
+      debugPrint('GetUserDetails Error: ${e.toString()}');
       return null;
     }
   }

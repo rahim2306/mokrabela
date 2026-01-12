@@ -47,5 +47,217 @@
         "example": "العربية"
       }
     }
+  },
+  "welcomeToMokrabela": "مرحبًا بكم في موكرابيلا",
+  "@welcomeToMokrabela": {
+    "description": "Welcome screen title"
+  },
+  "welcomeSubtitle": "نساعد الأطفال على الشعور بالهدوء، وزيادة التركيز، والدعم معًا.",
+  "@welcomeSubtitle": {
+    "description": "Welcome screen subtitle"
+  },
+  "getStarted": "ابدأ الآن",
+  "@getStarted": {
+    "description": "Get started button"
+  },
+  "logIn": "تسجيل الدخول",
+  "@logIn": {
+    "description": "Log in button"
+  },
+  "welcomeBack": "مرحبا بعودتك",
+  "@welcomeBack": {
+    "description": "Login screen title"
+  },
+  "loginSubtitle": "سجل الدخول لمتابعة رحلتك.",
+  "@loginSubtitle": {
+    "description": "Login screen subtitle"
+  },
+  "loginFailed": "فشل تسجيل الدخول. يرجى التحقق من بيانات الاعتماد.",
+  "@loginFailed": {
+    "description": "Login failure message"
+  },
+  "dontHaveAccount": "ليس لديك حساب؟",
+  "@dontHaveAccount": {
+    "description": "Sign up prompt text"
+  },
+  "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
+  "@alreadyHaveAccount": {
+    "description": "Login prompt text"
+  },
+  "onboardingQuestion1": "أي جملة تصفك بشكل أفضل؟",
+  "@onboardingQuestion1": {
+    "description": "First onboarding question"
+  },
+  "optionParent": "أنا ولي أمر أريد متابعة تقدم طفلي.",
+  "@optionParent": {
+    "description": "Parent role option"
+  },
+  "optionTeacher": "أنا معلم أعمل مع الطلاب.",
+  "@optionTeacher": {
+    "description": "Teacher role option"
+  },
+  "next": "التالي",
+  "@next": {
+    "description": "Next button"
+  },
+  "back": "رجوع",
+  "@back": {
+    "description": "Back button"
+  },
+  "skip": "تخطي",
+  "@skip": {
+    "description": "Skip button"
+  },
+  "intro1Title": "الدعم أولًا",
+  "@intro1Title": {
+    "description": "Title for first introduction screen"
+  },
+  "intro1Description": "الأطفال لا ينظمون أنفسهم وحدهم. بتوجيه من الأولياء والمعلمين، يصبح الهدوء عادة.",
+  "@intro1Description": {
+    "description": "Description for first introduction screen"
+  },
+  "intro2Title": "بناء الهدوء الداخلي",
+  "@intro2Title": {
+    "description": "Title for second introduction screen"
+  },
+  "intro2Description": "خطوة بخطوة، يتعلم الأطفال كيف يهدؤون أنفسهم، ويحسنون تركيزهم، ويشعرون بالتحكم.",
+  "@intro2Description": {
+    "description": "Description for second introduction screen"
+  },
+  "onboardingQuestion2": "متى تريد تسجيل الدخول يوميًا؟",
+  "@onboardingQuestion2": {
+    "description": "Second onboarding question"
+  },
+  "reminderHabitText": "التذكير اللطيف يساعدك على بناء عادة.",
+  "@reminderHabitText": {
+    "description": "Reminder card text"
+  },
+  "am": "صباحاً",
+  "@am": {
+    "description": "AM time indicator"
+  },
+  "pm": "مساءً",
+  "@pm": {
+    "description": "PM time indicator"
+  },
+  "tellUsMoreTitle": "أخبرنا المزيد عن نفسك",
+  "@tellUsMoreTitle": {
+    "description": "Registration form title"
+  },
+  "tellUsMoreSubtitle": "اختر بعض الكلمات التي تناسبك",
+  "@tellUsMoreSubtitle": {
+    "description": "Registration form subtitle"
+  },
+  "profileImage": "صورة الملف الشخصي",
+  "@profileImage": {
+    "description": "Profile image label"
+  },
+  "fullName": "الاسم الكامل",
+  "@fullName": {
+    "description": "Full name field label"
+  },
+  "firstName": "الاسم الأول",
+  "@firstName": {
+    "description": "First name field label"
+  },
+  "familyName": "اسم العائلة",
+  "@familyName": {
+    "description": "Family name field label"
+  },
+  "email": "البريد الإلكتروني",
+  "@email": {
+    "description": "Email field label"
+  },
+  "password": "كلمة المرور",
+  "@password": {
+    "description": "Password field label"
+  },
+  "phoneNumber": "رقم الهاتف",
+  "@phoneNumber": {
+    "description": "Phone number field label"
+  },
+  "dateOfBirth": "تاريخ الميلاد",
+  "@dateOfBirth": {
+    "description": "Date of birth field label"
+  },
+  "gender": "الجنس",
+  "@gender": {
+    "description": "Gender field label"
+  },
+  "male": "ذكر",
+  "@male": {
+    "description": "Male gender option"
+  },
+  "female": "أنثى",
+  "@female": {
+    "description": "Female gender option"
+  },
+  "other": "آخر",
+  "@other": {
+    "description": "Other gender option"
+  },
+  "preferNotToSay": "أفضل عدم القول",
+  "@preferNotToSay": {
+    "description": "Prefer not to say option"
+  },
+  "goToFinalCheckIn": "الانتقال إلى التسجيل النهائي",
+  "@goToFinalCheckIn": {
+    "description": "Submit registration button"
+  },
+  "iAmA": "أنا...",
+  "@iAmA": {
+    "description": "Role selection label"
+  },
+  "signUp": "التسجيل",
+  "@signUp": {
+    "description": "Sign up button text"
+  },
+  "fieldRequired": "هذا الحقل مطلوب",
+  "@fieldRequired": {
+    "description": "Required field validation message"
+  },
+  "invalidEmail": "يرجى إدخال بريد إلكتروني صالح",
+  "@invalidEmail": {
+    "description": "Invalid email validation message"
+  },
+  "passwordTooShort": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل",
+  "@passwordTooShort": {
+    "description": "Password too short validation message"
+  },
+  "invalidPhoneNumber": "يرجى إدخال رقم هاتف صالح",
+  "@invalidPhoneNumber": {
+    "description": "Invalid phone number validation message"
+  },
+  "registrationSuccess": "تم التسجيل بنجاح!",
+  "@registrationSuccess": {
+    "description": "Registration success message"
+  },
+  "registrationFailed": "فشل التسجيل. يرجى المحاولة مرة أخرى.",
+  "@registrationFailed": {
+    "description": "Registration failed message"
+  },
+  "emailAlreadyInUse": "هذا البريد الإلكتروني مستخدم بالفعل",
+  "@emailAlreadyInUse": {
+    "description": "Email already in use error"
+  },
+  "weakPassword": "كلمة المرور ضعيفة جدًا",
+  "@weakPassword": {
+    "description": "Weak password error"
+  },
+  "networkError": "خطأ في الشبكة. يرجى التحقق من اتصالك.",
+  "@networkError": {
+    "description": "Network error message"
+  },
+  "selectGender": "اختر الجنس",
+  "@selectGender": {
+    "description": "Gender dropdown placeholder"
+  },
+  "selectDate": "اختر التاريخ",
+  "@selectDate": {
+    "description": "Date picker placeholder"
+  },
+  "languageShort": "عربي",
+  "@languageShort": {
+    "description": "Short language code for display"
   }
 }

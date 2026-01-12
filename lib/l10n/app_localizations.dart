@@ -153,6 +153,324 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Current Language: {language}'**
   String currentLanguage(String language);
+
+  /// Welcome screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to MokraBela'**
+  String get welcomeToMokrabela;
+
+  /// Welcome screen subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Helping children feel calmer, more focused, and supported—together.'**
+  String get welcomeSubtitle;
+
+  /// Get started button
+  ///
+  /// In en, this message translates to:
+  /// **'Get Started'**
+  String get getStarted;
+
+  /// Log in button
+  ///
+  /// In en, this message translates to:
+  /// **'Log in'**
+  String get logIn;
+
+  /// Login screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome Back'**
+  String get welcomeBack;
+
+  /// Login screen subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to continue your journey.'**
+  String get loginSubtitle;
+
+  /// Login failure message
+  ///
+  /// In en, this message translates to:
+  /// **'Login failed. Please check your credentials.'**
+  String get loginFailed;
+
+  /// Sign up prompt text
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t have an account?'**
+  String get dontHaveAccount;
+
+  /// Login prompt text
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account?'**
+  String get alreadyHaveAccount;
+
+  /// First onboarding question
+  ///
+  /// In en, this message translates to:
+  /// **'Which sentence describes you the best?'**
+  String get onboardingQuestion1;
+
+  /// Parent role option
+  ///
+  /// In en, this message translates to:
+  /// **'I am a parent who wants to monitor my child\'s progress.'**
+  String get optionParent;
+
+  /// Teacher role option
+  ///
+  /// In en, this message translates to:
+  /// **'I am a teacher who works with students.'**
+  String get optionTeacher;
+
+  /// Next button
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
+
+  /// Back button
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get back;
+
+  /// Skip button
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get skip;
+
+  /// Title for first introduction screen
+  ///
+  /// In en, this message translates to:
+  /// **'Support Comes First'**
+  String get intro1Title;
+
+  /// Description for first introduction screen
+  ///
+  /// In en, this message translates to:
+  /// **'Children don\'t regulate alone. With guidance from parents and teachers, calm becomes a habit.'**
+  String get intro1Description;
+
+  /// Title for second introduction screen
+  ///
+  /// In en, this message translates to:
+  /// **'Building Inner Calm'**
+  String get intro2Title;
+
+  /// Description for second introduction screen
+  ///
+  /// In en, this message translates to:
+  /// **'Step by step, children learn to calm themselves, focus better, and feel in control.'**
+  String get intro2Description;
+
+  /// Second onboarding question
+  ///
+  /// In en, this message translates to:
+  /// **'When would you like to check in daily?'**
+  String get onboardingQuestion2;
+
+  /// Reminder card text
+  ///
+  /// In en, this message translates to:
+  /// **'A gentle reminder helps you build a habit.'**
+  String get reminderHabitText;
+
+  /// AM time indicator
+  ///
+  /// In en, this message translates to:
+  /// **'AM'**
+  String get am;
+
+  /// PM time indicator
+  ///
+  /// In en, this message translates to:
+  /// **'PM'**
+  String get pm;
+
+  /// Registration form title
+  ///
+  /// In en, this message translates to:
+  /// **'Tell us more about yourself'**
+  String get tellUsMoreTitle;
+
+  /// Registration form subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a few words that fit for you'**
+  String get tellUsMoreSubtitle;
+
+  /// Profile image label
+  ///
+  /// In en, this message translates to:
+  /// **'Profile image'**
+  String get profileImage;
+
+  /// Full name field label
+  ///
+  /// In en, this message translates to:
+  /// **'Full Name'**
+  String get fullName;
+
+  /// First name field label
+  ///
+  /// In en, this message translates to:
+  /// **'First Name'**
+  String get firstName;
+
+  /// Family name field label
+  ///
+  /// In en, this message translates to:
+  /// **'Family Name'**
+  String get familyName;
+
+  /// Email field label
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get email;
+
+  /// Password field label
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// Phone number field label
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Number'**
+  String get phoneNumber;
+
+  /// Date of birth field label
+  ///
+  /// In en, this message translates to:
+  /// **'Date of Birth'**
+  String get dateOfBirth;
+
+  /// Gender field label
+  ///
+  /// In en, this message translates to:
+  /// **'Gender'**
+  String get gender;
+
+  /// Male gender option
+  ///
+  /// In en, this message translates to:
+  /// **'Male'**
+  String get male;
+
+  /// Female gender option
+  ///
+  /// In en, this message translates to:
+  /// **'Female'**
+  String get female;
+
+  /// Other gender option
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get other;
+
+  /// Prefer not to say option
+  ///
+  /// In en, this message translates to:
+  /// **'Prefer not to say'**
+  String get preferNotToSay;
+
+  /// Submit registration button
+  ///
+  /// In en, this message translates to:
+  /// **'Go To Final Check in'**
+  String get goToFinalCheckIn;
+
+  /// Role selection label
+  ///
+  /// In en, this message translates to:
+  /// **'I am a...'**
+  String get iAmA;
+
+  /// Sign up button text
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get signUp;
+
+  /// Required field validation message
+  ///
+  /// In en, this message translates to:
+  /// **'This field is required'**
+  String get fieldRequired;
+
+  /// Invalid email validation message
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email'**
+  String get invalidEmail;
+
+  /// Password too short validation message
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 6 characters'**
+  String get passwordTooShort;
+
+  /// Invalid phone number validation message
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid phone number'**
+  String get invalidPhoneNumber;
+
+  /// Registration success message
+  ///
+  /// In en, this message translates to:
+  /// **'Registration successful!'**
+  String get registrationSuccess;
+
+  /// Registration failed message
+  ///
+  /// In en, this message translates to:
+  /// **'Registration failed. Please try again.'**
+  String get registrationFailed;
+
+  /// Email already in use error
+  ///
+  /// In en, this message translates to:
+  /// **'This email is already in use'**
+  String get emailAlreadyInUse;
+
+  /// Weak password error
+  ///
+  /// In en, this message translates to:
+  /// **'Password is too weak'**
+  String get weakPassword;
+
+  /// Network error message
+  ///
+  /// In en, this message translates to:
+  /// **'Network error. Please check your connection.'**
+  String get networkError;
+
+  /// Gender dropdown placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Select gender'**
+  String get selectGender;
+
+  /// Date picker placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Select date'**
+  String get selectDate;
+
+  /// Short language code for display
+  ///
+  /// In en, this message translates to:
+  /// **'Eng'**
+  String get languageShort;
 }
 
 class _AppLocalizationsDelegate

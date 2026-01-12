@@ -47,5 +47,217 @@
         "example": "English"
       }
     }
+  },
+  "welcomeToMokrabela": "Welcome to MokraBela",
+  "@welcomeToMokrabela": {
+    "description": "Welcome screen title"
+  },
+  "welcomeSubtitle": "Helping children feel calmer, more focused, and supported—together.",
+  "@welcomeSubtitle": {
+    "description": "Welcome screen subtitle"
+  },
+  "getStarted": "Get Started",
+  "@getStarted": {
+    "description": "Get started button"
+  },
+  "logIn": "Log in",
+  "@logIn": {
+    "description": "Log in button"
+  },
+  "welcomeBack": "Welcome Back",
+  "@welcomeBack": {
+    "description": "Login screen title"
+  },
+  "loginSubtitle": "Sign in to continue your journey.",
+  "@loginSubtitle": {
+    "description": "Login screen subtitle"
+  },
+  "loginFailed": "Login failed. Please check your credentials.",
+  "@loginFailed": {
+    "description": "Login failure message"
+  },
+  "dontHaveAccount": "Don't have an account?",
+  "@dontHaveAccount": {
+    "description": "Sign up prompt text"
+  },
+  "alreadyHaveAccount": "Already have an account?",
+  "@alreadyHaveAccount": {
+    "description": "Login prompt text"
+  },
+  "onboardingQuestion1": "Which sentence describes you the best?",
+  "@onboardingQuestion1": {
+    "description": "First onboarding question"
+  },
+  "optionParent": "I am a parent who wants to monitor my child's progress.",
+  "@optionParent": {
+    "description": "Parent role option"
+  },
+  "optionTeacher": "I am a teacher who works with students.",
+  "@optionTeacher": {
+    "description": "Teacher role option"
+  },
+  "next": "Next",
+  "@next": {
+    "description": "Next button"
+  },
+  "back": "Back",
+  "@back": {
+    "description": "Back button"
+  },
+  "skip": "Skip",
+  "@skip": {
+    "description": "Skip button"
+  },
+  "intro1Title": "Support Comes First",
+  "@intro1Title": {
+    "description": "Title for first introduction screen"
+  },
+  "intro1Description": "Children don't regulate alone. With guidance from parents and teachers, calm becomes a habit.",
+  "@intro1Description": {
+    "description": "Description for first introduction screen"
+  },
+  "intro2Title": "Building Inner Calm",
+  "@intro2Title": {
+    "description": "Title for second introduction screen"
+  },
+  "intro2Description": "Step by step, children learn to calm themselves, focus better, and feel in control.",
+  "@intro2Description": {
+    "description": "Description for second introduction screen"
+  },
+  "onboardingQuestion2": "When would you like to check in daily?",
+  "@onboardingQuestion2": {
+    "description": "Second onboarding question"
+  },
+  "reminderHabitText": "A gentle reminder helps you build a habit.",
+  "@reminderHabitText": {
+    "description": "Reminder card text"
+  },
+  "am": "AM",
+  "@am": {
+    "description": "AM time indicator"
+  },
+  "pm": "PM",
+  "@pm": {
+    "description": "PM time indicator"
+  },
+  "tellUsMoreTitle": "Tell us more about yourself",
+  "@tellUsMoreTitle": {
+    "description": "Registration form title"
+  },
+  "tellUsMoreSubtitle": "Choose a few words that fit for you",
+  "@tellUsMoreSubtitle": {
+    "description": "Registration form subtitle"
+  },
+  "profileImage": "Profile image",
+  "@profileImage": {
+    "description": "Profile image label"
+  },
+  "fullName": "Full Name",
+  "@fullName": {
+    "description": "Full name field label"
+  },
+  "firstName": "First Name",
+  "@firstName": {
+    "description": "First name field label"
+  },
+  "familyName": "Family Name",
+  "@familyName": {
+    "description": "Family name field label"
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Email field label"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Password field label"
+  },
+  "phoneNumber": "Phone Number",
+  "@phoneNumber": {
+    "description": "Phone number field label"
+  },
+  "dateOfBirth": "Date of Birth",
+  "@dateOfBirth": {
+    "description": "Date of birth field label"
+  },
+  "gender": "Gender",
+  "@gender": {
+    "description": "Gender field label"
+  },
+  "male": "Male",
+  "@male": {
+    "description": "Male gender option"
+  },
+  "female": "Female",
+  "@female": {
+    "description": "Female gender option"
+  },
+  "other": "Other",
+  "@other": {
+    "description": "Other gender option"
+  },
+  "preferNotToSay": "Prefer not to say",
+  "@preferNotToSay": {
+    "description": "Prefer not to say option"
+  },
+  "goToFinalCheckIn": "Go To Final Check in",
+  "@goToFinalCheckIn": {
+    "description": "Submit registration button"
+  },
+  "iAmA": "I am a...",
+  "@iAmA": {
+    "description": "Role selection label"
+  },
+  "signUp": "Sign Up",
+  "@signUp": {
+    "description": "Sign up button text"
+  },
+  "fieldRequired": "This field is required",
+  "@fieldRequired": {
+    "description": "Required field validation message"
+  },
+  "invalidEmail": "Please enter a valid email",
+  "@invalidEmail": {
+    "description": "Invalid email validation message"
+  },
+  "passwordTooShort": "Password must be at least 6 characters",
+  "@passwordTooShort": {
+    "description": "Password too short validation message"
+  },
+  "invalidPhoneNumber": "Please enter a valid phone number",
+  "@invalidPhoneNumber": {
+    "description": "Invalid phone number validation message"
+  },
+  "registrationSuccess": "Registration successful!",
+  "@registrationSuccess": {
+    "description": "Registration success message"
+  },
+  "registrationFailed": "Registration failed. Please try again.",
+  "@registrationFailed": {
+    "description": "Registration failed message"
+  },
+  "emailAlreadyInUse": "This email is already in use",
+  "@emailAlreadyInUse": {
+    "description": "Email already in use error"
+  },
+  "weakPassword": "Password is too weak",
+  "@weakPassword": {
+    "description": "Weak password error"
+  },
+  "networkError": "Network error. Please check your connection.",
+  "@networkError": {
+    "description": "Network error message"
+  },
+  "selectGender": "Select gender",
+  "@selectGender": {
+    "description": "Gender dropdown placeholder"
+  },
+  "selectDate": "Select date",
+  "@selectDate": {
+    "description": "Date picker placeholder"
+  },
+  "languageShort": "Eng",
+  "@languageShort": {
+    "description": "Short language code for display"
   }
 }

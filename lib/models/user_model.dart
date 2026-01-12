@@ -32,12 +32,10 @@ class UserModel {
 
     return UserModel(
       uid: doc.id,
-      email:
-          data['email'] ??
-          '', // Email might be top-level or in profile depending on implementation choice, will keep top-level for auth ease + profile
-      name: profile['name'] ?? '',
+      email: data['email'] ?? '',
+      name: profile['name'] ?? data['name'] ?? '',
       role: UserRole.values.firstWhere(
-        (e) => e.toString() == 'UserRole.${profile['role']}',
+        (e) => e.toString() == 'UserRole.${profile['role'] ?? data['role']}',
         orElse: () => UserRole.child,
       ),
       bpm: liveState['bpm'],
