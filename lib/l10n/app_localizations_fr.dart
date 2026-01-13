@@ -103,6 +103,64 @@ class AppLocalizationsFr extends AppLocalizations {
       'Pas à pas, les enfants apprennent à se calmer, à mieux se concentrer et à se sentir en contrôle.';
 
   @override
+  String welcomeChild(String name) {
+    return 'Bienvenue, $name!';
+  }
+
+  @override
+  String get watchConnected => 'Connecté';
+
+  @override
+  String get watchDisconnected => 'Déconnecté';
+
+  @override
+  String get dailyProgress => 'Progrès quotidien';
+
+  @override
+  String tasksRemaining(int count) {
+    return '$count tâches restantes';
+  }
+
+  @override
+  String get breathingExercise => 'Respiration';
+
+  @override
+  String get focusGames => 'Jeux de concentration';
+
+  @override
+  String get calmMusic => 'Musique calme';
+
+  @override
+  String get stories => 'Histoires';
+
+  @override
+  String get missingSquare => 'Le carré manquant';
+
+  @override
+  String get protocol => 'Protocole';
+
+  @override
+  String get achievements => 'Réussites';
+
+  @override
+  String get tapToStart => 'Appuyez pour commencer';
+
+  @override
+  String get goodMorning => 'Bonjour';
+
+  @override
+  String get language => 'Langue';
+
+  @override
+  String get logout => 'Se déconnecter';
+
+  @override
+  String get tasks => 'Tâches';
+
+  @override
+  String get manageYourTimeWell => 'Gérez bien\nvotre temps';
+
+  @override
   String get onboardingQuestion2 =>
       'Quand souhaitez-vous vous enregistrer quotidiennement?';
 

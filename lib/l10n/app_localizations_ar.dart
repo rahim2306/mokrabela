@@ -100,6 +100,64 @@ class AppLocalizationsAr extends AppLocalizations {
       'خطوة بخطوة، يتعلم الأطفال كيف يهدؤون أنفسهم، ويحسنون تركيزهم، ويشعرون بالتحكم.';
 
   @override
+  String welcomeChild(String name) {
+    return 'مرحبًا، $name!';
+  }
+
+  @override
+  String get watchConnected => 'متصل';
+
+  @override
+  String get watchDisconnected => 'غير متصل';
+
+  @override
+  String get dailyProgress => 'التقدم اليومي';
+
+  @override
+  String tasksRemaining(int count) {
+    return '$count مهام متبقية';
+  }
+
+  @override
+  String get breathingExercise => 'التنفس';
+
+  @override
+  String get focusGames => 'ألعاب التركيز';
+
+  @override
+  String get calmMusic => 'موسيقى هادئة';
+
+  @override
+  String get stories => 'قصص';
+
+  @override
+  String get missingSquare => 'المربع المفقود';
+
+  @override
+  String get protocol => 'البروتوكول';
+
+  @override
+  String get achievements => 'الإنجازات';
+
+  @override
+  String get tapToStart => 'اضغط للبدء';
+
+  @override
+  String get goodMorning => 'صباح الخير';
+
+  @override
+  String get language => 'اللغة';
+
+  @override
+  String get logout => 'تسجيل الخروج';
+
+  @override
+  String get tasks => 'المهام';
+
+  @override
+  String get manageYourTimeWell => 'أدر وقتك\nبشكل جيد';
+
+  @override
   String get onboardingQuestion2 => 'متى تريد تسجيل الدخول يوميًا؟';
 
   @override

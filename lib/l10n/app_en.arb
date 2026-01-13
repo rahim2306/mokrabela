@@ -124,6 +124,94 @@
   "@intro2Description": {
     "description": "Description for second introduction screen"
   },
+  "welcomeChild": "Welcome, {name}!",
+  "@welcomeChild": {
+    "description": "Welcome message for child dashboard",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Alex"
+      }
+    }
+  },
+  "watchConnected": "Connected",
+  "@watchConnected": {
+    "description": "Watch connection status - connected"
+  },
+  "watchDisconnected": "Disconnected",
+  "@watchDisconnected": {
+    "description": "Watch connection status - disconnected"
+  },
+  "dailyProgress": "Daily Progress",
+  "@dailyProgress": {
+    "description": "Daily progress section title"
+  },
+  "tasksRemaining": "{count} Tasks Remaining",
+  "@tasksRemaining": {
+    "description": "Number of tasks remaining",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "breathingExercise": "Breathing",
+  "@breathingExercise": {
+    "description": "Breathing exercise card title"
+  },
+  "focusGames": "Focus Games",
+  "@focusGames": {
+    "description": "Focus games card title"
+  },
+  "calmMusic": "Calm Music",
+  "@calmMusic": {
+    "description": "Calm music card title"
+  },
+  "stories": "Stories",
+  "@stories": {
+    "description": "Stories card title"
+  },
+  "missingSquare": "The Missing Square",
+  "@missingSquare": {
+    "description": "Missing Square protocol title"
+  },
+  "protocol": "Protocol",
+  "@protocol": {
+    "description": "Protocol label"
+  },
+  "achievements": "Achievements",
+  "@achievements": {
+    "description": "Achievements button label"
+  },
+  "tapToStart": "Tap to start",
+  "@tapToStart": {
+    "description": "Tap to start instruction"
+  },
+  "goodMorning": "Good Morning",
+  "@goodMorning": {
+    "description": "Morning greeting"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Language setting label"
+  },
+  "logout": "Log Out",
+  "@logout": {
+    "description": "Logout button text"
+  },
+  "dailyProgress": "Daily Progress",
+  "@dailyProgress": {
+    "description": "Daily progress label"
+  },
+  "tasks": "Tasks",
+  "@tasks": {
+    "description": "Tasks label"
+  },
+  "manageYourTimeWell": "Manage your\ntime well",
+  "@manageYourTimeWell": {
+    "description": "Daily progress card motivational text"
+  },
   "onboardingQuestion2": "When would you like to check in daily?",
   "@onboardingQuestion2": {
     "description": "Second onboarding question"

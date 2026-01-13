@@ -268,6 +268,114 @@ abstract class AppLocalizations {
   /// **'Step by step, children learn to calm themselves, focus better, and feel in control.'**
   String get intro2Description;
 
+  /// Welcome message for child dashboard
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome, {name}!'**
+  String welcomeChild(String name);
+
+  /// Watch connection status - connected
+  ///
+  /// In en, this message translates to:
+  /// **'Connected'**
+  String get watchConnected;
+
+  /// Watch connection status - disconnected
+  ///
+  /// In en, this message translates to:
+  /// **'Disconnected'**
+  String get watchDisconnected;
+
+  /// Daily progress label
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Progress'**
+  String get dailyProgress;
+
+  /// Number of tasks remaining
+  ///
+  /// In en, this message translates to:
+  /// **'{count} Tasks Remaining'**
+  String tasksRemaining(int count);
+
+  /// Breathing exercise card title
+  ///
+  /// In en, this message translates to:
+  /// **'Breathing'**
+  String get breathingExercise;
+
+  /// Focus games card title
+  ///
+  /// In en, this message translates to:
+  /// **'Focus Games'**
+  String get focusGames;
+
+  /// Calm music card title
+  ///
+  /// In en, this message translates to:
+  /// **'Calm Music'**
+  String get calmMusic;
+
+  /// Stories card title
+  ///
+  /// In en, this message translates to:
+  /// **'Stories'**
+  String get stories;
+
+  /// Missing Square protocol title
+  ///
+  /// In en, this message translates to:
+  /// **'The Missing Square'**
+  String get missingSquare;
+
+  /// Protocol label
+  ///
+  /// In en, this message translates to:
+  /// **'Protocol'**
+  String get protocol;
+
+  /// Achievements button label
+  ///
+  /// In en, this message translates to:
+  /// **'Achievements'**
+  String get achievements;
+
+  /// Tap to start instruction
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to start'**
+  String get tapToStart;
+
+  /// Morning greeting
+  ///
+  /// In en, this message translates to:
+  /// **'Good Morning'**
+  String get goodMorning;
+
+  /// Language setting label
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
+
+  /// Logout button text
+  ///
+  /// In en, this message translates to:
+  /// **'Log Out'**
+  String get logout;
+
+  /// Tasks label
+  ///
+  /// In en, this message translates to:
+  /// **'Tasks'**
+  String get tasks;
+
+  /// Daily progress card motivational text
+  ///
+  /// In en, this message translates to:
+  /// **'Manage your\ntime well'**
+  String get manageYourTimeWell;
+
   /// Second onboarding question
   ///
   /// In en, this message translates to:

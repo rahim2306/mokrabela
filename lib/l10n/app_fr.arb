@@ -124,6 +124,25 @@
   "@intro2Description": {
     "description": "Description for second introduction screen"
   },
+  "welcomeChild": "Bienvenue, {name}!",
+  "watchConnected": "Connecté",
+  "watchDisconnected": "Déconnecté",
+  "dailyProgress": "Progrès quotidien",
+  "tasksRemaining": "{count} tâches restantes",
+  "breathingExercise": "Respiration",
+  "focusGames": "Jeux de concentration",
+  "calmMusic": "Musique calme",
+  "stories": "Histoires",
+  "missingSquare": "Le carré manquant",
+  "protocol": "Protocole",
+  "achievements": "Réussites",
+  "tapToStart": "Appuyez pour commencer",
+  "goodMorning": "Bonjour",
+  "language": "Langue",
+  "logout": "Se déconnecter",
+  "dailyProgress": "Progrès quotidien",
+  "tasks": "Tâches",
+  "manageYourTimeWell": "Gérez bien\nvotre temps",
   "onboardingQuestion2": "Quand souhaitez-vous vous enregistrer quotidiennement?",
   "@onboardingQuestion2": {
     "description": "Second onboarding question"

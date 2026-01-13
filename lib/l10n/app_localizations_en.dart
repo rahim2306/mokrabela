@@ -101,6 +101,64 @@ class AppLocalizationsEn extends AppLocalizations {
       'Step by step, children learn to calm themselves, focus better, and feel in control.';
 
   @override
+  String welcomeChild(String name) {
+    return 'Welcome, $name!';
+  }
+
+  @override
+  String get watchConnected => 'Connected';
+
+  @override
+  String get watchDisconnected => 'Disconnected';
+
+  @override
+  String get dailyProgress => 'Daily Progress';
+
+  @override
+  String tasksRemaining(int count) {
+    return '$count Tasks Remaining';
+  }
+
+  @override
+  String get breathingExercise => 'Breathing';
+
+  @override
+  String get focusGames => 'Focus Games';
+
+  @override
+  String get calmMusic => 'Calm Music';
+
+  @override
+  String get stories => 'Stories';
+
+  @override
+  String get missingSquare => 'The Missing Square';
+
+  @override
+  String get protocol => 'Protocol';
+
+  @override
+  String get achievements => 'Achievements';
+
+  @override
+  String get tapToStart => 'Tap to start';
+
+  @override
+  String get goodMorning => 'Good Morning';
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get logout => 'Log Out';
+
+  @override
+  String get tasks => 'Tasks';
+
+  @override
+  String get manageYourTimeWell => 'Manage your\ntime well';
+
+  @override
   String get onboardingQuestion2 => 'When would you like to check in daily?';
 
   @override

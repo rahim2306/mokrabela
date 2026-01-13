@@ -72,7 +72,7 @@ class AppTheme {
       ),
 
       // Text Theme - Using nunito font with BOLD weights for maximum contrast
-      textTheme: GoogleFonts.nunitoTextTheme(
+      textTheme: GoogleFonts.spaceGroteskTextTheme(
         const TextTheme(
           displayLarge: TextStyle(
             fontSize: 32,
@@ -179,7 +179,7 @@ class AppTheme {
             borderRadius: BorderRadius.circular(12),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-          textStyle: GoogleFonts.nunito(
+          textStyle: GoogleFonts.spaceGrotesk(
             fontSize: 16,
             fontWeight: FontWeight.w600,
             letterSpacing: 0.2,

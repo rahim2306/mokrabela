@@ -124,6 +124,25 @@
   "@intro2Description": {
     "description": "Description for second introduction screen"
   },
+  "welcomeChild": "مرحبًا، {name}!",
+  "watchConnected": "متصل",
+  "watchDisconnected": "غير متصل",
+  "dailyProgress": "التقدم اليومي",
+  "tasksRemaining": "{count} مهام متبقية",
+  "breathingExercise": "التنفس",
+  "focusGames": "ألعاب التركيز",
+  "calmMusic": "موسيقى هادئة",
+  "stories": "قصص",
+  "missingSquare": "المربع المفقود",
+  "protocol": "البروتوكول",
+  "achievements": "الإنجازات",
+  "tapToStart": "اضغط للبدء",
+  "goodMorning": "صباح الخير",
+  "language": "اللغة",
+  "logout": "تسجيل الخروج",
+  "dailyProgress": "التقدم اليومي",
+  "tasks": "المهام",
+  "manageYourTimeWell": "أدر وقتك\nبشكل جيد",
   "onboardingQuestion2": "متى تريد تسجيل الدخول يوميًا؟",
   "@onboardingQuestion2": {
     "description": "Second onboarding question"

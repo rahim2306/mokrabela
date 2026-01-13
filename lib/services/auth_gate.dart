@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mokrabela/components/snackbars/custom_snackbar.dart';
-import 'package:mokrabela/screens/child/child_dashboard.dart';
+import 'package:mokrabela/screens/child/kids_main_scaffold.dart';
 import 'package:mokrabela/screens/common/status_screens.dart';
 import 'package:mokrabela/screens/onboarding/onboarding_flow.dart';
 import 'package:mokrabela/screens/parent/parent_dashboard.dart';
@@ -37,7 +37,11 @@ class AuthGate extends StatelessWidget {
         }
 
         // Authenticated - check role
-        return RoleBasedRouter(userId: snapshot.data!.uid);
+        return RoleBasedRouter(
+          userId: snapshot.data!.uid,
+          onLanguageChange: onLanguageChange,
+          currentLocale: currentLocale,
+        );
       },
     );
   }
@@ -45,8 +49,15 @@ class AuthGate extends StatelessWidget {
 
 class RoleBasedRouter extends StatefulWidget {
   final String userId;
+  final Function(Locale) onLanguageChange;
+  final Locale currentLocale;
 
-  const RoleBasedRouter({super.key, required this.userId});
+  const RoleBasedRouter({
+    super.key,
+    required this.userId,
+    required this.onLanguageChange,
+    required this.currentLocale,
+  });
 
   @override
   State<RoleBasedRouter> createState() => _RoleBasedRouterState();
@@ -103,7 +114,10 @@ class _RoleBasedRouterState extends State<RoleBasedRouter> {
         // Role-based navigation
         switch (role) {
           case 'child':
-            return const ChildDashboard();
+            return KidsMainScaffold(
+              onLanguageChange: widget.onLanguageChange,
+              currentLocale: widget.currentLocale,
+            );
           case 'parent':
             return const ParentDashboard();
           case 'teacher':

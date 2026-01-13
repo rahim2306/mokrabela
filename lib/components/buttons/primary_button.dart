@@ -9,6 +9,7 @@ class PrimaryButton extends StatelessWidget {
   final bool isLoading;
   final double? width;
   final double height;
+  final List<Color>? gradientColors; // Optional custom gradient colors
 
   const PrimaryButton({
     super.key,
@@ -17,6 +18,7 @@ class PrimaryButton extends StatelessWidget {
     this.isLoading = false,
     this.width,
     this.height = 52, // Will be converted to 6.5.h in build
+    this.gradientColors, // Defaults to teal gradient if null
   });
 
   @override
@@ -35,12 +37,14 @@ class PrimaryButton extends StatelessWidget {
             )
           : Container(
               decoration: BoxDecoration(
-                // Soft therapeutic gradient - teal to light aqua
-                gradient: const LinearGradient(
-                  colors: [
-                    Color(0xFF4ECDC4), // Soft teal
-                    Color(0xFF6FD9D1), // Light aqua
-                  ],
+                // Use custom gradient colors or default therapeutic gradient
+                gradient: LinearGradient(
+                  colors:
+                      gradientColors ??
+                      const [
+                        Color(0xFF4ECDC4), // Soft teal
+                        Color(0xFF6FD9D1), // Light aqua
+                      ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -48,7 +52,7 @@ class PrimaryButton extends StatelessWidget {
                 // Gentle, therapeutic glow
                 boxShadow: [
                   BoxShadow(
-                    color: AppTheme.primary.withValues(
+                    color: (gradientColors?[0] ?? AppTheme.primary).withValues(
                       alpha: 0.25,
                     ), // Softer shadow
                     blurRadius: 16,
@@ -56,7 +60,7 @@ class PrimaryButton extends StatelessWidget {
                     spreadRadius: 0,
                   ),
                   BoxShadow(
-                    color: AppTheme.primary.withValues(
+                    color: (gradientColors?[0] ?? AppTheme.primary).withValues(
                       alpha: 0.15,
                     ), // Very soft glow
                     blurRadius: 24,
