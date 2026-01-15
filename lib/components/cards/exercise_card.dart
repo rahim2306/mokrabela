@@ -27,7 +27,7 @@ class ExerciseCard extends StatelessWidget {
             end: Alignment.bottomRight,
             colors: gradient,
           ),
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(3.h),
           boxShadow: [
             BoxShadow(
               color: gradient[0].withValues(alpha: 0.25),

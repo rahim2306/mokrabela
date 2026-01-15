@@ -41,27 +41,27 @@ class WelcomeScreen extends StatelessWidget {
         ),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsetsDirectional.symmetric(horizontal: 24),
+            padding: EdgeInsetsDirectional.symmetric(horizontal: 6.w),
             child: Column(
               children: [
                 // Language switcher
                 Align(
                   alignment: AlignmentDirectional.topEnd,
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 8),
+                    padding: EdgeInsets.only(top: 1.h),
                     child: LanguageSwitcher(
                       currentLocale: currentLocale,
                       onLanguageChanged: onLanguageChanged,
                     ),
                   ),
                 ),
-                // Logo
-                Image.asset(
-                  'assets/images/logos/Logo.png',
-                  height: 14.h,
-                  fit: BoxFit.contain,
-                ),
-                const SizedBox(height: 40),
+                //! Logo
+                // Image.asset(
+                //   'assets/images/logos/Logo.png',
+                //   height: 14.h,
+                //   fit: BoxFit.contain,
+                // ),
+                SizedBox(height: 5.h),
                 // Illustration with SVG
                 Container(
                   height: 30.h,
@@ -88,22 +88,22 @@ class WelcomeScreen extends StatelessWidget {
                 // Welcome text - Primary heading with dark blue-teal
                 Text(
                   l10n.welcomeToMokrabela,
-                  style: const TextStyle(
-                    fontSize: 32,
+                  style: TextStyle(
+                    fontSize: 25.sp,
                     fontWeight: FontWeight.w900, // Extra bold for emphasis
-                    color: Color(0xFF1E4D5C), // Dark blue-teal mix
+                    color: const Color(0xFF1E4D5C), // Dark blue-teal mix
                     letterSpacing: -0.5, // Tighter for impact
                     height: 1.2,
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 2.h),
                 // Subtitle - Secondary text with medium blue-teal
                 Text(
                   l10n.welcomeSubtitle,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Color(
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    color: const Color(
                       0xFF2C5F7C,
                     ), // Medium blue-teal (matches deepBlue)
                     height: 1.6,
@@ -115,7 +115,7 @@ class WelcomeScreen extends StatelessWidget {
                 const Spacer(flex: 2),
                 // Get Started button
                 PrimaryButton(text: l10n.getStarted, onPressed: onGetStarted),
-                const SizedBox(height: 16),
+                SizedBox(height: 2.h),
                 // Log in link - Accent teal color with subtle background
                 Container(
                   decoration: BoxDecoration(
@@ -127,17 +127,17 @@ class WelcomeScreen extends StatelessWidget {
                   child: TextButton(
                     onPressed: onLogin,
                     style: TextButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 32,
-                        vertical: 12,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 8.w,
+                        vertical: 1.5.h,
                       ),
-                      minimumSize: const Size(double.infinity, 48),
+                      minimumSize: Size(double.infinity, 6.h),
                     ),
                     child: Text(
                       l10n.logIn,
                       style: TextStyle(
-                        fontSize: 16,
-                        color: Color(
+                        fontSize: 16.sp,
+                        color: const Color(
                           0xFF4ECDC4,
                         ), // Primary teal to match button above
                         fontWeight: FontWeight.w700,
@@ -146,7 +146,7 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 2.h),
               ],
             ),
           ),

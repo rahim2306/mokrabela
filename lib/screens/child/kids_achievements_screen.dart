@@ -1,11 +1,94 @@
 import 'package:flutter/material.dart';
 import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:mokrabela/theme/app_theme.dart';
+import 'package:mokrabela/models/achievement_model.dart';
+import 'package:mokrabela/data/achievements_list.dart';
+import 'package:mokrabela/components/cards/achievement_card.dart';
 import 'package:sizer/sizer.dart';
 
 /// Kids Achievements Screen - Rewards and achievements list
-class KidsAchievementsScreen extends StatelessWidget {
+class KidsAchievementsScreen extends StatefulWidget {
   const KidsAchievementsScreen({super.key});
+
+  @override
+  State<KidsAchievementsScreen> createState() => _KidsAchievementsScreenState();
+}
+
+class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
+  AchievementCategory? _selectedCategory;
+  bool _showOnlyUnlocked = false;
+  List<Achievement> _achievements = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAchievements();
+  }
+
+  void _loadAchievements() {
+    // TODO: Load from Firebase with actual progress
+    // For now, use predefined list with some unlocked for demo
+    setState(() {
+      _achievements = AchievementsList.getAllAchievements();
+      // Demo: Unlock first few achievements
+      if (_achievements.isNotEmpty) {
+        _achievements[0] = _achievements[0].copyWith(
+          currentValue: 1,
+          isUnlocked: true,
+          unlockedAt: DateTime.now(),
+        );
+        _achievements[1] = _achievements[1].copyWith(
+          currentValue: 3,
+          isUnlocked: false,
+        );
+        _achievements[10] = _achievements[10].copyWith(
+          currentValue: 3,
+          isUnlocked: true,
+          unlockedAt: DateTime.now(),
+        );
+      }
+    });
+  }
+
+  List<Achievement> get _filteredAchievements {
+    var filtered = _achievements;
+
+    // Filter by category
+    if (_selectedCategory != null) {
+      filtered = filtered
+          .where((achievement) => achievement.category == _selectedCategory)
+          .toList();
+    }
+
+    // Filter by unlock status
+    if (_showOnlyUnlocked) {
+      filtered = filtered
+          .where((achievement) => achievement.isUnlocked)
+          .toList();
+    }
+
+    return filtered;
+  }
+
+  int get _totalPoints {
+    return _achievements
+        .where((achievement) => achievement.isUnlocked)
+        .fold(0, (sum, achievement) => sum + achievement.points);
+  }
+
+  int get _unlockedCount {
+    return _achievements.where((achievement) => achievement.isUnlocked).length;
+  }
+
+  int get _currentLevel {
+    // Simple level calculation: 1 level per 500 points
+    return (_totalPoints / 500).floor() + 1;
+  }
+
+  double get _levelProgress {
+    final pointsInCurrentLevel = _totalPoints % 500;
+    return pointsInCurrentLevel / 500;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,50 +97,329 @@ class KidsAchievementsScreen extends StatelessWidget {
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 3.h),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 4.h),
-          // Achievements content
-          _buildAchievementsContent(l10n),
+          SizedBox(height: 2.h),
+
+          // Stats Header
+          _buildStatsHeader(l10n),
+
+          SizedBox(height: 3.h),
+
+          // Category Filters
+          _buildCategoryFilters(l10n),
+
+          SizedBox(height: 2.h),
+
+          // Filter Toggle
+          _buildFilterToggle(l10n),
+
+          SizedBox(height: 2.h),
+
+          // Achievements Grid
+          _buildAchievementsGrid(),
+
           SizedBox(height: 10.h), // Space for bottom nav
         ],
       ),
     );
   }
 
-  Widget _buildAchievementsContent(AppLocalizations l10n) {
+  Widget _buildStatsHeader(AppLocalizations l10n) {
     return Container(
-      padding: EdgeInsets.all(3.h),
+      padding: EdgeInsets.all(4.w),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Color(0xFF4ECDC4), Color(0xFF44A08D)],
+        ),
+        borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: AppTheme.vibrantOrange.withValues(alpha: 0.08),
-            blurRadius: 24,
+            color: const Color(0xFF4ECDC4).withValues(alpha: 0.3),
+            blurRadius: 20,
             offset: const Offset(0, 8),
-            spreadRadius: -4,
           ),
         ],
       ),
       child: Column(
         children: [
-          Icon(Icons.emoji_events, size: 60.sp, color: AppTheme.vibrantOrange),
-          SizedBox(height: 2.h),
-          Text(
-            l10n.achievements,
-            style: TextStyle(
-              fontSize: 24.sp,
-              fontWeight: FontWeight.w800,
-              color: AppTheme.deepBlue,
-            ),
+          // Total Points
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Total Points',
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white.withValues(alpha: 0.9),
+                    ),
+                  ),
+                  SizedBox(height: 0.5.h),
+                  Text(
+                    _totalPoints.toString(),
+                    style: TextStyle(
+                      fontSize: 32.sp,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.white,
+                      height: 1.0,
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                padding: EdgeInsets.all(3.w),
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.2),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(Icons.stars, size: 32.sp, color: Colors.white),
+              ),
+            ],
           ),
-          SizedBox(height: 1.h),
-          Text(
-            'Coming soon!',
-            style: TextStyle(fontSize: 14.sp, color: AppTheme.textSecondary),
+
+          SizedBox(height: 3.h),
+
+          // Level Progress
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Level $_currentLevel',
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    '${(_levelProgress * 100).toInt()}%',
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white.withValues(alpha: 0.9),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 1.h),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: LinearProgressIndicator(
+                  value: _levelProgress,
+                  backgroundColor: Colors.white.withValues(alpha: 0.3),
+                  valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
+                  minHeight: 8,
+                ),
+              ),
+            ],
+          ),
+
+          SizedBox(height: 2.h),
+
+          // Achievement Count
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.emoji_events, size: 20.sp, color: Colors.white),
+              SizedBox(width: 2.w),
+              Text(
+                '$_unlockedCount/${_achievements.length} Achievements',
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+              ),
+            ],
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildCategoryFilters(AppLocalizations l10n) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          _buildCategoryChip('All', null, Icons.grid_view),
+          SizedBox(width: 2.w),
+          _buildCategoryChip(
+            'Exercise',
+            AchievementCategory.exercise,
+            Icons.air,
+          ),
+          SizedBox(width: 2.w),
+          _buildCategoryChip(
+            'Streaks',
+            AchievementCategory.streaks,
+            Icons.local_fire_department,
+          ),
+          SizedBox(width: 2.w),
+          _buildCategoryChip(
+            'Calm',
+            AchievementCategory.calm,
+            Icons.self_improvement,
+          ),
+          SizedBox(width: 2.w),
+          _buildCategoryChip(
+            'Milestones',
+            AchievementCategory.milestones,
+            Icons.celebration,
+          ),
+          SizedBox(width: 2.w),
+          _buildCategoryChip(
+            'Special',
+            AchievementCategory.special,
+            Icons.workspace_premium,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCategoryChip(
+    String label,
+    AchievementCategory? category,
+    IconData icon,
+  ) {
+    final isSelected = _selectedCategory == category;
+
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selectedCategory = category;
+        });
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
+        decoration: BoxDecoration(
+          gradient: isSelected
+              ? const LinearGradient(
+                  colors: [Color(0xFF4ECDC4), Color(0xFF44A08D)],
+                )
+              : null,
+          color: isSelected ? null : Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: isSelected
+                ? Colors.transparent
+                : AppTheme.primary.withValues(alpha: 0.3),
+            width: 1.5,
+          ),
+          boxShadow: isSelected
+              ? [
+                  BoxShadow(
+                    color: const Color(0xFF4ECDC4).withValues(alpha: 0.3),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ]
+              : [],
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
+              size: 18.sp,
+              color: isSelected ? Colors.white : AppTheme.deepBlue,
+            ),
+            SizedBox(width: 2.w),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w700,
+                color: isSelected ? Colors.white : AppTheme.deepBlue,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFilterToggle(AppLocalizations l10n) {
+    return Row(
+      children: [
+        Checkbox(
+          value: _showOnlyUnlocked,
+          onChanged: (value) {
+            setState(() {
+              _showOnlyUnlocked = value ?? false;
+            });
+          },
+          activeColor: AppTheme.primary,
+        ),
+        Text(
+          'Show only unlocked',
+          style: TextStyle(
+            fontSize: 13.sp,
+            fontWeight: FontWeight.w600,
+            color: AppTheme.deepBlue,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildAchievementsGrid() {
+    final filtered = _filteredAchievements;
+
+    if (filtered.isEmpty) {
+      return Center(
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 8.h),
+          child: Column(
+            children: [
+              Icon(
+                Icons.search_off,
+                size: 48.sp,
+                color: AppTheme.textSecondary.withValues(alpha: 0.5),
+              ),
+              SizedBox(height: 2.h),
+              Text(
+                'No achievements found',
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600,
+                  color: AppTheme.textSecondary,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 0.75,
+        crossAxisSpacing: 3.w,
+        mainAxisSpacing: 2.h,
+      ),
+      itemCount: filtered.length,
+      itemBuilder: (context, index) {
+        return AchievementCard(
+          achievement: filtered[index],
+          onTap: () {
+            // TODO: Show achievement detail modal
+          },
+        );
+      },
     );
   }
 }

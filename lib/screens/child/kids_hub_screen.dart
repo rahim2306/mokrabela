@@ -3,6 +3,7 @@ import 'package:mokrabela/components/cards/daily_progress_card.dart';
 import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 import 'package:mokrabela/components/cards/exercise_card.dart';
+import 'package:mokrabela/screens/child/breathing/breathing_exercises_menu_screen.dart';
 import 'package:mokrabela/services/auth_service.dart';
 import 'package:sizer/sizer.dart';
 
@@ -140,8 +141,19 @@ class _KidsHubScreenState extends State<KidsHubScreen> {
                     title: exercise['title'] as String,
                     icon: exercise['icon'] as IconData,
                     gradient: exercise['gradient'] as List<Color>,
-                    onTap: () =>
-                        _showPlaceholder(context, exercise['title'] as String),
+                    onTap: () {
+                      if (index == 0) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const BreathingExercisesMenuScreen(),
+                          ),
+                        );
+                      } else {
+                        _showPlaceholder(context, exercise['title'] as String);
+                      }
+                    },
                   ),
                 );
               },

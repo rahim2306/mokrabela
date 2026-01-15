@@ -259,4 +259,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get languageShort => 'Eng';
+
+  @override
+  String get breathingExercisesTitle => 'Breathing Exercises';
+
+  @override
+  String get goldenBreathTitle => 'Golden Breath';
+
+  @override
+  String get goldenBreathDesc => 'Short exercise (6s) for energy.';
+
+  @override
+  String get butterflyBreathTitle => 'Butterfly Breath';
+
+  @override
+  String get butterflyBreathDesc => 'Calm exercise (10s) for deep relaxation.';
+
+  @override
+  String get oceanBreathTitle => 'Ocean Breath';
+
+  @override
+  String get oceanBreathDesc => 'Exercise (8s) mimicking ocean waves.';
+
+  @override
+  String get forestBreathTitle => 'Forest Breath';
+
+  @override
+  String get forestBreathDesc => 'Gentle exercise (7s) for balance.';
+
+  @override
+  String get seconds => 'seconds';
+
+  @override
+  String startExercise(String exercise) {
+    return 'Start $exercise...';
+  }
+
+  @override
+  String get whyBreatheTitle => 'Why breathe consciously?';
+
+  @override
+  String get whyBreatheDesc =>
+      'Breathing exercises help calm the mind, reduce stress, and improve focus. It\'s a magical way to recharge or relax.';
 }

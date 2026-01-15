@@ -278,5 +278,18 @@
   "languageShort": "عربي",
   "@languageShort": {
     "description": "Short language code for display"
-  }
+  },
+  "breathingExercisesTitle": "تمارين التنفس",
+  "goldenBreathTitle": "التنفس الذهبي",
+  "goldenBreathDesc": "تمرين قصير (6 ثوانٍ) للتحفيز والنشاط.",
+  "butterflyBreathTitle": "تنفس الفراشة",
+  "butterflyBreathDesc": "تمرين هادئ (10 ثوانٍ) للاسترخاء العميق.",
+  "oceanBreathTitle": "تنفس المحيط",
+  "oceanBreathDesc": "تمرين (8 ثوانٍ) لمحاكاة هدوء الأمواج.",
+  "forestBreathTitle": "تنفس الغابة",
+  "forestBreathDesc": "تمرين لطيف (7 ثوانٍ) للتوازن الطبيعي.",
+  "seconds": "ثواني",
+  "startExercise": "بدء {exercise}...",
+  "whyBreatheTitle": "لماذا نتنفس بوعي؟",
+  "whyBreatheDesc": "تساعد تمارين التنفس على تهدئة العقل، تقليل التوتر، وزيادة التركيز. إنها طريقة سحرية لشحن طاقتك أو الاسترخاء بعد يوم طويل وممتع."
 }

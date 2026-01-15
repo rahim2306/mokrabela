@@ -347,5 +347,63 @@
   "languageShort": "Eng",
   "@languageShort": {
     "description": "Short language code for display"
+  },
+  "breathingExercisesTitle": "Breathing Exercises",
+  "@breathingExercisesTitle": {
+    "description": "Title for breathing exercises screen"
+  },
+  "goldenBreathTitle": "Golden Breath",
+  "@goldenBreathTitle": {
+    "description": "Title for golden breath exercise"
+  },
+  "goldenBreathDesc": "Short exercise (6s) for energy.",
+  "@goldenBreathDesc": {
+    "description": "Description for golden breath exercise"
+  },
+  "butterflyBreathTitle": "Butterfly Breath",
+  "@butterflyBreathTitle": {
+    "description": "Title for butterfly breath exercise"
+  },
+  "butterflyBreathDesc": "Calm exercise (10s) for deep relaxation.",
+  "@butterflyBreathDesc": {
+    "description": "Description for butterfly breath exercise"
+  },
+  "oceanBreathTitle": "Ocean Breath",
+  "@oceanBreathTitle": {
+    "description": "Title for ocean breath exercise"
+  },
+  "oceanBreathDesc": "Exercise (8s) mimicking ocean waves.",
+  "@oceanBreathDesc": {
+    "description": "Description for ocean breath exercise"
+  },
+  "forestBreathTitle": "Forest Breath",
+  "@forestBreathTitle": {
+    "description": "Title for forest breath exercise"
+  },
+  "forestBreathDesc": "Gentle exercise (7s) for balance.",
+  "@forestBreathDesc": {
+    "description": "Description for forest breath exercise"
+  },
+  "seconds": "seconds",
+  "@seconds": {
+    "description": "Seconds unit label"
+  },
+  "startExercise": "Start {exercise}...",
+  "@startExercise": {
+    "description": "Message when starting an exercise",
+    "placeholders": {
+      "exercise": {
+        "type": "String",
+        "example": "Golden Breath"
+      }
+    }
+  },
+  "whyBreatheTitle": "Why breathe consciously?",
+  "@whyBreatheTitle": {
+    "description": "Title for breathing info card"
+  },
+  "whyBreatheDesc": "Breathing exercises help calm the mind, reduce stress, and improve focus. It's a magical way to recharge or relax.",
+  "@whyBreatheDesc": {
+    "description": "Description for breathing info card"
   }
 }

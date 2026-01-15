@@ -579,6 +579,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Eng'**
   String get languageShort;
+
+  /// Title for breathing exercises screen
+  ///
+  /// In en, this message translates to:
+  /// **'Breathing Exercises'**
+  String get breathingExercisesTitle;
+
+  /// Title for golden breath exercise
+  ///
+  /// In en, this message translates to:
+  /// **'Golden Breath'**
+  String get goldenBreathTitle;
+
+  /// Description for golden breath exercise
+  ///
+  /// In en, this message translates to:
+  /// **'Short exercise (6s) for energy.'**
+  String get goldenBreathDesc;
+
+  /// Title for butterfly breath exercise
+  ///
+  /// In en, this message translates to:
+  /// **'Butterfly Breath'**
+  String get butterflyBreathTitle;
+
+  /// Description for butterfly breath exercise
+  ///
+  /// In en, this message translates to:
+  /// **'Calm exercise (10s) for deep relaxation.'**
+  String get butterflyBreathDesc;
+
+  /// Title for ocean breath exercise
+  ///
+  /// In en, this message translates to:
+  /// **'Ocean Breath'**
+  String get oceanBreathTitle;
+
+  /// Description for ocean breath exercise
+  ///
+  /// In en, this message translates to:
+  /// **'Exercise (8s) mimicking ocean waves.'**
+  String get oceanBreathDesc;
+
+  /// Title for forest breath exercise
+  ///
+  /// In en, this message translates to:
+  /// **'Forest Breath'**
+  String get forestBreathTitle;
+
+  /// Description for forest breath exercise
+  ///
+  /// In en, this message translates to:
+  /// **'Gentle exercise (7s) for balance.'**
+  String get forestBreathDesc;
+
+  /// Seconds unit label
+  ///
+  /// In en, this message translates to:
+  /// **'seconds'**
+  String get seconds;
+
+  /// Message when starting an exercise
+  ///
+  /// In en, this message translates to:
+  /// **'Start {exercise}...'**
+  String startExercise(String exercise);
+
+  /// Title for breathing info card
+  ///
+  /// In en, this message translates to:
+  /// **'Why breathe consciously?'**
+  String get whyBreatheTitle;
+
+  /// Description for breathing info card
+  ///
+  /// In en, this message translates to:
+  /// **'Breathing exercises help calm the mind, reduce stress, and improve focus. It\'s a magical way to recharge or relax.'**
+  String get whyBreatheDesc;
 }
 
 class _AppLocalizationsDelegate

@@ -2,46 +2,106 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 enum UserRole { child, parent, teacher }
 
+class UserProfile {
+  final String? name;
+  final int? age;
+  final List<String> classroomIds;
+
+  UserProfile({this.name, this.age, this.classroomIds = const []});
+
+  factory UserProfile.fromMap(Map<String, dynamic> data) {
+    return UserProfile(
+      name: data['name'] as String?,
+      age: data['age'] as int?,
+      classroomIds: List<String>.from(data['classroomIds'] ?? []),
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      if (name != null) 'name': name,
+      if (age != null) 'age': age,
+      'classroomIds': classroomIds,
+    };
+  }
+}
+
+class WatchSettings {
+  final int stressThreshold;
+  final String? deviceId;
+  final String? deviceName;
+  final bool isConnected;
+  final DateTime? lastSync;
+
+  WatchSettings({
+    this.stressThreshold = 50,
+    this.deviceId,
+    this.deviceName,
+    this.isConnected = false,
+    this.lastSync,
+  });
+
+  factory WatchSettings.fromMap(Map<String, dynamic> data) {
+    return WatchSettings(
+      stressThreshold: data['stressThreshold'] as int? ?? 50,
+      deviceId: data['deviceId'] as String?,
+      deviceName: data['deviceName'] as String?,
+      isConnected: data['isConnected'] as bool? ?? false,
+      lastSync: data['lastSync'] is Timestamp
+          ? (data['lastSync'] as Timestamp).toDate()
+          : null,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'stressThreshold': stressThreshold,
+      if (deviceId != null) 'deviceId': deviceId,
+      if (deviceName != null) 'deviceName': deviceName,
+      'isConnected': isConnected,
+      if (lastSync != null) 'lastSync': Timestamp.fromDate(lastSync!),
+    };
+  }
+}
+
 class UserModel {
   final String uid;
-  final String email;
-  final String name;
   final UserRole role;
+  final UserProfile profile;
+  final WatchSettings watchSettings;
 
-  // Real-time biometric data (LiveState)
-  final int? bpm;
-  final int? currentSquare;
-  final String stressLevel;
-  final bool isInSession;
+  // Shortcuts for UI convenience
+  String get name => profile.name ?? '';
+  String get email =>
+      ''; // Email is generally auth-level, not strictly in doc per schema, but can keep if needed. Schema didn't list email in doc, only auth. Assuming removed or fetched via Auth.
+  // Wait, legacy code used email. Schema: "uid: string, role: ..., profile: ..., watchSettings: ...". No email in doc.
+  // I will keep email as a passing field from Auth if available, or empty if not in doc.
+  // Actually, existing code relies on email. I'll check if I should keep it in the class but not parse it from doc if it's not there.
+  // Schema does NOT show email in the document.
+  // I will add email to the model class but not require it from Firestore map if not present.
 
   UserModel({
     required this.uid,
-    required this.email,
-    required this.name,
     required this.role,
-    this.bpm,
-    this.currentSquare,
-    this.stressLevel = 'calm',
-    this.isInSession = false,
+    required this.profile,
+    required this.watchSettings,
   });
 
   factory UserModel.fromFirestore(DocumentSnapshot doc) {
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-    Map<String, dynamic> profile = data['profile'] ?? {};
-    Map<String, dynamic> liveState = data['liveState'] ?? {};
 
     return UserModel(
-      uid: doc.id,
-      email: data['email'] ?? '',
-      name: profile['name'] ?? data['name'] ?? '',
+      uid: data['uid'] ?? doc.id,
       role: UserRole.values.firstWhere(
-        (e) => e.toString() == 'UserRole.${profile['role'] ?? data['role']}',
+        (e) => e.toString().split('.').last == (data['role'] as String?),
         orElse: () => UserRole.child,
       ),
-      bpm: liveState['bpm'],
-      currentSquare: liveState['currentSquare'],
-      stressLevel: liveState['stressLevel'] ?? 'calm',
-      isInSession: liveState['isInSession'] ?? false,
+      profile: UserProfile.fromMap(
+        data['profile'] as Map<String, dynamic>? ?? {},
+      ),
+      watchSettings: WatchSettings.fromMap(
+        data['watchSettings'] as Map<String, dynamic>? ?? {},
+      ),
     );
   }
 }

@@ -258,4 +258,46 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get languageShort => 'عربي';
+
+  @override
+  String get breathingExercisesTitle => 'تمارين التنفس';
+
+  @override
+  String get goldenBreathTitle => 'التنفس الذهبي';
+
+  @override
+  String get goldenBreathDesc => 'تمرين قصير (6 ثوانٍ) للتحفيز والنشاط.';
+
+  @override
+  String get butterflyBreathTitle => 'تنفس الفراشة';
+
+  @override
+  String get butterflyBreathDesc => 'تمرين هادئ (10 ثوانٍ) للاسترخاء العميق.';
+
+  @override
+  String get oceanBreathTitle => 'تنفس المحيط';
+
+  @override
+  String get oceanBreathDesc => 'تمرين (8 ثوانٍ) لمحاكاة هدوء الأمواج.';
+
+  @override
+  String get forestBreathTitle => 'تنفس الغابة';
+
+  @override
+  String get forestBreathDesc => 'تمرين لطيف (7 ثوانٍ) للتوازن الطبيعي.';
+
+  @override
+  String get seconds => 'ثواني';
+
+  @override
+  String startExercise(String exercise) {
+    return 'بدء $exercise...';
+  }
+
+  @override
+  String get whyBreatheTitle => 'لماذا نتنفس بوعي؟';
+
+  @override
+  String get whyBreatheDesc =>
+      'تساعد تمارين التنفس على تهدئة العقل، تقليل التوتر، وزيادة التركيز. إنها طريقة سحرية لشحن طاقتك أو الاسترخاء بعد يوم طويل وممتع.';
 }

@@ -29,16 +29,25 @@ class AuthService {
       User? user = result.user;
 
       if (user != null) {
+        final profile = UserProfile(name: name);
+        final watchSettings = WatchSettings(); // Default settings
+
         // Create user doc in Firestore
         await _firestore.collection('users').doc(user.uid).set({
           'uid': user.uid,
-          'email': email,
-          'name': name,
           'role': role.toString().split('.').last,
+          'profile': profile.toMap(),
+          'watchSettings': watchSettings.toMap(),
           'createdAt': FieldValue.serverTimestamp(),
+          // 'email': email, // kept only if debugging needed, but removed from official schema model
         });
 
-        return UserModel(uid: user.uid, email: email, name: name, role: role);
+        return UserModel(
+          uid: user.uid,
+          role: role,
+          profile: profile,
+          watchSettings: watchSettings,
+        );
       }
       return null;
     } on FirebaseAuthException catch (e) {
@@ -84,16 +93,7 @@ class AuthService {
           .get();
 
       if (doc.exists) {
-        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-        return UserModel(
-          uid: data['uid'] ?? '',
-          email: data['email'] ?? '',
-          name: data['name'] ?? '',
-          role: UserRole.values.firstWhere(
-            (e) => e.toString() == 'UserRole.${data['role']}',
-            orElse: () => UserRole.child,
-          ),
-        );
+        return UserModel.fromFirestore(doc);
       }
       return null;
     } catch (e) {

@@ -278,5 +278,18 @@
   "languageShort": "Fra",
   "@languageShort": {
     "description": "Short language code for display"
-  }
+  },
+  "breathingExercisesTitle": "Exercices de Respiration",
+  "goldenBreathTitle": "Respiration Dorée",
+  "goldenBreathDesc": "Exercice court (6s) pour l'énergie.",
+  "butterflyBreathTitle": "Respiration Papillon",
+  "butterflyBreathDesc": "Exercice calme (10s) pour relaxation profonde.",
+  "oceanBreathTitle": "Respiration Océan",
+  "oceanBreathDesc": "Exercice (8s) imitant les vagues de l'océan.",
+  "forestBreathTitle": "Respiration Forêt",
+  "forestBreathDesc": "Exercice doux (7s) pour l'équilibre.",
+  "seconds": "secondes",
+  "startExercise": "Démarrer {exercise}...",
+  "whyBreatheTitle": "Pourquoi respirer consciemment?",
+  "whyBreatheDesc": "Les exercices de respiration aident à calmer l'esprit, réduire le stress et améliorer la concentration. C'est une façon magique de se ressourcer ou de se détendre."
 }

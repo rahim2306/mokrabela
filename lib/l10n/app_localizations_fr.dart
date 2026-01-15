@@ -268,4 +268,47 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get languageShort => 'Fra';
+
+  @override
+  String get breathingExercisesTitle => 'Exercices de Respiration';
+
+  @override
+  String get goldenBreathTitle => 'Respiration Dorée';
+
+  @override
+  String get goldenBreathDesc => 'Exercice court (6s) pour l\'énergie.';
+
+  @override
+  String get butterflyBreathTitle => 'Respiration Papillon';
+
+  @override
+  String get butterflyBreathDesc =>
+      'Exercice calme (10s) pour relaxation profonde.';
+
+  @override
+  String get oceanBreathTitle => 'Respiration Océan';
+
+  @override
+  String get oceanBreathDesc => 'Exercice (8s) imitant les vagues de l\'océan.';
+
+  @override
+  String get forestBreathTitle => 'Respiration Forêt';
+
+  @override
+  String get forestBreathDesc => 'Exercice doux (7s) pour l\'équilibre.';
+
+  @override
+  String get seconds => 'secondes';
+
+  @override
+  String startExercise(String exercise) {
+    return 'Démarrer $exercise...';
+  }
+
+  @override
+  String get whyBreatheTitle => 'Pourquoi respirer consciemment?';
+
+  @override
+  String get whyBreatheDesc =>
+      'Les exercices de respiration aident à calmer l\'esprit, réduire le stress et améliorer la concentration. C\'est une façon magique de se ressourcer ou de se détendre.';
 }
