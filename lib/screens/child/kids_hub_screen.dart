@@ -4,6 +4,9 @@ import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 import 'package:mokrabela/components/cards/exercise_card.dart';
 import 'package:mokrabela/screens/child/breathing/breathing_exercises_menu_screen.dart';
+import 'package:mokrabela/screens/child/focus/memory_game_screen.dart';
+import 'package:mokrabela/screens/child/music/music_menu_screen.dart';
+import 'package:mokrabela/screens/child/stories/story_menu_screen.dart';
 import 'package:mokrabela/services/auth_service.dart';
 import 'package:sizer/sizer.dart';
 
@@ -148,6 +151,27 @@ class _KidsHubScreenState extends State<KidsHubScreen> {
                           MaterialPageRoute(
                             builder: (context) =>
                                 const BreathingExercisesMenuScreen(),
+                          ),
+                        );
+                      } else if (index == 1) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const MemoryGameScreen(),
+                          ),
+                        );
+                      } else if (index == 2) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const MusicMenuScreen(),
+                          ),
+                        );
+                      } else if (index == 3) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const StoryMenuScreen(),
                           ),
                         );
                       } else {

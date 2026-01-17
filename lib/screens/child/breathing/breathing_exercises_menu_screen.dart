@@ -23,7 +23,7 @@ class BreathingExercisesMenuScreen extends StatelessWidget {
           style: GoogleFonts.spaceGrotesk(
             color: AppTheme.deepBlue,
             fontWeight: FontWeight.w900,
-            fontSize: 22.sp,
+            fontSize: 18.sp,
           ),
         ),
         centerTitle: true,
@@ -59,7 +59,7 @@ class BreathingExercisesMenuScreen extends StatelessWidget {
                     crossAxisCount: 2,
                     crossAxisSpacing: 3.w,
                     mainAxisSpacing: 3.h,
-                    childAspectRatio: 0.85,
+                    childAspectRatio: 0.86,
                   ),
                   delegate: SliverChildBuilderDelegate((context, index) {
                     final exercise = exercises[index];
@@ -89,7 +89,6 @@ class BreathingExercisesMenuScreen extends StatelessWidget {
                   }, childCount: exercises.length),
                 ),
               ),
-
               // Info Card
               SliverPadding(
                 padding: EdgeInsets.fromLTRB(4.w, 0, 4.w, 4.h),

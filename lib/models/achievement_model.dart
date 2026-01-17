@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 /// Achievement rarity levels
 enum AchievementRarity { common, rare, epic, legendary }
@@ -81,12 +82,20 @@ class Achievement {
     Map<String, dynamic> data,
     Achievement template,
   ) {
+    DateTime? unlockedAt;
+    if (data['unlockedAt'] != null) {
+      final unlockedAtData = data['unlockedAt'];
+      if (unlockedAtData is Timestamp) {
+        unlockedAt = unlockedAtData.toDate();
+      } else if (unlockedAtData is String) {
+        unlockedAt = DateTime.parse(unlockedAtData);
+      }
+    }
+
     return template.copyWith(
       currentValue: data['currentValue'] ?? 0,
       isUnlocked: data['isUnlocked'] ?? false,
-      unlockedAt: data['unlockedAt'] != null
-          ? DateTime.parse(data['unlockedAt'])
-          : null,
+      unlockedAt: unlockedAt,
     );
   }
 

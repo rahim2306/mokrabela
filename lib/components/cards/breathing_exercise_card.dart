@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mokrabela/models/breathing_exercise_model.dart';
-import 'package:mokrabela/theme/app_theme.dart';
 import 'package:sizer/sizer.dart';
 
 class BreathingExerciseCard extends StatelessWidget {
@@ -15,87 +14,85 @@ class BreathingExerciseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Determine background color: Desaturated light version of the primary gradient color
-    final backgroundColor = exercise.gradient.first.withValues(alpha: 0.15);
-    final borderColor = exercise.gradient.first.withValues(alpha: 0.3);
-
     return Container(
       decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: borderColor, width: 1.5),
+        gradient: LinearGradient(
+          colors: exercise.gradient,
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: exercise.gradient.first.withValues(alpha: 0.1),
-            blurRadius: 15,
-            offset: const Offset(0, 8),
+            color: exercise.gradient.first.withValues(alpha: 0.3),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
+            spreadRadius: -5,
           ),
         ],
       ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(20),
-          onTap: onTap,
-          child: Padding(
-            padding: EdgeInsets.all(2.h),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Icon Container
-                Container(
-                  width: 18.w,
-                  height: 18.w,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: exercise.gradient,
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: exercise.gradient.first.withValues(alpha: 0.4),
-                        blurRadius: 12,
-                        offset: const Offset(0, 6),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.black.withValues(alpha: 0.15),
+          borderRadius: BorderRadius.circular(24),
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(24),
+            onTap: onTap,
+            splashColor: Colors.white.withValues(alpha: 0.2),
+            highlightColor: Colors.white.withValues(alpha: 0.1),
+            child: Padding(
+              padding: EdgeInsets.all(2.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Icon in rounded square container
+                  Container(
+                    width: 12.w,
+                    height: 12.w,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.25),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: Colors.white.withValues(alpha: 0.3),
+                        width: 1.5,
                       ),
-                    ],
+                    ),
+                    child: Icon(exercise.icon, color: Colors.white, size: 6.w),
                   ),
-                  child: Icon(exercise.icon, color: Colors.white, size: 9.w),
-                ),
-                SizedBox(height: 2.h),
-                // Title - Larger & Darker
-                Text(
-                  exercise.title,
-                  style: TextStyle(
-                    fontSize: 20.sp, // Made significantly larger
-                    fontWeight: FontWeight.w900,
-                    color: AppTheme.deepBlue,
-                    letterSpacing: -0.5,
+                  const Spacer(),
+                  // Title
+                  Text(
+                    exercise.title,
+                    style: TextStyle(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                      height: 1.2,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                SizedBox(height: 1.h),
-                // Brief Description - Larger & Readable
-                Expanded(
-                  child: Text(
+
+                  SizedBox(height: 0.5.h),
+
+                  // Description
+                  Text(
                     exercise.description,
                     style: TextStyle(
-                      fontSize: 14.sp, // Increased size
-                      fontWeight: FontWeight.w600,
-                      color: AppTheme.deepBlue.withValues(
-                        alpha: 0.8,
-                      ), // Darker for better contrast on colored bg
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white.withValues(alpha: 0.85),
                       height: 1.3,
                     ),
-                    textAlign: TextAlign.center,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                   ),
-                ),
-              ],
+                  const Spacer(),
+                ],
+              ),
             ),
           ),
         ),

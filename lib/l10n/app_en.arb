@@ -405,5 +405,145 @@
   "whyBreatheDesc": "Breathing exercises help calm the mind, reduce stress, and improve focus. It's a magical way to recharge or relax.",
   "@whyBreatheDesc": {
     "description": "Description for breathing info card"
-  }
+  },
+  "breatheIn": "Breathe In",
+  "@breatheIn": {
+    "description": "Inhale phase indicator"
+  },
+  "breatheOut": "Breathe Out",
+  "@breatheOut": {
+    "description": "Exhale phase indicator"
+  },
+  "cycle": "Cycle",
+  "@cycle": {
+    "description": "Cycle label for breathing session"
+  },
+  "complete": "Complete!",
+  "@complete": {
+    "description": "Session completion message"
+  },
+  "breathingComplete": "🎉 {exercise} Complete! ✨",
+  "@breathingComplete": {
+    "description": "Breathing exercise completion message",
+    "placeholders": {
+      "exercise": {
+        "type": "String",
+        "example": "Golden Breath"
+      }
+    }
+  },
+  "focusGamesTitle": "Focus Games",
+  "@focusGamesTitle": {
+    "description": "Title for focus games section"
+  },
+  "memoryFlipTitle": "Memory Flip",
+  "@memoryFlipTitle": {
+    "description": "Title for memory flip game"
+  },
+  "memoryFlipDesc": "Match pairs of cards to improve memory and focus",
+  "@memoryFlipDesc": {
+    "description": "Description for memory flip game"
+  },
+  "moves": "Moves",
+  "@moves": {
+    "description": "Moves counter label"
+  },
+  "time": "Time",
+  "@time": {
+    "description": "Time label"
+  },
+  "gameComplete": "Game Complete!",
+  "@gameComplete": {
+    "description": "Game completion title"
+  },
+  "playAgain": "Play Again",
+  "@playAgain": {
+    "description": "Play again button"
+  },
+  "wellDone": "Well Done!",
+  "@wellDone": {
+    "description": "Congratulations message"
+  },
+  "calmMusicTitle": "Calm Music",
+  "@calmMusicTitle": {
+    "description": "Title for calm music screen"
+  },
+  "rainSounds": "Rain Sounds",
+  "@rainSounds": {
+    "description": "Rain sounds track title"
+  },
+  "rainSoundsDesc": "Gentle rain to calm your mind",
+  "@rainSoundsDesc": {
+    "description": "Rain sounds track description"
+  },
+  "natureAmbience": "Nature Ambience",
+  "@natureAmbience": {
+    "description": "Nature ambience track title"
+  },
+  "natureAmbienceDesc": "Peaceful sounds of nature",
+  "@natureAmbienceDesc": {
+    "description": "Nature ambience track description"
+  },
+  "oceanWaves": "Ocean Waves",
+  "@oceanWaves": {
+    "description": "Ocean waves track title"
+  },
+  "oceanWavesDesc": "Soothing ocean waves",
+  "@oceanWavesDesc": {
+    "description": "Ocean waves track description"
+  },
+  "calmMusicTrack": "Calm Music",
+  "@calmMusicTrack": {
+    "description": "Calm music track title"
+  },
+  "calmMusicTrackDesc": "Relaxing melodies for peace",
+  "@calmMusicTrackDesc": {
+    "description": "Calm music track description"
+  },
+  "storiesTitle": "Stories",
+  "@storiesTitle": {
+    "description": "Title for stories section"
+  },
+  "braveStarTitle": "The Brave Little Star",
+  "@braveStarTitle": {
+    "description": "Brave star story title"
+  },
+  "braveStarDesc": "A tale of courage and believing in yourself",
+  "@braveStarDesc": {
+    "description": "Brave star story description"
+  },
+  "magicGardenTitle": "The Magic Garden",
+  "@magicGardenTitle": {
+    "description": "Magic garden story title"
+  },
+  "magicGardenDesc": "Discover the magic of kindness",
+  "@magicGardenDesc": {
+    "description": "Magic garden story description"
+  },
+  "friendlyDragonTitle": "The Friendly Dragon",
+  "@friendlyDragonTitle": {
+    "description": "Friendly dragon story title"
+  },
+  "friendlyDragonDesc": "A heartwarming story about friendship",
+  "@friendlyDragonDesc": {
+    "description": "Friendly dragon story description"
+  },
+  "braveStarPage1": "Once upon a time, in the vast night sky, there lived a little star named Stella. She was the smallest star in her constellation, but she had the biggest dreams.",
+  "braveStarPage2": "Every night, Stella watched the other stars shine brightly. \"I wish I could shine as bright as them,\" she would whisper to the moon.",
+  "braveStarPage3": "One night, a dark cloud covered the sky. All the big stars hid behind it, afraid to shine. But Stella thought, \"Someone needs to light the way for the children below.\"",
+  "braveStarPage4": "With all her courage, Stella pushed through the cloud. It was hard and scary, but she kept going. Her light began to glow brighter and brighter!",
+  "braveStarPage5": "The children on Earth looked up and saw Stella's brave light. \"Look! A shooting star!\" they cheered. Stella realized she didn't need to be the biggest to make a difference.",
+  "braveStarPage6": "From that night on, Stella shone with confidence. She learned that being brave doesn't mean you're not scared—it means you shine anyway. The End. ⭐",
+  "magicGardenPage1": "In a quiet corner of the world, there was a magical garden that only appeared to those who truly believed in magic.",
+  "magicGardenPage2": "A curious girl named Maya loved exploring. One sunny day, she followed a golden butterfly and discovered a hidden gate covered in vines.",
+  "magicGardenPage3": "As Maya touched the gate, it opened with a gentle glow. Inside was the most beautiful garden she had ever seen—flowers that sang, trees that danced, and streams that sparkled like diamonds.",
+  "magicGardenPage4": "In the center of the garden stood a wise old tree. \"Welcome, Maya,\" it said with a warm voice. \"This garden grows from kindness and care. Will you help it bloom?\"",
+  "magicGardenPage5": "Maya watered the flowers, sang to the trees, and helped the little creatures. With each kind act, the garden grew more vibrant and magical.",
+  "magicGardenPage6": "When it was time to leave, the tree gave Maya a special seed. \"Plant this in your heart,\" it said. \"Kindness is the real magic.\" Maya smiled, knowing she could create magic anywhere. The End. 🌸",
+  "friendlyDragonPage1": "High in the misty mountains lived a dragon named Ember. Unlike other dragons, Ember didn't want to guard treasure or breathe fire at knights.",
+  "friendlyDragonPage2": "Ember just wanted a friend. But whenever he flew down to the village, people would run away screaming. \"I'm not scary!\" Ember would call out, but no one stayed to listen.",
+  "friendlyDragonPage3": "One day, a brave little boy named Leo got lost in the mountains. As night fell and the cold wind blew, Leo began to cry. That's when he saw a warm, orange glow.",
+  "friendlyDragonPage4": "It was Ember! The dragon gently breathed warm air to keep Leo cozy. \"Don't be afraid,\" Ember said softly. \"I'll help you get home.\"",
+  "friendlyDragonPage5": "Ember flew Leo safely back to the village. When the people saw how kind and gentle the dragon was, they realized they had been wrong to judge him by his appearance.",
+  "friendlyDragonPage6": "From that day on, Ember had many friends in the village. He learned that true friendship comes to those who are kind and patient. And Leo learned that the biggest hearts sometimes come in the most unexpected forms. The End. 🐉"
 }

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 import 'package:mokrabela/models/achievement_model.dart';
-import 'package:mokrabela/data/achievements_list.dart';
 import 'package:mokrabela/components/cards/achievement_card.dart';
+import 'package:mokrabela/services/achievement_service.dart';
+import 'package:mokrabela/services/auth_service.dart';
 import 'package:sizer/sizer.dart';
 
 /// Kids Achievements Screen - Rewards and achievements list
@@ -15,43 +16,27 @@ class KidsAchievementsScreen extends StatefulWidget {
 }
 
 class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
+  final AchievementService _achievementService = AchievementService();
+  final AuthService _authService = AuthService();
   AchievementCategory? _selectedCategory;
   bool _showOnlyUnlocked = false;
-  List<Achievement> _achievements = [];
 
   @override
   void initState() {
     super.initState();
-    _loadAchievements();
+    _initializeAchievements();
   }
 
-  void _loadAchievements() {
-    // TODO: Load from Firebase with actual progress
-    // For now, use predefined list with some unlocked for demo
-    setState(() {
-      _achievements = AchievementsList.getAllAchievements();
-      // Demo: Unlock first few achievements
-      if (_achievements.isNotEmpty) {
-        _achievements[0] = _achievements[0].copyWith(
-          currentValue: 1,
-          isUnlocked: true,
-          unlockedAt: DateTime.now(),
-        );
-        _achievements[1] = _achievements[1].copyWith(
-          currentValue: 3,
-          isUnlocked: false,
-        );
-        _achievements[10] = _achievements[10].copyWith(
-          currentValue: 3,
-          isUnlocked: true,
-          unlockedAt: DateTime.now(),
-        );
-      }
-    });
+  Future<void> _initializeAchievements() async {
+    final user = _authService.currentUser;
+    if (user != null) {
+      // Initialize achievements if this is first time
+      await _achievementService.initializeAchievements(user.uid);
+    }
   }
 
-  List<Achievement> get _filteredAchievements {
-    var filtered = _achievements;
+  List<Achievement> _getFilteredAchievements(List<Achievement> achievements) {
+    var filtered = achievements;
 
     // Filter by category
     if (_selectedCategory != null) {
@@ -70,62 +55,111 @@ class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
     return filtered;
   }
 
-  int get _totalPoints {
-    return _achievements
+  int _getTotalPoints(List<Achievement> achievements) {
+    return achievements
         .where((achievement) => achievement.isUnlocked)
         .fold(0, (sum, achievement) => sum + achievement.points);
   }
 
-  int get _unlockedCount {
-    return _achievements.where((achievement) => achievement.isUnlocked).length;
+  int _getUnlockedCount(List<Achievement> achievements) {
+    return achievements.where((achievement) => achievement.isUnlocked).length;
   }
 
-  int get _currentLevel {
+  int _getCurrentLevel(int totalPoints) {
     // Simple level calculation: 1 level per 500 points
-    return (_totalPoints / 500).floor() + 1;
+    return (totalPoints / 500).floor() + 1;
   }
 
-  double get _levelProgress {
-    final pointsInCurrentLevel = _totalPoints % 500;
+  double _getLevelProgress(int totalPoints) {
+    final pointsInCurrentLevel = totalPoints % 500;
     return pointsInCurrentLevel / 500;
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final user = _authService.currentUser;
 
-    return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 3.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 2.h),
+    if (user == null) {
+      return Center(
+        child: Text(
+          'Please log in to view achievements',
+          style: TextStyle(fontSize: 16.sp),
+        ),
+      );
+    }
 
-          // Stats Header
-          _buildStatsHeader(l10n),
+    return StreamBuilder<List<Achievement>>(
+      stream: _achievementService.getAchievements(user.uid),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
 
-          SizedBox(height: 3.h),
+        if (snapshot.hasError) {
+          return Center(
+            child: Text(
+              'Error loading achievements',
+              style: TextStyle(fontSize: 16.sp),
+            ),
+          );
+        }
 
-          // Category Filters
-          _buildCategoryFilters(l10n),
+        final achievements = snapshot.data ?? [];
+        final filteredAchievements = _getFilteredAchievements(achievements);
+        final totalPoints = _getTotalPoints(achievements);
+        final unlockedCount = _getUnlockedCount(achievements);
+        final currentLevel = _getCurrentLevel(totalPoints);
+        final levelProgress = _getLevelProgress(totalPoints);
 
-          SizedBox(height: 2.h),
+        return SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 3.h),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 2.h),
 
-          // Filter Toggle
-          _buildFilterToggle(l10n),
+              // Stats Header
+              _buildStatsHeader(
+                l10n,
+                totalPoints,
+                unlockedCount,
+                achievements.length,
+                currentLevel,
+                levelProgress,
+              ),
 
-          SizedBox(height: 2.h),
+              SizedBox(height: 3.h),
 
-          // Achievements Grid
-          _buildAchievementsGrid(),
+              // Category Filters
+              _buildCategoryFilters(l10n),
 
-          SizedBox(height: 10.h), // Space for bottom nav
-        ],
-      ),
+              SizedBox(height: 2.h),
+
+              // Filter Toggle
+              _buildFilterToggle(l10n),
+
+              SizedBox(height: 2.h),
+
+              // Achievements Grid
+              _buildAchievementsGrid(filteredAchievements),
+
+              SizedBox(height: 10.h), // Space for bottom nav
+            ],
+          ),
+        );
+      },
     );
   }
 
-  Widget _buildStatsHeader(AppLocalizations l10n) {
+  Widget _buildStatsHeader(
+    AppLocalizations l10n,
+    int totalPoints,
+    int unlockedCount,
+    int totalCount,
+    int currentLevel,
+    double levelProgress,
+  ) {
     return Container(
       padding: EdgeInsets.all(4.w),
       decoration: BoxDecoration(
@@ -162,7 +196,7 @@ class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
                   ),
                   SizedBox(height: 0.5.h),
                   Text(
-                    _totalPoints.toString(),
+                    totalPoints.toString(),
                     style: TextStyle(
                       fontSize: 32.sp,
                       fontWeight: FontWeight.w900,
@@ -193,7 +227,7 @@ class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Level $_currentLevel',
+                    'Level $currentLevel',
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w700,
@@ -201,7 +235,7 @@ class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
                     ),
                   ),
                   Text(
-                    '${(_levelProgress * 100).toInt()}%',
+                    '${(levelProgress * 100).toInt()}%',
                     style: TextStyle(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w600,
@@ -214,7 +248,7 @@ class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: LinearProgressIndicator(
-                  value: _levelProgress,
+                  value: levelProgress,
                   backgroundColor: Colors.white.withValues(alpha: 0.3),
                   valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
                   minHeight: 8,
@@ -232,7 +266,7 @@ class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
               Icon(Icons.emoji_events, size: 20.sp, color: Colors.white),
               SizedBox(width: 2.w),
               Text(
-                '$_unlockedCount/${_achievements.length} Achievements',
+                '$unlockedCount/$totalCount Achievements',
                 style: TextStyle(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
@@ -373,10 +407,8 @@ class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
     );
   }
 
-  Widget _buildAchievementsGrid() {
-    final filtered = _filteredAchievements;
-
-    if (filtered.isEmpty) {
+  Widget _buildAchievementsGrid(List<Achievement> filteredAchievements) {
+    if (filteredAchievements.isEmpty) {
       return Center(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 8.h),
@@ -411,10 +443,10 @@ class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
         crossAxisSpacing: 3.w,
         mainAxisSpacing: 2.h,
       ),
-      itemCount: filtered.length,
+      itemCount: filteredAchievements.length,
       itemBuilder: (context, index) {
         return AchievementCard(
-          achievement: filtered[index],
+          achievement: filteredAchievements[index],
           onTap: () {
             // TODO: Show achievement detail modal
           },

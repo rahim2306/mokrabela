@@ -311,4 +311,166 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get whyBreatheDesc =>
       'Les exercices de respiration aident à calmer l\'esprit, réduire le stress et améliorer la concentration. C\'est une façon magique de se ressourcer ou de se détendre.';
+
+  @override
+  String get breatheIn => 'Inspirez';
+
+  @override
+  String get breatheOut => 'Expirez';
+
+  @override
+  String get cycle => 'Cycle';
+
+  @override
+  String get complete => 'Terminé!';
+
+  @override
+  String breathingComplete(String exercise) {
+    return '🎉 $exercise Terminé! ✨';
+  }
+
+  @override
+  String get focusGamesTitle => 'Jeux de Concentration';
+
+  @override
+  String get memoryFlipTitle => 'Retournement de Mémoire';
+
+  @override
+  String get memoryFlipDesc =>
+      'Associez des paires de cartes pour améliorer la mémoire et la concentration';
+
+  @override
+  String get moves => 'Mouvements';
+
+  @override
+  String get time => 'Temps';
+
+  @override
+  String get gameComplete => 'Jeu Terminé!';
+
+  @override
+  String get playAgain => 'Rejouer';
+
+  @override
+  String get wellDone => 'Bien Joué!';
+
+  @override
+  String get calmMusicTitle => 'Musique Calme';
+
+  @override
+  String get rainSounds => 'Sons de Pluie';
+
+  @override
+  String get rainSoundsDesc => 'Pluie douce pour calmer votre esprit';
+
+  @override
+  String get natureAmbience => 'Ambiance Nature';
+
+  @override
+  String get natureAmbienceDesc => 'Sons paisibles de la nature';
+
+  @override
+  String get oceanWaves => 'Vagues de l\'Océan';
+
+  @override
+  String get oceanWavesDesc => 'Vagues apaisantes de l\'océan';
+
+  @override
+  String get calmMusicTrack => 'Musique Calme';
+
+  @override
+  String get calmMusicTrackDesc => 'Mélodies relaxantes pour la paix';
+
+  @override
+  String get storiesTitle => 'Histoires';
+
+  @override
+  String get braveStarTitle => 'La Petite Étoile Courageuse';
+
+  @override
+  String get braveStarDesc => 'Un conte sur le courage et la confiance en soi';
+
+  @override
+  String get magicGardenTitle => 'Le Jardin Magique';
+
+  @override
+  String get magicGardenDesc => 'Découvrez la magie de la gentillesse';
+
+  @override
+  String get friendlyDragonTitle => 'Le Dragon Amical';
+
+  @override
+  String get friendlyDragonDesc => 'Une histoire touchante sur l\'amitié';
+
+  @override
+  String get braveStarPage1 =>
+      'Il était une fois, dans le vaste ciel nocturne, une petite étoile nommée Stella. Elle était la plus petite étoile de sa constellation, mais elle avait les plus grands rêves.';
+
+  @override
+  String get braveStarPage2 =>
+      'Chaque nuit, Stella regardait les autres étoiles briller intensément. \"J\'aimerais briller aussi fort qu\'elles\", murmurait-elle à la lune.';
+
+  @override
+  String get braveStarPage3 =>
+      'Une nuit, un nuage sombre couvrit le ciel. Toutes les grandes étoiles se cachèrent derrière, effrayées de briller. Mais Stella pensa: \"Quelqu\'un doit éclairer le chemin pour les enfants en bas.\"';
+
+  @override
+  String get braveStarPage4 =>
+      'Avec tout son courage, Stella traversa le nuage. C\'était difficile et effrayant, mais elle continua. Sa lumière commença à briller de plus en plus fort!';
+
+  @override
+  String get braveStarPage5 =>
+      'Les enfants sur Terre levèrent les yeux et virent la lumière courageuse de Stella. \"Regardez! Une étoile filante!\" s\'écrièrent-ils. Stella réalisa qu\'elle n\'avait pas besoin d\'être la plus grande pour faire une différence.';
+
+  @override
+  String get braveStarPage6 =>
+      'À partir de cette nuit, Stella brilla avec confiance. Elle apprit qu\'être courageux ne signifie pas ne pas avoir peur - cela signifie briller quand même. Fin. ⭐';
+
+  @override
+  String get magicGardenPage1 =>
+      'Dans un coin tranquille du monde, il y avait un jardin magique qui n\'apparaissait qu\'à ceux qui croyaient vraiment en la magie.';
+
+  @override
+  String get magicGardenPage2 =>
+      'Une fille curieuse nommée Maya adorait explorer. Un jour ensoleillé, elle suivit un papillon doré et découvrit une porte cachée couverte de vignes.';
+
+  @override
+  String get magicGardenPage3 =>
+      'Quand Maya toucha la porte, elle s\'ouvrit avec une douce lueur. À l\'intérieur se trouvait le plus beau jardin qu\'elle ait jamais vu - des fleurs qui chantaient, des arbres qui dansaient et des ruisseaux qui scintillaient comme des diamants.';
+
+  @override
+  String get magicGardenPage4 =>
+      'Au centre du jardin se tenait un vieil arbre sage. \"Bienvenue, Maya\", dit-il d\'une voix chaleureuse. \"Ce jardin grandit grâce à la gentillesse et aux soins. M\'aideras-tu à le faire fleurir?\"';
+
+  @override
+  String get magicGardenPage5 =>
+      'Maya arrosa les fleurs, chanta aux arbres et aida les petites créatures. À chaque acte de gentillesse, le jardin devenait plus vibrant et magique.';
+
+  @override
+  String get magicGardenPage6 =>
+      'Quand il fut temps de partir, l\'arbre donna à Maya une graine spéciale. \"Plante-la dans ton cœur\", dit-il. \"La gentillesse est la vraie magie.\" Maya sourit, sachant qu\'elle pouvait créer de la magie n\'importe où. Fin. 🌸';
+
+  @override
+  String get friendlyDragonPage1 =>
+      'Haut dans les montagnes brumeuses vivait un dragon nommé Ember. Contrairement aux autres dragons, Ember ne voulait pas garder de trésor ni cracher du feu sur les chevaliers.';
+
+  @override
+  String get friendlyDragonPage2 =>
+      'Ember voulait juste un ami. Mais chaque fois qu\'il descendait au village, les gens s\'enfuyaient en criant. \"Je ne suis pas effrayant!\" criait Ember, mais personne ne restait pour écouter.';
+
+  @override
+  String get friendlyDragonPage3 =>
+      'Un jour, un petit garçon courageux nommé Leo se perdit dans les montagnes. Alors que la nuit tombait et que le vent froid soufflait, Leo commença à pleurer. C\'est alors qu\'il vit une lueur orange et chaude.';
+
+  @override
+  String get friendlyDragonPage4 =>
+      'C\'était Ember! Le dragon souffla doucement de l\'air chaud pour garder Leo au chaud. \"N\'aie pas peur\", dit Ember doucement. \"Je vais t\'aider à rentrer chez toi.\"';
+
+  @override
+  String get friendlyDragonPage5 =>
+      'Ember ramena Leo en toute sécurité au village. Quand les gens virent à quel point le dragon était gentil et doux, ils réalisèrent qu\'ils avaient eu tort de le juger sur son apparence.';
+
+  @override
+  String get friendlyDragonPage6 =>
+      'À partir de ce jour, Ember eut de nombreux amis au village. Il apprit que la vraie amitié vient à ceux qui sont gentils et patients. Et Leo apprit que les plus grands cœurs viennent parfois sous les formes les plus inattendues. Fin. 🐉';
 }

@@ -657,6 +657,288 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Breathing exercises help calm the mind, reduce stress, and improve focus. It\'s a magical way to recharge or relax.'**
   String get whyBreatheDesc;
+
+  /// Inhale phase indicator
+  ///
+  /// In en, this message translates to:
+  /// **'Breathe In'**
+  String get breatheIn;
+
+  /// Exhale phase indicator
+  ///
+  /// In en, this message translates to:
+  /// **'Breathe Out'**
+  String get breatheOut;
+
+  /// Cycle label for breathing session
+  ///
+  /// In en, this message translates to:
+  /// **'Cycle'**
+  String get cycle;
+
+  /// Session completion message
+  ///
+  /// In en, this message translates to:
+  /// **'Complete!'**
+  String get complete;
+
+  /// Breathing exercise completion message
+  ///
+  /// In en, this message translates to:
+  /// **'🎉 {exercise} Complete! ✨'**
+  String breathingComplete(String exercise);
+
+  /// Title for focus games section
+  ///
+  /// In en, this message translates to:
+  /// **'Focus Games'**
+  String get focusGamesTitle;
+
+  /// Title for memory flip game
+  ///
+  /// In en, this message translates to:
+  /// **'Memory Flip'**
+  String get memoryFlipTitle;
+
+  /// Description for memory flip game
+  ///
+  /// In en, this message translates to:
+  /// **'Match pairs of cards to improve memory and focus'**
+  String get memoryFlipDesc;
+
+  /// Moves counter label
+  ///
+  /// In en, this message translates to:
+  /// **'Moves'**
+  String get moves;
+
+  /// Time label
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get time;
+
+  /// Game completion title
+  ///
+  /// In en, this message translates to:
+  /// **'Game Complete!'**
+  String get gameComplete;
+
+  /// Play again button
+  ///
+  /// In en, this message translates to:
+  /// **'Play Again'**
+  String get playAgain;
+
+  /// Congratulations message
+  ///
+  /// In en, this message translates to:
+  /// **'Well Done!'**
+  String get wellDone;
+
+  /// Title for calm music screen
+  ///
+  /// In en, this message translates to:
+  /// **'Calm Music'**
+  String get calmMusicTitle;
+
+  /// Rain sounds track title
+  ///
+  /// In en, this message translates to:
+  /// **'Rain Sounds'**
+  String get rainSounds;
+
+  /// Rain sounds track description
+  ///
+  /// In en, this message translates to:
+  /// **'Gentle rain to calm your mind'**
+  String get rainSoundsDesc;
+
+  /// Nature ambience track title
+  ///
+  /// In en, this message translates to:
+  /// **'Nature Ambience'**
+  String get natureAmbience;
+
+  /// Nature ambience track description
+  ///
+  /// In en, this message translates to:
+  /// **'Peaceful sounds of nature'**
+  String get natureAmbienceDesc;
+
+  /// Ocean waves track title
+  ///
+  /// In en, this message translates to:
+  /// **'Ocean Waves'**
+  String get oceanWaves;
+
+  /// Ocean waves track description
+  ///
+  /// In en, this message translates to:
+  /// **'Soothing ocean waves'**
+  String get oceanWavesDesc;
+
+  /// Calm music track title
+  ///
+  /// In en, this message translates to:
+  /// **'Calm Music'**
+  String get calmMusicTrack;
+
+  /// Calm music track description
+  ///
+  /// In en, this message translates to:
+  /// **'Relaxing melodies for peace'**
+  String get calmMusicTrackDesc;
+
+  /// Title for stories section
+  ///
+  /// In en, this message translates to:
+  /// **'Stories'**
+  String get storiesTitle;
+
+  /// Brave star story title
+  ///
+  /// In en, this message translates to:
+  /// **'The Brave Little Star'**
+  String get braveStarTitle;
+
+  /// Brave star story description
+  ///
+  /// In en, this message translates to:
+  /// **'A tale of courage and believing in yourself'**
+  String get braveStarDesc;
+
+  /// Magic garden story title
+  ///
+  /// In en, this message translates to:
+  /// **'The Magic Garden'**
+  String get magicGardenTitle;
+
+  /// Magic garden story description
+  ///
+  /// In en, this message translates to:
+  /// **'Discover the magic of kindness'**
+  String get magicGardenDesc;
+
+  /// Friendly dragon story title
+  ///
+  /// In en, this message translates to:
+  /// **'The Friendly Dragon'**
+  String get friendlyDragonTitle;
+
+  /// Friendly dragon story description
+  ///
+  /// In en, this message translates to:
+  /// **'A heartwarming story about friendship'**
+  String get friendlyDragonDesc;
+
+  /// No description provided for @braveStarPage1.
+  ///
+  /// In en, this message translates to:
+  /// **'Once upon a time, in the vast night sky, there lived a little star named Stella. She was the smallest star in her constellation, but she had the biggest dreams.'**
+  String get braveStarPage1;
+
+  /// No description provided for @braveStarPage2.
+  ///
+  /// In en, this message translates to:
+  /// **'Every night, Stella watched the other stars shine brightly. \"I wish I could shine as bright as them,\" she would whisper to the moon.'**
+  String get braveStarPage2;
+
+  /// No description provided for @braveStarPage3.
+  ///
+  /// In en, this message translates to:
+  /// **'One night, a dark cloud covered the sky. All the big stars hid behind it, afraid to shine. But Stella thought, \"Someone needs to light the way for the children below.\"'**
+  String get braveStarPage3;
+
+  /// No description provided for @braveStarPage4.
+  ///
+  /// In en, this message translates to:
+  /// **'With all her courage, Stella pushed through the cloud. It was hard and scary, but she kept going. Her light began to glow brighter and brighter!'**
+  String get braveStarPage4;
+
+  /// No description provided for @braveStarPage5.
+  ///
+  /// In en, this message translates to:
+  /// **'The children on Earth looked up and saw Stella\'s brave light. \"Look! A shooting star!\" they cheered. Stella realized she didn\'t need to be the biggest to make a difference.'**
+  String get braveStarPage5;
+
+  /// No description provided for @braveStarPage6.
+  ///
+  /// In en, this message translates to:
+  /// **'From that night on, Stella shone with confidence. She learned that being brave doesn\'t mean you\'re not scared—it means you shine anyway. The End. ⭐'**
+  String get braveStarPage6;
+
+  /// No description provided for @magicGardenPage1.
+  ///
+  /// In en, this message translates to:
+  /// **'In a quiet corner of the world, there was a magical garden that only appeared to those who truly believed in magic.'**
+  String get magicGardenPage1;
+
+  /// No description provided for @magicGardenPage2.
+  ///
+  /// In en, this message translates to:
+  /// **'A curious girl named Maya loved exploring. One sunny day, she followed a golden butterfly and discovered a hidden gate covered in vines.'**
+  String get magicGardenPage2;
+
+  /// No description provided for @magicGardenPage3.
+  ///
+  /// In en, this message translates to:
+  /// **'As Maya touched the gate, it opened with a gentle glow. Inside was the most beautiful garden she had ever seen—flowers that sang, trees that danced, and streams that sparkled like diamonds.'**
+  String get magicGardenPage3;
+
+  /// No description provided for @magicGardenPage4.
+  ///
+  /// In en, this message translates to:
+  /// **'In the center of the garden stood a wise old tree. \"Welcome, Maya,\" it said with a warm voice. \"This garden grows from kindness and care. Will you help it bloom?\"'**
+  String get magicGardenPage4;
+
+  /// No description provided for @magicGardenPage5.
+  ///
+  /// In en, this message translates to:
+  /// **'Maya watered the flowers, sang to the trees, and helped the little creatures. With each kind act, the garden grew more vibrant and magical.'**
+  String get magicGardenPage5;
+
+  /// No description provided for @magicGardenPage6.
+  ///
+  /// In en, this message translates to:
+  /// **'When it was time to leave, the tree gave Maya a special seed. \"Plant this in your heart,\" it said. \"Kindness is the real magic.\" Maya smiled, knowing she could create magic anywhere. The End. 🌸'**
+  String get magicGardenPage6;
+
+  /// No description provided for @friendlyDragonPage1.
+  ///
+  /// In en, this message translates to:
+  /// **'High in the misty mountains lived a dragon named Ember. Unlike other dragons, Ember didn\'t want to guard treasure or breathe fire at knights.'**
+  String get friendlyDragonPage1;
+
+  /// No description provided for @friendlyDragonPage2.
+  ///
+  /// In en, this message translates to:
+  /// **'Ember just wanted a friend. But whenever he flew down to the village, people would run away screaming. \"I\'m not scary!\" Ember would call out, but no one stayed to listen.'**
+  String get friendlyDragonPage2;
+
+  /// No description provided for @friendlyDragonPage3.
+  ///
+  /// In en, this message translates to:
+  /// **'One day, a brave little boy named Leo got lost in the mountains. As night fell and the cold wind blew, Leo began to cry. That\'s when he saw a warm, orange glow.'**
+  String get friendlyDragonPage3;
+
+  /// No description provided for @friendlyDragonPage4.
+  ///
+  /// In en, this message translates to:
+  /// **'It was Ember! The dragon gently breathed warm air to keep Leo cozy. \"Don\'t be afraid,\" Ember said softly. \"I\'ll help you get home.\"'**
+  String get friendlyDragonPage4;
+
+  /// No description provided for @friendlyDragonPage5.
+  ///
+  /// In en, this message translates to:
+  /// **'Ember flew Leo safely back to the village. When the people saw how kind and gentle the dragon was, they realized they had been wrong to judge him by his appearance.'**
+  String get friendlyDragonPage5;
+
+  /// No description provided for @friendlyDragonPage6.
+  ///
+  /// In en, this message translates to:
+  /// **'From that day on, Ember had many friends in the village. He learned that true friendship comes to those who are kind and patient. And Leo learned that the biggest hearts sometimes come in the most unexpected forms. The End. 🐉'**
+  String get friendlyDragonPage6;
 }
 
 class _AppLocalizationsDelegate

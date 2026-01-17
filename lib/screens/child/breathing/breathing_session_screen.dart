@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:mokrabela/models/breathing_exercise_model.dart';
+import 'package:mokrabela/services/session_service.dart';
+import 'package:mokrabela/services/auth_service.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 import 'package:sizer/sizer.dart';
 
@@ -22,6 +24,9 @@ class BreathingSessionScreen extends StatefulWidget {
 
 class _BreathingSessionScreenState extends State<BreathingSessionScreen>
     with SingleTickerProviderStateMixin {
+  final SessionService _sessionService = SessionService();
+  final AuthService _authService = AuthService();
+
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
 
@@ -29,10 +34,12 @@ class _BreathingSessionScreenState extends State<BreathingSessionScreen>
   BreathPhase _currentPhase = BreathPhase.inhale;
   Timer? _phaseTimer;
   bool _isCompleted = false;
+  late DateTime _sessionStartTime;
 
   @override
   void initState() {
     super.initState();
+    _sessionStartTime = DateTime.now();
     _setupAnimation();
     _startBreathingCycle();
   }
@@ -100,16 +107,38 @@ class _BreathingSessionScreenState extends State<BreathingSessionScreen>
     });
   }
 
-  void _completeSession() {
+  void _completeSession() async {
     setState(() => _isCompleted = true);
     _phaseTimer?.cancel();
 
-    Future.delayed(const Duration(seconds: 2), () {
-      if (mounted) {
-        widget.onComplete?.call();
-        Navigator.pop(context);
+    // Wait for completion animation
+    await Future.delayed(const Duration(seconds: 2));
+
+    // Save session and show achievement dialogs
+    final user = _authService.currentUser;
+    if (user != null && mounted) {
+      try {
+        await _sessionService.saveSession(
+          childId: user.uid,
+          type: 'breathing',
+          exerciseName: widget.exercise.title,
+          exerciseType: widget.exercise.id,
+          startTime: _sessionStartTime,
+          endTime: DateTime.now(),
+          completed: true,
+          exerciseData: {'breathingCycles': _currentCycle},
+          context: context,
+        );
+      } catch (error) {
+        print('Error saving session: $error');
       }
-    });
+    }
+
+    // Close screen after achievements
+    if (mounted) {
+      widget.onComplete?.call();
+      Navigator.pop(context);
+    }
   }
 
   @override
@@ -182,7 +211,6 @@ class _BreathingSessionScreenState extends State<BreathingSessionScreen>
                       ],
                     ),
                   ),
-
                   const Spacer(),
 
                   // Main breathing circle with dynamic radial gradient
