@@ -103,13 +103,19 @@ class Achievement {
   static List<Color> getGradientForRarity(AchievementRarity rarity) {
     switch (rarity) {
       case AchievementRarity.common:
-        return [const Color(0xFF9E9E9E), const Color(0xFF757575)]; // Gray
+        return [const Color(0xFF4ECDC4), const Color(0xFF44A08D)]; // Teal
       case AchievementRarity.rare:
-        return [const Color(0xFF42A5F5), const Color(0xFF1E88E5)]; // Blue
+        return [
+          const Color(0xFF667EEA),
+          const Color(0xFF764BA2),
+        ]; // Blue-Purple
       case AchievementRarity.epic:
-        return [const Color(0xFF9C27B0), const Color(0xFF7B1FA2)]; // Purple
+        return [const Color(0xFFFF6B6B), const Color(0xFFEE5A24)]; // Red-Orange
       case AchievementRarity.legendary:
-        return [const Color(0xFFFFD700), const Color(0xFFFFA000)]; // Gold
+        return [
+          const Color(0xFFFFD700),
+          const Color(0xFFFF8C00),
+        ]; // Gold-Orange
     }
   }
 

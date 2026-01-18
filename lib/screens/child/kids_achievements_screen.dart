@@ -3,6 +3,7 @@ import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 import 'package:mokrabela/models/achievement_model.dart';
 import 'package:mokrabela/components/cards/achievement_card.dart';
+import 'package:mokrabela/components/dialogs/achievement_detail_dialog.dart';
 import 'package:mokrabela/services/achievement_service.dart';
 import 'package:mokrabela/services/auth_service.dart';
 import 'package:sizer/sizer.dart';
@@ -448,7 +449,14 @@ class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
         return AchievementCard(
           achievement: filteredAchievements[index],
           onTap: () {
-            // TODO: Show achievement detail modal
+            Navigator.of(context).push(
+              PageRouteBuilder(
+                opaque: false,
+                pageBuilder: (context, _, __) => AchievementDetailDialog(
+                  achievement: filteredAchievements[index],
+                ),
+              ),
+            );
           },
         );
       },

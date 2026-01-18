@@ -5,6 +5,8 @@ import 'package:mokrabela/components/music/rotating_disc_widget.dart';
 import 'package:mokrabela/components/music/sound_wave_widget.dart';
 import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:mokrabela/models/music_track_model.dart';
+import 'package:mokrabela/services/session_service.dart';
+import 'package:mokrabela/services/auth_service.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 import 'package:sizer/sizer.dart';
 
@@ -19,12 +21,18 @@ class CalmMusicScreen extends StatefulWidget {
 
 class _CalmMusicScreenState extends State<CalmMusicScreen> {
   final AudioPlayer _audioPlayer = AudioPlayer();
+  final SessionService _sessionService = SessionService();
+  final AuthService _authService = AuthService();
 
   List<MusicTrack> tracks = [];
   int _currentTrackIndex = 0;
   bool _isPlaying = false;
   Duration _duration = Duration.zero;
   Duration _position = Duration.zero;
+
+  // Session tracking
+  DateTime? _sessionStartTime;
+  bool _sessionSaved = false;
 
   @override
   void initState() {
@@ -44,15 +52,24 @@ class _CalmMusicScreenState extends State<CalmMusicScreen> {
     });
 
     _audioPlayer.onPlayerComplete.listen((_) {
+      // Save session when track completes
+      _saveSessionIfValid();
       _playNext();
     });
   }
 
   Future<void> _playPause() async {
     if (_isPlaying) {
+      // Save session when pausing (if played 10+ seconds)
+      _saveSessionIfValid();
       await _audioPlayer.pause();
       setState(() => _isPlaying = false);
     } else {
+      // Start new session
+      if (_position == Duration.zero) {
+        _sessionStartTime = DateTime.now();
+        _sessionSaved = false;
+      }
       await _audioPlayer.play(
         AssetSource(tracks[_currentTrackIndex].assetPath),
       );
@@ -61,6 +78,10 @@ class _CalmMusicScreenState extends State<CalmMusicScreen> {
   }
 
   Future<void> _playNext() async {
+    // Reset session for new track
+    _sessionStartTime = DateTime.now();
+    _sessionSaved = false;
+
     setState(() {
       _currentTrackIndex = (_currentTrackIndex + 1) % tracks.length;
       _position = Duration.zero;
@@ -74,6 +95,10 @@ class _CalmMusicScreenState extends State<CalmMusicScreen> {
   }
 
   Future<void> _playPrevious() async {
+    // Reset session for new track
+    _sessionStartTime = DateTime.now();
+    _sessionSaved = false;
+
     setState(() {
       _currentTrackIndex =
           (_currentTrackIndex - 1 + tracks.length) % tracks.length;
@@ -83,6 +108,30 @@ class _CalmMusicScreenState extends State<CalmMusicScreen> {
       await _audioPlayer.stop();
       await _audioPlayer.play(
         AssetSource(tracks[_currentTrackIndex].assetPath),
+      );
+    }
+  }
+
+  /// Save session to Firestore if played 10+ seconds
+  void _saveSessionIfValid() {
+    if (_sessionSaved || _sessionStartTime == null) return;
+    if (_position.inSeconds < 10) return;
+
+    // Set flag immediately to prevent duplicate saves
+    _sessionSaved = true;
+
+    final user = _authService.currentUser;
+    if (user != null && mounted) {
+      _sessionService.saveSession(
+        childId: user.uid,
+        type: 'music',
+        exerciseName: tracks[_currentTrackIndex].titleKey,
+        exerciseType: 'calm_music',
+        startTime: _sessionStartTime!,
+        endTime: DateTime.now(),
+        completed: true,
+        exerciseData: {'trackId': tracks[_currentTrackIndex].id},
+        context: context,
       );
     }
   }
