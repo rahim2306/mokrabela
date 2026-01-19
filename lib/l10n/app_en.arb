@@ -406,6 +406,22 @@
   "@whyBreatheDesc": {
     "description": "Description for breathing info card"
   },
+  "whyMusicTitle": "Why listen to calm music?",
+  "@whyMusicTitle": {
+    "description": "Title for music info card"
+  },
+  "whyMusicDesc": "Calm music helps create a peaceful environment, reduces anxiety, and enhances relaxation. It's perfect for meditation, study, or bedtime.",
+  "@whyMusicDesc": {
+    "description": "Description for music info card"
+  },
+  "whyStoriesTitle": "Why read stories?",
+  "@whyStoriesTitle": {
+    "description": "Title for stories info card"
+  },
+  "whyStoriesDesc": "Stories spark imagination, teach valuable lessons, and help children relax. They're a wonderful way to wind down and dream big!",
+  "@whyStoriesDesc": {
+    "description": "Description for stories info card"
+  },
   "breatheIn": "Breathe In",
   "@breatheIn": {
     "description": "Inhale phase indicator"

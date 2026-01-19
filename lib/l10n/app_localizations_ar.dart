@@ -302,6 +302,20 @@ class AppLocalizationsAr extends AppLocalizations {
       'تساعد تمارين التنفس على تهدئة العقل، تقليل التوتر، وزيادة التركيز. إنها طريقة سحرية لشحن طاقتك أو الاسترخاء بعد يوم طويل وممتع.';
 
   @override
+  String get whyMusicTitle => 'لماذا نستمع للموسيقى الهادئة؟';
+
+  @override
+  String get whyMusicDesc =>
+      'تساعد الموسيقى الهادئة على خلق بيئة سلمية، تقليل القلق، وتعزيز الاسترخاء. إنها مثالية للتأمل، الدراسة، أو وقت النوم.';
+
+  @override
+  String get whyStoriesTitle => 'لماذا نقرأ القصص؟';
+
+  @override
+  String get whyStoriesDesc =>
+      'القصص تشعل الخيال، تعلم دروساً قيمة، وتساعد الأطفال على الاسترخاء. إنها طريقة رائعة للاسترخاء والحلم بأشياء كبيرة!';
+
+  @override
   String get breatheIn => 'استنشق';
 
   @override

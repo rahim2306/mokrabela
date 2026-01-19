@@ -658,6 +658,30 @@ abstract class AppLocalizations {
   /// **'Breathing exercises help calm the mind, reduce stress, and improve focus. It\'s a magical way to recharge or relax.'**
   String get whyBreatheDesc;
 
+  /// Title for music info card
+  ///
+  /// In en, this message translates to:
+  /// **'Why listen to calm music?'**
+  String get whyMusicTitle;
+
+  /// Description for music info card
+  ///
+  /// In en, this message translates to:
+  /// **'Calm music helps create a peaceful environment, reduces anxiety, and enhances relaxation. It\'s perfect for meditation, study, or bedtime.'**
+  String get whyMusicDesc;
+
+  /// Title for stories info card
+  ///
+  /// In en, this message translates to:
+  /// **'Why read stories?'**
+  String get whyStoriesTitle;
+
+  /// Description for stories info card
+  ///
+  /// In en, this message translates to:
+  /// **'Stories spark imagination, teach valuable lessons, and help children relax. They\'re a wonderful way to wind down and dream big!'**
+  String get whyStoriesDesc;
+
   /// Inhale phase indicator
   ///
   /// In en, this message translates to:

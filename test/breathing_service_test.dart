@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:mokrabela/models/breathing_exercise_model.dart';
-import 'package:mokrabela/services/breathing_service.dart';
-import 'package:mokrabela/l10n/app_localizations.dart';
+// import 'package:mokrabela/services/breathing_service.dart';
+// import 'package:mokrabela/l10n/app_localizations.dart';
 
 void main() {
   group('BreathingExercise Model Tests', () {

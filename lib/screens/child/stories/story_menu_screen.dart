@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mokrabela/components/cards/sticky_info_card.dart';
 import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:mokrabela/models/story_model.dart';
 import 'package:mokrabela/screens/child/stories/story_reader_screen.dart';
@@ -50,174 +51,200 @@ class _StoryMenuScreenState extends State<StoryMenuScreen> {
           ),
         ),
         child: SafeArea(
-          child: StreamBuilder<List<Story>>(
-            stream: _storyService.getStories(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              }
+          child: Stack(
+            children: [
+              StreamBuilder<List<Story>>(
+                stream: _storyService.getStories(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
 
-              if (snapshot.hasError) {
-                print('Story stream error: ${snapshot.error}');
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.error_outline, size: 48, color: Colors.red),
-                      SizedBox(height: 2.h),
-                      Text('Error loading stories'),
-                      Text(
-                        '${snapshot.error}',
-                        style: TextStyle(fontSize: 10.sp),
+                  if (snapshot.hasError) {
+                    print('Story stream error: ${snapshot.error}');
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.error_outline,
+                            size: 48,
+                            color: Colors.red,
+                          ),
+                          SizedBox(height: 2.h),
+                          Text('Error loading stories'),
+                          Text(
+                            '${snapshot.error}',
+                            style: TextStyle(fontSize: 10.sp),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                );
-              }
+                    );
+                  }
 
-              final stories = snapshot.data ?? Story.getAllStories();
-              print('Stories loaded: ${stories.length}');
+                  final stories = snapshot.data ?? Story.getAllStories();
+                  print('Stories loaded: ${stories.length}');
 
-              if (stories.isEmpty) {
-                return Center(child: Text('No stories available'));
-              }
+                  if (stories.isEmpty) {
+                    return Center(child: Text('No stories available'));
+                  }
 
-              return ListView.builder(
-                padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
-                itemCount: stories.length,
-                itemBuilder: (context, index) {
-                  final story = stories[index];
-                  return Container(
-                    margin: EdgeInsets.only(bottom: 3.h),
-                    height: 22.h,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: story.gradient,
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      borderRadius: BorderRadius.circular(24),
-                      boxShadow: [
-                        BoxShadow(
-                          color: story.gradient.first.withValues(alpha: 0.4),
-                          blurRadius: 20,
-                          offset: const Offset(0, 10),
-                          spreadRadius: -5,
-                        ),
-                      ],
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.black.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(24),
-                      ),
-                      child: Material(
-                        color: Colors.transparent,
-                        child: InkWell(
+                  return ListView.builder(
+                    padding: EdgeInsets.fromLTRB(6.w, 2.h, 6.w, 25.h),
+                    itemCount: stories.length,
+                    itemBuilder: (context, index) {
+                      final story = stories[index];
+                      return Container(
+                        margin: EdgeInsets.only(bottom: 3.h),
+                        height: 22.h,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: story.gradient,
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
                           borderRadius: BorderRadius.circular(24),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    StoryReaderScreen(story: story),
+                          boxShadow: [
+                            BoxShadow(
+                              color: story.gradient.first.withValues(
+                                alpha: 0.4,
                               ),
-                            );
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.all(3.h),
-                            child: Row(
-                              children: [
-                                // Icon
-                                Container(
-                                  width: 18.w,
-                                  height: 18.w,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white.withValues(alpha: 0.25),
-                                    borderRadius: BorderRadius.circular(20),
-                                    border: Border.all(
-                                      color: Colors.white.withValues(
-                                        alpha: 0.3,
-                                      ),
-                                      width: 1.5,
-                                    ),
+                              blurRadius: 20,
+                              offset: const Offset(0, 10),
+                              spreadRadius: -5,
+                            ),
+                          ],
+                        ),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.black.withValues(alpha: 0.1),
+                            borderRadius: BorderRadius.circular(24),
+                          ),
+                          child: Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(24),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        StoryReaderScreen(story: story),
                                   ),
-                                  child: Icon(
-                                    story.icon,
-                                    color: Colors.white,
-                                    size: 10.w,
-                                  ),
-                                ),
-                                SizedBox(width: 4.w),
-                                // Text
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        _getStoryTitle(l10n, story),
-                                        style: GoogleFonts.spaceGrotesk(
-                                          fontSize: 19.sp,
-                                          fontWeight: FontWeight.w900,
-                                          color: Colors.white,
+                                );
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.all(3.h),
+                                child: Row(
+                                  children: [
+                                    // Icon
+                                    Container(
+                                      width: 18.w,
+                                      height: 18.w,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white.withValues(
+                                          alpha: 0.25,
                                         ),
-                                      ),
-                                      SizedBox(height: 1.h),
-                                      Text(
-                                        _getStoryDescription(l10n, story),
-                                        style: GoogleFonts.spaceGrotesk(
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w600,
+                                        borderRadius: BorderRadius.circular(20),
+                                        border: Border.all(
                                           color: Colors.white.withValues(
-                                            alpha: 0.9,
+                                            alpha: 0.3,
                                           ),
+                                          width: 1.5,
                                         ),
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
                                       ),
-                                      SizedBox(height: 1.h),
-                                      Row(
+                                      child: Icon(
+                                        story.icon,
+                                        color: Colors.white,
+                                        size: 10.w,
+                                      ),
+                                    ),
+                                    SizedBox(width: 4.w),
+                                    // Text
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
-                                          Icon(
-                                            Icons.menu_book,
-                                            color: Colors.white.withValues(
-                                              alpha: 0.8,
-                                            ),
-                                            size: 4.w,
-                                          ),
-                                          SizedBox(width: 1.w),
                                           Text(
-                                            '${story.pages.length} pages',
+                                            _getStoryTitle(l10n, story),
                                             style: GoogleFonts.spaceGrotesk(
-                                              fontSize: 11.sp,
+                                              fontSize: 19.sp,
+                                              fontWeight: FontWeight.w900,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          SizedBox(height: 1.h),
+                                          Text(
+                                            _getStoryDescription(l10n, story),
+                                            style: GoogleFonts.spaceGrotesk(
+                                              fontSize: 12.sp,
                                               fontWeight: FontWeight.w600,
                                               color: Colors.white.withValues(
-                                                alpha: 0.8,
+                                                alpha: 0.9,
                                               ),
                                             ),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          SizedBox(height: 1.h),
+                                          Row(
+                                            children: [
+                                              Icon(
+                                                Icons.menu_book,
+                                                color: Colors.white.withValues(
+                                                  alpha: 0.8,
+                                                ),
+                                                size: 4.w,
+                                              ),
+                                              SizedBox(width: 1.w),
+                                              Text(
+                                                '${story.pages.length} pages',
+                                                style: GoogleFonts.spaceGrotesk(
+                                                  fontSize: 11.sp,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: Colors.white
+                                                      .withValues(alpha: 0.8),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    Icon(
+                                      Icons.arrow_forward_ios,
+                                      color: Colors.white,
+                                      size: 6.w,
+                                    ),
+                                  ],
                                 ),
-                                Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: Colors.white,
-                                  size: 6.w,
-                                ),
-                              ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
+                      );
+                    },
                   );
                 },
-              );
-            },
+              ),
+
+              // Sticky info card at bottom
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: StickyInfoCard(
+                  title: l10n.whyStoriesTitle,
+                  description: l10n.whyStoriesDesc,
+                  icon: Icons.auto_stories,
+                  iconColor: const Color(0xFFFF6F00), // Orange
+                  iconBackgroundColor: const Color(0xFFFFB74D), // Light Orange
+                ),
+              ),
+            ],
           ),
         ),
       ),

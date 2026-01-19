@@ -313,6 +313,20 @@ class AppLocalizationsFr extends AppLocalizations {
       'Les exercices de respiration aident à calmer l\'esprit, réduire le stress et améliorer la concentration. C\'est une façon magique de se ressourcer ou de se détendre.';
 
   @override
+  String get whyMusicTitle => 'Pourquoi écouter de la musique calme?';
+
+  @override
+  String get whyMusicDesc =>
+      'La musique calme aide à créer un environnement paisible, réduit l\'anxiété et améliore la relaxation. C\'est parfait pour la méditation, l\'étude ou l\'heure du coucher.';
+
+  @override
+  String get whyStoriesTitle => 'Pourquoi lire des histoires?';
+
+  @override
+  String get whyStoriesDesc =>
+      'Les histoires stimulent l\'imagination, enseignent des leçons précieuses et aident les enfants à se détendre. C\'est une merveilleuse façon de se relaxer et de rêver grand!';
+
+  @override
   String get breatheIn => 'Inspirez';
 
   @override

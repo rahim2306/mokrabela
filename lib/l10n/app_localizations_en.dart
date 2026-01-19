@@ -303,6 +303,20 @@ class AppLocalizationsEn extends AppLocalizations {
       'Breathing exercises help calm the mind, reduce stress, and improve focus. It\'s a magical way to recharge or relax.';
 
   @override
+  String get whyMusicTitle => 'Why listen to calm music?';
+
+  @override
+  String get whyMusicDesc =>
+      'Calm music helps create a peaceful environment, reduces anxiety, and enhances relaxation. It\'s perfect for meditation, study, or bedtime.';
+
+  @override
+  String get whyStoriesTitle => 'Why read stories?';
+
+  @override
+  String get whyStoriesDesc =>
+      'Stories spark imagination, teach valuable lessons, and help children relax. They\'re a wonderful way to wind down and dream big!';
+
+  @override
   String get breatheIn => 'Breathe In';
 
   @override

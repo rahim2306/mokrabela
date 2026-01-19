@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mokrabela/components/cards/sticky_info_card.dart';
 import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:mokrabela/models/music_track_model.dart';
 import 'package:mokrabela/screens/child/music/calm_music_screen.dart';
@@ -43,114 +44,135 @@ class MusicMenuScreen extends StatelessWidget {
           ),
         ),
         child: SafeArea(
-          child: ListView.builder(
-            padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
-            itemCount: tracks.length,
-            itemBuilder: (context, index) {
-              final track = tracks[index];
-              return Container(
-                margin: EdgeInsets.only(bottom: 3.h),
-                height: 20.h,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: track.gradient,
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.circular(24),
-                  boxShadow: [
-                    BoxShadow(
-                      color: track.gradient.first.withValues(alpha: 0.4),
-                      blurRadius: 20,
-                      offset: const Offset(0, 10),
-                      spreadRadius: -5,
-                    ),
-                  ],
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(24),
-                  ),
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
+          child: Stack(
+            children: [
+              ListView.builder(
+                padding: EdgeInsets.fromLTRB(6.w, 2.h, 6.w, 25.h),
+                itemCount: tracks.length,
+                itemBuilder: (context, index) {
+                  final track = tracks[index];
+                  return Container(
+                    margin: EdgeInsets.only(bottom: 3.h),
+                    height: 20.h,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: track.gradient,
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
                       borderRadius: BorderRadius.circular(24),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                CalmMusicScreen(initialTrackIndex: index),
-                          ),
-                        );
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.all(3.h),
-                        child: Row(
-                          children: [
-                            // Icon
-                            Container(
-                              width: 15.w,
-                              height: 15.w,
-                              decoration: BoxDecoration(
-                                color: Colors.white.withValues(alpha: 0.25),
-                                borderRadius: BorderRadius.circular(16),
-                                border: Border.all(
-                                  color: Colors.white.withValues(alpha: 0.3),
-                                  width: 1.5,
-                                ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: track.gradient.first.withValues(alpha: 0.4),
+                          blurRadius: 20,
+                          offset: const Offset(0, 10),
+                          spreadRadius: -5,
+                        ),
+                      ],
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black.withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(24),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    CalmMusicScreen(initialTrackIndex: index),
                               ),
-                              child: Icon(
-                                track.icon,
-                                color: Colors.white,
-                                size: 8.w,
-                              ),
-                            ),
-                            SizedBox(width: 4.w),
-                            // Text
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    _getTrackTitle(l10n, track),
-                                    style: GoogleFonts.spaceGrotesk(
-                                      fontSize: 22.sp,
-                                      fontWeight: FontWeight.w900,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  SizedBox(height: 0.5.h),
-                                  Text(
-                                    _getTrackDescription(l10n, track),
-                                    style: GoogleFonts.spaceGrotesk(
-                                      fontSize: 13.sp,
-                                      fontWeight: FontWeight.w600,
+                            );
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.all(3.h),
+                            child: Row(
+                              children: [
+                                // Icon
+                                Container(
+                                  width: 15.w,
+                                  height: 15.w,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withValues(alpha: 0.25),
+                                    borderRadius: BorderRadius.circular(16),
+                                    border: Border.all(
                                       color: Colors.white.withValues(
-                                        alpha: 0.9,
+                                        alpha: 0.3,
                                       ),
+                                      width: 1.5,
                                     ),
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                ],
-                              ),
+                                  child: Icon(
+                                    track.icon,
+                                    color: Colors.white,
+                                    size: 8.w,
+                                  ),
+                                ),
+                                SizedBox(width: 4.w),
+                                // Text
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        _getTrackTitle(l10n, track),
+                                        style: GoogleFonts.spaceGrotesk(
+                                          fontSize: 22.sp,
+                                          fontWeight: FontWeight.w900,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      SizedBox(height: 0.5.h),
+                                      Text(
+                                        _getTrackDescription(l10n, track),
+                                        style: GoogleFonts.spaceGrotesk(
+                                          fontSize: 13.sp,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white.withValues(
+                                            alpha: 0.9,
+                                          ),
+                                        ),
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.play_circle_filled,
+                                  color: Colors.white,
+                                  size: 12.w,
+                                ),
+                              ],
                             ),
-                            Icon(
-                              Icons.play_circle_filled,
-                              color: Colors.white,
-                              size: 12.w,
-                            ),
-                          ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
+                  );
+                },
+              ),
+
+              // Sticky info card at bottom
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: StickyInfoCard(
+                  title: l10n.whyMusicTitle,
+                  description: l10n.whyMusicDesc,
+                  icon: Icons.music_note,
+                  iconColor: const Color(0xFF7C4DFF), // Purple
+                  iconBackgroundColor: const Color(0xFFB39DDB), // Light Purple
                 ),
-              );
-            },
+              ),
+            ],
           ),
         ),
       ),
