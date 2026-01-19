@@ -3,16 +3,23 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:mokrabela/models/story_model.dart';
 import 'package:mokrabela/screens/child/stories/story_reader_screen.dart';
+import 'package:mokrabela/services/story_service.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 import 'package:sizer/sizer.dart';
 
-class StoryMenuScreen extends StatelessWidget {
+class StoryMenuScreen extends StatefulWidget {
   const StoryMenuScreen({super.key});
+
+  @override
+  State<StoryMenuScreen> createState() => _StoryMenuScreenState();
+}
+
+class _StoryMenuScreenState extends State<StoryMenuScreen> {
+  final StoryService _storyService = StoryService();
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final stories = Story.getAllStories();
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -43,135 +50,172 @@ class StoryMenuScreen extends StatelessWidget {
           ),
         ),
         child: SafeArea(
-          child: ListView.builder(
-            padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
-            itemCount: stories.length,
-            itemBuilder: (context, index) {
-              final story = stories[index];
-              return Container(
-                margin: EdgeInsets.only(bottom: 3.h),
-                height: 22.h,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: story.gradient,
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
+          child: StreamBuilder<List<Story>>(
+            stream: _storyService.getStories(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
+              if (snapshot.hasError) {
+                print('Story stream error: ${snapshot.error}');
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.error_outline, size: 48, color: Colors.red),
+                      SizedBox(height: 2.h),
+                      Text('Error loading stories'),
+                      Text(
+                        '${snapshot.error}',
+                        style: TextStyle(fontSize: 10.sp),
+                      ),
+                    ],
                   ),
-                  borderRadius: BorderRadius.circular(24),
-                  boxShadow: [
-                    BoxShadow(
-                      color: story.gradient.first.withValues(alpha: 0.4),
-                      blurRadius: 20,
-                      offset: const Offset(0, 10),
-                      spreadRadius: -5,
-                    ),
-                  ],
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(24),
-                  ),
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
+                );
+              }
+
+              final stories = snapshot.data ?? Story.getAllStories();
+              print('Stories loaded: ${stories.length}');
+
+              if (stories.isEmpty) {
+                return Center(child: Text('No stories available'));
+              }
+
+              return ListView.builder(
+                padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
+                itemCount: stories.length,
+                itemBuilder: (context, index) {
+                  final story = stories[index];
+                  return Container(
+                    margin: EdgeInsets.only(bottom: 3.h),
+                    height: 22.h,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: story.gradient,
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
                       borderRadius: BorderRadius.circular(24),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                StoryReaderScreen(story: story),
-                          ),
-                        );
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.all(3.h),
-                        child: Row(
-                          children: [
-                            // Icon
-                            Container(
-                              width: 18.w,
-                              height: 18.w,
-                              decoration: BoxDecoration(
-                                color: Colors.white.withValues(alpha: 0.25),
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(
-                                  color: Colors.white.withValues(alpha: 0.3),
-                                  width: 1.5,
-                                ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: story.gradient.first.withValues(alpha: 0.4),
+                          blurRadius: 20,
+                          offset: const Offset(0, 10),
+                          spreadRadius: -5,
+                        ),
+                      ],
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black.withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(24),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    StoryReaderScreen(story: story),
                               ),
-                              child: Icon(
-                                story.icon,
-                                color: Colors.white,
-                                size: 10.w,
-                              ),
-                            ),
-                            SizedBox(width: 4.w),
-                            // Text
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    _getStoryTitle(l10n, story),
-                                    style: GoogleFonts.spaceGrotesk(
-                                      fontSize: 19.sp,
-                                      fontWeight: FontWeight.w900,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  SizedBox(height: 1.h),
-                                  Text(
-                                    _getStoryDescription(l10n, story),
-                                    style: GoogleFonts.spaceGrotesk(
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w600,
+                            );
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.all(3.h),
+                            child: Row(
+                              children: [
+                                // Icon
+                                Container(
+                                  width: 18.w,
+                                  height: 18.w,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withValues(alpha: 0.25),
+                                    borderRadius: BorderRadius.circular(20),
+                                    border: Border.all(
                                       color: Colors.white.withValues(
-                                        alpha: 0.9,
+                                        alpha: 0.3,
                                       ),
+                                      width: 1.5,
                                     ),
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                  SizedBox(height: 1.h),
-                                  Row(
+                                  child: Icon(
+                                    story.icon,
+                                    color: Colors.white,
+                                    size: 10.w,
+                                  ),
+                                ),
+                                SizedBox(width: 4.w),
+                                // Text
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Icon(
-                                        Icons.menu_book,
-                                        color: Colors.white.withValues(
-                                          alpha: 0.8,
-                                        ),
-                                        size: 4.w,
-                                      ),
-                                      SizedBox(width: 1.w),
                                       Text(
-                                        '${story.pages.length} pages',
+                                        _getStoryTitle(l10n, story),
                                         style: GoogleFonts.spaceGrotesk(
-                                          fontSize: 11.sp,
+                                          fontSize: 19.sp,
+                                          fontWeight: FontWeight.w900,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      SizedBox(height: 1.h),
+                                      Text(
+                                        _getStoryDescription(l10n, story),
+                                        style: GoogleFonts.spaceGrotesk(
+                                          fontSize: 12.sp,
                                           fontWeight: FontWeight.w600,
                                           color: Colors.white.withValues(
-                                            alpha: 0.8,
+                                            alpha: 0.9,
                                           ),
                                         ),
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      SizedBox(height: 1.h),
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.menu_book,
+                                            color: Colors.white.withValues(
+                                              alpha: 0.8,
+                                            ),
+                                            size: 4.w,
+                                          ),
+                                          SizedBox(width: 1.w),
+                                          Text(
+                                            '${story.pages.length} pages',
+                                            style: GoogleFonts.spaceGrotesk(
+                                              fontSize: 11.sp,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.white.withValues(
+                                                alpha: 0.8,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
-                                ],
-                              ),
+                                ),
+                                Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: Colors.white,
+                                  size: 6.w,
+                                ),
+                              ],
                             ),
-                            Icon(
-                              Icons.arrow_forward_ios,
-                              color: Colors.white,
-                              size: 6.w,
-                            ),
-                          ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                },
               );
             },
           ),
@@ -181,6 +225,13 @@ class StoryMenuScreen extends StatelessWidget {
   }
 
   String _getStoryTitle(AppLocalizations l10n, Story story) {
+    final locale = Localizations.localeOf(context).languageCode;
+    // Try localized title first
+    final localizedTitle = story.getTitle(locale);
+    if (localizedTitle != story.titleKey) {
+      return localizedTitle;
+    }
+    // Fallback to l10n for hardcoded stories
     switch (story.titleKey) {
       case 'braveStarTitle':
         return l10n.braveStarTitle;
@@ -194,6 +245,13 @@ class StoryMenuScreen extends StatelessWidget {
   }
 
   String _getStoryDescription(AppLocalizations l10n, Story story) {
+    final locale = Localizations.localeOf(context).languageCode;
+    // Try localized description first
+    final localizedDesc = story.getDescription(locale);
+    if (localizedDesc != story.descriptionKey) {
+      return localizedDesc;
+    }
+    // Fallback to l10n for hardcoded stories
     switch (story.descriptionKey) {
       case 'braveStarDesc':
         return l10n.braveStarDesc;

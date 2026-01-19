@@ -186,7 +186,7 @@ class _StoryReaderScreenState extends State<StoryReaderScreen> {
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Text(
-                  _getPageContent(context, page.contentKey),
+                  _getPageContent(context, page),
                   style: GoogleFonts.merriweather(
                     fontSize: 16.sp,
                     height: 1.8,
@@ -215,8 +215,17 @@ class _StoryReaderScreenState extends State<StoryReaderScreen> {
     );
   }
 
-  String _getPageContent(BuildContext context, String contentKey) {
+  String _getPageContent(BuildContext context, StoryPage page) {
     final l10n = AppLocalizations.of(context)!;
+    final locale = Localizations.localeOf(context).languageCode;
+
+    // Try localized content first (for Firestore stories)
+    if (page.localizedContent != null) {
+      return page.getContent(locale);
+    }
+
+    // Fallback to l10n for hardcoded stories
+    final contentKey = page.contentKey;
 
     // Map content keys to localized strings
     switch (contentKey) {

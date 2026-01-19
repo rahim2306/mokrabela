@@ -14,6 +14,8 @@ class BreathingExerciseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final locale = Localizations.localeOf(context).languageCode;
+
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -65,7 +67,7 @@ class BreathingExerciseCard extends StatelessWidget {
                   const Spacer(),
                   // Title
                   Text(
-                    exercise.title,
+                    exercise.getTitle(locale),
                     style: TextStyle(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w700,
@@ -80,7 +82,7 @@ class BreathingExerciseCard extends StatelessWidget {
 
                   // Description
                   Text(
-                    exercise.description,
+                    exercise.getDescription(locale),
                     style: TextStyle(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w500,
