@@ -138,6 +138,48 @@ class AppLocalizationsEn extends AppLocalizations {
   String get protocol => 'Protocol';
 
   @override
+  String get helloLabel => 'Hello';
+
+  @override
+  String get letsStartProtocol => 'Let\'s start your protocol';
+
+  @override
+  String get missingSquareProtocol => 'Why use the protocol?';
+
+  @override
+  String protocolWelcome(String userName) {
+    return 'Hello $userName, let\'s start your protocol';
+  }
+
+  @override
+  String get protocolExplanation =>
+      'These 4 squares help you understand feelings, control energy, and find peace.';
+
+  @override
+  String get square1Title => 'Self Awareness';
+
+  @override
+  String get square1Desc => 'Understand your feelings';
+
+  @override
+  String get square2Title => 'Self Regulation';
+
+  @override
+  String get square2Desc => 'Control your energy';
+
+  @override
+  String get square3Title => 'Daily Tasks';
+
+  @override
+  String get square3Desc => 'Organize your time';
+
+  @override
+  String get square4Title => 'Psychological Calming';
+
+  @override
+  String get square4Desc => 'Find your peace';
+
+  @override
   String get achievements => 'Achievements';
 
   @override
@@ -315,6 +357,13 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get whyStoriesDesc =>
       'Stories spark imagination, teach valuable lessons, and help children relax. They\'re a wonderful way to wind down and dream big!';
+
+  @override
+  String get whyFocusGamesTitle => 'Why play focus games?';
+
+  @override
+  String get whyFocusGamesDesc =>
+      'Focus games help improve concentration, memory, and cognitive skills. They\'re a fun way to train your brain and boost mental agility!';
 
   @override
   String get breatheIn => 'Breathe In';

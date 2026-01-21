@@ -328,11 +328,89 @@ abstract class AppLocalizations {
   /// **'The Missing Square'**
   String get missingSquare;
 
-  /// Protocol label
+  /// No description provided for @protocol.
   ///
   /// In en, this message translates to:
   /// **'Protocol'**
   String get protocol;
+
+  /// Simple hello greeting
+  ///
+  /// In en, this message translates to:
+  /// **'Hello'**
+  String get helloLabel;
+
+  /// Invitation to start protocol
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s start your protocol'**
+  String get letsStartProtocol;
+
+  /// Missing Square protocol title
+  ///
+  /// In en, this message translates to:
+  /// **'Why use the protocol?'**
+  String get missingSquareProtocol;
+
+  /// Personalized welcome message for protocol screen
+  ///
+  /// In en, this message translates to:
+  /// **'Hello {userName}, let\'s start your protocol'**
+  String protocolWelcome(String userName);
+
+  /// Protocol explanation subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'These 4 squares help you understand feelings, control energy, and find peace.'**
+  String get protocolExplanation;
+
+  /// Square 1 title
+  ///
+  /// In en, this message translates to:
+  /// **'Self Awareness'**
+  String get square1Title;
+
+  /// Square 1 description
+  ///
+  /// In en, this message translates to:
+  /// **'Understand your feelings'**
+  String get square1Desc;
+
+  /// Square 2 title
+  ///
+  /// In en, this message translates to:
+  /// **'Self Regulation'**
+  String get square2Title;
+
+  /// Square 2 description
+  ///
+  /// In en, this message translates to:
+  /// **'Control your energy'**
+  String get square2Desc;
+
+  /// Square 3 title
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Tasks'**
+  String get square3Title;
+
+  /// Square 3 description
+  ///
+  /// In en, this message translates to:
+  /// **'Organize your time'**
+  String get square3Desc;
+
+  /// Square 4 title
+  ///
+  /// In en, this message translates to:
+  /// **'Psychological Calming'**
+  String get square4Title;
+
+  /// Square 4 description
+  ///
+  /// In en, this message translates to:
+  /// **'Find your peace'**
+  String get square4Desc;
 
   /// Achievements button label
   ///
@@ -681,6 +759,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Stories spark imagination, teach valuable lessons, and help children relax. They\'re a wonderful way to wind down and dream big!'**
   String get whyStoriesDesc;
+
+  /// Title for focus games info card
+  ///
+  /// In en, this message translates to:
+  /// **'Why play focus games?'**
+  String get whyFocusGamesTitle;
+
+  /// Description for focus games info card
+  ///
+  /// In en, this message translates to:
+  /// **'Focus games help improve concentration, memory, and cognitive skills. They\'re a fun way to train your brain and boost mental agility!'**
+  String get whyFocusGamesDesc;
 
   /// Inhale phase indicator
   ///

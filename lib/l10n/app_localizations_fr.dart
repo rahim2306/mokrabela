@@ -140,6 +140,48 @@ class AppLocalizationsFr extends AppLocalizations {
   String get protocol => 'Protocole';
 
   @override
+  String get helloLabel => 'Bonjour';
+
+  @override
+  String get letsStartProtocol => 'Commençons ton protocole';
+
+  @override
+  String get missingSquareProtocol => 'Pourquoi ce protocole ?';
+
+  @override
+  String protocolWelcome(String userName) {
+    return 'Bonjour $userName, commençons ton protocole';
+  }
+
+  @override
+  String get protocolExplanation =>
+      'Ces 4 carrés t\'aident à comprendre tes émotions, contrôler ton énergie et trouver la paix.';
+
+  @override
+  String get square1Title => 'Conscience de Soi';
+
+  @override
+  String get square1Desc => 'Comprends tes émotions';
+
+  @override
+  String get square2Title => 'Autorégulation';
+
+  @override
+  String get square2Desc => 'Contrôle ton énergie';
+
+  @override
+  String get square3Title => 'Tâches Quotidiennes';
+
+  @override
+  String get square3Desc => 'Organise ton temps';
+
+  @override
+  String get square4Title => 'Apaisement Psychologique';
+
+  @override
+  String get square4Desc => 'Trouve ta paix';
+
+  @override
   String get achievements => 'Réussites';
 
   @override
@@ -325,6 +367,14 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get whyStoriesDesc =>
       'Les histoires stimulent l\'imagination, enseignent des leçons précieuses et aident les enfants à se détendre. C\'est une merveilleuse façon de se relaxer et de rêver grand!';
+
+  @override
+  String get whyFocusGamesTitle =>
+      'Pourquoi jouer à des jeux de concentration?';
+
+  @override
+  String get whyFocusGamesDesc =>
+      'Les jeux de concentration aident à améliorer la concentration, la mémoire et les compétences cognitives. C\'est une façon amusante d\'entraîner votre cerveau!';
 
   @override
   String get breatheIn => 'Inspirez';

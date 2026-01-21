@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:mokrabela/models/story_model.dart';
+import 'package:mokrabela/services/auth_service.dart';
+import 'package:mokrabela/services/session_service.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 import 'package:sizer/sizer.dart';
 
@@ -17,15 +19,27 @@ class StoryReaderScreen extends StatefulWidget {
 class _StoryReaderScreenState extends State<StoryReaderScreen> {
   late PageController _pageController;
   int _currentPage = 0;
+  bool _hasRecordedCompletion = false;
+  final SessionService _sessionService = SessionService();
+  final AuthService _authService = AuthService();
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController();
     _pageController.addListener(() {
-      setState(() {
-        _currentPage = _pageController.page?.round() ?? 0;
-      });
+      final newPage = _pageController.page?.round() ?? 0;
+      if (newPage != _currentPage) {
+        setState(() {
+          _currentPage = newPage;
+        });
+
+        // Check if user reached the final page
+        if (_currentPage == widget.story.pages.length - 1 &&
+            !_hasRecordedCompletion) {
+          _recordStoryCompletion();
+        }
+      }
     });
   }
 
@@ -33,6 +47,38 @@ class _StoryReaderScreenState extends State<StoryReaderScreen> {
   void dispose() {
     _pageController.dispose();
     super.dispose();
+  }
+
+  /// Record story completion when user reaches the final page
+  Future<void> _recordStoryCompletion() async {
+    if (_hasRecordedCompletion) return;
+
+    _hasRecordedCompletion = true;
+
+    try {
+      final user = _authService.currentUser;
+      if (user == null) return;
+
+      final now = DateTime.now();
+      final l10n = AppLocalizations.of(context)!;
+
+      await _sessionService.saveSession(
+        childId: user.uid,
+        type: 'story',
+        exerciseName: widget.story.getTitle(l10n.localeName),
+        exerciseType: widget.story.id,
+        startTime: now,
+        endTime: now,
+        completed: true,
+        exerciseData: {
+          'storyId': widget.story.id,
+          'pagesRead': widget.story.pages.length,
+        },
+        context: context,
+      );
+    } catch (e) {
+      print('Error recording story completion: $e');
+    }
   }
 
   @override

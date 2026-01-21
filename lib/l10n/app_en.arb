@@ -177,8 +177,63 @@
     "description": "Missing Square protocol title"
   },
   "protocol": "Protocol",
-  "@protocol": {
-    "description": "Protocol label"
+  "helloLabel": "Hello",
+  "@helloLabel": {
+    "description": "Simple hello greeting"
+  },
+  "letsStartProtocol": "Let's start your protocol",
+  "@letsStartProtocol": {
+    "description": "Invitation to start protocol"
+  },
+  "missingSquareProtocol": "Why use the protocol?",
+  "@missingSquareProtocol": {
+    "description": "Missing Square protocol title"
+  },
+  "protocolWelcome": "Hello {userName}, let's start your protocol",
+  "@protocolWelcome": {
+    "description": "Personalized welcome message for protocol screen",
+    "placeholders": {
+      "userName": {
+        "type": "String",
+        "example": "Ali"
+      }
+    }
+  },
+  "protocolExplanation": "These 4 squares help you understand feelings, control energy, and find peace.",
+  "@protocolExplanation": {
+    "description": "Protocol explanation subtitle"
+  },
+  "square1Title": "Self Awareness",
+  "@square1Title": {
+    "description": "Square 1 title"
+  },
+  "square1Desc": "Understand your feelings",
+  "@square1Desc": {
+    "description": "Square 1 description"
+  },
+  "square2Title": "Self Regulation",
+  "@square2Title": {
+    "description": "Square 2 title"
+  },
+  "square2Desc": "Control your energy",
+  "@square2Desc": {
+    "description": "Square 2 description"
+  },
+  "square3Title": "Daily Tasks",
+  "@square3Title": {
+    "description": "Square 3 title"
+  },
+  "square3Desc": "Organize your time",
+  "@square3Desc": {
+    "description": "Square 3 description"
+  },
+  "square4Title": "Psychological Calming",
+  "@square4Title": {
+    "description": "Square 4 title"
+  },
+  "square4Desc": "Find your peace",
+  "@square4Desc": {
+    "description": "Square 4 description"
   },
   "achievements": "Achievements",
   "@achievements": {
@@ -421,6 +476,14 @@
   "whyStoriesDesc": "Stories spark imagination, teach valuable lessons, and help children relax. They're a wonderful way to wind down and dream big!",
   "@whyStoriesDesc": {
     "description": "Description for stories info card"
+  },
+  "whyFocusGamesTitle": "Why play focus games?",
+  "@whyFocusGamesTitle": {
+    "description": "Title for focus games info card"
+  },
+  "whyFocusGamesDesc": "Focus games help improve concentration, memory, and cognitive skills. They're a fun way to train your brain and boost mental agility!",
+  "@whyFocusGamesDesc": {
+    "description": "Description for focus games info card"
   },
   "breatheIn": "Breathe In",
   "@breatheIn": {

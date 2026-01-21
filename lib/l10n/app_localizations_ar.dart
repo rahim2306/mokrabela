@@ -137,6 +137,48 @@ class AppLocalizationsAr extends AppLocalizations {
   String get protocol => 'البروتوكول';
 
   @override
+  String get helloLabel => 'مرحباً';
+
+  @override
+  String get letsStartProtocol => 'لنبدأ بروتوكولك';
+
+  @override
+  String get missingSquareProtocol => 'لماذا هذا البروتوكول؟';
+
+  @override
+  String protocolWelcome(String userName) {
+    return 'مرحباً $userName، لنبدأ بروتوكولك';
+  }
+
+  @override
+  String get protocolExplanation =>
+      'تساعدك هذه المربعات الـ 4 على فهم مشاعرك، والتحكم في طاقتك، والعثور على السلام.';
+
+  @override
+  String get square1Title => 'الوعي الذاتي';
+
+  @override
+  String get square1Desc => 'افهم مشاعرك';
+
+  @override
+  String get square2Title => 'التنظيم الذاتي';
+
+  @override
+  String get square2Desc => 'تحكم في طاقتك';
+
+  @override
+  String get square3Title => 'المهام اليومية';
+
+  @override
+  String get square3Desc => 'نظم وقتك';
+
+  @override
+  String get square4Title => 'التهدئة النفسية';
+
+  @override
+  String get square4Desc => 'اعثر على سلامك';
+
+  @override
   String get achievements => 'الإنجازات';
 
   @override
@@ -314,6 +356,13 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get whyStoriesDesc =>
       'القصص تشعل الخيال، تعلم دروساً قيمة، وتساعد الأطفال على الاسترخاء. إنها طريقة رائعة للاسترخاء والحلم بأشياء كبيرة!';
+
+  @override
+  String get whyFocusGamesTitle => 'لماذا نلعب ألعاب التركيز؟';
+
+  @override
+  String get whyFocusGamesDesc =>
+      'تساعد ألعاب التركيز على تحسين التركيز، الذاكرة، والمهارات المعرفية. إنها طريقة ممتعة لتدريب عقلك وتعزيز خفة الحركة الذهنية!';
 
   @override
   String get breatheIn => 'استنشق';
