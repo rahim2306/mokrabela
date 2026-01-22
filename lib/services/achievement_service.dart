@@ -118,7 +118,7 @@ class AchievementService {
     // Calculate total calm time (in minutes)
     final totalDuration = sessionsSnapshot.docs.fold<int>(
       0,
-      (sum, doc) => sum + ((doc.data()['duration'] as int?) ?? 0),
+      (total, doc) => total + ((doc.data()['duration'] as int?) ?? 0),
     );
     final totalMinutes = (totalDuration / 60).floor();
 

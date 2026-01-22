@@ -11,11 +11,13 @@ import 'package:sizer/sizer.dart';
 class BreathingSessionScreen extends StatefulWidget {
   final BreathingExercise exercise;
   final VoidCallback? onComplete;
+  final int? protocolSquare;
 
   const BreathingSessionScreen({
     super.key,
     required this.exercise,
     this.onComplete,
+    this.protocolSquare,
   });
 
   @override
@@ -123,6 +125,7 @@ class _BreathingSessionScreenState extends State<BreathingSessionScreen>
           type: 'breathing',
           exerciseName: widget.exercise.title,
           exerciseType: widget.exercise.id,
+          protocolSquare: widget.protocolSquare,
           startTime: _sessionStartTime,
           endTime: DateTime.now(),
           completed: true,

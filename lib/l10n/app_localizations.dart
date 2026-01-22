@@ -334,6 +334,78 @@ abstract class AppLocalizations {
   /// **'Protocol'**
   String get protocol;
 
+  /// No description provided for @focusTimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Focus Timer'**
+  String get focusTimer;
+
+  /// No description provided for @addTask.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Task'**
+  String get addTask;
+
+  /// No description provided for @myTasks.
+  ///
+  /// In en, this message translates to:
+  /// **'My Tasks'**
+  String get myTasks;
+
+  /// No description provided for @start.
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get start;
+
+  /// No description provided for @pause.
+  ///
+  /// In en, this message translates to:
+  /// **'Pause'**
+  String get pause;
+
+  /// No description provided for @resume.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume'**
+  String get resume;
+
+  /// No description provided for @reset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get reset;
+
+  /// No description provided for @minutes.
+  ///
+  /// In en, this message translates to:
+  /// **'minutes'**
+  String get minutes;
+
+  /// No description provided for @taskTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Task Title'**
+  String get taskTitle;
+
+  /// No description provided for @duration.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration (min)'**
+  String get duration;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
   /// Simple hello greeting
   ///
   /// In en, this message translates to:
@@ -1053,6 +1125,198 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'From that day on, Ember had many friends in the village. He learned that true friendship comes to those who are kind and patient. And Leo learned that the biggest hearts sometimes come in the most unexpected forms. The End. 🐉'**
   String get friendlyDragonPage6;
+
+  /// Title for add task dialog
+  ///
+  /// In en, this message translates to:
+  /// **'New Task'**
+  String get dtNewTask;
+
+  /// Placeholder for task title input
+  ///
+  /// In en, this message translates to:
+  /// **'What do you want to focus on?'**
+  String get dtTaskTitlePlaceholder;
+
+  /// Label for task duration input
+  ///
+  /// In en, this message translates to:
+  /// **'Duration (minutes)'**
+  String get dtTaskDurationLabel;
+
+  /// Button to confirm adding task
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get dtAddButton;
+
+  /// No description provided for @dtCancelButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get dtCancelButton;
+
+  /// No description provided for @howAreYouFeeling.
+  ///
+  /// In en, this message translates to:
+  /// **'How are you feeling?'**
+  String get howAreYouFeeling;
+
+  /// No description provided for @activityLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity Level (1-10)'**
+  String get activityLevel;
+
+  /// No description provided for @quiet.
+  ///
+  /// In en, this message translates to:
+  /// **'Quiet'**
+  String get quiet;
+
+  /// No description provided for @hyper.
+  ///
+  /// In en, this message translates to:
+  /// **'Hyper'**
+  String get hyper;
+
+  /// No description provided for @guidedBodyScan.
+  ///
+  /// In en, this message translates to:
+  /// **'Guided Body Scan'**
+  String get guidedBodyScan;
+
+  /// No description provided for @bodyScanDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Check in with every part of your body.'**
+  String get bodyScanDesc;
+
+  /// No description provided for @saveSession.
+  ///
+  /// In en, this message translates to:
+  /// **'Save My Session'**
+  String get saveSession;
+
+  /// No description provided for @connectWatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect Your Watch'**
+  String get connectWatch;
+
+  /// No description provided for @watchScanning.
+  ///
+  /// In en, this message translates to:
+  /// **'Searching for your watch...'**
+  String get watchScanning;
+
+  /// No description provided for @watchFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch found!'**
+  String get watchFound;
+
+  /// No description provided for @watchConnecting.
+  ///
+  /// In en, this message translates to:
+  /// **'Connecting to your watch...'**
+  String get watchConnecting;
+
+  /// No description provided for @watchError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t find your watch. Is it turned on?'**
+  String get watchError;
+
+  /// No description provided for @pairNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Pair Now'**
+  String get pairNow;
+
+  /// No description provided for @availableDevices.
+  ///
+  /// In en, this message translates to:
+  /// **'Available Devices'**
+  String get availableDevices;
+
+  /// No description provided for @noDevicesFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No devices found nearby.'**
+  String get noDevicesFound;
+
+  /// No description provided for @retryScan.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan Again'**
+  String get retryScan;
+
+  /// No description provided for @stopTechnique.
+  ///
+  /// In en, this message translates to:
+  /// **'STOP Technique'**
+  String get stopTechnique;
+
+  /// No description provided for @stopStep1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'S - Stop'**
+  String get stopStep1Title;
+
+  /// No description provided for @stopStep1Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop what you are doing. Take a moment.'**
+  String get stopStep1Desc;
+
+  /// No description provided for @stopStep2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'T - Take a Breath'**
+  String get stopStep2Title;
+
+  /// No description provided for @stopStep2Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Take a slow, deep breath. Feel it.'**
+  String get stopStep2Desc;
+
+  /// No description provided for @stopStep3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'O - Observe'**
+  String get stopStep3Title;
+
+  /// No description provided for @stopStep3Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Notice your thoughts and feelings.'**
+  String get stopStep3Desc;
+
+  /// No description provided for @stopStep4Title.
+  ///
+  /// In en, this message translates to:
+  /// **'P - Proceed'**
+  String get stopStep4Title;
+
+  /// No description provided for @stopStep4Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with more calm and focus.'**
+  String get stopStep4Desc;
+
+  /// No description provided for @breatheWithMe.
+  ///
+  /// In en, this message translates to:
+  /// **'Breathe with me'**
+  String get breatheWithMe;
+
+  /// No description provided for @feelingCooler.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m feeling cooler now!'**
+  String get feelingCooler;
 }
 
 class _AppLocalizationsDelegate

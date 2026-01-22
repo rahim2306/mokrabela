@@ -7,7 +7,9 @@ import 'package:mokrabela/screens/child/kids_protocol_screen.dart';
 import 'package:mokrabela/screens/common/settings_screen.dart';
 import 'package:mokrabela/components/bars/floating_top_bar.dart';
 import 'package:mokrabela/services/auth_service.dart';
+import 'package:mokrabela/screens/settings/watch_connection_screen.dart';
 import 'package:sizer/sizer.dart';
+import 'package:mokrabela/theme/app_theme.dart';
 
 /// Main scaffold for kids with floating bottom navigation
 class KidsMainScaffold extends StatefulWidget {
@@ -71,12 +73,6 @@ class _KidsMainScaffoldState extends State<KidsMainScaffold>
     super.dispose();
   }
 
-  void _toggleWatchConnection() {
-    setState(() {
-      _isWatchConnected = !_isWatchConnected;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -84,21 +80,7 @@ class _KidsMainScaffoldState extends State<KidsMainScaffold>
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFFFAFAFA), // Off-white at top
-              Color.fromARGB(
-                255,
-                187,
-                222,
-                230,
-              ), // Soft teal/mint in middle (greeting area)
-              Color(0xFFFAFAFA), // Off-white at bottom
-            ],
-            stops: [0.0, 0.1, 0.9], // Color concentrated in upper-middle area
-          ),
+          gradient: AppTheme.kidsBackgroundGradient,
         ),
         child: Column(
           children: [
@@ -106,7 +88,14 @@ class _KidsMainScaffoldState extends State<KidsMainScaffold>
             // Persistent floating top bar with progress, watch status, and settings
             FloatingTopBar(
               isWatchConnected: _isWatchConnected,
-              onWatchTap: _toggleWatchConnection,
+              onWatchTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const WatchConnectionScreen(),
+                  ),
+                );
+              },
               onSettingsTap: () {
                 Navigator.push(
                   context,

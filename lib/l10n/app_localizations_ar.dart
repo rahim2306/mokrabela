@@ -137,6 +137,42 @@ class AppLocalizationsAr extends AppLocalizations {
   String get protocol => 'البروتوكول';
 
   @override
+  String get focusTimer => 'مؤقت التركيز';
+
+  @override
+  String get addTask => 'أضف مهمة';
+
+  @override
+  String get myTasks => 'مهامي';
+
+  @override
+  String get start => 'بدء';
+
+  @override
+  String get pause => 'إيقاف مؤقت';
+
+  @override
+  String get resume => 'استئناف';
+
+  @override
+  String get reset => 'إعادة ضبط';
+
+  @override
+  String get minutes => 'دقيقة';
+
+  @override
+  String get taskTitle => 'عنوان المهمة';
+
+  @override
+  String get duration => 'المدة (دقيقة)';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get save => 'حفظ';
+
+  @override
   String get helloLabel => 'مرحباً';
 
   @override
@@ -524,4 +560,100 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get friendlyDragonPage6 =>
       'من ذلك اليوم فصاعداً، كان لإمبر العديد من الأصدقاء في القرية. تعلم أن الصداقة الحقيقية تأتي لمن هم لطفاء وصبورون. وتعلم ليو أن أكبر القلوب تأتي أحياناً في أكثر الأشكال غير المتوقعة. النهاية. 🐉';
+
+  @override
+  String get dtNewTask => 'مهمة جديدة';
+
+  @override
+  String get dtTaskTitlePlaceholder => 'على ماذا تريد التركيز؟';
+
+  @override
+  String get dtTaskDurationLabel => 'المدة (دقيقة)';
+
+  @override
+  String get dtAddButton => 'إضافة';
+
+  @override
+  String get dtCancelButton => 'إلغاء';
+
+  @override
+  String get howAreYouFeeling => 'بماذا تشعر الآن؟';
+
+  @override
+  String get activityLevel => 'مستوى النشاط (1-10)';
+
+  @override
+  String get quiet => 'هادئ';
+
+  @override
+  String get hyper => 'نشيط جداً';
+
+  @override
+  String get guidedBodyScan => 'مسح الجسم الموجه';
+
+  @override
+  String get bodyScanDesc => 'تحقق من كل جزء من أجزاء جسمك.';
+
+  @override
+  String get saveSession => 'حفظ جلستي';
+
+  @override
+  String get connectWatch => 'توصيل ساعتك';
+
+  @override
+  String get watchScanning => 'البحث عن ساعتك...';
+
+  @override
+  String get watchFound => 'تم العثور على الساعة!';
+
+  @override
+  String get watchConnecting => 'جاري الاتصال بساعتك...';
+
+  @override
+  String get watchError => 'تعذر العثور على ساعتك. هل هي قيد التشغيل؟';
+
+  @override
+  String get pairNow => 'اقرن الآن';
+
+  @override
+  String get availableDevices => 'الأجهزة المتاحة';
+
+  @override
+  String get noDevicesFound => 'لم يتم العثور على أجهزة قريبة.';
+
+  @override
+  String get retryScan => 'إعادة المسح';
+
+  @override
+  String get stopTechnique => 'تقنية STOP';
+
+  @override
+  String get stopStep1Title => 'S - توقف';
+
+  @override
+  String get stopStep1Desc => 'توقف عما تفعله. خذ لحظة.';
+
+  @override
+  String get stopStep2Title => 'T - خذ نفساً';
+
+  @override
+  String get stopStep2Desc => 'خذ نفساً عميقاً وبطيئاً. اشعر به.';
+
+  @override
+  String get stopStep3Title => 'O - لاحظ';
+
+  @override
+  String get stopStep3Desc => 'لاحظ أفكارك ومشاعرك.';
+
+  @override
+  String get stopStep4Title => 'P - تقدم';
+
+  @override
+  String get stopStep4Desc => 'استمر بمزيد من الهدوء والتركيز.';
+
+  @override
+  String get breatheWithMe => 'تنفس معي';
+
+  @override
+  String get feelingCooler => 'أشعر بهدوء أكبر الآن!';
 }

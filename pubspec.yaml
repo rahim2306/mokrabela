@@ -47,6 +47,7 @@ dependencies:
   logger: ^2.6.2
   audioplayers: ^6.5.1
   confetti: ^0.8.0
+  permission_handler: ^12.0.1
 
 dev_dependencies:
   # Firebasependencies:

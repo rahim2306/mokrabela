@@ -140,6 +140,42 @@ class AppLocalizationsFr extends AppLocalizations {
   String get protocol => 'Protocole';
 
   @override
+  String get focusTimer => 'Minuteur de concentration';
+
+  @override
+  String get addTask => 'Ajouter une tâche';
+
+  @override
+  String get myTasks => 'Mes tâches';
+
+  @override
+  String get start => 'Démarrer';
+
+  @override
+  String get pause => 'Pause';
+
+  @override
+  String get resume => 'Reprendre';
+
+  @override
+  String get reset => 'Réinitialiser';
+
+  @override
+  String get minutes => 'minutes';
+
+  @override
+  String get taskTitle => 'Titre de la tâche';
+
+  @override
+  String get duration => 'Durée (min)';
+
+  @override
+  String get cancel => 'Annuler';
+
+  @override
+  String get save => 'Enregistrer';
+
+  @override
   String get helloLabel => 'Bonjour';
 
   @override
@@ -537,4 +573,101 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get friendlyDragonPage6 =>
       'À partir de ce jour, Ember eut de nombreux amis au village. Il apprit que la vraie amitié vient à ceux qui sont gentils et patients. Et Leo apprit que les plus grands cœurs viennent parfois sous les formes les plus inattendues. Fin. 🐉';
+
+  @override
+  String get dtNewTask => 'Nouvelle Tâche';
+
+  @override
+  String get dtTaskTitlePlaceholder => 'Sur quoi veux-tu te concentrer ?';
+
+  @override
+  String get dtTaskDurationLabel => 'Durée (minutes)';
+
+  @override
+  String get dtAddButton => 'Ajouter';
+
+  @override
+  String get dtCancelButton => 'Annuler';
+
+  @override
+  String get howAreYouFeeling => 'Comment te sens-tu ?';
+
+  @override
+  String get activityLevel => 'Niveau d\'activité (1-10)';
+
+  @override
+  String get quiet => 'Calme';
+
+  @override
+  String get hyper => 'Hyperactif';
+
+  @override
+  String get guidedBodyScan => 'Scan corporel guidé';
+
+  @override
+  String get bodyScanDesc => 'Fais le tour de chaque partie de ton corps.';
+
+  @override
+  String get saveSession => 'Enregistrer ma séance';
+
+  @override
+  String get connectWatch => 'Connecter votre montre';
+
+  @override
+  String get watchScanning => 'Recherche de votre montre...';
+
+  @override
+  String get watchFound => 'Montre trouvée !';
+
+  @override
+  String get watchConnecting => 'Connexion à votre montre...';
+
+  @override
+  String get watchError =>
+      'Impossible de trouver votre montre. Est-elle allumée ?';
+
+  @override
+  String get pairNow => 'Jumeler maintenant';
+
+  @override
+  String get availableDevices => 'Appareils disponibles';
+
+  @override
+  String get noDevicesFound => 'Aucun appareil trouvé à proximité.';
+
+  @override
+  String get retryScan => 'Réessayer le scan';
+
+  @override
+  String get stopTechnique => 'STOP Technique';
+
+  @override
+  String get stopStep1Title => 'S - Stop';
+
+  @override
+  String get stopStep1Desc => 'Stop what you are doing. Take a moment.';
+
+  @override
+  String get stopStep2Title => 'T - Take a Breath';
+
+  @override
+  String get stopStep2Desc => 'Take a slow, deep breath. Feel it.';
+
+  @override
+  String get stopStep3Title => 'O - Observe';
+
+  @override
+  String get stopStep3Desc => 'Notice your thoughts and feelings.';
+
+  @override
+  String get stopStep4Title => 'P - Proceed';
+
+  @override
+  String get stopStep4Desc => 'Continue with more calm and focus.';
+
+  @override
+  String get breatheWithMe => 'Breathe with me';
+
+  @override
+  String get feelingCooler => 'I\'m feeling cooler now!';
 }

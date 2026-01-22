@@ -177,6 +177,18 @@
     "description": "Missing Square protocol title"
   },
   "protocol": "Protocol",
+  "focusTimer": "Focus Timer",
+  "addTask": "Add Task",
+  "myTasks": "My Tasks",
+  "start": "Start",
+  "pause": "Pause",
+  "resume": "Resume",
+  "reset": "Reset",
+  "minutes": "minutes",
+  "taskTitle": "Task Title",
+  "duration": "Duration (min)",
+  "cancel": "Cancel",
+  "save": "Save",
   "helloLabel": "Hello",
   "@helloLabel": {
     "description": "Simple hello greeting"
@@ -624,5 +636,49 @@
   "friendlyDragonPage3": "One day, a brave little boy named Leo got lost in the mountains. As night fell and the cold wind blew, Leo began to cry. That's when he saw a warm, orange glow.",
   "friendlyDragonPage4": "It was Ember! The dragon gently breathed warm air to keep Leo cozy. \"Don't be afraid,\" Ember said softly. \"I'll help you get home.\"",
   "friendlyDragonPage5": "Ember flew Leo safely back to the village. When the people saw how kind and gentle the dragon was, they realized they had been wrong to judge him by his appearance.",
-  "friendlyDragonPage6": "From that day on, Ember had many friends in the village. He learned that true friendship comes to those who are kind and patient. And Leo learned that the biggest hearts sometimes come in the most unexpected forms. The End. 🐉"
+  "friendlyDragonPage6": "From that day on, Ember had many friends in the village. He learned that true friendship comes to those who are kind and patient. And Leo learned that the biggest hearts sometimes come in the most unexpected forms. The End. 🐉",
+  "dtNewTask": "New Task",
+  "@dtNewTask": {
+    "description": "Title for add task dialog"
+  },
+  "dtTaskTitlePlaceholder": "What do you want to focus on?",
+  "@dtTaskTitlePlaceholder": {
+    "description": "Placeholder for task title input"
+  },
+  "dtTaskDurationLabel": "Duration (minutes)",
+  "@dtTaskDurationLabel": {
+    "description": "Label for task duration input"
+  },
+  "dtAddButton": "Add",
+  "@dtAddButton": {
+    "description": "Button to confirm adding task"
+  },
+  "dtCancelButton": "Cancel",
+  "howAreYouFeeling": "How are you feeling?",
+  "activityLevel": "Activity Level (1-10)",
+  "quiet": "Quiet",
+  "hyper": "Hyper",
+  "guidedBodyScan": "Guided Body Scan",
+  "bodyScanDesc": "Check in with every part of your body.",
+  "saveSession": "Save My Session",
+  "connectWatch": "Connect Your Watch",
+  "watchScanning": "Searching for your watch...",
+  "watchFound": "Watch found!",
+  "watchConnecting": "Connecting to your watch...",
+  "watchError": "Couldn't find your watch. Is it turned on?",
+  "pairNow": "Pair Now",
+  "availableDevices": "Available Devices",
+  "noDevicesFound": "No devices found nearby.",
+  "retryScan": "Scan Again",
+  "stopTechnique": "STOP Technique",
+  "stopStep1Title": "S - Stop",
+  "stopStep1Desc": "Stop what you are doing. Take a moment.",
+  "stopStep2Title": "T - Take a Breath",
+  "stopStep2Desc": "Take a slow, deep breath. Feel it.",
+  "stopStep3Title": "O - Observe",
+  "stopStep3Desc": "Notice your thoughts and feelings.",
+  "stopStep4Title": "P - Proceed",
+  "stopStep4Desc": "Continue with more calm and focus.",
+  "breatheWithMe": "Breathe with me",
+  "feelingCooler": "I'm feeling cooler now!"
 }

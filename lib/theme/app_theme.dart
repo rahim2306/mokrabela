@@ -57,6 +57,18 @@ class AppTheme {
   static const Color shadow = Color(0x1A000000);
   static const Color shadowLight = Color(0x0D000000);
 
+  // Gradients
+  static const LinearGradient kidsBackgroundGradient = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      Color(0xFFFAFAFA), // Off-white at top
+      Color(0xFFBBDEE6), // Soft teal/mint in middle
+      Color(0xFFFAFAFA), // Off-white at bottom
+    ],
+    stops: [0.0, 0.1, 0.9],
+  );
+
   /// Main Theme
   static ThemeData get lightTheme {
     return ThemeData(

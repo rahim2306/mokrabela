@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:logger/logger.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 // UUIDs الأساسية
 final Guid serviceUuid = Guid("180A");
@@ -26,6 +27,17 @@ final Guid calmnessPeriodUuid = Guid("2A74");
 final Guid hyperactivityIndexUuid = Guid("2A75");
 
 class BleService extends ChangeNotifier {
+  static final BleService _instance = BleService._internal();
+  factory BleService() => _instance;
+
+  BleService._internal() {
+    _connectionState = BluetoothConnectionState.disconnected;
+    _isScanning = false;
+    _isConnecting = false;
+    _initializeBluetoothState();
+    _logger.i("تم تهيئة خدمة البلوتوث المحسنة");
+  }
+
   final Logger _logger = Logger();
 
   StreamSubscription<List<ScanResult>>? _scanSubscription;
@@ -51,6 +63,9 @@ class BleService extends ChangeNotifier {
   final Map<String, dynamic> _sensorData = {};
   double _currentThreshold = 12.0;
   List<ScanResult> _scanResults = [];
+  String? _lastErrorMessage;
+
+  String? get lastErrorMessage => _lastErrorMessage;
 
   // البيانات المحسنة مع القيم الافتراضية المحسنة
   final Map<String, dynamic> _enhancedData = {
@@ -91,149 +106,147 @@ class BleService extends ChangeNotifier {
       _sensorDataController.stream;
   Stream<double> get thresholdStream => _thresholdController.stream;
 
-  BleService() {
-    _connectionState = BluetoothConnectionState.disconnected;
-    _isScanning = false;
-    _isConnecting = false;
-    _initializeBluetoothState();
-    _logger.i("تم تهيئة خدمة البلوتوث المحسنة");
-  }
-
   Future<void> _initializeBluetoothState() async {
     try {
       if (!await FlutterBluePlus.isSupported) {
-        _logger.e("البلوتوث غير مدعوم على هذا الجهاز.");
+        _logger.e("Bluetooth is not supported on this device.");
         return;
       }
 
+      // Sync internal _isScanning with hardware state
+      FlutterBluePlus.isScanning.listen((scanning) {
+        _logger.d("Hardware scan state changed: $scanning");
+        _isScanning = scanning;
+        notifyListeners();
+      });
+
       FlutterBluePlus.adapterState.listen((BluetoothAdapterState state) {
-        _logger.i("تغيرت حالة محول البلوتوث: $state");
+        _logger.i("Bluetooth adapter state changed: $state");
         if (state != BluetoothAdapterState.on && isConnected) {
-          _logger.w("تم إيقاف البلوتوث أثناء الاتصال. جارٍ قطع الاتصال...");
+          _logger.w("Bluetooth disabled during connection. Disconnecting...");
           disconnectDevice();
         }
       });
     } catch (e) {
-      _logger.e("خطأ أثناء تهيئة حالة البلوتوث: $e");
+      _logger.e("Error initializing Bluetooth state: $e");
     }
   }
 
   Future<bool> _checkBluetoothPermissions() async {
     try {
-      final adapterState = await FlutterBluePlus.adapterState.first;
+      // 1. Check OS Permissions (CRITICAL for Android 12+)
+      if (defaultTargetPlatform == TargetPlatform.android) {
+        Map<Permission, PermissionStatus> statuses = await [
+          Permission.bluetoothScan,
+          Permission.bluetoothConnect,
+          Permission.location,
+        ].request();
+
+        if (statuses[Permission.bluetoothScan] != PermissionStatus.granted ||
+            statuses[Permission.bluetoothConnect] != PermissionStatus.granted) {
+          _lastErrorMessage =
+              "Bluetooth permissions denied. Please allow them in settings.";
+          _logger.w(_lastErrorMessage);
+          return false;
+        }
+      }
+
+      // 2. Check Adapter State (Is Bluetooth ON?)
+      final adapterState = await FlutterBluePlus.adapterState.first.timeout(
+        const Duration(seconds: 2),
+        onTimeout: () => BluetoothAdapterState.unknown,
+      );
+
       if (adapterState != BluetoothAdapterState.on) {
-        _logger.w("البلوتوث غير مفعل. الحالة الحالية: $adapterState");
+        _lastErrorMessage =
+            "Bluetooth is $adapterState. Please make sure it's turned on.";
+        _logger.w(_lastErrorMessage);
         return false;
       }
+
+      _lastErrorMessage = null;
       return true;
     } catch (e) {
-      _logger.e("خطأ أثناء التحقق من أذونات البلوتوث: $e");
+      _lastErrorMessage = "Error checking permissions: $e";
+      _logger.e(_lastErrorMessage);
       return false;
     }
   }
 
   Future<void> startScan() async {
-    if (_isScanning) {
-      _logger.w("المسح جارٍ بالفعل");
-      return;
-    }
-
-    _logger.i("بدء مسح BLE المحسن...");
-    _isScanning = true;
-    _scanResults.clear();
-    notifyListeners();
+    _logger.i("Attempting to start BLE scan...");
 
     try {
       if (!await _checkBluetoothPermissions()) {
-        _isScanning = false;
-        notifyListeners();
+        _logger.w("Scan aborted: Permission check failed.");
         return;
       }
 
-      await FlutterBluePlus.stopScan();
-      await Future.delayed(const Duration(milliseconds: 500));
+      // Check if hardware is already scanning
+      bool isHardwareScanning = false;
+      try {
+        isHardwareScanning = await FlutterBluePlus.isScanning.first.timeout(
+          const Duration(milliseconds: 500),
+        );
+      } catch (_) {}
+
+      if (isHardwareScanning) {
+        _logger.i(
+          "Scan already running in hardware. Refreshing results subscription.",
+        );
+      } else {
+        await FlutterBluePlus.stopScan().catchError((_) {});
+        await Future.delayed(const Duration(milliseconds: 200));
+
+        // Start the scan non-blocking
+        FlutterBluePlus.startScan(
+          timeout: const Duration(seconds: 60),
+          androidUsesFineLocation: true,
+          continuousUpdates: true,
+        ).catchError((e) {
+          _logger.e("Error during FlutterBluePlus.startScan: $e");
+          stopScan();
+        });
+      }
 
       _scanResults.clear();
-
+      _scanSubscription?.cancel();
       _scanSubscription = FlutterBluePlus.scanResults.listen(
         (results) {
-          _logger.d("تم استلام نتائج المسح: ${results.length} أجهزة");
-
-          for (ScanResult result in results) {
-            final deviceName = result.device.platformName;
-            final deviceId = result.device.remoteId.toString();
-            final rssi = result.rssi;
-
-            _logger.d(
-              "جهاز: $deviceName [$deviceId] RSSI: $rssi, خدمات: ${result.advertisementData.serviceUuids}",
-            );
-
-            if (deviceName.isNotEmpty && deviceName == "ADHD_Smart_Bracelet") {
-              _logger.i(
-                "تم العثور على السوار الذكي المحسن: $deviceName [$deviceId]",
-              );
-              _scanResults = results;
-              notifyListeners();
-              stopScan();
-              connectToDevice(result.device);
-              return;
-            } else if (deviceName.isNotEmpty &&
-                (deviceName.contains("ESP32") ||
-                    deviceName.toLowerCase().contains("sensor"))) {
-              _logger.w(
-                "تم العثور على جهاز احتياطي: $deviceName [$deviceId]. يُفضل استخدام ADHD_Smart_Bracelet.",
-              );
-              _scanResults = results;
-              notifyListeners();
-            }
-          }
-
+          _logger.d("Received ${results.length} scan results");
           _scanResults = results;
           notifyListeners();
         },
         onError: (e) {
-          _logger.e("خطأ في المسح: $e");
-          _isScanning = false;
-          notifyListeners();
+          _logger.e("Error in scan results stream: $e");
         },
       );
 
-      await FlutterBluePlus.startScan(
-        timeout: const Duration(seconds: 30),
-        androidUsesFineLocation: true,
-        continuousUpdates: true,
-        withServices: [serviceUuid],
-      );
-
-      _scanTimeoutTimer = Timer(const Duration(seconds: 31), () {
+      _scanTimeoutTimer?.cancel();
+      _scanTimeoutTimer = Timer(const Duration(seconds: 61), () {
         if (_isScanning) {
-          _logger.i("تم الوصول إلى مهلة المسح");
+          _logger.i("Scan timeout reached (Timer)");
           stopScan();
         }
       });
     } catch (e) {
-      _logger.e("خطأ أثناء بدء المسح: $e");
+      _logger.e("Error during startScan: $e");
       _isScanning = false;
       notifyListeners();
     }
   }
 
   Future<void> stopScan() async {
-    if (!_isScanning) return;
-
-    _logger.i("إيقاف مسح BLE.");
+    _logger.i("Stopping BLE scan...");
     try {
       await FlutterBluePlus.stopScan();
       _scanTimeoutTimer?.cancel();
       _scanTimeoutTimer = null;
       await _scanSubscription?.cancel();
       _scanSubscription = null;
-      _isScanning = false;
-      notifyListeners();
+      // Note: _isScanning will be updated by the listener in _initializeBluetoothState
     } catch (e) {
-      _logger.e("خطأ أثناء إيقاف المسح: $e");
-      _isScanning = false;
-      notifyListeners();
+      _logger.e("Error during stopScan: $e");
     }
   }
 

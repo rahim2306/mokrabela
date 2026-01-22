@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:mokrabela/services/auth_service.dart';
+import 'package:mokrabela/screens/child/protocol/daily_tasks_screen.dart';
+import 'package:mokrabela/screens/protocol/self_awareness_screen.dart';
+import 'package:mokrabela/screens/protocol/self_regulation_screen.dart';
+import 'package:mokrabela/screens/protocol/psychological_calming_screen.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 import 'package:sizer/sizer.dart';
 
@@ -115,8 +119,14 @@ class _KidsProtocolScreenState extends State<KidsProtocolScreen> {
                 description: l10n.square1Desc,
                 icon: Icons.psychology_rounded,
                 gradient: const [Color(0xFF4ECDC4), Color(0xFF44A08D)],
+                heroTag: 'awareness_card',
                 onTap: () {
-                  _showComingSoon(context, l10n.square1Title);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SelfAwarenessScreen(),
+                    ),
+                  );
                 },
               ),
               _buildSquareCard(
@@ -125,8 +135,14 @@ class _KidsProtocolScreenState extends State<KidsProtocolScreen> {
                 description: l10n.square2Desc,
                 icon: Icons.air_rounded,
                 gradient: const [Color(0xFF667EEA), Color(0xFF764BA2)],
+                heroTag: 'regulation_card',
                 onTap: () {
-                  _showComingSoon(context, l10n.square2Title);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SelfRegulationScreen(),
+                    ),
+                  );
                 },
               ),
               _buildSquareCard(
@@ -135,8 +151,14 @@ class _KidsProtocolScreenState extends State<KidsProtocolScreen> {
                 description: l10n.square3Desc,
                 icon: Icons.task_alt_rounded,
                 gradient: const [Color(0xFFFFE259), Color(0xFFFFA751)],
+                heroTag: 'daily_tasks_card',
                 onTap: () {
-                  _showComingSoon(context, l10n.square3Title);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DailyTasksScreen(),
+                    ),
+                  );
                 },
               ),
               _buildSquareCard(
@@ -146,7 +168,12 @@ class _KidsProtocolScreenState extends State<KidsProtocolScreen> {
                 icon: Icons.self_improvement_rounded,
                 gradient: const [Color(0xFFF093FB), Color(0xFFF5576C)],
                 onTap: () {
-                  _showComingSoon(context, l10n.square4Title);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PsychologicalCalmingScreen(),
+                    ),
+                  );
                 },
               ),
             ],
@@ -164,7 +191,81 @@ class _KidsProtocolScreenState extends State<KidsProtocolScreen> {
     required IconData icon,
     required List<Color> gradient,
     required VoidCallback onTap,
+    String? heroTag,
   }) {
+    Widget cardContent = Ink(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: gradient,
+        ),
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: gradient.first.withValues(alpha: 0.4),
+            blurRadius: 16,
+            offset: const Offset(0, 8),
+            spreadRadius: -4,
+          ),
+        ],
+      ),
+      child: Container(
+        padding: EdgeInsets.all(3.h),
+        child: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Icon
+              Container(
+                padding: EdgeInsets.all(1.5.h),
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.25),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Icon(icon, size: 28.sp, color: Colors.white),
+              ),
+              SizedBox(height: 2.h),
+              // Title
+              Text(
+                title,
+                style: GoogleFonts.spaceGrotesk(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w800,
+                  color: Colors.white,
+                  letterSpacing: -0.3,
+                  height: 1.2,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              SizedBox(height: 0.8.h),
+              // Description
+              Text(
+                description,
+                style: GoogleFonts.spaceGrotesk(
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white.withValues(alpha: 0.9),
+                  height: 1.3,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+
+    if (heroTag != null) {
+      cardContent = Hero(
+        tag: heroTag,
+        child: Material(color: Colors.transparent, child: cardContent),
+      );
+    }
+
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -172,93 +273,7 @@ class _KidsProtocolScreenState extends State<KidsProtocolScreen> {
         borderRadius: BorderRadius.circular(24),
         splashColor: Colors.white.withValues(alpha: 0.3),
         highlightColor: Colors.white.withValues(alpha: 0.1),
-        child: Ink(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: gradient,
-            ),
-            borderRadius: BorderRadius.circular(24),
-            boxShadow: [
-              BoxShadow(
-                color: gradient.first.withValues(alpha: 0.4),
-                blurRadius: 16,
-                offset: const Offset(0, 8),
-                spreadRadius: -4,
-              ),
-            ],
-          ),
-          child: Container(
-            padding: EdgeInsets.all(3.h),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Icon
-                Container(
-                  padding: EdgeInsets.all(1.5.h),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.25),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Icon(icon, size: 28.sp, color: Colors.white),
-                ),
-                const Spacer(),
-                // Title
-                Text(
-                  title,
-                  style: GoogleFonts.spaceGrotesk(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w800,
-                    color: Colors.white,
-                    letterSpacing: -0.3,
-                    height: 1.2,
-                  ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                SizedBox(height: 0.8.h),
-                // Description
-                Text(
-                  description,
-                  style: GoogleFonts.spaceGrotesk(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white.withValues(alpha: 0.9),
-                    height: 1.3,
-                  ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const Spacer(),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  void _showComingSoon(BuildContext context, String feature) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Row(
-          children: [
-            Icon(Icons.info_outline, color: Colors.white),
-            SizedBox(width: 3.w),
-            Expanded(
-              child: Text(
-                '$feature - Coming soon!',
-                style: GoogleFonts.spaceGrotesk(fontWeight: FontWeight.w600),
-              ),
-            ),
-          ],
-        ),
-        backgroundColor: AppTheme.info,
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        margin: EdgeInsets.all(4.w),
-        duration: const Duration(seconds: 2),
+        child: cardContent,
       ),
     );
   }

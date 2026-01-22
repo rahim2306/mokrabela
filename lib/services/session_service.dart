@@ -75,6 +75,11 @@ class SessionService {
       }
     });
 
+    // Update protocol progress if applicable
+    if (protocolSquare != null) {
+      await updateProtocolProgress(childId, protocolSquare);
+    }
+
     // Track achievements and get newly unlocked ones
     final unlockedAchievements = await _achievementService
         .trackSessionCompletion(childId, type, exerciseData ?? {});
@@ -100,6 +105,42 @@ class SessionService {
         }
       }
     }
+  }
+
+  /// Update protocol progress in Firestore
+  Future<void> updateProtocolProgress(String childId, int squareNumber) async {
+    final progressRef = _firestore.collection('protocolProgress').doc(childId);
+
+    await _firestore.runTransaction((transaction) async {
+      final doc = await transaction.get(progressRef);
+      final timestamp = FieldValue.serverTimestamp();
+
+      if (doc.exists) {
+        final data = doc.data()!;
+        final List<int> completed = List<int>.from(
+          data['completedSquares'] ?? [],
+        );
+        if (!completed.contains(squareNumber)) {
+          completed.add(squareNumber);
+        }
+
+        transaction.update(progressRef, {
+          'completedSquares': completed,
+          'square${squareNumber}Complete': true,
+          'lastUpdated': timestamp,
+          'currentSquare': squareNumber,
+        });
+      } else {
+        transaction.set(progressRef, {
+          'childId': childId,
+          'currentSquare': squareNumber,
+          'completedSquares': [squareNumber],
+          'square${squareNumber}Complete': true,
+          'lastUpdated': timestamp,
+          'startedAt': timestamp,
+        });
+      }
+    });
   }
 
   /// Format date as YYYY-MM-DD

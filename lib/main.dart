@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mokrabela/firebase_options.dart';
-import 'package:mokrabela/scripts/seed_test_breathing.dart';
+//import 'package:mokrabela/scripts/seed_test_breathing.dart';
 import 'package:mokrabela/services/auth_gate.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -12,7 +12,7 @@ import 'package:sizer/sizer.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await addTestBreathingExercise();
+  // await addTestBreathingExercise();
   //await addTestStory();
   runApp(const MyApp());
 }

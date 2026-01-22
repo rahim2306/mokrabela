@@ -138,6 +138,42 @@ class AppLocalizationsEn extends AppLocalizations {
   String get protocol => 'Protocol';
 
   @override
+  String get focusTimer => 'Focus Timer';
+
+  @override
+  String get addTask => 'Add Task';
+
+  @override
+  String get myTasks => 'My Tasks';
+
+  @override
+  String get start => 'Start';
+
+  @override
+  String get pause => 'Pause';
+
+  @override
+  String get resume => 'Resume';
+
+  @override
+  String get reset => 'Reset';
+
+  @override
+  String get minutes => 'minutes';
+
+  @override
+  String get taskTitle => 'Task Title';
+
+  @override
+  String get duration => 'Duration (min)';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get save => 'Save';
+
+  @override
   String get helloLabel => 'Hello';
 
   @override
@@ -526,4 +562,100 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get friendlyDragonPage6 =>
       'From that day on, Ember had many friends in the village. He learned that true friendship comes to those who are kind and patient. And Leo learned that the biggest hearts sometimes come in the most unexpected forms. The End. 🐉';
+
+  @override
+  String get dtNewTask => 'New Task';
+
+  @override
+  String get dtTaskTitlePlaceholder => 'What do you want to focus on?';
+
+  @override
+  String get dtTaskDurationLabel => 'Duration (minutes)';
+
+  @override
+  String get dtAddButton => 'Add';
+
+  @override
+  String get dtCancelButton => 'Cancel';
+
+  @override
+  String get howAreYouFeeling => 'How are you feeling?';
+
+  @override
+  String get activityLevel => 'Activity Level (1-10)';
+
+  @override
+  String get quiet => 'Quiet';
+
+  @override
+  String get hyper => 'Hyper';
+
+  @override
+  String get guidedBodyScan => 'Guided Body Scan';
+
+  @override
+  String get bodyScanDesc => 'Check in with every part of your body.';
+
+  @override
+  String get saveSession => 'Save My Session';
+
+  @override
+  String get connectWatch => 'Connect Your Watch';
+
+  @override
+  String get watchScanning => 'Searching for your watch...';
+
+  @override
+  String get watchFound => 'Watch found!';
+
+  @override
+  String get watchConnecting => 'Connecting to your watch...';
+
+  @override
+  String get watchError => 'Couldn\'t find your watch. Is it turned on?';
+
+  @override
+  String get pairNow => 'Pair Now';
+
+  @override
+  String get availableDevices => 'Available Devices';
+
+  @override
+  String get noDevicesFound => 'No devices found nearby.';
+
+  @override
+  String get retryScan => 'Scan Again';
+
+  @override
+  String get stopTechnique => 'STOP Technique';
+
+  @override
+  String get stopStep1Title => 'S - Stop';
+
+  @override
+  String get stopStep1Desc => 'Stop what you are doing. Take a moment.';
+
+  @override
+  String get stopStep2Title => 'T - Take a Breath';
+
+  @override
+  String get stopStep2Desc => 'Take a slow, deep breath. Feel it.';
+
+  @override
+  String get stopStep3Title => 'O - Observe';
+
+  @override
+  String get stopStep3Desc => 'Notice your thoughts and feelings.';
+
+  @override
+  String get stopStep4Title => 'P - Proceed';
+
+  @override
+  String get stopStep4Desc => 'Continue with more calm and focus.';
+
+  @override
+  String get breatheWithMe => 'Breathe with me';
+
+  @override
+  String get feelingCooler => 'I\'m feeling cooler now!';
 }
