@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:mokrabela/models/breathing_exercise_model.dart';
 import 'package:mokrabela/services/session_service.dart';
+import 'package:mokrabela/services/protocol_service.dart';
 import 'package:mokrabela/services/auth_service.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 import 'package:sizer/sizer.dart';
@@ -26,6 +27,7 @@ class BreathingSessionScreen extends StatefulWidget {
 
 class _BreathingSessionScreenState extends State<BreathingSessionScreen>
     with SingleTickerProviderStateMixin {
+  final ProtocolService _protocolService = ProtocolService();
   final SessionService _sessionService = SessionService();
   final AuthService _authService = AuthService();
 
@@ -120,18 +122,26 @@ class _BreathingSessionScreenState extends State<BreathingSessionScreen>
     final user = _authService.currentUser;
     if (user != null && mounted) {
       try {
-        await _sessionService.saveSession(
-          childId: user.uid,
-          type: 'breathing',
-          exerciseName: widget.exercise.title,
-          exerciseType: widget.exercise.id,
-          protocolSquare: widget.protocolSquare,
-          startTime: _sessionStartTime,
-          endTime: DateTime.now(),
-          completed: true,
-          exerciseData: {'breathingCycles': _currentCycle},
-          context: context,
-        );
+        if (widget.protocolSquare != null) {
+          // Protocol activity: Update progress only
+          await _protocolService.updateProtocolProgress(
+            user.uid,
+            widget.protocolSquare!,
+          );
+        } else {
+          // Hub activity: Save full session
+          await _sessionService.saveSession(
+            childId: user.uid,
+            type: 'breathing',
+            exerciseName: widget.exercise.title,
+            exerciseType: widget.exercise.id,
+            startTime: _sessionStartTime,
+            endTime: DateTime.now(),
+            completed: true,
+            exerciseData: {'breathingCycles': _currentCycle},
+            context: context,
+          );
+        }
       } catch (error) {
         print('Error saving session: $error');
       }

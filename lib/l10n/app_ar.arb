@@ -401,5 +401,13 @@
   "stopStep4Title": "P - تقدم",
   "stopStep4Desc": "استمر بمزيد من الهدوء والتركيز.",
   "breatheWithMe": "تنفس معي",
-  "feelingCooler": "أشعر بهدوء أكبر الآن!"
+  "feelingCooler": "أشعر بهدوء أكبر الآن!",
+  "expressYourself": "عبر عن نفسك",
+  "mindfulnessPrompts": "تمارين اليقظة",
+  "drawingCanvas": "لوحة الرسم",
+  "clearCanvas": "مسح",
+  "saveDrawing": "حفظ",
+  "calmingSounds": "أصوات هادئة",
+  "bedtimeStories": "قصص النوم",
+  "mindfulness": "اليقظة الذهنية"
 }

@@ -6,25 +6,33 @@ class TaskService {
 
   /// Stream of tasks for a specific child for the current day
   Stream<List<DailyTask>> getTasks(String childId) {
-    // Get start and end of current day
     final now = DateTime.now();
-    final startOfDay = DateTime(now.year, now.month, now.day);
-    final endOfDay = startOfDay.add(const Duration(days: 1));
+    final startOfToday = DateTime(now.year, now.month, now.day);
 
     return _firestore
         .collection('tasks')
         .where('childId', isEqualTo: childId)
-        .where(
-          'createdAt',
-          isGreaterThanOrEqualTo: Timestamp.fromDate(startOfDay),
-        )
-        .where('createdAt', isLessThan: Timestamp.fromDate(endOfDay))
-        .orderBy('createdAt', descending: false)
         .snapshots()
         .map((snapshot) {
-          return snapshot.docs
+          final allTasks = snapshot.docs
               .map((doc) => DailyTask.fromMap(doc.data(), doc.id))
               .toList();
+
+          final now = DateTime.now();
+          final startOfToday = DateTime(now.year, now.month, now.day);
+
+          // Filter locally for today's tasks to be 100% robust against Firestore indexing/query issues
+          final todayTasks = allTasks
+              .where(
+                (task) =>
+                    task.createdAt.isAfter(startOfToday) ||
+                    task.createdAt.isAtSameMomentAs(startOfToday),
+              )
+              .toList();
+
+          // Sort locally
+          todayTasks.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+          return todayTasks;
         });
   }
 

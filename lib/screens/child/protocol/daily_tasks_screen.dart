@@ -7,7 +7,7 @@ import 'package:mokrabela/models/daily_task.dart';
 import 'package:mokrabela/services/auth_service.dart';
 import 'package:mokrabela/services/task_service.dart';
 import 'dart:async';
-import 'package:mokrabela/services/session_service.dart';
+import 'package:mokrabela/services/protocol_service.dart';
 import 'package:uuid/uuid.dart';
 
 class DailyTasksScreen extends StatefulWidget {
@@ -20,9 +20,8 @@ class DailyTasksScreen extends StatefulWidget {
 class _DailyTasksScreenState extends State<DailyTasksScreen> {
   final TaskService _taskService = TaskService();
   final AuthService _authService = AuthService();
-  final SessionService _sessionService = SessionService();
+  final ProtocolService _protocolService = ProtocolService();
   final Uuid _uuid = const Uuid();
-  final DateTime _startTime = DateTime.now();
 
   // Timer State
   Timer? _timer;
@@ -30,6 +29,7 @@ class _DailyTasksScreenState extends State<DailyTasksScreen> {
   bool _isRunning = false;
 
   String? _childId;
+  Stream<List<DailyTask>>? _tasksStream;
 
   @override
   void initState() {
@@ -42,6 +42,7 @@ class _DailyTasksScreenState extends State<DailyTasksScreen> {
     if (user != null) {
       setState(() {
         _childId = user.uid;
+        _tasksStream = _taskService.getTasks(_childId!);
       });
     }
   }
@@ -99,17 +100,7 @@ class _DailyTasksScreenState extends State<DailyTasksScreen> {
 
   Future<void> _saveSession() async {
     if (_childId != null) {
-      await _sessionService.saveSession(
-        childId: _childId!,
-        type: 'focus',
-        exerciseName: 'Daily Tasks Focus',
-        exerciseType: 'timer',
-        protocolSquare: 3,
-        startTime: _startTime,
-        endTime: DateTime.now(),
-        completed: true,
-        context: context,
-      );
+      await _protocolService.updateProtocolProgress(_childId!, 3);
     }
   }
 
@@ -122,7 +113,6 @@ class _DailyTasksScreenState extends State<DailyTasksScreen> {
   void _showAddTaskDialog() {
     final l10n = AppLocalizations.of(context)!;
     final TextEditingController titleController = TextEditingController();
-    int selectedDuration = 15; // Default duration
 
     showModalBottomSheet(
       context: context,
@@ -211,70 +201,6 @@ class _DailyTasksScreenState extends State<DailyTasksScreen> {
                       cursorColor: AppTheme.vibrantOrange,
                     ),
                     SizedBox(height: 4.h),
-
-                    // Duration Selector
-                    Padding(
-                      padding: EdgeInsets.only(left: 2.w),
-                      child: Text(
-                        l10n.dtTaskDurationLabel,
-                        style: GoogleFonts.spaceGrotesk(
-                          fontSize: 14.sp, // Larger label
-                          fontWeight: FontWeight.w700,
-                          color: AppTheme.deepBlue,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 2.h),
-                    SizedBox(
-                      height: 7.h, // Even taller pills
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 4,
-                        separatorBuilder: (_, __) => SizedBox(width: 3.w),
-                        itemBuilder: (context, index) {
-                          final duration = (index + 1) * 15; // 15, 30, 45, 60
-                          final isSelected = selectedDuration == duration;
-                          return GestureDetector(
-                            onTap: () {
-                              setModalState(() {
-                                selectedDuration = duration;
-                              });
-                            },
-                            child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 200),
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 6.w, // Wider pills
-                                vertical: 1.h,
-                              ),
-                              decoration: BoxDecoration(
-                                color: isSelected
-                                    ? AppTheme.vibrantOrange
-                                    : AppTheme.backgroundLight.withValues(
-                                        alpha: 0.5,
-                                      ),
-                                borderRadius: BorderRadius.circular(
-                                  28,
-                                ), // Very rounded
-                                // No border for cleaner look
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "$duration ${l10n.minutes.substring(0, 3)}",
-                                  style: GoogleFonts.spaceGrotesk(
-                                    fontSize: 14.sp, // Bigger duration text
-                                    fontWeight: FontWeight.w700,
-                                    color: isSelected
-                                        ? Colors.white
-                                        : AppTheme.textSecondary,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                    SizedBox(height: 6.h), // More space before buttons
                     // Action Buttons
                     Row(
                       children: [
@@ -307,7 +233,6 @@ class _DailyTasksScreenState extends State<DailyTasksScreen> {
                                   id: _uuid.v4(),
                                   childId: _childId!,
                                   title: titleController.text,
-                                  durationMinutes: selectedDuration,
                                   createdAt: DateTime.now(),
                                 );
 
@@ -353,12 +278,20 @@ class _DailyTasksScreenState extends State<DailyTasksScreen> {
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      backgroundColor: const Color(
-        0xFFFAFAFA,
-      ), // Matches top of AppTheme.kidsBackgroundGradient
+      backgroundColor: Colors.white,
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: AppTheme.kidsBackgroundGradient,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              const Color(0xFFFFF9E6), // Softer yellow background
+              AppTheme.kidsBackgroundGradient.colors.last.withValues(
+                alpha: 0.15,
+              ),
+            ],
+          ),
         ),
         child: SafeArea(
           child: Column(
@@ -373,9 +306,7 @@ class _DailyTasksScreenState extends State<DailyTasksScreen> {
                       child: Container(
                         padding: EdgeInsets.all(1.2.h),
                         decoration: BoxDecoration(
-                          color: Colors.white.withValues(
-                            alpha: 0.9,
-                          ), // Glassy white
+                          color: Colors.white.withValues(alpha: 0.9),
                           borderRadius: BorderRadius.circular(14),
                           border: Border.all(
                             color: AppTheme.border.withValues(alpha: 0.3),
@@ -400,12 +331,12 @@ class _DailyTasksScreenState extends State<DailyTasksScreen> {
                     ),
                     SizedBox(width: 4.w),
                     Text(
-                      l10n.square3Title, // "Daily Tasks"
+                      l10n.square3Title,
                       style: GoogleFonts.spaceGrotesk(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w700,
+                        fontSize: 22.sp, // Increased
+                        fontWeight: FontWeight.w800, // Bolder
                         color: AppTheme.deepBlue,
-                        letterSpacing: -0.5,
+                        letterSpacing: -0.8,
                       ),
                     ),
                   ],
@@ -419,7 +350,7 @@ class _DailyTasksScreenState extends State<DailyTasksScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Timer Section (Hero)
+                      // Timer Section
                       Hero(
                         tag: 'daily_tasks_card',
                         child: Material(
@@ -429,116 +360,121 @@ class _DailyTasksScreenState extends State<DailyTasksScreen> {
                             padding: EdgeInsets.all(2.5.h),
                             decoration: BoxDecoration(
                               gradient: const LinearGradient(
-                                colors: [Color(0xFFFFE259), Color(0xFFFFA751)],
+                                colors: [
+                                  Color(0xFFFFB366), // Vibrant yellow/orange
+                                  Color(0xFFFF9433),
+                                  Color(0xFFFFD1A3),
+                                ],
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
                               ),
-                              borderRadius: BorderRadius.circular(3.h),
+                              borderRadius: BorderRadius.circular(32),
                               boxShadow: [
                                 BoxShadow(
                                   color: const Color(
-                                    0xFFFFA751,
-                                  ).withValues(alpha: 0.25),
-                                  blurRadius: 20,
-                                  offset: const Offset(0, 8),
+                                    0xFFFFB366,
+                                  ).withValues(alpha: 0.35),
+                                  blurRadius: 25,
+                                  offset: const Offset(0, 12),
                                   spreadRadius: -4,
                                 ),
                               ],
                             ),
-                            child: SingleChildScrollView(
-                              physics: const NeverScrollableScrollPhysics(),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 3.w,
-                                      vertical: 0.8.h,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withValues(
-                                        alpha: 0.2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: Text(
-                                      l10n.focusTimer,
-                                      style: GoogleFonts.spaceGrotesk(
-                                        fontSize: 11.sp,
-                                        fontWeight: FontWeight.w700,
-                                        color: Colors.white,
-                                        letterSpacing: 0.5,
-                                      ),
+                            child: Column(
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 3.w,
+                                    vertical: 0.8.h,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withValues(alpha: 0.2),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Text(
+                                    l10n.focusTimer.toUpperCase(),
+                                    style: GoogleFonts.spaceGrotesk(
+                                      fontSize: 10.sp,
+                                      fontWeight: FontWeight.w900,
+                                      color: Colors.white,
+                                      letterSpacing: 2,
                                     ),
                                   ),
-                                  SizedBox(height: 2.h),
-                                  // Circle Timer Placeholder
-                                  Container(
-                                    width: 20.h,
-                                    height: 20.h,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                        color: Colors.white.withValues(
-                                          alpha: 0.3,
+                                ),
+                                SizedBox(height: 2.h),
+                                // Circle Timer
+                                Container(
+                                  width: 20.h,
+                                  height: 20.h,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: Colors.white.withValues(
+                                        alpha: 0.3,
+                                      ),
+                                      width: 6,
+                                    ),
+                                    color: Colors.white.withValues(alpha: 0.1),
+                                  ),
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          _formatTime(_remainingSeconds),
+                                          style: GoogleFonts.spaceGrotesk(
+                                            fontSize: 28.sp, // Larger
+                                            fontWeight: FontWeight.w900,
+                                            color: Colors.white,
+                                            letterSpacing: -1.5,
+                                          ),
                                         ),
-                                        width: 6,
-                                      ),
-                                      color: Colors.white.withValues(
-                                        alpha: 0.1,
-                                      ),
-                                    ),
-                                    child: Center(
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            _formatTime(_remainingSeconds),
-                                            style: GoogleFonts.spaceGrotesk(
-                                              fontSize: 28.sp,
-                                              fontWeight: FontWeight.w900,
-                                              color: Colors.white,
-                                              letterSpacing: -1,
+                                        Text(
+                                          l10n.minutes,
+                                          style: GoogleFonts.spaceGrotesk(
+                                            fontSize: 12.sp, // Larger
+                                            fontWeight: FontWeight.w700,
+                                            color: Colors.white.withValues(
+                                              alpha: 0.9,
                                             ),
                                           ),
-                                          Text(
-                                            l10n.minutes,
-                                            style: GoogleFonts.spaceGrotesk(
-                                              fontSize: 10.sp,
-                                              fontWeight: FontWeight.w600,
-                                              color: Colors.white.withValues(
-                                                alpha: 0.8,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  SizedBox(height: 3.h),
-                                  // Control Buttons
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      ElevatedButton(
-                                        onPressed: _isRunning
-                                            ? _pauseTimer
-                                            : _startTimer,
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.white,
-                                          foregroundColor: const Color(
-                                            0xFFFFA751,
+                                ),
+                                SizedBox(height: 3.h),
+                                // Control Buttons
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: _isRunning
+                                          ? _pauseTimer
+                                          : _startTimer,
+                                      child: AnimatedContainer(
+                                        duration: const Duration(
+                                          milliseconds: 300,
+                                        ),
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 10.w,
+                                          vertical: 1.8.h,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(
+                                            20,
                                           ),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                              16,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black.withValues(
+                                                alpha: 0.1,
+                                              ),
+                                              blurRadius: 10,
+                                              offset: const Offset(0, 4),
                                             ),
-                                          ),
-                                          elevation: 0,
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: 8.w,
-                                            vertical: 1.8.h,
-                                          ),
+                                          ],
                                         ),
                                         child: Row(
                                           children: [
@@ -546,294 +482,327 @@ class _DailyTasksScreenState extends State<DailyTasksScreen> {
                                               _isRunning
                                                   ? Icons.pause_rounded
                                                   : Icons.play_arrow_rounded,
-                                              size: 18.sp,
+                                              color: const Color(0xFFFF9433),
+                                              size: 22.sp,
                                             ),
                                             SizedBox(width: 2.w),
                                             Text(
-                                              _isRunning
-                                                  ? l10n.pause
-                                                  : l10n.start,
+                                              (_isRunning
+                                                      ? l10n.pause
+                                                      : l10n.start)
+                                                  .toUpperCase(),
                                               style: GoogleFonts.spaceGrotesk(
-                                                fontSize: 13.sp,
-                                                fontWeight: FontWeight.w800,
+                                                fontSize: 14.sp, // Larger
+                                                fontWeight: FontWeight.w900,
+                                                color: const Color(0xFFFF9433),
+                                                letterSpacing: 1.5,
                                               ),
                                             ),
                                           ],
                                         ),
                                       ),
-                                      if (_remainingSeconds < 25 * 60) ...[
-                                        SizedBox(width: 4.w),
-                                        IconButton(
-                                          onPressed: _resetTimer,
-                                          icon: const Icon(
-                                            Icons.refresh_rounded,
-                                            color: Colors.white,
-                                          ),
-                                          style: IconButton.styleFrom(
-                                            backgroundColor: Colors.white
-                                                .withValues(alpha: 0.2),
-                                            padding: EdgeInsets.all(1.5.h),
-                                          ),
+                                    ),
+                                    if (_remainingSeconds < 25 * 60) ...[
+                                      SizedBox(width: 4.w),
+                                      IconButton(
+                                        onPressed: _resetTimer,
+                                        icon: Icon(
+                                          Icons.refresh_rounded,
+                                          color: Colors.white,
+                                          size: 20.sp,
                                         ),
-                                      ],
+                                        style: IconButton.styleFrom(
+                                          backgroundColor: Colors.white
+                                              .withValues(alpha: 0.2),
+                                          padding: EdgeInsets.all(1.5.h),
+                                        ),
+                                      ),
                                     ],
-                                  ),
-                                ],
-                              ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
                         ),
                       ),
                       SizedBox(height: 4.h),
 
-                      // Tasks Header
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Column(
+                      // Live Tasks List
+                      StreamBuilder<List<DailyTask>>(
+                        stream: _tasksStream,
+                        builder: (context, snapshot) {
+                          final tasks = snapshot.data ?? [];
+                          final completedProgress = snapshot.hasData
+                              ? "${tasks.where((t) => t.isCompleted).length} of ${tasks.length} completed"
+                              : "Tasks list";
+
+                          return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                l10n.myTasks,
-                                style: GoogleFonts.spaceGrotesk(
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.w800,
-                                  color: AppTheme.deepBlue,
-                                  letterSpacing: -0.5,
-                                ),
-                              ),
-                              Text(
-                                "My Tasks", // TODO: Use dynamic count from stream if possible
-                                style: GoogleFonts.spaceGrotesk(
-                                  fontSize: 11.sp,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppTheme.textSecondary,
-                                ),
-                              ),
-                            ],
-                          ),
-                          // Add Button (Inline)
-                          InkWell(
-                            onTap: _showAddTaskDialog,
-                            borderRadius: BorderRadius.circular(14),
-                            child: Container(
-                              padding: EdgeInsets.all(1.h),
-                              decoration: BoxDecoration(
-                                color: AppTheme.tealGreen.withValues(
-                                  alpha: 0.1,
-                                ),
-                                borderRadius: BorderRadius.circular(14),
-                                border: Border.all(
-                                  color: AppTheme.tealGreen.withValues(
-                                    alpha: 0.2,
-                                  ),
-                                ),
-                              ),
-                              child: Icon(
-                                Icons.add_rounded,
-                                color: AppTheme.tealGreen,
-                                size: 20.sp,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 2.h),
-
-                      // Tasks List or Empty State
-                      StreamBuilder<List<DailyTask>>(
-                        stream: _childId != null
-                            ? _taskService.getTasks(_childId!)
-                            : Stream.value([]),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          }
-
-                          final tasks = snapshot.data ?? [];
-
-                          if (tasks.isEmpty) {
-                            return Container(
-                              width: double.infinity,
-                              padding: EdgeInsets.symmetric(
-                                vertical: 6.h,
-                                horizontal: 4.w,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(3.h),
-                                border: Border.all(
-                                  color: AppTheme.border.withValues(alpha: 0.5),
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: const Color(0xFFF0F0F0),
-                                    blurRadius: 10,
-                                    offset: const Offset(0, 4),
-                                  ),
-                                ],
-                              ),
-                              child: Column(
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  Container(
-                                    padding: EdgeInsets.all(2.5.h),
-                                    decoration: BoxDecoration(
-                                      color: AppTheme.backgroundLight,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: Icon(
-                                      Icons.assignment_outlined,
-                                      size: 32.sp,
-                                      color: AppTheme.textLight,
-                                    ),
-                                  ),
-                                  SizedBox(height: 2.h),
-                                  Text(
-                                    "No tasks for today",
-                                    style: GoogleFonts.spaceGrotesk(
-                                      color: AppTheme.deepBlue,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w700,
-                                      letterSpacing: -0.3,
-                                    ),
-                                  ),
-                                  SizedBox(height: 0.5.h),
-                                  Text(
-                                    "Add a task to start your day!",
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.spaceGrotesk(
-                                      color: AppTheme.textSecondary,
-                                      fontSize: 11.sp,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          }
-
-                          return ListView.separated(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: tasks.length,
-                            separatorBuilder: (_, __) =>
-                                SizedBox(height: 1.5.h),
-                            itemBuilder: (context, index) {
-                              final task = tasks[index];
-                              final isCompleted = task.isCompleted;
-
-                              return Dismissible(
-                                key: Key(task.id),
-                                direction: DismissDirection.endToStart,
-                                background: Container(
-                                  alignment: Alignment.centerRight,
-                                  padding: EdgeInsets.only(right: 5.w),
-                                  decoration: BoxDecoration(
-                                    color: AppTheme.error,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: const Icon(
-                                    Icons.delete_rounded,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                onDismissed: (direction) {
-                                  _taskService.deleteTask(task.id);
-                                },
-                                child: GestureDetector(
-                                  onTap: () {
-                                    _taskService.updateTask(
-                                      task.copyWith(
-                                        isCompleted: !isCompleted,
-                                        completedAt: !isCompleted
-                                            ? DateTime.now()
-                                            : null,
-                                      ),
-                                    );
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 4.w,
-                                      vertical: 2.2.h,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(20),
-                                      border: Border.all(
-                                        color: AppTheme.border.withValues(
-                                          alpha: 0.3,
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        l10n.myTasks,
+                                        style: GoogleFonts.spaceGrotesk(
+                                          fontSize: 20.sp, // Increased
+                                          fontWeight: FontWeight.w800,
+                                          color: AppTheme.deepBlue,
+                                          letterSpacing: -0.6,
                                         ),
                                       ),
+                                      Text(
+                                        completedProgress,
+                                        style: GoogleFonts.spaceGrotesk(
+                                          fontSize: 13.sp, // Increased
+                                          fontWeight: FontWeight.w700,
+                                          color: AppTheme.textSecondary
+                                              .withValues(alpha: 0.8),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  GestureDetector(
+                                    onTap: _showAddTaskDialog,
+                                    child: Container(
+                                      padding: EdgeInsets.all(1.h),
+                                      decoration: BoxDecoration(
+                                        color: AppTheme.tealGreen.withValues(
+                                          alpha: 0.1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(14),
+                                        border: Border.all(
+                                          color: AppTheme.tealGreen.withValues(
+                                            alpha: 0.2,
+                                          ),
+                                        ),
+                                      ),
+                                      child: Icon(
+                                        Icons.add_rounded,
+                                        color: AppTheme.tealGreen,
+                                        size: 20.sp,
+                                      ),
                                     ),
-                                    child: Row(
-                                      children: [
-                                        // Checkbox
-                                        Container(
-                                          width: 24,
-                                          height: 24,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 2.h),
+
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting)
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 4.h),
+                                  child: const Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                )
+                              else if (tasks.isEmpty)
+                                Container(
+                                  width: double.infinity,
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: 6.h,
+                                    horizontal: 4.w,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(3.h),
+                                    border: Border.all(
+                                      color: AppTheme.border.withValues(
+                                        alpha: 0.5,
+                                      ),
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: const Color(0xFFF0F0F0),
+                                        blurRadius: 10,
+                                        offset: const Offset(0, 4),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.all(2.5.h),
+                                        decoration: BoxDecoration(
+                                          color: AppTheme.backgroundLight,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Icon(
+                                          Icons.assignment_outlined,
+                                          size: 32.sp,
+                                          color: AppTheme.textLight,
+                                        ),
+                                      ),
+                                      SizedBox(height: 2.h),
+                                      Text(
+                                        "No tasks for today",
+                                        style: GoogleFonts.spaceGrotesk(
+                                          color: AppTheme.deepBlue,
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w700,
+                                          letterSpacing: -0.3,
+                                        ),
+                                      ),
+                                      SizedBox(height: 0.5.h),
+                                      Text(
+                                        "Add a task to start your day!",
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.spaceGrotesk(
+                                          color: AppTheme.textSecondary,
+                                          fontSize: 11.sp,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              else
+                                ListView.separated(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: tasks.length,
+                                  separatorBuilder: (_, __) =>
+                                      SizedBox(height: 1.5.h),
+                                  itemBuilder: (context, index) {
+                                    final task = tasks[index];
+                                    final isCompleted = task.isCompleted;
+
+                                    return Dismissible(
+                                      key: Key(task.id),
+                                      direction: DismissDirection.endToStart,
+                                      background: Container(
+                                        alignment: Alignment.centerRight,
+                                        padding: EdgeInsets.only(right: 5.w),
+                                        decoration: BoxDecoration(
+                                          color: AppTheme.error,
+                                          borderRadius: BorderRadius.circular(
+                                            20,
+                                          ),
+                                        ),
+                                        child: const Icon(
+                                          Icons.delete_rounded,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      onDismissed: (direction) =>
+                                          _taskService.deleteTask(task.id),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          _taskService.updateTask(
+                                            task.copyWith(
+                                              isCompleted: !isCompleted,
+                                              completedAt: !isCompleted
+                                                  ? DateTime.now()
+                                                  : null,
+                                            ),
+                                          );
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 4.w,
+                                            vertical: 2.2.h,
+                                          ),
                                           decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: isCompleted
-                                                ? AppTheme.vibrantOrange
-                                                : Colors.transparent,
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.circular(
+                                              20,
+                                            ),
                                             border: Border.all(
-                                              color: AppTheme.vibrantOrange,
-                                              width: 2,
+                                              color: AppTheme.border.withValues(
+                                                alpha: 0.3,
+                                              ),
                                             ),
                                           ),
-                                          child: isCompleted
-                                              ? const Icon(
-                                                  Icons.check,
-                                                  size: 16,
-                                                  color: Colors.white,
-                                                )
-                                              : null,
-                                        ),
-                                        SizedBox(width: 4.w),
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                          child: Row(
                                             children: [
-                                              Text(
-                                                task.title,
-                                                style: GoogleFonts.spaceGrotesk(
-                                                  fontSize: 12.sp,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: isCompleted
-                                                      ? AppTheme.textSecondary
-                                                      : AppTheme.deepBlue,
-                                                  decoration: isCompleted
-                                                      ? TextDecoration
-                                                            .lineThrough
-                                                      : null,
+                                              AnimatedContainer(
+                                                duration: const Duration(
+                                                  milliseconds: 300,
                                                 ),
+                                                width: 28,
+                                                height: 28,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  gradient: isCompleted
+                                                      ? const LinearGradient(
+                                                          colors: [
+                                                            Color(0xFF4ECDC4),
+                                                            Color(0xFF45B7AF),
+                                                          ],
+                                                        )
+                                                      : null,
+                                                  color: isCompleted
+                                                      ? null
+                                                      : Colors.white,
+                                                  border: Border.all(
+                                                    color: isCompleted
+                                                        ? Colors.transparent
+                                                        : AppTheme.border,
+                                                    width: 2,
+                                                  ),
+                                                  boxShadow: isCompleted
+                                                      ? [
+                                                          BoxShadow(
+                                                            color:
+                                                                const Color(
+                                                                  0xFF4ECDC4,
+                                                                ).withValues(
+                                                                  alpha: 0.3,
+                                                                ),
+                                                            blurRadius: 8,
+                                                            offset:
+                                                                const Offset(
+                                                                  0,
+                                                                  4,
+                                                                ),
+                                                          ),
+                                                        ]
+                                                      : [],
+                                                ),
+                                                child: isCompleted
+                                                    ? Icon(
+                                                        Icons.check_rounded,
+                                                        size: 18.sp,
+                                                        color: Colors.white,
+                                                      )
+                                                    : null,
                                               ),
-                                              Text(
-                                                "${task.durationMinutes} ${l10n.minutes}",
-                                                style: GoogleFonts.spaceGrotesk(
-                                                  fontSize: 10.sp,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: AppTheme.textSecondary,
+                                              SizedBox(width: 4.w),
+                                              Expanded(
+                                                child: Text(
+                                                  task.title,
+                                                  style: GoogleFonts.spaceGrotesk(
+                                                    fontSize: 15
+                                                        .sp, // Increased significantly
+                                                    fontWeight: FontWeight.w700,
+                                                    color: isCompleted
+                                                        ? AppTheme.textSecondary
+                                                        : AppTheme.deepBlue,
+                                                    decoration: isCompleted
+                                                        ? TextDecoration
+                                                              .lineThrough
+                                                        : null,
+                                                  ),
                                                 ),
                                               ),
                                             ],
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                  ),
+                                      ),
+                                    );
+                                  },
                                 ),
-                              );
-                            },
+                            ],
                           );
                         },
                       ),
-                      SizedBox(height: 12.h), // Bottom padding
+                      SizedBox(height: 12.h),
                     ],
                   ),
                 ),
@@ -844,16 +813,16 @@ class _DailyTasksScreenState extends State<DailyTasksScreen> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _showAddTaskDialog,
-        backgroundColor: const Color(0xFFFFB366),
-        elevation: 2, // Reducing elevation
-        highlightElevation: 4,
+        backgroundColor: const Color(0xFFFF9433), // Vibrant orange/yellow
+        elevation: 3,
+        highlightElevation: 6,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        icon: const Icon(Icons.add_rounded, color: Colors.white),
+        icon: const Icon(Icons.add_rounded, color: Colors.white, size: 24),
         label: Text(
           l10n.addTask,
           style: GoogleFonts.spaceGrotesk(
-            fontSize: 12.sp,
-            fontWeight: FontWeight.w700,
+            fontSize: 14.sp, // Larger
+            fontWeight: FontWeight.w800,
             color: Colors.white,
           ),
         ),

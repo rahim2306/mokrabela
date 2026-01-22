@@ -656,4 +656,28 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get feelingCooler => 'أشعر بهدوء أكبر الآن!';
+
+  @override
+  String get expressYourself => 'عبر عن نفسك';
+
+  @override
+  String get mindfulnessPrompts => 'تمارين اليقظة';
+
+  @override
+  String get drawingCanvas => 'لوحة الرسم';
+
+  @override
+  String get clearCanvas => 'مسح';
+
+  @override
+  String get saveDrawing => 'حفظ';
+
+  @override
+  String get calmingSounds => 'أصوات هادئة';
+
+  @override
+  String get bedtimeStories => 'قصص النوم';
+
+  @override
+  String get mindfulness => 'اليقظة الذهنية';
 }

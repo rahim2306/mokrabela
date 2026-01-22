@@ -1317,6 +1317,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'I\'m feeling cooler now!'**
   String get feelingCooler;
+
+  /// No description provided for @expressYourself.
+  ///
+  /// In en, this message translates to:
+  /// **'Express Yourself'**
+  String get expressYourself;
+
+  /// No description provided for @mindfulnessPrompts.
+  ///
+  /// In en, this message translates to:
+  /// **'Mindfulness Prompts'**
+  String get mindfulnessPrompts;
+
+  /// No description provided for @drawingCanvas.
+  ///
+  /// In en, this message translates to:
+  /// **'Drawing Canvas'**
+  String get drawingCanvas;
+
+  /// No description provided for @clearCanvas.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get clearCanvas;
+
+  /// No description provided for @saveDrawing.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get saveDrawing;
+
+  /// No description provided for @calmingSounds.
+  ///
+  /// In en, this message translates to:
+  /// **'Calming Sounds'**
+  String get calmingSounds;
+
+  /// No description provided for @bedtimeStories.
+  ///
+  /// In en, this message translates to:
+  /// **'Bedtime Stories'**
+  String get bedtimeStories;
+
+  /// No description provided for @mindfulness.
+  ///
+  /// In en, this message translates to:
+  /// **'Mindfulness'**
+  String get mindfulness;
 }
 
 class _AppLocalizationsDelegate

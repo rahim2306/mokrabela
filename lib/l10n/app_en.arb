@@ -680,5 +680,13 @@
   "stopStep4Title": "P - Proceed",
   "stopStep4Desc": "Continue with more calm and focus.",
   "breatheWithMe": "Breathe with me",
-  "feelingCooler": "I'm feeling cooler now!"
+  "feelingCooler": "I'm feeling cooler now!",
+  "expressYourself": "Express Yourself",
+  "mindfulnessPrompts": "Mindfulness Prompts",
+  "drawingCanvas": "Drawing Canvas",
+  "clearCanvas": "Clear",
+  "saveDrawing": "Save",
+  "calmingSounds": "Calming Sounds",
+  "bedtimeStories": "Bedtime Stories",
+  "mindfulness": "Mindfulness"
 }

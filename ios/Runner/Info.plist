@@ -43,6 +43,10 @@
 	</array>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>We need access to your gallery to save your drawings.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need access to your gallery to save your drawings.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 </dict>

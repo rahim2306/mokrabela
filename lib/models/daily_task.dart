@@ -4,7 +4,6 @@ class DailyTask {
   final String id;
   final String childId;
   final String title;
-  final int durationMinutes;
   final bool isCompleted;
   final DateTime? completedAt;
   final DateTime createdAt;
@@ -13,7 +12,6 @@ class DailyTask {
     required this.id,
     required this.childId,
     required this.title,
-    required this.durationMinutes,
     this.isCompleted = false,
     this.completedAt,
     required this.createdAt,
@@ -24,7 +22,6 @@ class DailyTask {
       'id': id,
       'childId': childId,
       'title': title,
-      'durationMinutes': durationMinutes,
       'isCompleted': isCompleted,
       'completedAt': completedAt != null
           ? Timestamp.fromDate(completedAt!)
@@ -38,7 +35,6 @@ class DailyTask {
       id: id,
       childId: map['childId'] ?? '',
       title: map['title'] ?? '',
-      durationMinutes: map['durationMinutes'] ?? 0,
       isCompleted: map['isCompleted'] ?? false,
       completedAt: map['completedAt'] != null
           ? (map['completedAt'] as Timestamp).toDate()
@@ -52,7 +48,6 @@ class DailyTask {
   DailyTask copyWith({
     String? childId,
     String? title,
-    int? durationMinutes,
     bool? isCompleted,
     DateTime? completedAt,
   }) {
@@ -60,7 +55,6 @@ class DailyTask {
       id: id,
       childId: childId ?? this.childId,
       title: title ?? this.title,
-      durationMinutes: durationMinutes ?? this.durationMinutes,
       isCompleted: isCompleted ?? this.isCompleted,
       completedAt: completedAt ?? this.completedAt,
       createdAt: createdAt,

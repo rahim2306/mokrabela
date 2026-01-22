@@ -658,4 +658,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get feelingCooler => 'I\'m feeling cooler now!';
+
+  @override
+  String get expressYourself => 'Express Yourself';
+
+  @override
+  String get mindfulnessPrompts => 'Mindfulness Prompts';
+
+  @override
+  String get drawingCanvas => 'Drawing Canvas';
+
+  @override
+  String get clearCanvas => 'Clear';
+
+  @override
+  String get saveDrawing => 'Save';
+
+  @override
+  String get calmingSounds => 'Calming Sounds';
+
+  @override
+  String get bedtimeStories => 'Bedtime Stories';
+
+  @override
+  String get mindfulness => 'Mindfulness';
 }

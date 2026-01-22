@@ -167,6 +167,7 @@ class _KidsProtocolScreenState extends State<KidsProtocolScreen> {
                 description: l10n.square4Desc,
                 icon: Icons.self_improvement_rounded,
                 gradient: const [Color(0xFFF093FB), Color(0xFFF5576C)],
+                heroTag: 'calming_card',
                 onTap: () {
                   Navigator.push(
                     context,

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mokrabela/screens/protocol/grounding_exercise_screen.dart';
 import 'package:mokrabela/screens/child/breathing/breathing_session_screen.dart';
 import 'package:mokrabela/models/breathing_exercise_model.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 import 'package:mokrabela/l10n/app_localizations.dart';
+import 'package:mokrabela/services/auth_service.dart';
+import 'package:mokrabela/services/protocol_service.dart';
 
 class SelfRegulationScreen extends StatefulWidget {
   const SelfRegulationScreen({super.key});
@@ -16,6 +17,30 @@ class SelfRegulationScreen extends StatefulWidget {
 
 class _SelfRegulationScreenState extends State<SelfRegulationScreen> {
   int _currentStopStep = 0;
+  final ProtocolService _protocolService = ProtocolService();
+  final AuthService _authService = AuthService();
+  bool _isSaving = false;
+
+  Future<void> _completeSession() async {
+    setState(() => _isSaving = true);
+    try {
+      final user = _authService.currentUser;
+      if (user != null) {
+        await _protocolService.updateProtocolProgress(user.uid, 2);
+        if (mounted) {
+          Navigator.pop(context);
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Error: $e')));
+      }
+    } finally {
+      if (mounted) setState(() => _isSaving = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -150,28 +175,12 @@ class _SelfRegulationScreenState extends State<SelfRegulationScreen> {
                           ),
                         ),
 
-                        SizedBox(height: 2.h),
-
-                        _buildSpecialToolCard(
-                          '5-4-3-2-1 Grounding',
-                          l10n.bodyScanDesc, // Reuse for now
-                          Icons.accessibility_new_rounded,
-                          const Color(0xFFF9A03F),
-                          () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const GroundingExerciseScreen(),
-                            ),
-                          ),
-                        ),
-
                         SizedBox(height: 6.h),
 
                         // Finish Button
                         Center(
                           child: ElevatedButton(
-                            onPressed: () => Navigator.pop(context),
+                            onPressed: _isSaving ? null : _completeSession,
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF764BA2),
                               minimumSize: Size(double.infinity, 7.h),
@@ -179,14 +188,18 @@ class _SelfRegulationScreenState extends State<SelfRegulationScreen> {
                                 borderRadius: BorderRadius.circular(20),
                               ),
                             ),
-                            child: Text(
-                              l10n.feelingCooler,
-                              style: GoogleFonts.spaceGrotesk(
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
+                            child: _isSaving
+                                ? const CircularProgressIndicator(
+                                    color: Colors.white,
+                                  )
+                                : Text(
+                                    l10n.feelingCooler,
+                                    style: GoogleFonts.spaceGrotesk(
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                           ),
                         ),
                         SizedBox(height: 4.h),

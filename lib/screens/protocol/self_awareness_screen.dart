@@ -5,8 +5,7 @@ import 'package:mokrabela/components/cards/live_sensor_card.dart';
 import 'package:mokrabela/screens/protocol/body_scan_screen.dart';
 import 'package:mokrabela/services/auth_service.dart';
 import 'package:mokrabela/theme/app_theme.dart';
-import 'package:mokrabela/services/session_service.dart';
-import 'package:mokrabela/services/ble_service.dart';
+import 'package:mokrabela/services/protocol_service.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 
@@ -19,11 +18,9 @@ class SelfAwarenessScreen extends StatefulWidget {
 
 class _SelfAwarenessScreenState extends State<SelfAwarenessScreen> {
   final AuthService _authService = AuthService();
-  final SessionService _sessionService = SessionService();
+  final ProtocolService _protocolService = ProtocolService();
   String? _selectedEmotion;
   double _activityScale = 5.0;
-  final TextEditingController _noteController = TextEditingController();
-  final DateTime _startTime = DateTime.now();
   bool _isSaving = false;
 
   final List<Map<String, String>> _emotions = [
@@ -35,7 +32,6 @@ class _SelfAwarenessScreenState extends State<SelfAwarenessScreen> {
     {'label': 'Tired', 'emoji': '😴'},
   ];
 
-  final BleService _bleService = BleService();
   @override
   void initState() {
     super.initState();
@@ -48,28 +44,7 @@ class _SelfAwarenessScreenState extends State<SelfAwarenessScreen> {
     try {
       final user = _authService.currentUser;
       if (user != null) {
-        await _sessionService.saveSession(
-          childId: user.uid,
-          type: 'awareness',
-          exerciseName: 'Self-Awareness Check-in',
-          exerciseType: 'daily_awareness',
-          protocolSquare: 1,
-          startTime: _startTime,
-          endTime: DateTime.now(),
-          completed: true,
-          avgMotionIntensity: _bleService.statistics['avgMovementIntensity']
-              ?.toDouble(),
-          peakHyperactivity: _bleService.statistics['peakHyperactivityIndex']
-              ?.toDouble(),
-          exerciseData: {
-            'emotion': _selectedEmotion,
-            'activityLevel': _activityScale,
-            'note': _noteController.text,
-            'realTimeActivity': _bleService.sensorData['activityLevel'],
-            'hyperactivityIndex': _bleService.sensorData['hyperactivityIndex'],
-          },
-          context: context,
-        );
+        await _protocolService.updateProtocolProgress(user.uid, 1);
 
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
