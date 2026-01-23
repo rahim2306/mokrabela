@@ -86,12 +86,12 @@ class _DailyTasksScreenState extends State<DailyTasksScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("Great Job!"),
-        content: const Text("You finished your focus session!"),
+        title: Text(AppLocalizations.of(context)!.dtGreatJob),
+        content: Text(AppLocalizations.of(context)!.dtSessionFinished),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text("Awesome!"),
+            child: Text(AppLocalizations.of(context)!.dtAwesome),
           ),
         ],
       ),
@@ -533,8 +533,14 @@ class _DailyTasksScreenState extends State<DailyTasksScreen> {
                         builder: (context, snapshot) {
                           final tasks = snapshot.data ?? [];
                           final completedProgress = snapshot.hasData
-                              ? "${tasks.where((t) => t.isCompleted).length} of ${tasks.length} completed"
-                              : "Tasks list";
+                              ? l10n.dtProgress(
+                                  tasks
+                                      .where((t) => t.isCompleted)
+                                      .length
+                                      .toString(),
+                                  tasks.length.toString(),
+                                )
+                              : l10n.dtTaskList;
 
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -641,7 +647,7 @@ class _DailyTasksScreenState extends State<DailyTasksScreen> {
                                       ),
                                       SizedBox(height: 2.h),
                                       Text(
-                                        "No tasks for today",
+                                        l10n.dtNoTasks,
                                         style: GoogleFonts.spaceGrotesk(
                                           color: AppTheme.deepBlue,
                                           fontSize: 14.sp,
@@ -651,7 +657,7 @@ class _DailyTasksScreenState extends State<DailyTasksScreen> {
                                       ),
                                       SizedBox(height: 0.5.h),
                                       Text(
-                                        "Add a task to start your day!",
+                                        l10n.dtNoTasksDesc,
                                         textAlign: TextAlign.center,
                                         style: GoogleFonts.spaceGrotesk(
                                           color: AppTheme.textSecondary,

@@ -72,7 +72,7 @@ class _StoryMenuScreenState extends State<StoryMenuScreen> {
                             color: Colors.red,
                           ),
                           SizedBox(height: 2.h),
-                          Text('Error loading stories'),
+                          Text(l10n.errorLoadingStories),
                           Text(
                             '${snapshot.error}',
                             style: TextStyle(fontSize: 10.sp),
@@ -86,7 +86,7 @@ class _StoryMenuScreenState extends State<StoryMenuScreen> {
                   print('Stories loaded: ${stories.length}');
 
                   if (stories.isEmpty) {
-                    return Center(child: Text('No stories available'));
+                    return Center(child: Text(l10n.noStoriesAvailable));
                   }
 
                   return ListView.builder(
@@ -201,7 +201,9 @@ class _StoryMenuScreenState extends State<StoryMenuScreen> {
                                               ),
                                               SizedBox(width: 1.w),
                                               Text(
-                                                '${story.pages.length} pages',
+                                                l10n.pagesCount(
+                                                  story.pages.length,
+                                                ),
                                                 style: GoogleFonts.spaceGrotesk(
                                                   fontSize: 11.sp,
                                                   fontWeight: FontWeight.w600,

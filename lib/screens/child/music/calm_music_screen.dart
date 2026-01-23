@@ -222,7 +222,10 @@ class _CalmMusicScreenState extends State<CalmMusicScreen> {
                 child: Column(
                   children: [
                     Text(
-                      tracks[_currentTrackIndex].titleKey,
+                      _getLocalizedTitle(
+                        l10n,
+                        tracks[_currentTrackIndex].titleKey,
+                      ),
                       style: GoogleFonts.spaceGrotesk(
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w900,
@@ -233,7 +236,6 @@ class _CalmMusicScreenState extends State<CalmMusicScreen> {
                   ],
                 ),
               ),
-
               const Spacer(flex: 1),
 
               // Progress Bar
@@ -341,5 +343,20 @@ class _CalmMusicScreenState extends State<CalmMusicScreen> {
         ),
       ),
     );
+  }
+
+  String _getLocalizedTitle(AppLocalizations l10n, String key) {
+    switch (key) {
+      case 'rainSounds':
+        return l10n.rainSounds;
+      case 'natureAmbience':
+        return l10n.natureAmbience;
+      case 'oceanWaves':
+        return l10n.oceanWaves;
+      case 'calmMusicTrack':
+        return l10n.calmMusicTrack;
+      default:
+        return key;
+    }
   }
 }

@@ -317,7 +317,7 @@ class _SelfRegulationScreenState extends State<SelfRegulationScreen> {
                         Text(
                           steps[index]['title'] as String,
                           style: GoogleFonts.spaceGrotesk(
-                            fontSize: 14.sp,
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
                             color: isActive
                                 ? const Color(0xFF764BA2)
@@ -329,7 +329,7 @@ class _SelfRegulationScreenState extends State<SelfRegulationScreen> {
                           Text(
                             steps[index]['desc'] as String,
                             style: GoogleFonts.spaceGrotesk(
-                              fontSize: 11.sp,
+                              fontSize: 14.sp,
                               color: Colors.grey[700],
                             ),
                           ),

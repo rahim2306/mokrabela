@@ -3,6 +3,7 @@ import 'package:mokrabela/theme/app_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 import 'dart:ui';
+import 'package:mokrabela/l10n/app_localizations.dart';
 
 class BodyScanScreen extends StatefulWidget {
   const BodyScanScreen({super.key});
@@ -14,39 +15,34 @@ class BodyScanScreen extends StatefulWidget {
 class _BodyScanScreenState extends State<BodyScanScreen> {
   int _currentStep = 0;
   final PageController _pageController = PageController();
-  final List<Map<String, String>> _steps = [
+  List<Map<String, String>> _getSteps(AppLocalizations l10n) => [
     {
-      'title': 'Start with Feet',
-      'instruction':
-          'Wiggle your toes. Feel them touching the floor. Relax them now.',
+      'title': l10n.bsStartFeetTitle,
+      'instruction': l10n.bsStartFeetDesc,
       'icon': '🦶',
       'accent': '#4ECDC4',
     },
     {
-      'title': 'Moving to Legs',
-      'instruction':
-          'Tense your leg muscles for a second... and let them go loose.',
+      'title': l10n.bsMovingLegsTitle,
+      'instruction': l10n.bsMovingLegsDesc,
       'icon': '🦵',
       'accent': '#667EEA',
     },
     {
-      'title': 'Relax Your Tummy',
-      'instruction':
-          'Place your hand on your belly. Feel it rise and fall as you breathe.',
+      'title': l10n.bsRelaxTummyTitle,
+      'instruction': l10n.bsRelaxTummyDesc,
       'icon': '🧘',
       'accent': '#FFA751',
     },
     {
-      'title': 'Soft Shoulders',
-      'instruction':
-          'Bring your shoulders up to your ears... then drop them down heavy.',
+      'title': l10n.bsSoftShouldersTitle,
+      'instruction': l10n.bsSoftShouldersDesc,
       'icon': '🤷',
       'accent': '#764BA2',
     },
     {
-      'title': 'Peaceful Face',
-      'instruction':
-          'Smile big... then relax your face completely. You are doing great!',
+      'title': l10n.bsPeacefulFaceTitle,
+      'instruction': l10n.bsPeacefulFaceDesc,
       'icon': '😊',
       'accent': '#F5576C',
     },
@@ -58,8 +54,8 @@ class _BodyScanScreenState extends State<BodyScanScreen> {
     super.dispose();
   }
 
-  void _next() {
-    if (_currentStep < _steps.length - 1) {
+  void _next(int stepsLength) {
+    if (_currentStep < stepsLength - 1) {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 600),
         curve: Curves.easeInOutCubic,
@@ -71,7 +67,9 @@ class _BodyScanScreenState extends State<BodyScanScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final currentStepData = _steps[_currentStep];
+    final l10n = AppLocalizations.of(context)!;
+    final steps = _getSteps(l10n);
+    final currentStepData = steps[_currentStep];
     final currentAccent = Color(
       int.parse(currentStepData['accent']!.replaceAll('#', '0xFF')),
     );
@@ -108,7 +106,7 @@ class _BodyScanScreenState extends State<BodyScanScreen> {
                       ),
                     ),
                     Text(
-                      'Body Scan',
+                      l10n.guidedBodyScan,
                       style: GoogleFonts.spaceGrotesk(
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w800,
@@ -126,7 +124,7 @@ class _BodyScanScreenState extends State<BodyScanScreen> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
-                        '${_currentStep + 1}/5',
+                        '${_currentStep + 1}/${steps.length}',
                         style: GoogleFonts.spaceGrotesk(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -144,9 +142,9 @@ class _BodyScanScreenState extends State<BodyScanScreen> {
                   physics: const NeverScrollableScrollPhysics(),
                   onPageChanged: (index) =>
                       setState(() => _currentStep = index),
-                  itemCount: _steps.length,
+                  itemCount: steps.length,
                   itemBuilder: (context, index) {
-                    final step = _steps[index];
+                    final step = steps[index];
                     final accentColor = Color(
                       int.parse(step['accent']!.replaceAll('#', '0xFF')),
                     );
@@ -262,7 +260,7 @@ class _BodyScanScreenState extends State<BodyScanScreen> {
                     ],
                   ),
                   child: ElevatedButton(
-                    onPressed: _next,
+                    onPressed: () => _next(steps.length),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
                       foregroundColor: AppTheme.deepBlue,
@@ -272,9 +270,9 @@ class _BodyScanScreenState extends State<BodyScanScreen> {
                       ),
                     ),
                     child: Text(
-                      _currentStep == _steps.length - 1
-                          ? 'I feel peaceful'
-                          : 'Next',
+                      _currentStep == steps.length - 1
+                          ? l10n.bsPeacefulButton
+                          : l10n.next,
                       style: GoogleFonts.spaceGrotesk(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w800,

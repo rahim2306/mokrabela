@@ -680,4 +680,144 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get mindfulness => 'اليقظة الذهنية';
+
+  @override
+  String get friend => 'صديق';
+
+  @override
+  String get emotionHappy => 'سعيد';
+
+  @override
+  String get emotionSad => 'حزين';
+
+  @override
+  String get emotionAngry => 'غاضب';
+
+  @override
+  String get emotionAnxious => 'قلق';
+
+  @override
+  String get emotionCalm => 'هادئ';
+
+  @override
+  String get emotionTired => 'تعبان';
+
+  @override
+  String get reportSaved => 'تم حفظ التقرير! أنت تقوم بعمل رائع.';
+
+  @override
+  String errorOccurred(String error) {
+    return 'عفواً! خطأ: $error';
+  }
+
+  @override
+  String get bsStartFeetTitle => 'ابدأ بالقدمين';
+
+  @override
+  String get bsStartFeetDesc =>
+      'هز أصابع قدميك. اشعر بملامستها للأرض. أرخها الآن.';
+
+  @override
+  String get bsMovingLegsTitle => 'التحرك إلى الساقين';
+
+  @override
+  String get bsMovingLegsDesc =>
+      'شد عضلات ساقك لمدة ثانية... ثم اتركها تسترخي.';
+
+  @override
+  String get bsRelaxTummyTitle => 'أرخِ بطنك';
+
+  @override
+  String get bsRelaxTummyDesc =>
+      'ضع يدك على بطنك. اشعر بارتفاعها وانخفاضها مع تنفسك.';
+
+  @override
+  String get bsSoftShouldersTitle => 'أكتاف ناعمة';
+
+  @override
+  String get bsSoftShouldersDesc =>
+      'ارفع كتفيك إلى أذنيك... ثم أنزلهما بوزن ثقيل.';
+
+  @override
+  String get bsPeacefulFaceTitle => 'وجه مسالم';
+
+  @override
+  String get bsPeacefulFaceDesc =>
+      'ابتسم ابتسامة عريضة... ثم أرخِ وجهك تماماً. أنت تقوم بعمل رائع!';
+
+  @override
+  String get bsPeacefulButton => 'أشعر بالسلام';
+
+  @override
+  String get dtGreatJob => 'عمل رائع!';
+
+  @override
+  String get dtSessionFinished => 'لقد أنهيت جلسة التركيز الخاصة بك!';
+
+  @override
+  String get dtAwesome => 'رائع!';
+
+  @override
+  String dtProgress(String completed, String total) {
+    return 'تم إنجاز $completed من أصل $total';
+  }
+
+  @override
+  String get dtTaskList => 'قائمة المهام';
+
+  @override
+  String get dtNoTasks => 'لا توجد مهام اليوم';
+
+  @override
+  String get dtNoTasksDesc => 'أضف مهمة لتبدأ يومك!';
+
+  @override
+  String get galleryPermissionRequired => 'إذن المعرض مطلوب لحفظ الرسومات.';
+
+  @override
+  String get savedToGallery => 'تم الحفظ في المعرض! 🎨';
+
+  @override
+  String galleryError(String error) {
+    return 'خطأ في المعرض: $error';
+  }
+
+  @override
+  String saveError(String error) {
+    return 'خطأ في الحفظ: $error';
+  }
+
+  @override
+  String get errorLoadingStories => 'خطأ في تحميل القصص';
+
+  @override
+  String get noStoriesAvailable => 'لا توجد قصص متاحة';
+
+  @override
+  String pagesCount(int count) {
+    return '$count صفحات';
+  }
+
+  @override
+  String pageIndicator(int current, int total) {
+    return 'صفحة $current من $total';
+  }
+
+  @override
+  String get swipeToTurnPage => 'اسحب لقلب الصفحة';
+
+  @override
+  String get theEnd => 'النهاية';
+
+  @override
+  String get liveHeartbeatMotion => 'نبضات القلب والحركة الحية';
+
+  @override
+  String get motionZ => 'الحركة (Z)';
+
+  @override
+  String get energy => 'الطاقة';
+
+  @override
+  String get liveTag => 'مباشر';
 }

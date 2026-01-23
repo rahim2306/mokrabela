@@ -6,8 +6,11 @@ import 'package:mokrabela/screens/child/kids_achievements_screen.dart';
 import 'package:mokrabela/screens/child/kids_protocol_screen.dart';
 import 'package:mokrabela/screens/common/settings_screen.dart';
 import 'package:mokrabela/components/bars/floating_top_bar.dart';
+import 'package:mokrabela/components/popups/protocol_status_popup.dart';
+import 'package:mokrabela/services/protocol_service.dart';
 import 'package:mokrabela/services/auth_service.dart';
 import 'package:mokrabela/screens/settings/watch_connection_screen.dart';
+import 'dart:async';
 import 'package:sizer/sizer.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 
@@ -30,9 +33,13 @@ class _KidsMainScaffoldState extends State<KidsMainScaffold>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final AuthService _authService = AuthService();
+  final ProtocolService _protocolService = ProtocolService();
+  StreamSubscription? _progressSubscription;
   int _currentIndex = 0;
   bool _isWatchConnected = false;
   String _firstName = 'Friend';
+  int _completedTasks = 0;
+  List<int> _completedSquares = [];
 
   @override
   void initState() {
@@ -44,6 +51,36 @@ class _KidsMainScaffoldState extends State<KidsMainScaffold>
       });
     });
     _loadUserName();
+    _initProgressStream();
+  }
+
+  void _initProgressStream() {
+    final user = _authService.currentUser;
+    if (user != null) {
+      _progressSubscription = _protocolService
+          .getProgressStream(user.uid)
+          .listen((snapshot) {
+            if (snapshot.exists && snapshot.data() != null) {
+              final data = snapshot.data()!;
+              final List<int> completed = List<int>.from(
+                data['completedSquares'] ?? [],
+              );
+              if (mounted) {
+                setState(() {
+                  _completedTasks = completed.length;
+                  _completedSquares = completed;
+                });
+              }
+            } else {
+              if (mounted) {
+                setState(() {
+                  _completedTasks = 0;
+                  _completedSquares = [];
+                });
+              }
+            }
+          });
+    }
   }
 
   Future<void> _loadUserName() async {
@@ -67,9 +104,19 @@ class _KidsMainScaffoldState extends State<KidsMainScaffold>
     }
   }
 
+  void _showProtocolStatus() {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black.withValues(alpha: 0.1),
+      builder: (context) =>
+          ProtocolStatusPopup(completedSquares: _completedSquares),
+    );
+  }
+
   @override
   void dispose() {
     _tabController.dispose();
+    _progressSubscription?.cancel();
     super.dispose();
   }
 
@@ -108,8 +155,9 @@ class _KidsMainScaffoldState extends State<KidsMainScaffold>
                   ),
                 );
               },
-              completedTasks: 2, // TODO: Get from state/database
-              totalTasks: 5,
+              onProgressTap: _showProtocolStatus,
+              completedTasks: _completedTasks,
+              totalTasks: 4,
             ),
             // Main content with bottom bar
             Expanded(

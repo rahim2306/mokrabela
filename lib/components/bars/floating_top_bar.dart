@@ -8,6 +8,7 @@ class FloatingTopBar extends StatelessWidget {
   final bool isWatchConnected;
   final VoidCallback onWatchTap;
   final VoidCallback onSettingsTap;
+  final VoidCallback? onProgressTap;
   final int completedTasks;
   final int totalTasks;
 
@@ -16,6 +17,7 @@ class FloatingTopBar extends StatelessWidget {
     required this.isWatchConnected,
     required this.onWatchTap,
     required this.onSettingsTap,
+    this.onProgressTap,
     this.completedTasks = 2,
     this.totalTasks = 5,
   });
@@ -53,65 +55,69 @@ class FloatingTopBar extends StatelessWidget {
           children: [
             // Progress bar (takes most space)
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        l10n.dailyProgress,
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w800,
-                          color: AppTheme.deepBlue,
-                          letterSpacing: -0.3,
-                        ),
-                      ),
-                      Text(
-                        '$completedTasks/$totalTasks ${l10n.tasks}',
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w700,
-                          color: AppTheme.textSecondary,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 1.2.h),
-                  Stack(
-                    children: [
-                      Container(
-                        height: 8,
-                        decoration: BoxDecoration(
-                          color: AppTheme.primary.withValues(alpha: 0.12),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      FractionallySizedBox(
-                        widthFactor: progress,
-                        child: Container(
-                          height: 8,
-                          decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                              colors: [Color(0xFF4ECDC4), Color(0xFF44A08D)],
-                            ),
-                            borderRadius: BorderRadius.circular(12),
-                            boxShadow: [
-                              BoxShadow(
-                                color: const Color(
-                                  0xFF4ECDC4,
-                                ).withValues(alpha: 0.4),
-                                blurRadius: 8,
-                                offset: const Offset(0, 2),
-                              ),
-                            ],
+              child: GestureDetector(
+                onTap: onProgressTap,
+                behavior: HitTestBehavior.opaque,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          l10n.dailyProgress,
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w800,
+                            color: AppTheme.deepBlue,
+                            letterSpacing: -0.3,
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                        Text(
+                          '$completedTasks/$totalTasks ${l10n.tasks}',
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w700,
+                            color: AppTheme.textSecondary,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 1.2.h),
+                    Stack(
+                      children: [
+                        Container(
+                          height: 8,
+                          decoration: BoxDecoration(
+                            color: AppTheme.primary.withValues(alpha: 0.12),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        FractionallySizedBox(
+                          widthFactor: progress,
+                          child: Container(
+                            height: 8,
+                            decoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                colors: [Color(0xFF4ECDC4), Color(0xFF44A08D)],
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color(
+                                    0xFF4ECDC4,
+                                  ).withValues(alpha: 0.4),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
             SizedBox(width: 3.w),

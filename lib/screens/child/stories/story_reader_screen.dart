@@ -83,6 +83,7 @@ class _StoryReaderScreenState extends State<StoryReaderScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -128,7 +129,10 @@ class _StoryReaderScreenState extends State<StoryReaderScreen> {
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Text(
-                            'Page ${_currentPage + 1} of ${widget.story.pages.length}',
+                            l10n.pageIndicator(
+                              _currentPage + 1,
+                              widget.story.pages.length,
+                            ),
                             style: GoogleFonts.spaceGrotesk(
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w700,
@@ -170,8 +174,8 @@ class _StoryReaderScreenState extends State<StoryReaderScreen> {
                     SizedBox(width: 2.w),
                     Text(
                       _currentPage < widget.story.pages.length - 1
-                          ? 'Swipe to turn page'
-                          : 'The End',
+                          ? l10n.swipeToTurnPage
+                          : l10n.theEnd,
                       style: GoogleFonts.spaceGrotesk(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w600,

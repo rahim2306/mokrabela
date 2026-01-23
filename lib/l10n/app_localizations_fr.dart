@@ -69,7 +69,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get alreadyHaveAccount => 'Vous avez déjà un compte?';
 
   @override
-  String get onboardingQuestion1 => 'Quelle phrasevous décrit le mieux?';
+  String get onboardingQuestion1 => 'Quelle phrase vous décrit le mieux?';
 
   @override
   String get optionParent =>
@@ -233,16 +233,18 @@ class AppLocalizationsFr extends AppLocalizations {
   String get logout => 'Se déconnecter';
 
   @override
-  String get tasks => 'Tasks';
+  String get tasks => 'Tâches';
 
   @override
-  String get manageYourTimeWell => 'Manage your\ntime well';
+  String get manageYourTimeWell => 'Gérez bien\nvotre temps';
 
   @override
-  String get onboardingQuestion2 => 'When would you like to check in daily?';
+  String get onboardingQuestion2 =>
+      'À quelle heure souhaiteriez-vous faire votre bilan quotidien ?';
 
   @override
-  String get reminderHabitText => 'A gentle reminder helps you build a habit.';
+  String get reminderHabitText =>
+      'Un rappel doux vous aide à instaurer une habitude.';
 
   @override
   String get am => 'AM';
@@ -251,382 +253,391 @@ class AppLocalizationsFr extends AppLocalizations {
   String get pm => 'PM';
 
   @override
-  String get tellUsMoreTitle => 'Tell us more about yourself';
+  String get tellUsMoreTitle => 'Dites-nous en plus sur vous';
 
   @override
-  String get tellUsMoreSubtitle => 'Choose a few words that fit for you';
+  String get tellUsMoreSubtitle =>
+      'Choisissez quelques mots qui vous correspondent';
 
   @override
-  String get profileImage => 'Profile image';
+  String get profileImage => 'Image de profil';
 
   @override
-  String get fullName => 'Full Name';
+  String get fullName => 'Nom complet';
 
   @override
-  String get firstName => 'First Name';
+  String get firstName => 'Prénom';
 
   @override
-  String get familyName => 'Family Name';
+  String get familyName => 'Nom de famille';
 
   @override
-  String get email => 'Email';
+  String get email => 'E-mail';
 
   @override
-  String get password => 'Password';
+  String get password => 'Mot de passe';
 
   @override
-  String get phoneNumber => 'Phone Number';
+  String get phoneNumber => 'Numéro de téléphone';
 
   @override
-  String get dateOfBirth => 'Date of Birth';
+  String get dateOfBirth => 'Date de naissance';
 
   @override
-  String get gender => 'Gender';
+  String get gender => 'Genre';
 
   @override
-  String get male => 'Male';
+  String get male => 'Homme';
 
   @override
-  String get female => 'Female';
+  String get female => 'Femme';
 
   @override
-  String get other => 'Other';
+  String get other => 'Autre';
 
   @override
-  String get preferNotToSay => 'Prefer not to say';
+  String get preferNotToSay => 'Préfère ne pas répondre';
 
   @override
-  String get goToFinalCheckIn => 'Go To Final Check in';
+  String get goToFinalCheckIn => 'Aller au bilan final';
 
   @override
-  String get iAmA => 'I am a...';
+  String get iAmA => 'Je suis...';
 
   @override
-  String get signUp => 'Sign Up';
+  String get signUp => 'S\'inscrire';
 
   @override
-  String get fieldRequired => 'This field is required';
+  String get fieldRequired => 'Ce champ est obligatoire';
 
   @override
-  String get invalidEmail => 'Please enter a valid email';
+  String get invalidEmail => 'Veuillez entrer un e-mail valide';
 
   @override
-  String get passwordTooShort => 'Password must be at least 6 characters';
+  String get passwordTooShort =>
+      'Le mot de passe doit comporter au moins 6 caractères';
 
   @override
-  String get invalidPhoneNumber => 'Please enter a valid phone number';
+  String get invalidPhoneNumber =>
+      'Veuillez entrer un numéro de téléphone valide';
 
   @override
-  String get registrationSuccess => 'Registration successful!';
+  String get registrationSuccess => 'Inscription réussie !';
 
   @override
-  String get registrationFailed => 'Registration failed. Please try again.';
+  String get registrationFailed =>
+      'L\'inscription a échoué. Veuillez réessayer.';
 
   @override
-  String get emailAlreadyInUse => 'This email is already in use';
+  String get emailAlreadyInUse => 'Cet e-mail est déjà utilisé';
 
   @override
-  String get weakPassword => 'Password is too weak';
+  String get weakPassword => 'Le mot de passe est trop faible';
 
   @override
-  String get networkError => 'Network error. Please check your connection.';
+  String get networkError =>
+      'Erreur réseau. Veuillez vérifier votre connexion.';
 
   @override
-  String get selectGender => 'Select gender';
+  String get selectGender => 'Sélectionner le genre';
 
   @override
-  String get selectDate => 'Select date';
+  String get selectDate => 'Sélectionner la date';
 
   @override
-  String get languageShort => 'Eng';
+  String get languageShort => 'Fra';
 
   @override
-  String get breathingExercisesTitle => 'Breathing Exercises';
+  String get breathingExercisesTitle => 'Exercices de respiration';
 
   @override
-  String get goldenBreathTitle => 'Golden Breath';
+  String get goldenBreathTitle => 'Respiration dorée';
 
   @override
-  String get goldenBreathDesc => 'Short exercise (6s) for energy.';
+  String get goldenBreathDesc =>
+      'Exercice court (6s) pour redonner de l\'énergie.';
 
   @override
-  String get butterflyBreathTitle => 'Butterfly Breath';
+  String get butterflyBreathTitle => 'Respiration papillon';
 
   @override
-  String get butterflyBreathDesc => 'Calm exercise (10s) for deep relaxation.';
+  String get butterflyBreathDesc =>
+      'Exercice calme (10s) pour une relaxation profonde.';
 
   @override
-  String get oceanBreathTitle => 'Ocean Breath';
+  String get oceanBreathTitle => 'Respiration de l\'océan';
 
   @override
-  String get oceanBreathDesc => 'Exercise (8s) mimicking ocean waves.';
+  String get oceanBreathDesc => 'Exercice (8s) imitant les vagues de l\'océan.';
 
   @override
-  String get forestBreathTitle => 'Forest Breath';
+  String get forestBreathTitle => 'Respiration de la forêt';
 
   @override
-  String get forestBreathDesc => 'Gentle exercise (7s) for balance.';
+  String get forestBreathDesc => 'Exercice doux (7s) pour l\'équilibre.';
 
   @override
-  String get seconds => 'seconds';
+  String get seconds => 'secondes';
 
   @override
   String startExercise(String exercise) {
-    return 'Start $exercise...';
+    return 'Démarrer $exercise...';
   }
 
   @override
-  String get whyBreatheTitle => 'Why breathe consciously?';
+  String get whyBreatheTitle => 'Pourquoi respirer consciemment ?';
 
   @override
   String get whyBreatheDesc =>
-      'Breathing exercises help calm the mind, reduce stress, and improve focus. It\'s a magical way to recharge or relax.';
+      'Les exercices de respiration aident à calmer l\'esprit, réduire le stress et améliorer la concentration. C\'est une façon magique de se ressourcer ou de se détendre.';
 
   @override
-  String get whyMusicTitle => 'Why listen to calm music?';
+  String get whyMusicTitle => 'Pourquoi écouter de la musique calme ?';
 
   @override
   String get whyMusicDesc =>
-      'Calm music helps create a peaceful environment, reduces anxiety, and enhances relaxation. It\'s perfect for meditation, study, or bedtime.';
+      'La musique calme aide à créer un environnement paisible, réduit l\'anxiété et favorise la relaxation. Elle est parfaite pour la méditation, l\'étude ou le coucher.';
 
   @override
-  String get whyStoriesTitle => 'Why read stories?';
+  String get whyStoriesTitle => 'Pourquoi lire des histoires ?';
 
   @override
   String get whyStoriesDesc =>
-      'Stories spark imagination, teach valuable lessons, and help children relax. They\'re a wonderful way to wind down and dream big!';
+      'Les histoires stimulent l\'imagination, enseignent des leçons précieuses et aident les enfants à se détendre. C\'est une merveilleuse façon de décompresser et de rêver grand !';
 
   @override
-  String get whyFocusGamesTitle => 'Why play focus games?';
+  String get whyFocusGamesTitle =>
+      'Pourquoi jouer à des jeux de concentration ?';
 
   @override
   String get whyFocusGamesDesc =>
-      'Focus games help improve concentration, memory, and cognitive skills. They\'re a fun way to train your brain and boost mental agility!';
+      'Les jeux de concentration aident à améliorer la concentration, la mémoire et les capacités cognitives. C\'est une façon amusante d\'entraîner votre cerveau et de booster votre agilité mentale !';
 
   @override
-  String get breatheIn => 'Breathe In';
+  String get breatheIn => 'Inspirez';
 
   @override
-  String get breatheOut => 'Breathe Out';
+  String get breatheOut => 'Expirez';
 
   @override
   String get cycle => 'Cycle';
 
   @override
-  String get complete => 'Complete!';
+  String get complete => 'Terminé !';
 
   @override
   String breathingComplete(String exercise) {
-    return '🎉 $exercise Complete! ✨';
+    return '🎉 $exercise terminé ! ✨';
   }
 
   @override
-  String get focusGamesTitle => 'Focus Games';
+  String get focusGamesTitle => 'Jeux de concentration';
 
   @override
-  String get memoryFlipTitle => 'Memory Flip';
+  String get memoryFlipTitle => 'Mémoire Flip';
 
   @override
   String get memoryFlipDesc =>
-      'Match pairs of cards to improve memory and focus';
+      'Associez les paires de cartes pour améliorer la mémoire et la concentration';
 
   @override
-  String get moves => 'Moves';
+  String get moves => 'Coups';
 
   @override
-  String get time => 'Time';
+  String get time => 'Temps';
 
   @override
-  String get gameComplete => 'Game Complete!';
+  String get gameComplete => 'Jeu terminé !';
 
   @override
-  String get playAgain => 'Play Again';
+  String get playAgain => 'Rejouer';
 
   @override
-  String get wellDone => 'Well Done!';
+  String get wellDone => 'Bien joué !';
 
   @override
-  String get calmMusicTitle => 'Calm Music';
+  String get calmMusicTitle => 'Musique calme';
 
   @override
-  String get rainSounds => 'Rain Sounds';
+  String get rainSounds => 'Sons de pluie';
 
   @override
-  String get rainSoundsDesc => 'Gentle rain to calm your mind';
+  String get rainSoundsDesc => 'Une pluie douce pour calmer votre esprit';
 
   @override
-  String get natureAmbience => 'Nature Ambience';
+  String get natureAmbience => 'Ambiance nature';
 
   @override
-  String get natureAmbienceDesc => 'Peaceful sounds of nature';
+  String get natureAmbienceDesc => 'Sons paisibles de la nature';
 
   @override
-  String get oceanWaves => 'Ocean Waves';
+  String get oceanWaves => 'Vagues de l\'océan';
 
   @override
-  String get oceanWavesDesc => 'Soothing ocean waves';
+  String get oceanWavesDesc => 'Vagues apaisantes de l\'océan';
 
   @override
-  String get calmMusicTrack => 'Calm Music';
+  String get calmMusicTrack => 'Musique calme';
 
   @override
-  String get calmMusicTrackDesc => 'Relaxing melodies for peace';
+  String get calmMusicTrackDesc => 'Mélodies relaxantes pour la paix';
 
   @override
-  String get storiesTitle => 'Stories';
+  String get storiesTitle => 'Histoires';
 
   @override
-  String get braveStarTitle => 'The Brave Little Star';
+  String get braveStarTitle => 'La petite étoile courageuse';
 
   @override
-  String get braveStarDesc => 'A tale of courage and believing in yourself';
+  String get braveStarDesc => 'Un conte de courage et de confiance en soi';
 
   @override
-  String get magicGardenTitle => 'The Magic Garden';
+  String get magicGardenTitle => 'Le jardin magique';
 
   @override
-  String get magicGardenDesc => 'Discover the magic of kindness';
+  String get magicGardenDesc => 'Découvrez la magie de la gentillesse';
 
   @override
-  String get friendlyDragonTitle => 'The Friendly Dragon';
+  String get friendlyDragonTitle => 'Le dragon amical';
 
   @override
-  String get friendlyDragonDesc => 'A heartwarming story about friendship';
+  String get friendlyDragonDesc => 'Une histoire réconfortante sur l\'amitié';
 
   @override
   String get braveStarPage1 =>
-      'Once upon a time, in the vast night sky, there lived a little star named Stella. She was the smallest star in her constellation, but she had the biggest dreams.';
+      'Il était une fois, dans le vaste ciel nocturne, une petite étoile nommée Stella. Elle était la plus petite étoile de sa constellation, mais elle avait les plus grands rêves.';
 
   @override
   String get braveStarPage2 =>
-      'Every night, Stella watched the other stars shine brightly. \"I wish I could shine as bright as them,\" she would whisper to the moon.';
+      'Chaque nuit, Stella regardait les autres étoiles briller intensément. « J\'aimerais pouvoir briller aussi fort qu\'elles », chuchotait-elle à la lune.';
 
   @override
   String get braveStarPage3 =>
-      'One night, a dark cloud covered the sky. All the big stars hid behind it, afraid to shine. But Stella thought, \"Someone needs to light the way for the children below.\"';
+      'Une nuit, un nuage sombre couvrit le ciel. Toutes les grandes étoiles se cachèrent derrière lui, craignant de briller. Mais Stella pensa : « Quelqu\'un doit éclairer le chemin pour les enfants en bas. »';
 
   @override
   String get braveStarPage4 =>
-      'With all her courage, Stella pushed through the cloud. It was hard and scary, but she kept going. Her light began to glow brighter and brighter!';
+      'Avec tout son courage, Stella traversa le nuage. C\'était difficile et effrayant, mais elle continua. Sa lumière commença à briller de plus en plus fort !';
 
   @override
   String get braveStarPage5 =>
-      'The children on Earth looked up and saw Stella\'s brave light. \"Look! A shooting star!\" they cheered. Stella realized she didn\'t need to be the biggest to make a difference.';
+      'Les enfants sur Terre levèrent les yeux et virent la lumière courageuse de Stella. « Regardez ! Une étoile filante ! » s\'écrièrent-ils. Stella comprit qu\'elle n\'avait pas besoin d\'être la plus grande pour faire une différence.';
 
   @override
   String get braveStarPage6 =>
-      'From that night on, Stella shone with confidence. She learned that being brave doesn\'t mean you\'re not scared—it means you shine anyway. The End. ⭐';
+      'Depuis cette nuit-là, Stella brilla avec confiance. Elle apprit qu\'être courageux ne signifie pas ne pas avoir peur, mais briller malgré tout. Fin. ⭐';
 
   @override
   String get magicGardenPage1 =>
-      'In a quiet corner of the world, there was a magical garden that only appeared to those who truly believed in magic.';
+      'Dans un coin tranquille du monde, il y avait un jardin magique qui n\'apparaissait qu\'à ceux qui croyaient vraiment à la magie.';
 
   @override
   String get magicGardenPage2 =>
-      'A curious girl named Maya loved exploring. One sunny day, she followed a golden butterfly and discovered a hidden gate covered in vines.';
+      'Une fille curieuse nommée Maya adorait explorer. Un jour ensoleillé, elle suivit un papillon doré et découvrit une porte cachée couverte de vignes.';
 
   @override
   String get magicGardenPage3 =>
-      'As Maya touched the gate, it opened with a gentle glow. Inside was the most beautiful garden she had ever seen—flowers that sang, trees that danced, and streams that sparkled like diamonds.';
+      'Lorsque Maya toucha la porte, elle s\'ouvrit avec une lueur douce. À l\'intérieur se trouvait le plus beau jardin qu\'elle ait jamais vu : des fleurs qui chantaient, des arbres qui dansaient et des ruisseaux qui scintillaient comme des diamants.';
 
   @override
   String get magicGardenPage4 =>
-      'In the center of the garden stood a wise old tree. \"Welcome, Maya,\" it said with a warm voice. \"This garden grows from kindness and care. Will you help it bloom?\"';
+      'Au centre du jardin se tenait un vieil arbre sage. « Bienvenue, Maya », dit-il d\'une voix chaleureuse. « Ce jardin grandit grâce à la gentillesse et aux soins. Veux-tu l\'aider à s\'épanouir ? »';
 
   @override
   String get magicGardenPage5 =>
-      'Maya watered the flowers, sang to the trees, and helped the little creatures. With each kind act, the garden grew more vibrant and magical.';
+      'Maya arrosa les fleurs, chanta aux arbres et aida les petites créatures. À chaque acte de gentillesse, le jardin devenait plus vibrant et magique.';
 
   @override
   String get magicGardenPage6 =>
-      'When it was time to leave, the tree gave Maya a special seed. \"Plant this in your heart,\" it said. \"Kindness is the real magic.\" Maya smiled, knowing she could create magic anywhere. The End. 🌸';
+      'Au moment de partir, l\'arbre donna à Maya une graine spéciale. « Plante ceci dans ton cœur », dit-il. « La gentillesse est la vraie magie. » Maya sourit, sachant qu\'elle pouvait créer de la magie n\'importe où. Fin. 🌸';
 
   @override
   String get friendlyDragonPage1 =>
-      'High in the misty mountains lived a dragon named Ember. Unlike other dragons, Ember didn\'t want to guard treasure or breathe fire at knights.';
+      'Haut dans les montagnes brumeuses vivait un dragon nommé Ember. Contrairement aux autres dragons, Ember ne voulait pas garder de trésors ni cracher du feu sur les chevaliers.';
 
   @override
   String get friendlyDragonPage2 =>
-      'Ember just wanted a friend. But whenever he flew down to the village, people would run away screaming. \"I\'m not scary!\" Ember would call out, but no one stayed to listen.';
+      'Ember voulait simplement un ami. Mais chaque fois qu\'il volait vers le village, les gens s\'enfuyaient en criant. « Je ne suis pas effrayant ! » criait Ember, mais personne ne restait pour écouter.';
 
   @override
   String get friendlyDragonPage3 =>
-      'One day, a brave little boy named Leo got lost in the mountains. As night fell and the cold wind blew, Leo began to cry. That\'s when he saw a warm, orange glow.';
+      'Un jour, un petit garçon courageux nommé Léo se perdit dans les montagnes. Alors que la nuit tombait et que le vent froid soufflait, Léo commença à pleurer. C\'est alors qu\'il vit une lueur orange chaleureuse.';
 
   @override
   String get friendlyDragonPage4 =>
-      'It was Ember! The dragon gently breathed warm air to keep Leo cozy. \"Don\'t be afraid,\" Ember said softly. \"I\'ll help you get home.\"';
+      'C\'était Ember ! Le dragon souffla doucement de l\'air chaud pour garder Léo au chaud. « N\'aie pas peur », dit doucement Ember. « Je vais t\'aider à rentrer chez toi. »';
 
   @override
   String get friendlyDragonPage5 =>
-      'Ember flew Leo safely back to the village. When the people saw how kind and gentle the dragon was, they realized they had been wrong to judge him by his appearance.';
+      'Ember ramena Léo en toute sécurité au village. Quand les gens virent à quel point le dragon était gentil et doux, ils comprirent qu\'ils avaient eu tort de le juger sur son apparence.';
 
   @override
   String get friendlyDragonPage6 =>
-      'From that day on, Ember had many friends in the village. He learned that true friendship comes to those who are kind and patient. And Leo learned that the biggest hearts sometimes come in the most unexpected forms. The End. 🐉';
+      'Depuis ce jour, Ember eut de nombreux amis dans le village. Il apprit que la véritable amitié vient à ceux qui sont gentils et patients. Et Léo apprit que les plus grands cœurs se cachent parfois sous les formes les plus inattendues. Fin. 🐉';
 
   @override
-  String get dtNewTask => 'New Task';
+  String get dtNewTask => 'Nouvelle tâche';
 
   @override
-  String get dtTaskTitlePlaceholder => 'What do you want to focus on?';
+  String get dtTaskTitlePlaceholder => 'Sur quoi veux-tu te concentrer ?';
 
   @override
-  String get dtTaskDurationLabel => 'Duration (minutes)';
+  String get dtTaskDurationLabel => 'Durée (minutes)';
 
   @override
-  String get dtAddButton => 'Add';
+  String get dtAddButton => 'Ajouter';
 
   @override
-  String get dtCancelButton => 'Cancel';
+  String get dtCancelButton => 'Annuler';
 
   @override
-  String get howAreYouFeeling => 'How are you feeling?';
+  String get howAreYouFeeling => 'Comment te sens-tu ?';
 
   @override
-  String get activityLevel => 'Activity Level (1-10)';
+  String get activityLevel => 'Niveau d\'activité (1-10)';
 
   @override
-  String get quiet => 'Quiet';
+  String get quiet => 'Calme';
 
   @override
   String get hyper => 'Hyper';
 
   @override
-  String get guidedBodyScan => 'Guided Body Scan';
+  String get guidedBodyScan => 'Scan corporel guidé';
 
   @override
-  String get bodyScanDesc => 'Check in with every part of your body.';
+  String get bodyScanDesc => 'Fais un bilan de chaque partie de ton corps.';
 
   @override
-  String get saveSession => 'Save My Session';
+  String get saveSession => 'Enregistrer ma séance';
 
   @override
-  String get connectWatch => 'Connect Your Watch';
+  String get connectWatch => 'Connecte ta montre';
 
   @override
-  String get watchScanning => 'Searching for your watch...';
+  String get watchScanning => 'Recherche de ta montre...';
 
   @override
-  String get watchFound => 'Watch found!';
+  String get watchFound => 'Montre trouvée !';
 
   @override
-  String get watchConnecting => 'Connecting to your watch...';
+  String get watchConnecting => 'Connexion à ta montre...';
 
   @override
-  String get watchError => 'Couldn\'t find your watch. Is it turned on?';
+  String get watchError =>
+      'Impossible de trouver ta montre. Est-elle allumée ?';
 
   @override
-  String get pairNow => 'Pair Now';
+  String get pairNow => 'Jumeler maintenant';
 
   @override
-  String get availableDevices => 'Available Devices';
+  String get availableDevices => 'Appareils disponibles';
 
   @override
-  String get noDevicesFound => 'No devices found nearby.';
+  String get noDevicesFound => 'Aucun appareil trouvé à proximité.';
 
   @override
-  String get retryScan => 'Réessayer le scan';
+  String get retryScan => 'Relancer le scan';
 
   @override
   String get stopTechnique => 'Technique STOP';
@@ -686,4 +697,145 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get mindfulness => 'Pleine conscience';
+
+  @override
+  String get friend => 'Ami';
+
+  @override
+  String get emotionHappy => 'Heureux';
+
+  @override
+  String get emotionSad => 'Triste';
+
+  @override
+  String get emotionAngry => 'En colère';
+
+  @override
+  String get emotionAnxious => 'Anxieux';
+
+  @override
+  String get emotionCalm => 'Calme';
+
+  @override
+  String get emotionTired => 'Fatigué';
+
+  @override
+  String get reportSaved => 'Rapport enregistré ! Tu t\'en sors très bien.';
+
+  @override
+  String errorOccurred(String error) {
+    return 'Oups ! Erreur : $error';
+  }
+
+  @override
+  String get bsStartFeetTitle => 'Commence avec les pieds';
+
+  @override
+  String get bsStartFeetDesc =>
+      'Remue tes orteils. Sens-les toucher le sol. Détends-les maintenant.';
+
+  @override
+  String get bsMovingLegsTitle => 'Passe aux jambes';
+
+  @override
+  String get bsMovingLegsDesc =>
+      'Contracte les muscles de tes jambes pendant une seconde... et relâche-les.';
+
+  @override
+  String get bsRelaxTummyTitle => 'Détends ton ventre';
+
+  @override
+  String get bsRelaxTummyDesc =>
+      'Pose ta main sur ton ventre. Sens-le monter et descendre en respirant.';
+
+  @override
+  String get bsSoftShouldersTitle => 'Épaules souples';
+
+  @override
+  String get bsSoftShouldersDesc =>
+      'Monte tes épaules jusqu\'à tes oreilles... puis laisse-les retomber lourdement.';
+
+  @override
+  String get bsPeacefulFaceTitle => 'Visage apaisé';
+
+  @override
+  String get bsPeacefulFaceDesc =>
+      'Fais un grand sourire... puis détends complètement ton visage. Tu te débrouilles super bien !';
+
+  @override
+  String get bsPeacefulButton => 'Je me sens apaisé';
+
+  @override
+  String get dtGreatJob => 'Bien joué !';
+
+  @override
+  String get dtSessionFinished => 'Tu as terminé ta séance de concentration !';
+
+  @override
+  String get dtAwesome => 'Génial !';
+
+  @override
+  String dtProgress(String completed, String total) {
+    return '$completed sur $total terminés';
+  }
+
+  @override
+  String get dtTaskList => 'Liste des tâches';
+
+  @override
+  String get dtNoTasks => 'Aucune tâche pour aujourd\'hui';
+
+  @override
+  String get dtNoTasksDesc => 'Ajoute une tâche pour commencer ta journée !';
+
+  @override
+  String get galleryPermissionRequired =>
+      'L\'autorisation d\'accès à la galerie est requise pour enregistrer les dessins.';
+
+  @override
+  String get savedToGallery => 'Enregistré dans la galerie ! 🎨';
+
+  @override
+  String galleryError(String error) {
+    return 'Erreur de galerie : $error';
+  }
+
+  @override
+  String saveError(String error) {
+    return 'Erreur d\'enregistrement : $error';
+  }
+
+  @override
+  String get errorLoadingStories => 'Erreur lors du chargement des histoires';
+
+  @override
+  String get noStoriesAvailable => 'Aucune histoire disponible';
+
+  @override
+  String pagesCount(int count) {
+    return '$count pages';
+  }
+
+  @override
+  String pageIndicator(int current, int total) {
+    return 'Page $current sur $total';
+  }
+
+  @override
+  String get swipeToTurnPage => 'Balaye pour tourner la page';
+
+  @override
+  String get theEnd => 'Fin';
+
+  @override
+  String get liveHeartbeatMotion => 'Rythme Cardiaque et Mouvement en Direct';
+
+  @override
+  String get motionZ => 'Mouvement (Z)';
+
+  @override
+  String get energy => 'Énergie';
+
+  @override
+  String get liveTag => 'DIRECT';
 }

@@ -2,15 +2,15 @@
   "@@locale": "fr",
   "appTitle": "MokraBela",
   "@appTitle": {
-    "description": "The title of the application"
+    "description": "Le titre de l'application"
   },
   "welcome": "Bienvenue",
   "@welcome": {
-    "description": "Welcome message"
+    "description": "Message de bienvenue"
   },
   "hello": "Bonjour, {name}!",
   "@hello": {
-    "description": "Greeting message with user name",
+    "description": "Message de salutation avec le nom de l'utilisateur",
     "placeholders": {
       "name": {
         "type": "String",
@@ -20,27 +20,27 @@
   },
   "languageSelector": "Sélectionner la langue",
   "@languageSelector": {
-    "description": "Label for language selector"
+    "description": "Libellé pour le sélecteur de langue"
   },
   "english": "Anglais",
   "@english": {
-    "description": "English language option"
+    "description": "Option de langue anglaise"
   },
   "french": "Français",
   "@french": {
-    "description": "French language option"
+    "description": "Option de langue française"
   },
   "arabic": "Arabe",
   "@arabic": {
-    "description": "Arabic language option"
+    "description": "Option de langue arabe"
   },
   "changeLanguage": "Changer de langue",
   "@changeLanguage": {
-    "description": "Button to change language"
+    "description": "Bouton pour changer de langue"
   },
   "currentLanguage": "Langue actuelle: {language}",
   "@currentLanguage": {
-    "description": "Display current language",
+    "description": "Affiche la langue actuelle",
     "placeholders": {
       "language": {
         "type": "String",
@@ -50,90 +50,132 @@
   },
   "welcomeToMokrabela": "Bienvenue sur MokraBela",
   "@welcomeToMokrabela": {
-    "description": "Welcome screen title"
+    "description": "Titre de l'écran de bienvenue"
   },
   "welcomeSubtitle": "Aider les enfants à se sentir plus calmes, plus concentrés et mieux accompagnés, ensemble.",
   "@welcomeSubtitle": {
-    "description": "Welcome screen subtitle"
+    "description": "Sous-titre de l'écran de bienvenue"
   },
   "getStarted": "Commencer",
   "@getStarted": {
-    "description": "Get started button"
+    "description": "Bouton pour commencer"
   },
   "logIn": "Se connecter",
   "@logIn": {
-    "description": "Log in button"
+    "description": "Bouton de connexion"
   },
   "welcomeBack": "Bon retour",
   "@welcomeBack": {
-    "description": "Login screen title"
+    "description": "Titre de l'écran de connexion"
   },
   "loginSubtitle": "Connectez-vous pour continuer votre parcours.",
   "@loginSubtitle": {
-    "description": "Login screen subtitle"
+    "description": "Sous-titre de l'écran de connexion"
   },
   "loginFailed": "Échec de la connexion. Veuillez vérifier vos identifiants.",
   "@loginFailed": {
-    "description": "Login failure message"
+    "description": "Message d'échec de connexion"
   },
   "dontHaveAccount": "Vous n'avez pas de compte?",
   "@dontHaveAccount": {
-    "description": "Sign up prompt text"
+    "description": "Texte d'invite à l'inscription"
   },
   "alreadyHaveAccount": "Vous avez déjà un compte?",
   "@alreadyHaveAccount": {
-    "description": "Login prompt text"
+    "description": "Texte d'invite à la connexion"
   },
-  "onboardingQuestion1": "Quelle phrasevous décrit le mieux?",
+  "onboardingQuestion1": "Quelle phrase vous décrit le mieux?",
   "@onboardingQuestion1": {
-    "description": "First onboarding question"
+    "description": "Première question d'intégration"
   },
   "optionParent": "Je suis un parent qui souhaite suivre les progrès de mon enfant.",
   "@optionParent": {
-    "description": "Parent role option"
+    "description": "Option rôle parent"
   },
   "optionTeacher": "Je suis un enseignant qui travaille avec des élèves.",
   "@optionTeacher": {
-    "description": "Teacher role option"
+    "description": "Option rôle enseignant"
   },
   "next": "Suivant",
   "@next": {
-    "description": "Next button"
+    "description": "Bouton suivant"
   },
   "back": "Retour",
   "@back": {
-    "description": "Back button"
+    "description": "Bouton retour"
   },
   "skip": "Passer",
   "@skip": {
-    "description": "Skip button"
+    "description": "Bouton passer"
   },
   "intro1Title": "Le soutien avant tout",
   "@intro1Title": {
-    "description": "Title for first introduction screen"
+    "description": "Titre du premier écran d'introduction"
   },
   "intro1Description": "Les enfants ne s'autorégulent pas seuls. Avec l'accompagnement des parents et des enseignants, le calme devient une habitude.",
   "@intro1Description": {
-    "description": "Description for first introduction screen"
+    "description": "Description du premier écran d'introduction"
   },
   "intro2Title": "Construire le calme intérieur",
   "@intro2Title": {
-    "description": "Title for second introduction screen"
+    "description": "Titre du deuxième écran d'introduction"
   },
   "intro2Description": "Pas à pas, les enfants apprennent à se calmer, à mieux se concentrer et à se sentir en contrôle.",
   "@intro2Description": {
-    "description": "Description for second introduction screen"
+    "description": "Description du deuxième écran d'introduction"
   },
   "welcomeChild": "Bienvenue, {name}!",
+  "@welcomeChild": {
+    "description": "Message de bienvenue pour le tableau de bord enfant",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Alex"
+      }
+    }
+  },
   "watchConnected": "Connecté",
+  "@watchConnected": {
+    "description": "Statut de connexion de la montre - connecté"
+  },
   "watchDisconnected": "Déconnecté",
+  "@watchDisconnected": {
+    "description": "Statut de connexion de la montre - déconnecté"
+  },
   "dailyProgress": "Progrès quotidien",
+  "@dailyProgress": {
+    "description": "Titre de la section progrès quotidien"
+  },
   "tasksRemaining": "{count} tâches restantes",
+  "@tasksRemaining": {
+    "description": "Nombre de tâches restantes",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
   "breathingExercise": "Respiration",
+  "@breathingExercise": {
+    "description": "Titre de la carte d'exercice de respiration"
+  },
   "focusGames": "Jeux de concentration",
+  "@focusGames": {
+    "description": "Titre de la carte de jeux de concentration"
+  },
   "calmMusic": "Musique calme",
+  "@calmMusic": {
+    "description": "Titre de la carte de musique calme"
+  },
   "stories": "Histoires",
+  "@stories": {
+    "description": "Titre de la carte d'histoires"
+  },
   "missingSquare": "Le carré manquant",
+  "@missingSquare": {
+    "description": "Titre du protocole Le carré manquant"
+  },
   "protocol": "Protocole",
   "focusTimer": "Minuteur de concentration",
   "addTask": "Ajouter une tâche",
@@ -148,24 +190,425 @@
   "cancel": "Annuler",
   "save": "Enregistrer",
   "helloLabel": "Bonjour",
+  "@helloLabel": {
+    "description": "Salutation simple"
+  },
   "letsStartProtocol": "Commençons ton protocole",
+  "@letsStartProtocol": {
+    "description": "Invitation à commencer le protocole"
+  },
   "missingSquareProtocol": "Pourquoi ce protocole ?",
+  "@missingSquareProtocol": {
+    "description": "Titre du protocole Le carré manquant"
+  },
   "protocolWelcome": "Bonjour {userName}, commençons ton protocole",
+  "@protocolWelcome": {
+    "description": "Message de bienvenue personnalisé pour l'écran de protocole",
+    "placeholders": {
+      "userName": {
+        "type": "String",
+        "example": "Ali"
+      }
+    }
+  },
   "protocolExplanation": "Ces 4 carrés t'aident à comprendre tes émotions, contrôler ton énergie et trouver la paix.",
+  "@protocolExplanation": {
+    "description": "Sous-titre d'explication du protocole"
+  },
   "square1Title": "Conscience de Soi",
+  "@square1Title": {
+    "description": "Titre du carré 1"
+  },
   "square1Desc": "Comprends tes émotions",
+  "@square1Desc": {
+    "description": "Description du carré 1"
+  },
   "square2Title": "Autorégulation",
+  "@square2Title": {
+    "description": "Titre du carré 2"
+  },
   "square2Desc": "Contrôle ton énergie",
+  "@square2Desc": {
+    "description": "Description du carré 2"
+  },
   "square3Title": "Tâches Quotidiennes",
+  "@square3Title": {
+    "description": "Titre du carré 3"
+  },
   "square3Desc": "Organise ton temps",
+  "@square3Desc": {
+    "description": "Description du carré 3"
+  },
   "square4Title": "Apaisement Psychologique",
+  "@square4Title": {
+    "description": "Titre du carré 4"
+  },
   "square4Desc": "Trouve ta paix",
+  "@square4Desc": {
+    "description": "Description du carré 4"
+  },
   "achievements": "Réussites",
+  "@achievements": {
+    "description": "Libellé du bouton de réussites"
+  },
   "tapToStart": "Appuyez pour commencer",
+  "@tapToStart": {
+    "description": "Instruction pour commencer"
+  },
   "goodMorning": "Bonjour",
+  "@goodMorning": {
+    "description": "Salutation du matin"
+  },
   "language": "Langue",
+  "@language": {
+    "description": "Libellé du paramètre de langue"
+  },
   "logout": "Se déconnecter",
-  "retryScan": "Réessayer le scan",
+  "@logout": {
+    "description": "Texte du bouton de déconnexion"
+  },
+  "tasks": "Tâches",
+  "@tasks": {
+    "description": "Libellé des tâches"
+  },
+  "manageYourTimeWell": "Gérez bien\nvotre temps",
+  "@manageYourTimeWell": {
+    "description": "Texte de motivation de la carte de progrès quotidien"
+  },
+  "onboardingQuestion2": "À quelle heure souhaiteriez-vous faire votre bilan quotidien ?",
+  "@onboardingQuestion2": {
+    "description": "Deuxième question d'intégration"
+  },
+  "reminderHabitText": "Un rappel doux vous aide à instaurer une habitude.",
+  "@reminderHabitText": {
+    "description": "Texte de la carte de rappel"
+  },
+  "am": "AM",
+  "@am": {
+    "description": "Indicateur de temps AM"
+  },
+  "pm": "PM",
+  "@pm": {
+    "description": "Indicateur de temps PM"
+  },
+  "tellUsMoreTitle": "Dites-nous en plus sur vous",
+  "@tellUsMoreTitle": {
+    "description": "Titre du formulaire d'inscription"
+  },
+  "tellUsMoreSubtitle": "Choisissez quelques mots qui vous correspondent",
+  "@tellUsMoreSubtitle": {
+    "description": "Sous-titre du formulaire d'inscription"
+  },
+  "profileImage": "Image de profil",
+  "@profileImage": {
+    "description": "Libellé de l'image de profil"
+  },
+  "fullName": "Nom complet",
+  "@fullName": {
+    "description": "Libellé du champ nom complet"
+  },
+  "firstName": "Prénom",
+  "@firstName": {
+    "description": "Libellé du champ prénom"
+  },
+  "familyName": "Nom de famille",
+  "@familyName": {
+    "description": "Libellé du champ nom de famille"
+  },
+  "email": "E-mail",
+  "@email": {
+    "description": "Libellé du champ e-mail"
+  },
+  "password": "Mot de passe",
+  "@password": {
+    "description": "Libellé du champ mot de passe"
+  },
+  "phoneNumber": "Numéro de téléphone",
+  "@phoneNumber": {
+    "description": "Libellé du champ numéro de téléphone"
+  },
+  "dateOfBirth": "Date de naissance",
+  "@dateOfBirth": {
+    "description": "Libellé du champ date de naissance"
+  },
+  "gender": "Genre",
+  "@gender": {
+    "description": "Libellé du champ genre"
+  },
+  "male": "Homme",
+  "@male": {
+    "description": "Option genre homme"
+  },
+  "female": "Femme",
+  "@female": {
+    "description": "Option genre femme"
+  },
+  "other": "Autre",
+  "@other": {
+    "description": "Autre option de genre"
+  },
+  "preferNotToSay": "Préfère ne pas répondre",
+  "@preferNotToSay": {
+    "description": "Option préfère ne pas répondre"
+  },
+  "goToFinalCheckIn": "Aller au bilan final",
+  "@goToFinalCheckIn": {
+    "description": "Bouton de soumission d'inscription"
+  },
+  "iAmA": "Je suis...",
+  "@iAmA": {
+    "description": "Libellé de sélection de rôle"
+  },
+  "signUp": "S'inscrire",
+  "@signUp": {
+    "description": "Texte du bouton d'inscription"
+  },
+  "fieldRequired": "Ce champ est obligatoire",
+  "@fieldRequired": {
+    "description": "Message de validation de champ obligatoire"
+  },
+  "invalidEmail": "Veuillez entrer un e-mail valide",
+  "@invalidEmail": {
+    "description": "Message de validation d'e-mail invalide"
+  },
+  "passwordTooShort": "Le mot de passe doit comporter au moins 6 caractères",
+  "@passwordTooShort": {
+    "description": "Message de validation de mot de passe trop court"
+  },
+  "invalidPhoneNumber": "Veuillez entrer un numéro de téléphone valide",
+  "@invalidPhoneNumber": {
+    "description": "Message de validation de numéro de téléphone invalide"
+  },
+  "registrationSuccess": "Inscription réussie !",
+  "@registrationSuccess": {
+    "description": "Message de réussite d'inscription"
+  },
+  "registrationFailed": "L'inscription a échoué. Veuillez réessayer.",
+  "@registrationFailed": {
+    "description": "Message d'échec d'inscription"
+  },
+  "emailAlreadyInUse": "Cet e-mail est déjà utilisé",
+  "@emailAlreadyInUse": {
+    "description": "Erreur e-mail déjà utilisé"
+  },
+  "weakPassword": "Le mot de passe est trop faible",
+  "@weakPassword": {
+    "description": "Erreur mot de passe faible"
+  },
+  "networkError": "Erreur réseau. Veuillez vérifier votre connexion.",
+  "@networkError": {
+    "description": "Message d'erreur réseau"
+  },
+  "selectGender": "Sélectionner le genre",
+  "@selectGender": {
+    "description": "Espace réservé pour la liste déroulante de genre"
+  },
+  "selectDate": "Sélectionner la date",
+  "@selectDate": {
+    "description": "Espace réservé pour le sélecteur de date"
+  },
+  "languageShort": "Fra",
+  "@languageShort": {
+    "description": "Code de langue court pour l'affichage"
+  },
+  "breathingExercisesTitle": "Exercices de respiration",
+  "@breathingExercisesTitle": {
+    "description": "Titre de l'écran des exercices de respiration"
+  },
+  "goldenBreathTitle": "Respiration dorée",
+  "@goldenBreathTitle": {
+    "description": "Titre de l'exercice respiration dorée"
+  },
+  "goldenBreathDesc": "Exercice court (6s) pour redonner de l'énergie.",
+  "@goldenBreathDesc": {
+    "description": "Description de l'exercice respiration dorée"
+  },
+  "butterflyBreathTitle": "Respiration papillon",
+  "@butterflyBreathTitle": {
+    "description": "Titre de l'exercice respiration papillon"
+  },
+  "butterflyBreathDesc": "Exercice calme (10s) pour une relaxation profonde.",
+  "@butterflyBreathDesc": {
+    "description": "Description de l'exercice respiration papillon"
+  },
+  "oceanBreathTitle": "Respiration de l'océan",
+  "@oceanBreathTitle": {
+    "description": "Titre de l'exercice respiration de l'océan"
+  },
+  "oceanBreathDesc": "Exercice (8s) imitant les vagues de l'océan.",
+  "@oceanBreathDesc": {
+    "description": "Description de l'exercice respiration de l'océan"
+  },
+  "forestBreathTitle": "Respiration de la forêt",
+  "@forestBreathTitle": {
+    "description": "Titre de l'exercice respiration de la forêt"
+  },
+  "forestBreathDesc": "Exercice doux (7s) pour l'équilibre.",
+  "@forestBreathDesc": {
+    "description": "Description de l'exercice respiration de la forêt"
+  },
+  "seconds": "secondes",
+  "@seconds": {
+    "description": "Libellé de l'unité secondes"
+  },
+  "startExercise": "Démarrer {exercise}...",
+  "@startExercise": {
+    "description": "Message lors du démarrage d'un exercice",
+    "placeholders": {
+      "exercise": {
+        "type": "String",
+        "example": "Respiration dorée"
+      }
+    }
+  },
+  "whyBreatheTitle": "Pourquoi respirer consciemment ?",
+  "@whyBreatheTitle": {
+    "description": "Titre de la carte d'info sur la respiration"
+  },
+  "whyBreatheDesc": "Les exercices de respiration aident à calmer l'esprit, réduire le stress et améliorer la concentration. C'est une façon magique de se ressourcer ou de se détendre.",
+  "@whyBreatheDesc": {
+    "description": "Description de la carte d'info sur la respiration"
+  },
+  "whyMusicTitle": "Pourquoi écouter de la musique calme ?",
+  "@whyMusicTitle": {
+    "description": "Titre de la carte d'info sur la musique"
+  },
+  "whyMusicDesc": "La musique calme aide à créer un environnement paisible, réduit l'anxiété et favorise la relaxation. Elle est parfaite pour la méditation, l'étude ou le coucher.",
+  "@whyMusicDesc": {
+    "description": "Description de la carte d'info sur la musique"
+  },
+  "whyStoriesTitle": "Pourquoi lire des histoires ?",
+  "@whyStoriesTitle": {
+    "description": "Titre de la carte d'info sur les histoires"
+  },
+  "whyStoriesDesc": "Les histoires stimulent l'imagination, enseignent des leçons précieuses et aident les enfants à se détendre. C'est une merveilleuse façon de décompresser et de rêver grand !",
+  "@whyStoriesDesc": {
+    "description": "Description de la carte d'info sur les histoires"
+  },
+  "whyFocusGamesTitle": "Pourquoi jouer à des jeux de concentration ?",
+  "@whyFocusGamesTitle": {
+    "description": "Titre de la carte d'info sur les jeux de concentration"
+  },
+  "whyFocusGamesDesc": "Les jeux de concentration aident à améliorer la concentration, la mémoire et les capacités cognitives. C'est une façon amusante d'entraîner votre cerveau et de booster votre agilité mentale !",
+  "@whyFocusGamesDesc": {
+    "description": "Description de la carte d'info sur les jeux de concentration"
+  },
+  "breatheIn": "Inspirez",
+  "@breatheIn": {
+    "description": "Indicateur de phase d'inspiration"
+  },
+  "breatheOut": "Expirez",
+  "@breatheOut": {
+    "description": "Indicateur de phase d'expiration"
+  },
+  "cycle": "Cycle",
+  "@cycle": {
+    "description": "Libellé de cycle pour la séance de respiration"
+  },
+  "complete": "Terminé !",
+  "@complete": {
+    "description": "Message de fin de séance"
+  },
+  "breathingComplete": "🎉 {exercise} terminé ! ✨",
+  "@breathingComplete": {
+    "description": "Message de fin d'exercice de respiration",
+    "placeholders": {
+      "exercise": {
+        "type": "String",
+        "example": "Respiration dorée"
+      }
+    }
+  },
+  "focusGamesTitle": "Jeux de concentration",
+  "@focusGamesTitle": {
+    "description": "Titre de la section des jeux de concentration"
+  },
+  "gameComplete": "Jeu terminé !",
+  "@gameComplete": {
+    "description": "Titre de fin de jeu"
+  },
+  "playAgain": "Rejouer",
+  "@playAgain": {
+    "description": "Bouton pour rejouer"
+  },
+  "wellDone": "Bien joué !",
+  "@wellDone": {
+    "description": "Message de félicitations"
+  },
+  "moves": "Coups",
+  "@moves": {
+    "description": "Libellé du compteur de coups"
+  },
+  "time": "Temps",
+  "@time": {
+    "description": "Libellé du temps"
+  },
+  "memoryFlipTitle": "Mémoire Flip",
+  "@memoryFlipTitle": {
+    "description": "Titre du jeu mémoire flip"
+  },
+  "memoryFlipDesc": "Associez les paires de cartes pour améliorer la mémoire et la concentration",
+  "@memoryFlipDesc": {
+    "description": "Description du jeu mémoire flip"
+  },
+  "calmMusicTitle": "Musique calme",
+  "@calmMusicTitle": {
+    "description": "Titre de l'écran de musique calme"
+  },
+  "rainSounds": "Sons de pluie",
+  "rainSoundsDesc": "Une pluie douce pour calmer votre esprit",
+  "natureAmbience": "Ambiance nature",
+  "natureAmbienceDesc": "Sons paisibles de la nature",
+  "oceanWaves": "Vagues de l'océan",
+  "oceanWavesDesc": "Vagues apaisantes de l'océan",
+  "calmMusicTrack": "Musique calme",
+  "calmMusicTrackDesc": "Mélodies relaxantes pour la paix",
+  "storiesTitle": "Histoires",
+  "braveStarTitle": "La petite étoile courageuse",
+  "braveStarDesc": "Un conte de courage et de confiance en soi",
+  "magicGardenTitle": "Le jardin magique",
+  "magicGardenDesc": "Découvrez la magie de la gentillesse",
+  "friendlyDragonTitle": "Le dragon amical",
+  "friendlyDragonDesc": "Une histoire réconfortante sur l'amitié",
+  "braveStarPage1": "Il était une fois, dans le vaste ciel nocturne, une petite étoile nommée Stella. Elle était la plus petite étoile de sa constellation, mais elle avait les plus grands rêves.",
+  "braveStarPage2": "Chaque nuit, Stella regardait les autres étoiles briller intensément. « J'aimerais pouvoir briller aussi fort qu'elles », chuchotait-elle à la lune.",
+  "braveStarPage3": "Une nuit, un nuage sombre couvrit le ciel. Toutes les grandes étoiles se cachèrent derrière lui, craignant de briller. Mais Stella pensa : « Quelqu'un doit éclairer le chemin pour les enfants en bas. »",
+  "braveStarPage4": "Avec tout son courage, Stella traversa le nuage. C'était difficile et effrayant, mais elle continua. Sa lumière commença à briller de plus en plus fort !",
+  "braveStarPage5": "Les enfants sur Terre levèrent les yeux et virent la lumière courageuse de Stella. « Regardez ! Une étoile filante ! » s'écrièrent-ils. Stella comprit qu'elle n'avait pas besoin d'être la plus grande pour faire une différence.",
+  "braveStarPage6": "Depuis cette nuit-là, Stella brilla avec confiance. Elle apprit qu'être courageux ne signifie pas ne pas avoir peur, mais briller malgré tout. Fin. ⭐",
+  "magicGardenPage1": "Dans un coin tranquille du monde, il y avait un jardin magique qui n'apparaissait qu'à ceux qui croyaient vraiment à la magie.",
+  "magicGardenPage2": "Une fille curieuse nommée Maya adorait explorer. Un jour ensoleillé, elle suivit un papillon doré et découvrit une porte cachée couverte de vignes.",
+  "magicGardenPage3": "Lorsque Maya toucha la porte, elle s'ouvrit avec une lueur douce. À l'intérieur se trouvait le plus beau jardin qu'elle ait jamais vu : des fleurs qui chantaient, des arbres qui dansaient et des ruisseaux qui scintillaient comme des diamants.",
+  "magicGardenPage4": "Au centre du jardin se tenait un vieil arbre sage. « Bienvenue, Maya », dit-il d'une voix chaleureuse. « Ce jardin grandit grâce à la gentillesse et aux soins. Veux-tu l'aider à s'épanouir ? »",
+  "magicGardenPage5": "Maya arrosa les fleurs, chanta aux arbres et aida les petites créatures. À chaque acte de gentillesse, le jardin devenait plus vibrant et magique.",
+  "magicGardenPage6": "Au moment de partir, l'arbre donna à Maya une graine spéciale. « Plante ceci dans ton cœur », dit-il. « La gentillesse est la vraie magie. » Maya sourit, sachant qu'elle pouvait créer de la magie n'importe où. Fin. 🌸",
+  "friendlyDragonPage1": "Haut dans les montagnes brumeuses vivait un dragon nommé Ember. Contrairement aux autres dragons, Ember ne voulait pas garder de trésors ni cracher du feu sur les chevaliers.",
+  "friendlyDragonPage2": "Ember voulait simplement un ami. Mais chaque fois qu'il volait vers le village, les gens s'enfuyaient en criant. « Je ne suis pas effrayant ! » criait Ember, mais personne ne restait pour écouter.",
+  "friendlyDragonPage3": "Un jour, un petit garçon courageux nommé Léo se perdit dans les montagnes. Alors que la nuit tombait et que le vent froid soufflait, Léo commença à pleurer. C'est alors qu'il vit une lueur orange chaleureuse.",
+  "friendlyDragonPage4": "C'était Ember ! Le dragon souffla doucement de l'air chaud pour garder Léo au chaud. « N'aie pas peur », dit doucement Ember. « Je vais t'aider à rentrer chez toi. »",
+  "friendlyDragonPage5": "Ember ramena Léo en toute sécurité au village. Quand les gens virent à quel point le dragon était gentil et doux, ils comprirent qu'ils avaient eu tort de le juger sur son apparence.",
+  "friendlyDragonPage6": "Depuis ce jour, Ember eut de nombreux amis dans le village. Il apprit que la véritable amitié vient à ceux qui sont gentils et patients. Et Léo apprit que les plus grands cœurs se cachent parfois sous les formes les plus inattendues. Fin. 🐉",
+  "dtNewTask": "Nouvelle tâche",
+  "dtTaskTitlePlaceholder": "Sur quoi veux-tu te concentrer ?",
+  "dtTaskDurationLabel": "Durée (minutes)",
+  "dtAddButton": "Ajouter",
+  "dtCancelButton": "Annuler",
+  "howAreYouFeeling": "Comment te sens-tu ?",
+  "activityLevel": "Niveau d'activité (1-10)",
+  "quiet": "Calme",
+  "hyper": "Hyper",
+  "guidedBodyScan": "Scan corporel guidé",
+  "bodyScanDesc": "Fais un bilan de chaque partie de ton corps.",
+  "saveSession": "Enregistrer ma séance",
+  "connectWatch": "Connecte ta montre",
+  "watchScanning": "Recherche de ta montre...",
+  "watchFound": "Montre trouvée !",
+  "watchConnecting": "Connexion à ta montre...",
+  "watchError": "Impossible de trouver ta montre. Est-elle allumée ?",
+  "pairNow": "Jumeler maintenant",
+  "availableDevices": "Appareils disponibles",
+  "noDevicesFound": "Aucun appareil trouvé à proximité.",
+  "retryScan": "Relancer le scan",
   "stopTechnique": "Technique STOP",
   "stopStep1Title": "S - Stop",
   "stopStep1Desc": "Arrête ce que tu fais. Prends un instant.",
@@ -184,5 +627,94 @@
   "saveDrawing": "Enregistrer",
   "calmingSounds": "Sons apaisants",
   "bedtimeStories": "Histoires du soir",
-  "mindfulness": "Pleine conscience"
+  "mindfulness": "Pleine conscience",
+  "friend": "Ami",
+  "emotionHappy": "Heureux",
+  "emotionSad": "Triste",
+  "emotionAngry": "En colère",
+  "emotionAnxious": "Anxieux",
+  "emotionCalm": "Calme",
+  "emotionTired": "Fatigué",
+  "reportSaved": "Rapport enregistré ! Tu t'en sors très bien.",
+  "errorOccurred": "Oups ! Erreur : {error}",
+  "@errorOccurred": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "bsStartFeetTitle": "Commence avec les pieds",
+  "bsStartFeetDesc": "Remue tes orteils. Sens-les toucher le sol. Détends-les maintenant.",
+  "bsMovingLegsTitle": "Passe aux jambes",
+  "bsMovingLegsDesc": "Contracte les muscles de tes jambes pendant une seconde... et relâche-les.",
+  "bsRelaxTummyTitle": "Détends ton ventre",
+  "bsRelaxTummyDesc": "Pose ta main sur ton ventre. Sens-le monter et descendre en respirant.",
+  "bsSoftShouldersTitle": "Épaules souples",
+  "bsSoftShouldersDesc": "Monte tes épaules jusqu'à tes oreilles... puis laisse-les retomber lourdement.",
+  "bsPeacefulFaceTitle": "Visage apaisé",
+  "bsPeacefulFaceDesc": "Fais un grand sourire... puis détends complètement ton visage. Tu te débrouilles super bien !",
+  "bsPeacefulButton": "Je me sens apaisé",
+  "dtGreatJob": "Bien joué !",
+  "dtSessionFinished": "Tu as terminé ta séance de concentration !",
+  "dtAwesome": "Génial !",
+  "dtProgress": "{completed} sur {total} terminés",
+  "@dtProgress": {
+    "placeholders": {
+      "completed": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "dtTaskList": "Liste des tâches",
+  "dtNoTasks": "Aucune tâche pour aujourd'hui",
+  "dtNoTasksDesc": "Ajoute une tâche pour commencer ta journée !",
+  "galleryPermissionRequired": "L'autorisation d'accès à la galerie est requise pour enregistrer les dessins.",
+  "savedToGallery": "Enregistré dans la galerie ! 🎨",
+  "galleryError": "Erreur de galerie : {error}",
+  "@galleryError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "saveError": "Erreur d'enregistrement : {error}",
+  "@saveError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "errorLoadingStories": "Erreur lors du chargement des histoires",
+  "noStoriesAvailable": "Aucune histoire disponible",
+  "pagesCount": "{count} pages",
+  "@pagesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "pageIndicator": "Page {current} sur {total}",
+  "@pageIndicator": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "swipeToTurnPage": "Balaye pour tourner la page",
+  "theEnd": "Fin",
+  "liveHeartbeatMotion": "Rythme Cardiaque et Mouvement en Direct",
+  "motionZ": "Mouvement (Z)",
+  "energy": "Énergie",
+  "liveTag": "DIRECT"
 }

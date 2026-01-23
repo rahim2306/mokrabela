@@ -682,4 +682,145 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mindfulness => 'Mindfulness';
+
+  @override
+  String get friend => 'Friend';
+
+  @override
+  String get emotionHappy => 'Happy';
+
+  @override
+  String get emotionSad => 'Sad';
+
+  @override
+  String get emotionAngry => 'Angry';
+
+  @override
+  String get emotionAnxious => 'Anxious';
+
+  @override
+  String get emotionCalm => 'Calm';
+
+  @override
+  String get emotionTired => 'Tired';
+
+  @override
+  String get reportSaved => 'Report saved! You are doing great.';
+
+  @override
+  String errorOccurred(String error) {
+    return 'Oops! Error: $error';
+  }
+
+  @override
+  String get bsStartFeetTitle => 'Start with Feet';
+
+  @override
+  String get bsStartFeetDesc =>
+      'Wiggle your toes. Feel them touching the floor. Relax them now.';
+
+  @override
+  String get bsMovingLegsTitle => 'Moving to Legs';
+
+  @override
+  String get bsMovingLegsDesc =>
+      'Tense your leg muscles for a second... and let them go loose.';
+
+  @override
+  String get bsRelaxTummyTitle => 'Relax Your Tummy';
+
+  @override
+  String get bsRelaxTummyDesc =>
+      'Place your hand on your belly. Feel it rise and fall as you breathe.';
+
+  @override
+  String get bsSoftShouldersTitle => 'Soft Shoulders';
+
+  @override
+  String get bsSoftShouldersDesc =>
+      'Bring your shoulders up to your ears... then drop them down heavy.';
+
+  @override
+  String get bsPeacefulFaceTitle => 'Peaceful Face';
+
+  @override
+  String get bsPeacefulFaceDesc =>
+      'Smile big... then relax your face completely. You are doing great!';
+
+  @override
+  String get bsPeacefulButton => 'I feel peaceful';
+
+  @override
+  String get dtGreatJob => 'Great Job!';
+
+  @override
+  String get dtSessionFinished => 'You finished your focus session!';
+
+  @override
+  String get dtAwesome => 'Awesome!';
+
+  @override
+  String dtProgress(String completed, String total) {
+    return '$completed of $total completed';
+  }
+
+  @override
+  String get dtTaskList => 'Tasks list';
+
+  @override
+  String get dtNoTasks => 'No tasks for today';
+
+  @override
+  String get dtNoTasksDesc => 'Add a task to start your day!';
+
+  @override
+  String get galleryPermissionRequired =>
+      'Gallery permission is required to save drawings.';
+
+  @override
+  String get savedToGallery => 'Saved to Gallery! 🎨';
+
+  @override
+  String galleryError(String error) {
+    return 'Gallery Error: $error';
+  }
+
+  @override
+  String saveError(String error) {
+    return 'Save Error: $error';
+  }
+
+  @override
+  String get errorLoadingStories => 'Error loading stories';
+
+  @override
+  String get noStoriesAvailable => 'No stories available';
+
+  @override
+  String pagesCount(int count) {
+    return '$count pages';
+  }
+
+  @override
+  String pageIndicator(int current, int total) {
+    return 'Page $current of $total';
+  }
+
+  @override
+  String get swipeToTurnPage => 'Swipe to turn page';
+
+  @override
+  String get theEnd => 'The End';
+
+  @override
+  String get liveHeartbeatMotion => 'Live Heartbeat & Motion';
+
+  @override
+  String get motionZ => 'Motion (Z)';
+
+  @override
+  String get energy => 'Energy';
+
+  @override
+  String get liveTag => 'LIVE';
 }

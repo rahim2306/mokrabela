@@ -7,6 +7,7 @@ import 'package:mokrabela/screens/protocol/self_awareness_screen.dart';
 import 'package:mokrabela/screens/protocol/self_regulation_screen.dart';
 import 'package:mokrabela/screens/protocol/psychological_calming_screen.dart';
 import 'package:mokrabela/theme/app_theme.dart';
+import 'package:mokrabela/services/protocol_service.dart';
 import 'package:sizer/sizer.dart';
 
 /// Kids Protocol Screen - The Missing Square Protocol with 4 squares
@@ -19,6 +20,7 @@ class KidsProtocolScreen extends StatefulWidget {
 
 class _KidsProtocolScreenState extends State<KidsProtocolScreen> {
   final AuthService _authService = AuthService();
+  final ProtocolService _protocolService = ProtocolService();
   String _firstName = 'Friend';
 
   @override
@@ -30,6 +32,9 @@ class _KidsProtocolScreenState extends State<KidsProtocolScreen> {
   Future<void> _loadUserName() async {
     final user = _authService.currentUser;
     if (user != null) {
+      // Check and reset daily progress if needed
+      await _protocolService.checkAndResetDailyProgress(user.uid);
+
       final userModel = await _authService.getUserDetails(user.uid);
       if (userModel != null && userModel.name.isNotEmpty) {
         if (mounted) {
@@ -40,10 +45,16 @@ class _KidsProtocolScreenState extends State<KidsProtocolScreen> {
               final firstName = nameParts[0];
               // Capitalize first letter
               _firstName = firstName.isEmpty
-                  ? 'Friend'
+                  ? AppLocalizations.of(context)!.friend
                   : firstName[0].toUpperCase() +
                         firstName.substring(1).toLowerCase();
             }
+          });
+        }
+      } else {
+        if (mounted) {
+          setState(() {
+            _firstName = AppLocalizations.of(context)!.friend;
           });
         }
       }

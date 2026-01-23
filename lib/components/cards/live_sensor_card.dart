@@ -3,6 +3,7 @@ import 'package:mokrabela/services/ble_service.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
+import 'package:mokrabela/l10n/app_localizations.dart';
 
 class LiveSensorCard extends StatelessWidget {
   const LiveSensorCard({super.key});
@@ -11,6 +12,7 @@ class LiveSensorCard extends StatelessWidget {
   Widget build(BuildContext context) {
     // Using the Singleton instance directly
     final bleService = BleService();
+    final l10n = AppLocalizations.of(context)!;
 
     return Container(
       padding: EdgeInsets.all(4.w),
@@ -27,7 +29,7 @@ class LiveSensorCard extends StatelessWidget {
               Icon(Icons.sensors, color: AppTheme.primary),
               SizedBox(width: 2.w),
               Text(
-                'Live Heartbeat & Motion',
+                l10n.liveHeartbeatMotion,
                 style: GoogleFonts.spaceGrotesk(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.bold,
@@ -54,13 +56,13 @@ class LiveSensorCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   _SensorItem(
-                    label: 'Motion (Z)',
+                    label: l10n.motionZ,
                     value: accZ,
                     unit: 'm/s²',
                     icon: Icons.unfold_more,
                   ),
                   _SensorItem(
-                    label: 'Energy',
+                    label: l10n.energy,
                     value: activity,
                     unit: '%',
                     icon: Icons.bolt,
@@ -97,7 +99,7 @@ class _LiveTag extends StatelessWidget {
           ),
           SizedBox(width: 1.w),
           Text(
-            'LIVE',
+            AppLocalizations.of(context)!.liveTag,
             style: TextStyle(
               fontSize: 8.sp,
               fontWeight: FontWeight.bold,

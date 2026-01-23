@@ -1365,6 +1365,252 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Mindfulness'**
   String get mindfulness;
+
+  /// No description provided for @friend.
+  ///
+  /// In en, this message translates to:
+  /// **'Friend'**
+  String get friend;
+
+  /// No description provided for @emotionHappy.
+  ///
+  /// In en, this message translates to:
+  /// **'Happy'**
+  String get emotionHappy;
+
+  /// No description provided for @emotionSad.
+  ///
+  /// In en, this message translates to:
+  /// **'Sad'**
+  String get emotionSad;
+
+  /// No description provided for @emotionAngry.
+  ///
+  /// In en, this message translates to:
+  /// **'Angry'**
+  String get emotionAngry;
+
+  /// No description provided for @emotionAnxious.
+  ///
+  /// In en, this message translates to:
+  /// **'Anxious'**
+  String get emotionAnxious;
+
+  /// No description provided for @emotionCalm.
+  ///
+  /// In en, this message translates to:
+  /// **'Calm'**
+  String get emotionCalm;
+
+  /// No description provided for @emotionTired.
+  ///
+  /// In en, this message translates to:
+  /// **'Tired'**
+  String get emotionTired;
+
+  /// No description provided for @reportSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Report saved! You are doing great.'**
+  String get reportSaved;
+
+  /// No description provided for @errorOccurred.
+  ///
+  /// In en, this message translates to:
+  /// **'Oops! Error: {error}'**
+  String errorOccurred(String error);
+
+  /// No description provided for @bsStartFeetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Start with Feet'**
+  String get bsStartFeetTitle;
+
+  /// No description provided for @bsStartFeetDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Wiggle your toes. Feel them touching the floor. Relax them now.'**
+  String get bsStartFeetDesc;
+
+  /// No description provided for @bsMovingLegsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Moving to Legs'**
+  String get bsMovingLegsTitle;
+
+  /// No description provided for @bsMovingLegsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Tense your leg muscles for a second... and let them go loose.'**
+  String get bsMovingLegsDesc;
+
+  /// No description provided for @bsRelaxTummyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Relax Your Tummy'**
+  String get bsRelaxTummyTitle;
+
+  /// No description provided for @bsRelaxTummyDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Place your hand on your belly. Feel it rise and fall as you breathe.'**
+  String get bsRelaxTummyDesc;
+
+  /// No description provided for @bsSoftShouldersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Soft Shoulders'**
+  String get bsSoftShouldersTitle;
+
+  /// No description provided for @bsSoftShouldersDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Bring your shoulders up to your ears... then drop them down heavy.'**
+  String get bsSoftShouldersDesc;
+
+  /// No description provided for @bsPeacefulFaceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Peaceful Face'**
+  String get bsPeacefulFaceTitle;
+
+  /// No description provided for @bsPeacefulFaceDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Smile big... then relax your face completely. You are doing great!'**
+  String get bsPeacefulFaceDesc;
+
+  /// No description provided for @bsPeacefulButton.
+  ///
+  /// In en, this message translates to:
+  /// **'I feel peaceful'**
+  String get bsPeacefulButton;
+
+  /// No description provided for @dtGreatJob.
+  ///
+  /// In en, this message translates to:
+  /// **'Great Job!'**
+  String get dtGreatJob;
+
+  /// No description provided for @dtSessionFinished.
+  ///
+  /// In en, this message translates to:
+  /// **'You finished your focus session!'**
+  String get dtSessionFinished;
+
+  /// No description provided for @dtAwesome.
+  ///
+  /// In en, this message translates to:
+  /// **'Awesome!'**
+  String get dtAwesome;
+
+  /// No description provided for @dtProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'{completed} of {total} completed'**
+  String dtProgress(String completed, String total);
+
+  /// No description provided for @dtTaskList.
+  ///
+  /// In en, this message translates to:
+  /// **'Tasks list'**
+  String get dtTaskList;
+
+  /// No description provided for @dtNoTasks.
+  ///
+  /// In en, this message translates to:
+  /// **'No tasks for today'**
+  String get dtNoTasks;
+
+  /// No description provided for @dtNoTasksDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a task to start your day!'**
+  String get dtNoTasksDesc;
+
+  /// No description provided for @galleryPermissionRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Gallery permission is required to save drawings.'**
+  String get galleryPermissionRequired;
+
+  /// No description provided for @savedToGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved to Gallery! 🎨'**
+  String get savedToGallery;
+
+  /// No description provided for @galleryError.
+  ///
+  /// In en, this message translates to:
+  /// **'Gallery Error: {error}'**
+  String galleryError(String error);
+
+  /// No description provided for @saveError.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Error: {error}'**
+  String saveError(String error);
+
+  /// No description provided for @errorLoadingStories.
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading stories'**
+  String get errorLoadingStories;
+
+  /// No description provided for @noStoriesAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No stories available'**
+  String get noStoriesAvailable;
+
+  /// No description provided for @pagesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} pages'**
+  String pagesCount(int count);
+
+  /// No description provided for @pageIndicator.
+  ///
+  /// In en, this message translates to:
+  /// **'Page {current} of {total}'**
+  String pageIndicator(int current, int total);
+
+  /// No description provided for @swipeToTurnPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe to turn page'**
+  String get swipeToTurnPage;
+
+  /// No description provided for @theEnd.
+  ///
+  /// In en, this message translates to:
+  /// **'The End'**
+  String get theEnd;
+
+  /// No description provided for @liveHeartbeatMotion.
+  ///
+  /// In en, this message translates to:
+  /// **'Live Heartbeat & Motion'**
+  String get liveHeartbeatMotion;
+
+  /// No description provided for @motionZ.
+  ///
+  /// In en, this message translates to:
+  /// **'Motion (Z)'**
+  String get motionZ;
+
+  /// No description provided for @energy.
+  ///
+  /// In en, this message translates to:
+  /// **'Energy'**
+  String get energy;
+
+  /// No description provided for @liveTag.
+  ///
+  /// In en, this message translates to:
+  /// **'LIVE'**
+  String get liveTag;
 }
 
 class _AppLocalizationsDelegate

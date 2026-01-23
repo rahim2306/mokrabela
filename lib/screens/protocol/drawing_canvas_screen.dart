@@ -47,9 +47,9 @@ class _DrawingCanvasScreenState extends State<DrawingCanvasScreen> {
         if (!granted) {
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
+              SnackBar(
                 content: Text(
-                  'Gallery permission is required to save drawings.',
+                  AppLocalizations.of(context)!.galleryPermissionRequired,
                 ),
               ),
             );
@@ -75,15 +75,19 @@ class _DrawingCanvasScreenState extends State<DrawingCanvasScreen> {
       );
 
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('Saved to Gallery! 🎨')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(AppLocalizations.of(context)!.savedToGallery)),
+        );
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('Gallery Error: $e')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              AppLocalizations.of(context)!.galleryError(e.toString()),
+            ),
+          ),
+        );
       }
     }
   }
@@ -99,9 +103,13 @@ class _DrawingCanvasScreenState extends State<DrawingCanvasScreen> {
       Navigator.pop(context);
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('Save Error: $e')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              AppLocalizations.of(context)!.saveError(e.toString()),
+            ),
+          ),
+        );
       }
     } finally {
       if (mounted) setState(() => _isSaving = false);

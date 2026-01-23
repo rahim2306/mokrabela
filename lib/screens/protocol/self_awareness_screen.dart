@@ -23,13 +23,13 @@ class _SelfAwarenessScreenState extends State<SelfAwarenessScreen> {
   double _activityScale = 5.0;
   bool _isSaving = false;
 
-  final List<Map<String, String>> _emotions = [
-    {'label': 'Happy', 'emoji': '😊'},
-    {'label': 'Sad', 'emoji': '😢'},
-    {'label': 'Angry', 'emoji': '😡'},
-    {'label': 'Anxious', 'emoji': '😰'},
-    {'label': 'Calm', 'emoji': '😌'},
-    {'label': 'Tired', 'emoji': '😴'},
+  List<Map<String, dynamic>> _getEmotions(AppLocalizations l10n) => [
+    {'label': l10n.emotionHappy, 'emoji': '😊', 'key': 'Happy'},
+    {'label': l10n.emotionSad, 'emoji': '😢', 'key': 'Sad'},
+    {'label': l10n.emotionAngry, 'emoji': '😡', 'key': 'Angry'},
+    {'label': l10n.emotionAnxious, 'emoji': '😰', 'key': 'Anxious'},
+    {'label': l10n.emotionCalm, 'emoji': '😌', 'key': 'Calm'},
+    {'label': l10n.emotionTired, 'emoji': '😴', 'key': 'Tired'},
   ];
 
   @override
@@ -48,16 +48,20 @@ class _SelfAwarenessScreenState extends State<SelfAwarenessScreen> {
 
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Report saved! You are doing great.')),
+            SnackBar(content: Text(AppLocalizations.of(context)!.reportSaved)),
           );
           Navigator.pop(context);
         }
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('Oops! Error: $e')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              AppLocalizations.of(context)!.errorOccurred(e.toString()),
+            ),
+          ),
+        );
       }
     } finally {
       if (mounted) setState(() => _isSaving = false);
@@ -162,15 +166,16 @@ class _SelfAwarenessScreenState extends State<SelfAwarenessScreen> {
                     mainAxisSpacing: 3.w,
                     childAspectRatio: 0.85,
                   ),
-                  itemCount: _emotions.length,
+                  itemCount: _getEmotions(l10n).length,
                   itemBuilder: (context, index) {
-                    final emotion = _emotions[index];
+                    final emotions = _getEmotions(l10n);
+                    final emotion = emotions[index];
                     return EmotionSelector(
                       label: emotion['label']!,
                       emoji: emotion['emoji']!,
-                      isSelected: _selectedEmotion == emotion['label'],
+                      isSelected: _selectedEmotion == emotion['key'],
                       onTap: () =>
-                          setState(() => _selectedEmotion = emotion['label']),
+                          setState(() => _selectedEmotion = emotion['key']),
                     );
                   },
                 ),

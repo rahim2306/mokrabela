@@ -688,5 +688,94 @@
   "saveDrawing": "Save",
   "calmingSounds": "Calming Sounds",
   "bedtimeStories": "Bedtime Stories",
-  "mindfulness": "Mindfulness"
+  "mindfulness": "Mindfulness",
+  "friend": "Friend",
+  "emotionHappy": "Happy",
+  "emotionSad": "Sad",
+  "emotionAngry": "Angry",
+  "emotionAnxious": "Anxious",
+  "emotionCalm": "Calm",
+  "emotionTired": "Tired",
+  "reportSaved": "Report saved! You are doing great.",
+  "errorOccurred": "Oops! Error: {error}",
+  "@errorOccurred": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "bsStartFeetTitle": "Start with Feet",
+  "bsStartFeetDesc": "Wiggle your toes. Feel them touching the floor. Relax them now.",
+  "bsMovingLegsTitle": "Moving to Legs",
+  "bsMovingLegsDesc": "Tense your leg muscles for a second... and let them go loose.",
+  "bsRelaxTummyTitle": "Relax Your Tummy",
+  "bsRelaxTummyDesc": "Place your hand on your belly. Feel it rise and fall as you breathe.",
+  "bsSoftShouldersTitle": "Soft Shoulders",
+  "bsSoftShouldersDesc": "Bring your shoulders up to your ears... then drop them down heavy.",
+  "bsPeacefulFaceTitle": "Peaceful Face",
+  "bsPeacefulFaceDesc": "Smile big... then relax your face completely. You are doing great!",
+  "bsPeacefulButton": "I feel peaceful",
+  "dtGreatJob": "Great Job!",
+  "dtSessionFinished": "You finished your focus session!",
+  "dtAwesome": "Awesome!",
+  "dtProgress": "{completed} of {total} completed",
+  "@dtProgress": {
+    "placeholders": {
+      "completed": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "dtTaskList": "Tasks list",
+  "dtNoTasks": "No tasks for today",
+  "dtNoTasksDesc": "Add a task to start your day!",
+  "galleryPermissionRequired": "Gallery permission is required to save drawings.",
+  "savedToGallery": "Saved to Gallery! 🎨",
+  "galleryError": "Gallery Error: {error}",
+  "@galleryError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "saveError": "Save Error: {error}",
+  "@saveError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "errorLoadingStories": "Error loading stories",
+  "noStoriesAvailable": "No stories available",
+  "pagesCount": "{count} pages",
+  "@pagesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "pageIndicator": "Page {current} of {total}",
+  "@pageIndicator": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "swipeToTurnPage": "Swipe to turn page",
+  "theEnd": "The End",
+  "liveHeartbeatMotion": "Live Heartbeat & Motion",
+  "motionZ": "Motion (Z)",
+  "energy": "Energy",
+  "liveTag": "LIVE"
 }
