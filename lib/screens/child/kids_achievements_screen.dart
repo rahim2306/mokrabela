@@ -6,6 +6,7 @@ import 'package:mokrabela/components/cards/achievement_card.dart';
 import 'package:mokrabela/components/dialogs/achievement_detail_dialog.dart';
 import 'package:mokrabela/services/achievement_service.dart';
 import 'package:mokrabela/services/auth_service.dart';
+import 'package:mokrabela/utils/localization_helpers.dart';
 import 'package:sizer/sizer.dart';
 
 /// Kids Achievements Screen - Rewards and achievements list
@@ -84,7 +85,7 @@ class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
     if (user == null) {
       return Center(
         child: Text(
-          'Please log in to view achievements',
+          l10n.loginToViewAchievements,
           style: TextStyle(fontSize: 16.sp),
         ),
       );
@@ -100,7 +101,7 @@ class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
         if (snapshot.hasError) {
           return Center(
             child: Text(
-              'Error loading achievements',
+              l10n.errorLoadingAchievements,
               style: TextStyle(fontSize: 16.sp),
             ),
           );
@@ -143,7 +144,7 @@ class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
               SizedBox(height: 2.h),
 
               // Achievements Grid
-              _buildAchievementsGrid(filteredAchievements),
+              _buildAchievementsGrid(l10n, filteredAchievements),
 
               SizedBox(height: 10.h), // Space for bottom nav
             ],
@@ -188,7 +189,7 @@ class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Total Points',
+                    l10n.totalPointsLabel,
                     style: TextStyle(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w600,
@@ -228,7 +229,7 @@ class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Level $currentLevel',
+                    l10n.levelIndicator(currentLevel),
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w700,
@@ -267,7 +268,7 @@ class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
               Icon(Icons.emoji_events, size: 20.sp, color: Colors.white),
               SizedBox(width: 2.w),
               Text(
-                '$unlockedCount/$totalCount Achievements',
+                l10n.achievementsCount(unlockedCount, totalCount),
                 style: TextStyle(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
@@ -286,34 +287,34 @@ class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: [
-          _buildCategoryChip('All', null, Icons.grid_view),
+          _buildCategoryChip(l10n.categoryAll, null, Icons.grid_view),
           SizedBox(width: 2.w),
           _buildCategoryChip(
-            'Exercise',
+            l10n.getCategoryString(AchievementCategory.exercise),
             AchievementCategory.exercise,
             Icons.air,
           ),
           SizedBox(width: 2.w),
           _buildCategoryChip(
-            'Streaks',
+            l10n.getCategoryString(AchievementCategory.streaks),
             AchievementCategory.streaks,
             Icons.local_fire_department,
           ),
           SizedBox(width: 2.w),
           _buildCategoryChip(
-            'Calm',
+            l10n.getCategoryString(AchievementCategory.calm),
             AchievementCategory.calm,
             Icons.self_improvement,
           ),
           SizedBox(width: 2.w),
           _buildCategoryChip(
-            'Milestones',
+            l10n.getCategoryString(AchievementCategory.milestones),
             AchievementCategory.milestones,
             Icons.celebration,
           ),
           SizedBox(width: 2.w),
           _buildCategoryChip(
-            'Special',
+            l10n.getCategoryString(AchievementCategory.special),
             AchievementCategory.special,
             Icons.workspace_premium,
           ),
@@ -397,7 +398,7 @@ class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
           activeColor: AppTheme.primary,
         ),
         Text(
-          'Show only unlocked',
+          l10n.showOnlyUnlocked,
           style: TextStyle(
             fontSize: 13.sp,
             fontWeight: FontWeight.w600,
@@ -408,7 +409,10 @@ class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
     );
   }
 
-  Widget _buildAchievementsGrid(List<Achievement> filteredAchievements) {
+  Widget _buildAchievementsGrid(
+    AppLocalizations l10n,
+    List<Achievement> filteredAchievements,
+  ) {
     if (filteredAchievements.isEmpty) {
       return Center(
         child: Padding(
@@ -422,7 +426,7 @@ class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
               ),
               SizedBox(height: 2.h),
               Text(
-                'No achievements found',
+                l10n.noAchievementsFound,
                 style: TextStyle(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w600,

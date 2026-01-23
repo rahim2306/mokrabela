@@ -100,6 +100,13 @@ class BleService extends ChangeNotifier {
   double get currentThreshold => _currentThreshold;
   List<ScanResult> get scanResults => _scanResults;
 
+  // Debug method for simulation
+  void injectSimulatedData(Map<String, dynamic> data) {
+    _sensorData.addAll(data);
+    _sensorDataController.add({..._sensorData, ..._enhancedData});
+    notifyListeners();
+  }
+
   Stream<BluetoothConnectionState> get connectionStateStream =>
       _connectionStateController.stream;
   Stream<Map<String, dynamic>> get sensorDataStream =>
@@ -134,28 +141,63 @@ class BleService extends ChangeNotifier {
 
   Future<bool> _checkBluetoothPermissions() async {
     try {
-      // 1. Check OS Permissions (CRITICAL for Android 12+)
+      // 1. Check OS Permissions (CRITICAL for Android)
       if (defaultTargetPlatform == TargetPlatform.android) {
+        // Request permissions
         Map<Permission, PermissionStatus> statuses = await [
           Permission.bluetoothScan,
           Permission.bluetoothConnect,
           Permission.location,
         ].request();
 
-        if (statuses[Permission.bluetoothScan] != PermissionStatus.granted ||
-            statuses[Permission.bluetoothConnect] != PermissionStatus.granted) {
+        // Check if all are granted
+        bool allGranted =
+            statuses[Permission.bluetoothScan] == PermissionStatus.granted &&
+            statuses[Permission.bluetoothConnect] == PermissionStatus.granted &&
+            statuses[Permission.location] == PermissionStatus.granted;
+
+        if (!allGranted) {
           _lastErrorMessage =
-              "Bluetooth permissions denied. Please allow them in settings.";
+              "Missing permissions: " +
+              (statuses[Permission.bluetoothScan] != PermissionStatus.granted
+                  ? "Scan, "
+                  : "") +
+              (statuses[Permission.bluetoothConnect] != PermissionStatus.granted
+                  ? "Connect, "
+                  : "") +
+              (statuses[Permission.location] != PermissionStatus.granted
+                  ? "Location"
+                  : "");
+          _logger.w(_lastErrorMessage);
+          return false;
+        }
+
+        // Check if Location services are enabled (Required for BLE on some Android versions)
+        if (!await Permission.location.serviceStatus.isEnabled) {
+          _lastErrorMessage =
+              "Please enable Location services to scan for devices.";
           _logger.w(_lastErrorMessage);
           return false;
         }
       }
 
       // 2. Check Adapter State (Is Bluetooth ON?)
-      final adapterState = await FlutterBluePlus.adapterState.first.timeout(
-        const Duration(seconds: 2),
-        onTimeout: () => BluetoothAdapterState.unknown,
-      );
+      BluetoothAdapterState adapterState =
+          await FlutterBluePlus.adapterState.first;
+
+      if (adapterState == BluetoothAdapterState.off) {
+        _logger.i("Bluetooth is OFF. Attempting to turn it on...");
+        try {
+          if (defaultTargetPlatform == TargetPlatform.android) {
+            await FlutterBluePlus.turnOn();
+            // Wait a bit for it to turn on
+            await Future.delayed(const Duration(seconds: 1));
+            adapterState = await FlutterBluePlus.adapterState.first;
+          }
+        } catch (e) {
+          _logger.w("Failed to turn on Bluetooth: $e");
+        }
+      }
 
       if (adapterState != BluetoothAdapterState.on) {
         _lastErrorMessage =

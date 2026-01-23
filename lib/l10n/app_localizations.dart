@@ -1611,6 +1611,516 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'LIVE'**
   String get liveTag;
+
+  /// No description provided for @achFirstBreathing.
+  ///
+  /// In en, this message translates to:
+  /// **'First Breath'**
+  String get achFirstBreathing;
+
+  /// No description provided for @achFirstBreathingDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete your first breathing exercise.'**
+  String get achFirstBreathingDesc;
+
+  /// No description provided for @achBreathing5.
+  ///
+  /// In en, this message translates to:
+  /// **'Breathing Steady'**
+  String get achBreathing5;
+
+  /// No description provided for @achBreathing5Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete 5 breathing exercises.'**
+  String get achBreathing5Desc;
+
+  /// No description provided for @achBreathing10.
+  ///
+  /// In en, this message translates to:
+  /// **'Breathing Expert'**
+  String get achBreathing10;
+
+  /// No description provided for @achBreathing10Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete 10 breathing exercises.'**
+  String get achBreathing10Desc;
+
+  /// No description provided for @achBreathingMaster.
+  ///
+  /// In en, this message translates to:
+  /// **'Breathing Master'**
+  String get achBreathingMaster;
+
+  /// No description provided for @achBreathingMasterDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete 30 breathing exercises.'**
+  String get achBreathingMasterDesc;
+
+  /// No description provided for @achFirstFocus.
+  ///
+  /// In en, this message translates to:
+  /// **'Focused Mind'**
+  String get achFirstFocus;
+
+  /// No description provided for @achFirstFocusDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete your first focus exercise.'**
+  String get achFirstFocusDesc;
+
+  /// No description provided for @achFocusChampion.
+  ///
+  /// In en, this message translates to:
+  /// **'Focus Champion'**
+  String get achFocusChampion;
+
+  /// No description provided for @achFocusChampionDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete 20 focus exercises.'**
+  String get achFocusChampionDesc;
+
+  /// No description provided for @achMusicBeginner.
+  ///
+  /// In en, this message translates to:
+  /// **'Musical Soul'**
+  String get achMusicBeginner;
+
+  /// No description provided for @achMusicBeginnerDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Listen to 5 calming tracks.'**
+  String get achMusicBeginnerDesc;
+
+  /// No description provided for @achMusicExpert.
+  ///
+  /// In en, this message translates to:
+  /// **'Music Enthusiast'**
+  String get achMusicExpert;
+
+  /// No description provided for @achMusicExpertDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Listen to 25 calming tracks.'**
+  String get achMusicExpertDesc;
+
+  /// No description provided for @achStoryStarter.
+  ///
+  /// In en, this message translates to:
+  /// **'Story Listener'**
+  String get achStoryStarter;
+
+  /// No description provided for @achStoryStarterDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Listen to 3 stories.'**
+  String get achStoryStarterDesc;
+
+  /// No description provided for @achStoryMaster.
+  ///
+  /// In en, this message translates to:
+  /// **'Fable Fanatic'**
+  String get achStoryMaster;
+
+  /// No description provided for @achStoryMasterDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Listen to 15 stories.'**
+  String get achStoryMasterDesc;
+
+  /// No description provided for @achStreak3.
+  ///
+  /// In en, this message translates to:
+  /// **'3 Day Streak'**
+  String get achStreak3;
+
+  /// No description provided for @achStreak3Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Maintain a 3-day activity streak.'**
+  String get achStreak3Desc;
+
+  /// No description provided for @achStreak7.
+  ///
+  /// In en, this message translates to:
+  /// **'Week Warrior'**
+  String get achStreak7;
+
+  /// No description provided for @achStreak7Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Maintain a 7-day activity streak.'**
+  String get achStreak7Desc;
+
+  /// No description provided for @achStreak14.
+  ///
+  /// In en, this message translates to:
+  /// **'Two Week Triumph'**
+  String get achStreak14;
+
+  /// No description provided for @achStreak14Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Maintain a 14-day activity streak.'**
+  String get achStreak14Desc;
+
+  /// No description provided for @achStreak30.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly Master'**
+  String get achStreak30;
+
+  /// No description provided for @achStreak30Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Maintain a 30-day activity streak.'**
+  String get achStreak30Desc;
+
+  /// No description provided for @achEarlyBird.
+  ///
+  /// In en, this message translates to:
+  /// **'Early Bird'**
+  String get achEarlyBird;
+
+  /// No description provided for @achEarlyBirdDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete 5 sessions before 9 AM.'**
+  String get achEarlyBirdDesc;
+
+  /// No description provided for @achCalm10.
+  ///
+  /// In en, this message translates to:
+  /// **'10 Minutes of Calm'**
+  String get achCalm10;
+
+  /// No description provided for @achCalm10Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Stay in a calm state for 10 minutes.'**
+  String get achCalm10Desc;
+
+  /// No description provided for @achCalm30.
+  ///
+  /// In en, this message translates to:
+  /// **'30 Minutes of Calm'**
+  String get achCalm30;
+
+  /// No description provided for @achCalm30Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Stay in a calm state for 30 minutes.'**
+  String get achCalm30Desc;
+
+  /// No description provided for @achCalm60.
+  ///
+  /// In en, this message translates to:
+  /// **'Hour of Peace'**
+  String get achCalm60;
+
+  /// No description provided for @achCalm60Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Stay in a calm state for 1 hour.'**
+  String get achCalm60Desc;
+
+  /// No description provided for @achReduceHyper20.
+  ///
+  /// In en, this message translates to:
+  /// **'Hyperactivity Reducer'**
+  String get achReduceHyper20;
+
+  /// No description provided for @achReduceHyper20Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Reduce hyperactivity by 20% in a session.'**
+  String get achReduceHyper20Desc;
+
+  /// No description provided for @achReduceHyper50.
+  ///
+  /// In en, this message translates to:
+  /// **'Calmness King'**
+  String get achReduceHyper50;
+
+  /// No description provided for @achReduceHyper50Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Reduce hyperactivity by 50% in a session.'**
+  String get achReduceHyper50Desc;
+
+  /// No description provided for @achPerfectPosture.
+  ///
+  /// In en, this message translates to:
+  /// **'Perfect Balance'**
+  String get achPerfectPosture;
+
+  /// No description provided for @achPerfectPostureDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Maintain perfect posture for 15 minutes.'**
+  String get achPerfectPostureDesc;
+
+  /// No description provided for @achFirstDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Day One'**
+  String get achFirstDay;
+
+  /// No description provided for @achFirstDayDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete your first day with the protocol.'**
+  String get achFirstDayDesc;
+
+  /// No description provided for @achFirstWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Seven Day Success'**
+  String get achFirstWeek;
+
+  /// No description provided for @achFirstWeekDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete your first full week.'**
+  String get achFirstWeekDesc;
+
+  /// No description provided for @achFirstMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Protocol Pro'**
+  String get achFirstMonth;
+
+  /// No description provided for @achFirstMonthDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete your first full month.'**
+  String get achFirstMonthDesc;
+
+  /// No description provided for @achTasks100.
+  ///
+  /// In en, this message translates to:
+  /// **'Centurion'**
+  String get achTasks100;
+
+  /// No description provided for @achTasks100Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete 100 protocol tasks.'**
+  String get achTasks100Desc;
+
+  /// No description provided for @achTasks500.
+  ///
+  /// In en, this message translates to:
+  /// **'Halfway to a Thousand'**
+  String get achTasks500;
+
+  /// No description provided for @achTasks500Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete 500 protocol tasks.'**
+  String get achTasks500Desc;
+
+  /// No description provided for @achTasks1000.
+  ///
+  /// In en, this message translates to:
+  /// **'Task Titan'**
+  String get achTasks1000;
+
+  /// No description provided for @achTasks1000Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete 1000 protocol tasks.'**
+  String get achTasks1000Desc;
+
+  /// No description provided for @achQuickLearner.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Learner'**
+  String get achQuickLearner;
+
+  /// No description provided for @achQuickLearnerDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete 5 new exercises in one day.'**
+  String get achQuickLearnerDesc;
+
+  /// No description provided for @achOverachiever.
+  ///
+  /// In en, this message translates to:
+  /// **'Overachiever'**
+  String get achOverachiever;
+
+  /// No description provided for @achOverachieverDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete all protocol tasks 7 days in a row.'**
+  String get achOverachieverDesc;
+
+  /// No description provided for @achCalmMaster.
+  ///
+  /// In en, this message translates to:
+  /// **'Zen Master'**
+  String get achCalmMaster;
+
+  /// No description provided for @achCalmMasterDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Maintain peak calmness during a difficult task.'**
+  String get achCalmMasterDesc;
+
+  /// No description provided for @achExplorer.
+  ///
+  /// In en, this message translates to:
+  /// **'Curious Explorer'**
+  String get achExplorer;
+
+  /// No description provided for @achExplorerDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Try every type of exercise at least once.'**
+  String get achExplorerDesc;
+
+  /// No description provided for @rarityCommon.
+  ///
+  /// In en, this message translates to:
+  /// **'Common'**
+  String get rarityCommon;
+
+  /// No description provided for @rarityRare.
+  ///
+  /// In en, this message translates to:
+  /// **'Rare'**
+  String get rarityRare;
+
+  /// No description provided for @rarityEpic.
+  ///
+  /// In en, this message translates to:
+  /// **'Epic'**
+  String get rarityEpic;
+
+  /// No description provided for @rarityLegendary.
+  ///
+  /// In en, this message translates to:
+  /// **'Legendary'**
+  String get rarityLegendary;
+
+  /// No description provided for @howToUnlock.
+  ///
+  /// In en, this message translates to:
+  /// **'How to Unlock'**
+  String get howToUnlock;
+
+  /// No description provided for @achievementUnlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlocked'**
+  String get achievementUnlocked;
+
+  /// No description provided for @achievementLocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Locked'**
+  String get achievementLocked;
+
+  /// No description provided for @achProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Progress'**
+  String get achProgress;
+
+  /// No description provided for @achPointsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'+{count} Points'**
+  String achPointsCount(int count);
+
+  /// No description provided for @achUnlockedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlocked!'**
+  String get achUnlockedTitle;
+
+  /// No description provided for @loginToViewAchievements.
+  ///
+  /// In en, this message translates to:
+  /// **'Please log in to view achievements'**
+  String get loginToViewAchievements;
+
+  /// No description provided for @errorLoadingAchievements.
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading achievements'**
+  String get errorLoadingAchievements;
+
+  /// No description provided for @totalPointsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Points'**
+  String get totalPointsLabel;
+
+  /// No description provided for @levelIndicator.
+  ///
+  /// In en, this message translates to:
+  /// **'Level {level}'**
+  String levelIndicator(int level);
+
+  /// No description provided for @achievementsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{unlocked}/{total} Achievements'**
+  String achievementsCount(int unlocked, int total);
+
+  /// No description provided for @categoryAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get categoryAll;
+
+  /// No description provided for @categoryExercise.
+  ///
+  /// In en, this message translates to:
+  /// **'Exercise'**
+  String get categoryExercise;
+
+  /// No description provided for @categoryStreaks.
+  ///
+  /// In en, this message translates to:
+  /// **'Streaks'**
+  String get categoryStreaks;
+
+  /// No description provided for @categoryCalm.
+  ///
+  /// In en, this message translates to:
+  /// **'Calm'**
+  String get categoryCalm;
+
+  /// No description provided for @categoryMilestones.
+  ///
+  /// In en, this message translates to:
+  /// **'Milestones'**
+  String get categoryMilestones;
+
+  /// No description provided for @categorySpecial.
+  ///
+  /// In en, this message translates to:
+  /// **'Special'**
+  String get categorySpecial;
+
+  /// No description provided for @showOnlyUnlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Show only unlocked'**
+  String get showOnlyUnlocked;
+
+  /// No description provided for @noAchievementsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No achievements found'**
+  String get noAchievementsFound;
 }
 
 class _AppLocalizationsDelegate

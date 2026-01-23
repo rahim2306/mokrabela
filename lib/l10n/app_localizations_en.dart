@@ -823,4 +823,270 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get liveTag => 'LIVE';
+
+  @override
+  String get achFirstBreathing => 'First Breath';
+
+  @override
+  String get achFirstBreathingDesc => 'Complete your first breathing exercise.';
+
+  @override
+  String get achBreathing5 => 'Breathing Steady';
+
+  @override
+  String get achBreathing5Desc => 'Complete 5 breathing exercises.';
+
+  @override
+  String get achBreathing10 => 'Breathing Expert';
+
+  @override
+  String get achBreathing10Desc => 'Complete 10 breathing exercises.';
+
+  @override
+  String get achBreathingMaster => 'Breathing Master';
+
+  @override
+  String get achBreathingMasterDesc => 'Complete 30 breathing exercises.';
+
+  @override
+  String get achFirstFocus => 'Focused Mind';
+
+  @override
+  String get achFirstFocusDesc => 'Complete your first focus exercise.';
+
+  @override
+  String get achFocusChampion => 'Focus Champion';
+
+  @override
+  String get achFocusChampionDesc => 'Complete 20 focus exercises.';
+
+  @override
+  String get achMusicBeginner => 'Musical Soul';
+
+  @override
+  String get achMusicBeginnerDesc => 'Listen to 5 calming tracks.';
+
+  @override
+  String get achMusicExpert => 'Music Enthusiast';
+
+  @override
+  String get achMusicExpertDesc => 'Listen to 25 calming tracks.';
+
+  @override
+  String get achStoryStarter => 'Story Listener';
+
+  @override
+  String get achStoryStarterDesc => 'Listen to 3 stories.';
+
+  @override
+  String get achStoryMaster => 'Fable Fanatic';
+
+  @override
+  String get achStoryMasterDesc => 'Listen to 15 stories.';
+
+  @override
+  String get achStreak3 => '3 Day Streak';
+
+  @override
+  String get achStreak3Desc => 'Maintain a 3-day activity streak.';
+
+  @override
+  String get achStreak7 => 'Week Warrior';
+
+  @override
+  String get achStreak7Desc => 'Maintain a 7-day activity streak.';
+
+  @override
+  String get achStreak14 => 'Two Week Triumph';
+
+  @override
+  String get achStreak14Desc => 'Maintain a 14-day activity streak.';
+
+  @override
+  String get achStreak30 => 'Monthly Master';
+
+  @override
+  String get achStreak30Desc => 'Maintain a 30-day activity streak.';
+
+  @override
+  String get achEarlyBird => 'Early Bird';
+
+  @override
+  String get achEarlyBirdDesc => 'Complete 5 sessions before 9 AM.';
+
+  @override
+  String get achCalm10 => '10 Minutes of Calm';
+
+  @override
+  String get achCalm10Desc => 'Stay in a calm state for 10 minutes.';
+
+  @override
+  String get achCalm30 => '30 Minutes of Calm';
+
+  @override
+  String get achCalm30Desc => 'Stay in a calm state for 30 minutes.';
+
+  @override
+  String get achCalm60 => 'Hour of Peace';
+
+  @override
+  String get achCalm60Desc => 'Stay in a calm state for 1 hour.';
+
+  @override
+  String get achReduceHyper20 => 'Hyperactivity Reducer';
+
+  @override
+  String get achReduceHyper20Desc =>
+      'Reduce hyperactivity by 20% in a session.';
+
+  @override
+  String get achReduceHyper50 => 'Calmness King';
+
+  @override
+  String get achReduceHyper50Desc =>
+      'Reduce hyperactivity by 50% in a session.';
+
+  @override
+  String get achPerfectPosture => 'Perfect Balance';
+
+  @override
+  String get achPerfectPostureDesc =>
+      'Maintain perfect posture for 15 minutes.';
+
+  @override
+  String get achFirstDay => 'Day One';
+
+  @override
+  String get achFirstDayDesc => 'Complete your first day with the protocol.';
+
+  @override
+  String get achFirstWeek => 'Seven Day Success';
+
+  @override
+  String get achFirstWeekDesc => 'Complete your first full week.';
+
+  @override
+  String get achFirstMonth => 'Protocol Pro';
+
+  @override
+  String get achFirstMonthDesc => 'Complete your first full month.';
+
+  @override
+  String get achTasks100 => 'Centurion';
+
+  @override
+  String get achTasks100Desc => 'Complete 100 protocol tasks.';
+
+  @override
+  String get achTasks500 => 'Halfway to a Thousand';
+
+  @override
+  String get achTasks500Desc => 'Complete 500 protocol tasks.';
+
+  @override
+  String get achTasks1000 => 'Task Titan';
+
+  @override
+  String get achTasks1000Desc => 'Complete 1000 protocol tasks.';
+
+  @override
+  String get achQuickLearner => 'Quick Learner';
+
+  @override
+  String get achQuickLearnerDesc => 'Complete 5 new exercises in one day.';
+
+  @override
+  String get achOverachiever => 'Overachiever';
+
+  @override
+  String get achOverachieverDesc =>
+      'Complete all protocol tasks 7 days in a row.';
+
+  @override
+  String get achCalmMaster => 'Zen Master';
+
+  @override
+  String get achCalmMasterDesc =>
+      'Maintain peak calmness during a difficult task.';
+
+  @override
+  String get achExplorer => 'Curious Explorer';
+
+  @override
+  String get achExplorerDesc => 'Try every type of exercise at least once.';
+
+  @override
+  String get rarityCommon => 'Common';
+
+  @override
+  String get rarityRare => 'Rare';
+
+  @override
+  String get rarityEpic => 'Epic';
+
+  @override
+  String get rarityLegendary => 'Legendary';
+
+  @override
+  String get howToUnlock => 'How to Unlock';
+
+  @override
+  String get achievementUnlocked => 'Unlocked';
+
+  @override
+  String get achievementLocked => 'Locked';
+
+  @override
+  String get achProgress => 'Progress';
+
+  @override
+  String achPointsCount(int count) {
+    return '+$count Points';
+  }
+
+  @override
+  String get achUnlockedTitle => 'Unlocked!';
+
+  @override
+  String get loginToViewAchievements => 'Please log in to view achievements';
+
+  @override
+  String get errorLoadingAchievements => 'Error loading achievements';
+
+  @override
+  String get totalPointsLabel => 'Total Points';
+
+  @override
+  String levelIndicator(int level) {
+    return 'Level $level';
+  }
+
+  @override
+  String achievementsCount(int unlocked, int total) {
+    return '$unlocked/$total Achievements';
+  }
+
+  @override
+  String get categoryAll => 'All';
+
+  @override
+  String get categoryExercise => 'Exercise';
+
+  @override
+  String get categoryStreaks => 'Streaks';
+
+  @override
+  String get categoryCalm => 'Calm';
+
+  @override
+  String get categoryMilestones => 'Milestones';
+
+  @override
+  String get categorySpecial => 'Special';
+
+  @override
+  String get showOnlyUnlocked => 'Show only unlocked';
+
+  @override
+  String get noAchievementsFound => 'No achievements found';
 }

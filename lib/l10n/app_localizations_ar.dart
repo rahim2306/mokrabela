@@ -820,4 +820,267 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get liveTag => 'مباشر';
+
+  @override
+  String get achFirstBreathing => 'النفس الأول';
+
+  @override
+  String get achFirstBreathingDesc => 'أكمل أول تمرين تنفس لك.';
+
+  @override
+  String get achBreathing5 => 'تنفس مستقر';
+
+  @override
+  String get achBreathing5Desc => 'أكمل 5 تمارين تنفس.';
+
+  @override
+  String get achBreathing10 => 'خبير تنفس';
+
+  @override
+  String get achBreathing10Desc => 'أكمل 10 تمارين تنفس.';
+
+  @override
+  String get achBreathingMaster => 'ماستر التنفس';
+
+  @override
+  String get achBreathingMasterDesc => 'أكمل 30 تمرين تنفس.';
+
+  @override
+  String get achFirstFocus => 'عقل مركز';
+
+  @override
+  String get achFirstFocusDesc => 'أكمل أول تمرين تركيز لك.';
+
+  @override
+  String get achFocusChampion => 'بطل التركيز';
+
+  @override
+  String get achFocusChampionDesc => 'أكمل 20 تمرين تركيز.';
+
+  @override
+  String get achMusicBeginner => 'روح موسيقية';
+
+  @override
+  String get achMusicBeginnerDesc => 'استمع إلى 5 مقاطع هادئة.';
+
+  @override
+  String get achMusicExpert => 'عاشق الموسيقى';
+
+  @override
+  String get achMusicExpertDesc => 'استمع إلى 25 مقطعاً هادئاً.';
+
+  @override
+  String get achStoryStarter => 'مستمع القصص';
+
+  @override
+  String get achStoryStarterDesc => 'استمع إلى 3 قصص.';
+
+  @override
+  String get achStoryMaster => 'عاشق الحكايات';
+
+  @override
+  String get achStoryMasterDesc => 'استمع إلى 15 قصة.';
+
+  @override
+  String get achStreak3 => 'سلسلة لـ 3 أيام';
+
+  @override
+  String get achStreak3Desc => 'حافظ على سلسلة نشاط لمدة 3 أيام.';
+
+  @override
+  String get achStreak7 => 'محارب الأسبوع';
+
+  @override
+  String get achStreak7Desc => 'حافظ على سلسلة نشاط لمدة 7 أيام.';
+
+  @override
+  String get achStreak14 => 'انتصار الأسبوعين';
+
+  @override
+  String get achStreak14Desc => 'حافظ على سلسلة نشاط لمدة 14 يوماً.';
+
+  @override
+  String get achStreak30 => 'ماستر الشهر';
+
+  @override
+  String get achStreak30Desc => 'حافظ على سلسلة نشاط لمدة 30 يوماً.';
+
+  @override
+  String get achEarlyBird => 'الطير المبكر';
+
+  @override
+  String get achEarlyBirdDesc => 'أكمل 5 جلسات قبل الساعة 9 صباحاً.';
+
+  @override
+  String get achCalm10 => '10 دقائق من الهدوء';
+
+  @override
+  String get achCalm10Desc => 'ابقَ في حالة هدوء لمدة 10 دقائق.';
+
+  @override
+  String get achCalm30 => '30 دقيقة من الهدوء';
+
+  @override
+  String get achCalm30Desc => 'ابقَ في حالة هدوء لمدة 30 دقيقة.';
+
+  @override
+  String get achCalm60 => 'ساعة من السلام';
+
+  @override
+  String get achCalm60Desc => 'ابقَ في حالة هدوء لمدة ساعة.';
+
+  @override
+  String get achReduceHyper20 => 'مقلل النشاط الزائد';
+
+  @override
+  String get achReduceHyper20Desc => 'قلل النشاط الزائد بنسبة 20% في الجلسة.';
+
+  @override
+  String get achReduceHyper50 => 'ملك الهدوء';
+
+  @override
+  String get achReduceHyper50Desc => 'قلل النشاط الزائد بنسبة 50% في الجلسة.';
+
+  @override
+  String get achPerfectPosture => 'توازن مثالي';
+
+  @override
+  String get achPerfectPostureDesc =>
+      'حافظ على وضعية جسم مثالية لمدة 15 دقيقة.';
+
+  @override
+  String get achFirstDay => 'اليوم الأول';
+
+  @override
+  String get achFirstDayDesc => 'أكمل يومك الأول مع البروتوكول.';
+
+  @override
+  String get achFirstWeek => 'نجاح السبعة أيام';
+
+  @override
+  String get achFirstWeekDesc => 'أكمل أول أسبوع كامل لك.';
+
+  @override
+  String get achFirstMonth => 'محترف البروتوكول';
+
+  @override
+  String get achFirstMonthDesc => 'أكمل أول شهر كامل لك.';
+
+  @override
+  String get achTasks100 => 'المئوي';
+
+  @override
+  String get achTasks100Desc => 'أكمل 100 مهمة بروتوكول.';
+
+  @override
+  String get achTasks500 => 'منتصف الطريق إلى الألف';
+
+  @override
+  String get achTasks500Desc => 'أكمل 500 مهمة بروتوكول.';
+
+  @override
+  String get achTasks1000 => 'عملاق المهام';
+
+  @override
+  String get achTasks1000Desc => 'أكمل 1000 مهمة بروتوكول.';
+
+  @override
+  String get achQuickLearner => 'متعلم سريع';
+
+  @override
+  String get achQuickLearnerDesc => 'أكمل 5 تمارين جديدة في يوم واحد.';
+
+  @override
+  String get achOverachiever => 'متفوق';
+
+  @override
+  String get achOverachieverDesc =>
+      'أكمل جميع مهام البروتوكول لـ 7 أيام متتالية.';
+
+  @override
+  String get achCalmMaster => 'ماستر زين';
+
+  @override
+  String get achCalmMasterDesc => 'حافظ على قمة الهدوء خلال مهمة صعبة.';
+
+  @override
+  String get achExplorer => 'مستكشف فضولي';
+
+  @override
+  String get achExplorerDesc => 'جرب كل نوع من التمارين مرة واحدة على الأقل.';
+
+  @override
+  String get rarityCommon => 'شائع';
+
+  @override
+  String get rarityRare => 'نادر';
+
+  @override
+  String get rarityEpic => 'ملحمي';
+
+  @override
+  String get rarityLegendary => 'أسطوري';
+
+  @override
+  String get howToUnlock => 'طريقة الفتح';
+
+  @override
+  String get achievementUnlocked => 'تم الفتح';
+
+  @override
+  String get achievementLocked => 'مغلق';
+
+  @override
+  String get achProgress => 'التقدم';
+
+  @override
+  String achPointsCount(int count) {
+    return '+$count نقاط';
+  }
+
+  @override
+  String get achUnlockedTitle => 'تم الفتح!';
+
+  @override
+  String get loginToViewAchievements => 'يرجى تسجيل الدخول لعرض الإنجازات';
+
+  @override
+  String get errorLoadingAchievements => 'خطأ في تحميل الإنجازات';
+
+  @override
+  String get totalPointsLabel => 'إجمالي النقاط';
+
+  @override
+  String levelIndicator(int level) {
+    return 'المستوى $level';
+  }
+
+  @override
+  String achievementsCount(int unlocked, int total) {
+    return '$unlocked/$total إنجازات';
+  }
+
+  @override
+  String get categoryAll => 'الكل';
+
+  @override
+  String get categoryExercise => 'تمارين';
+
+  @override
+  String get categoryStreaks => 'سلاسل';
+
+  @override
+  String get categoryCalm => 'هدوء';
+
+  @override
+  String get categoryMilestones => 'إنجازات رئيسية';
+
+  @override
+  String get categorySpecial => 'خاص';
+
+  @override
+  String get showOnlyUnlocked => 'إظهار المفتوحة فقط';
+
+  @override
+  String get noAchievementsFound => 'لم يتم العثور على إنجازات';
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:mokrabela/services/ble_service.dart';
 import 'package:mokrabela/theme/app_theme.dart';
+import 'package:mokrabela/screens/settings/test_ble_sync.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 
@@ -88,6 +89,16 @@ class _WatchConnectionScreenState extends State<WatchConnectionScreen>
               fontSize: 18.sp,
               fontWeight: FontWeight.bold,
               color: AppTheme.deepBlue,
+            ),
+          ),
+          const Spacer(),
+          IconButton(
+            icon: const Icon(Icons.bug_report, color: AppTheme.primary),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const TestBleSyncScreen(),
+              ),
             ),
           ),
         ],

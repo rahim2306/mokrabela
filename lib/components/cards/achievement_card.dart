@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mokrabela/models/achievement_model.dart';
 import 'package:mokrabela/l10n/app_localizations.dart';
+import 'package:mokrabela/utils/localization_helpers.dart';
 import 'package:sizer/sizer.dart';
 
 /// Achievement card component with gradient background and lock states
@@ -98,7 +99,7 @@ class AchievementCard extends StatelessWidget {
 
                       // Title
                       Text(
-                        _getLocalizedTitle(l10n),
+                        l10n.getAchievementString(achievement.titleKey),
                         style: TextStyle(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w900,
@@ -122,7 +123,7 @@ class AchievementCard extends StatelessWidget {
 
                       // Description
                       Text(
-                        _getLocalizedDescription(l10n),
+                        l10n.getAchievementString(achievement.descriptionKey),
                         style: TextStyle(
                           fontSize: 11.sp,
                           fontWeight: FontWeight.w500,
@@ -207,7 +208,9 @@ class AchievementCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
-                      _getRarityText(achievement.rarity),
+                      l10n.getAchievementString(
+                        achievement.rarity.name.toUpperCase(),
+                      ),
                       style: TextStyle(
                         fontSize: 9.sp,
                         fontWeight: FontWeight.w700,
@@ -223,74 +226,5 @@ class AchievementCard extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  String _getLocalizedTitle(AppLocalizations l10n) {
-    // Convert camelCase localization key to readable title
-    // e.g., "achFirstBreathing" -> "First Breathing"
-    final key = achievement.titleKey;
-
-    // Remove "ach" prefix if present
-    String cleaned = key.startsWith('ach') ? key.substring(3) : key;
-
-    // Insert spaces before capital letters
-    String spaced = cleaned
-        .replaceAllMapped(RegExp(r'([A-Z])'), (match) => ' ${match.group(0)}')
-        .trim();
-
-    // Capitalize first letter
-    return spaced.isEmpty ? key : spaced[0].toUpperCase() + spaced.substring(1);
-  }
-
-  String _getLocalizedDescription(AppLocalizations l10n) {
-    // Convert camelCase localization key to readable description
-    // e.g., "achFirstBreathingDesc" -> "Complete your first breathing exercise"
-    final key = achievement.descriptionKey;
-
-    // Remove "ach" prefix and "Desc" suffix if present
-    String cleaned = key.startsWith('ach') ? key.substring(3) : key;
-    cleaned = cleaned.endsWith('Desc')
-        ? cleaned.substring(0, cleaned.length - 4)
-        : cleaned;
-
-    // Insert spaces before capital letters
-    String spaced = cleaned
-        .replaceAllMapped(RegExp(r'([A-Z])'), (match) => ' ${match.group(0)}')
-        .trim();
-
-    // Create a description based on the achievement
-    return _generateDescription(spaced.toLowerCase());
-  }
-
-  String _generateDescription(String title) {
-    // Generate contextual descriptions based on title
-    if (title.contains('first')) {
-      return 'Complete your $title';
-    } else if (title.contains('streak')) {
-      return 'Maintain a $title';
-    } else if (title.contains('calm')) {
-      return 'Stay calm for $title';
-    } else if (title.contains('tasks')) {
-      return 'Complete $title';
-    } else if (title.contains('master') ||
-        title.contains('champion') ||
-        title.contains('expert')) {
-      return 'Become a $title';
-    } else {
-      return title[0].toUpperCase() + title.substring(1);
-    }
-  }
-
-  String _getRarityText(AchievementRarity rarity) {
-    switch (rarity) {
-      case AchievementRarity.common:
-        return 'COMMON';
-      case AchievementRarity.rare:
-        return 'RARE';
-      case AchievementRarity.epic:
-        return 'EPIC';
-      case AchievementRarity.legendary:
-        return 'LEGENDARY';
-    }
   }
 }

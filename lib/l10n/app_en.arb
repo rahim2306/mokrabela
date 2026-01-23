@@ -777,5 +777,114 @@
   "liveHeartbeatMotion": "Live Heartbeat & Motion",
   "motionZ": "Motion (Z)",
   "energy": "Energy",
-  "liveTag": "LIVE"
+  "liveTag": "LIVE",
+  "achFirstBreathing": "First Breath",
+  "achFirstBreathingDesc": "Complete your first breathing exercise.",
+  "achBreathing5": "Breathing Steady",
+  "achBreathing5Desc": "Complete 5 breathing exercises.",
+  "achBreathing10": "Breathing Expert",
+  "achBreathing10Desc": "Complete 10 breathing exercises.",
+  "achBreathingMaster": "Breathing Master",
+  "achBreathingMasterDesc": "Complete 30 breathing exercises.",
+  "achFirstFocus": "Focused Mind",
+  "achFirstFocusDesc": "Complete your first focus exercise.",
+  "achFocusChampion": "Focus Champion",
+  "achFocusChampionDesc": "Complete 20 focus exercises.",
+  "achMusicBeginner": "Musical Soul",
+  "achMusicBeginnerDesc": "Listen to 5 calming tracks.",
+  "achMusicExpert": "Music Enthusiast",
+  "achMusicExpertDesc": "Listen to 25 calming tracks.",
+  "achStoryStarter": "Story Listener",
+  "achStoryStarterDesc": "Listen to 3 stories.",
+  "achStoryMaster": "Fable Fanatic",
+  "achStoryMasterDesc": "Listen to 15 stories.",
+  "achStreak3": "3 Day Streak",
+  "achStreak3Desc": "Maintain a 3-day activity streak.",
+  "achStreak7": "Week Warrior",
+  "achStreak7Desc": "Maintain a 7-day activity streak.",
+  "achStreak14": "Two Week Triumph",
+  "achStreak14Desc": "Maintain a 14-day activity streak.",
+  "achStreak30": "Monthly Master",
+  "achStreak30Desc": "Maintain a 30-day activity streak.",
+  "achEarlyBird": "Early Bird",
+  "achEarlyBirdDesc": "Complete 5 sessions before 9 AM.",
+  "achCalm10": "10 Minutes of Calm",
+  "achCalm10Desc": "Stay in a calm state for 10 minutes.",
+  "achCalm30": "30 Minutes of Calm",
+  "achCalm30Desc": "Stay in a calm state for 30 minutes.",
+  "achCalm60": "Hour of Peace",
+  "achCalm60Desc": "Stay in a calm state for 1 hour.",
+  "achReduceHyper20": "Hyperactivity Reducer",
+  "achReduceHyper20Desc": "Reduce hyperactivity by 20% in a session.",
+  "achReduceHyper50": "Calmness King",
+  "achReduceHyper50Desc": "Reduce hyperactivity by 50% in a session.",
+  "achPerfectPosture": "Perfect Balance",
+  "achPerfectPostureDesc": "Maintain perfect posture for 15 minutes.",
+  "achFirstDay": "Day One",
+  "achFirstDayDesc": "Complete your first day with the protocol.",
+  "achFirstWeek": "Seven Day Success",
+  "achFirstWeekDesc": "Complete your first full week.",
+  "achFirstMonth": "Protocol Pro",
+  "achFirstMonthDesc": "Complete your first full month.",
+  "achTasks100": "Centurion",
+  "achTasks100Desc": "Complete 100 protocol tasks.",
+  "achTasks500": "Halfway to a Thousand",
+  "achTasks500Desc": "Complete 500 protocol tasks.",
+  "achTasks1000": "Task Titan",
+  "achTasks1000Desc": "Complete 1000 protocol tasks.",
+  "achQuickLearner": "Quick Learner",
+  "achQuickLearnerDesc": "Complete 5 new exercises in one day.",
+  "achOverachiever": "Overachiever",
+  "achOverachieverDesc": "Complete all protocol tasks 7 days in a row.",
+  "achCalmMaster": "Zen Master",
+  "achCalmMasterDesc": "Maintain peak calmness during a difficult task.",
+  "achExplorer": "Curious Explorer",
+  "achExplorerDesc": "Try every type of exercise at least once.",
+  "rarityCommon": "Common",
+  "rarityRare": "Rare",
+  "rarityEpic": "Epic",
+  "rarityLegendary": "Legendary",
+  "howToUnlock": "How to Unlock",
+  "achievementUnlocked": "Unlocked",
+  "achievementLocked": "Locked",
+  "achProgress": "Progress",
+  "achPointsCount": "+{count} Points",
+  "@achPointsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "achUnlockedTitle": "Unlocked!",
+  "loginToViewAchievements": "Please log in to view achievements",
+  "errorLoadingAchievements": "Error loading achievements",
+  "totalPointsLabel": "Total Points",
+  "levelIndicator": "Level {level}",
+  "@levelIndicator": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "achievementsCount": "{unlocked}/{total} Achievements",
+  "@achievementsCount": {
+    "placeholders": {
+      "unlocked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "categoryAll": "All",
+  "categoryExercise": "Exercise",
+  "categoryStreaks": "Streaks",
+  "categoryCalm": "Calm",
+  "categoryMilestones": "Milestones",
+  "categorySpecial": "Special",
+  "showOnlyUnlocked": "Show only unlocked",
+  "noAchievementsFound": "No achievements found"
 }

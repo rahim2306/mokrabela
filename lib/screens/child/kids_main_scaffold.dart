@@ -9,6 +9,7 @@ import 'package:mokrabela/components/bars/floating_top_bar.dart';
 import 'package:mokrabela/components/popups/protocol_status_popup.dart';
 import 'package:mokrabela/services/protocol_service.dart';
 import 'package:mokrabela/services/auth_service.dart';
+import 'package:mokrabela/services/realtime_sync_service.dart';
 import 'package:mokrabela/screens/settings/watch_connection_screen.dart';
 import 'dart:async';
 import 'package:sizer/sizer.dart';
@@ -52,6 +53,7 @@ class _KidsMainScaffoldState extends State<KidsMainScaffold>
     });
     _loadUserName();
     _initProgressStream();
+    RealtimeSyncService().startSync();
   }
 
   void _initProgressStream() {
@@ -117,6 +119,7 @@ class _KidsMainScaffoldState extends State<KidsMainScaffold>
   void dispose() {
     _tabController.dispose();
     _progressSubscription?.cancel();
+    RealtimeSyncService().stopSync();
     super.dispose();
   }
 

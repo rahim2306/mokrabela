@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mokrabela/models/achievement_model.dart';
 import 'package:mokrabela/l10n/app_localizations.dart';
+import 'package:mokrabela/utils/localization_helpers.dart';
 import 'package:sizer/sizer.dart';
 import 'package:intl/intl.dart';
 
@@ -100,7 +101,7 @@ class AchievementDetailDialog extends StatelessWidget {
 
                         // Title
                         Text(
-                          _getLocalizedTitle(l10n),
+                          l10n.getAchievementString(achievement.titleKey),
                           style: GoogleFonts.spaceGrotesk(
                             fontSize: 24.sp,
                             fontWeight: FontWeight.w900,
@@ -119,7 +120,7 @@ class AchievementDetailDialog extends StatelessWidget {
 
                         // Description
                         Text(
-                          _getLocalizedDescription(l10n),
+                          l10n.getAchievementString(achievement.descriptionKey),
                           style: GoogleFonts.spaceGrotesk(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w500,
@@ -141,7 +142,9 @@ class AchievementDetailDialog extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Text(
-                            achievement.rarity.name.toUpperCase(),
+                            l10n.getAchievementString(
+                              achievement.rarity.name.toUpperCase(),
+                            ),
                             style: GoogleFonts.spaceGrotesk(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w700,
@@ -167,7 +170,7 @@ class AchievementDetailDialog extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Progress',
+                                    l10n.achProgress,
                                     style: GoogleFonts.spaceGrotesk(
                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.w700,
@@ -225,7 +228,7 @@ class AchievementDetailDialog extends StatelessWidget {
                                     ),
                                     SizedBox(width: 2.w),
                                     Text(
-                                      'Unlocked!',
+                                      l10n.achUnlockedTitle,
                                       style: GoogleFonts.spaceGrotesk(
                                         fontSize: 16.sp,
                                         fontWeight: FontWeight.w700,
@@ -239,6 +242,7 @@ class AchievementDetailDialog extends StatelessWidget {
                                   Text(
                                     DateFormat(
                                       'MMMM d, yyyy',
+                                      l10n.localeName,
                                     ).format(achievement.unlockedAt!),
                                     style: GoogleFonts.spaceGrotesk(
                                       fontSize: 13.sp,
@@ -259,7 +263,7 @@ class AchievementDetailDialog extends StatelessWidget {
                                     ),
                                     SizedBox(width: 2.w),
                                     Text(
-                                      'How to Unlock',
+                                      l10n.howToUnlock,
                                       style: GoogleFonts.spaceGrotesk(
                                         fontSize: 16.sp,
                                         fontWeight: FontWeight.w700,
@@ -305,7 +309,7 @@ class AchievementDetailDialog extends StatelessWidget {
                               ),
                               SizedBox(width: 2.w),
                               Text(
-                                '+${achievement.points} Points',
+                                l10n.achPointsCount(achievement.points),
                                 style: GoogleFonts.spaceGrotesk(
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w700,
@@ -325,24 +329,6 @@ class AchievementDetailDialog extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  String _getLocalizedTitle(AppLocalizations l10n) {
-    // Convert camelCase localization key to readable title
-    final key = achievement.titleKey;
-    return key
-        .replaceAll('ach', '')
-        .replaceAllMapped(RegExp(r'([A-Z])'), (match) => ' ${match.group(0)}')
-        .trim();
-  }
-
-  String _getLocalizedDescription(AppLocalizations l10n) {
-    // Use the description key as-is for now
-    return achievement.descriptionKey
-        .replaceAll('Desc', '')
-        .replaceAll('ach', '')
-        .replaceAllMapped(RegExp(r'([A-Z])'), (match) => ' ${match.group(0)}')
-        .trim();
   }
 
   String _getUnlockInstructions() {
