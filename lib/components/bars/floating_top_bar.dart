@@ -65,7 +65,7 @@ class FloatingTopBar extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          l10n.dailyProgress,
+                          l10n.todaysCalmTime,
                           style: TextStyle(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w800,
@@ -74,7 +74,7 @@ class FloatingTopBar extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '$completedTasks/$totalTasks ${l10n.tasks}',
+                          '$completedTasks/$totalTasks ${l10n.minutes}',
                           style: TextStyle(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w700,
@@ -94,7 +94,7 @@ class FloatingTopBar extends StatelessWidget {
                           ),
                         ),
                         FractionallySizedBox(
-                          widthFactor: progress,
+                          widthFactor: progress.clamp(0.0, 1.0),
                           child: Container(
                             height: 8,
                             decoration: BoxDecoration(

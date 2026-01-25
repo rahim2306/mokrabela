@@ -146,6 +146,22 @@
   "@dailyProgress": {
     "description": "Daily progress section title"
   },
+  "todaysCalmTime": "Today's Calm Time",
+  "@todaysCalmTime": {
+    "description": "Title for daily calm time tracking"
+  },
+  "minutes": "min",
+  "@minutes": {
+    "description": "Abbreviation for minutes"
+  },
+  "dailyCalmGoal": "Daily Calm Goal",
+  "@dailyCalmGoal": {
+    "description": "Setting title for daily calm goal"
+  },
+  "goalReached": "Goal reached!",
+  "@goalReached": {
+    "description": "Message when daily goal is reached"
+  },
   "tasksRemaining": "{count} Tasks Remaining",
   "@tasksRemaining": {
     "description": "Number of tasks remaining",
@@ -493,7 +509,11 @@
   "@whyFocusGamesTitle": {
     "description": "Title for focus games info card"
   },
-  "whyFocusGamesDesc": "Focus games help improve concentration, memory, and cognitive skills. They're a fun way to train your brain and boost mental agility!",
+  "whyFocusGamesDesc": "Focus games help improve concentration, memory, and cognitive skills. It's a fun way to train your brain and boost mental agility!",
+  "breatheIn": "Breathe In",
+  "breatheOut": "Breathe Out",
+  "cycle": "Cycle",
+  "complete": "Complete!",
   "@whyFocusGamesDesc": {
     "description": "Description for focus games info card"
   },
@@ -797,7 +817,52 @@
   "achStoryStarter": "Story Listener",
   "achStoryStarterDesc": "Listen to 3 stories.",
   "achStoryMaster": "Fable Fanatic",
+  "weekLabel": "Week {count} of 5",
+  "@weekLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "weekPrefix": "WEEK",
+  "continueTraining": "Continue training habits",
+  "focusQuest": "Focus Quest",
+  "mindfulStories": "Mindful Stories",
+  "calmingRhythms": "Calming Rhythms",
+  "finalDiscoveryDashboard": "Final Discovery Dashboard",
+  "protocolAnalytics": "Protocol Analytics",
+  "avgStressLevel": "Avg Stress Level",
+  "avgActivityLevel": "Avg Activity Level",
+  "weeklyBreakdown": "Weekly Breakdown",
+  "noProtocolData": "No Protocol Data Yet",
+  "noProtocolDataDesc": "Stats will appear as you complete activities.",
+  "weekDetail": "Week {index}",
+  "@weekDetail": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
+  "sessionsCount": "{count} sessions",
+  "@sessionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "stressPercentage": "{percentage}% Stress",
+  "@stressPercentage": {
+    "placeholders": {
+      "percentage": {
+        "type": "int"
+      }
+    }
+  },
   "achStoryMasterDesc": "Listen to 15 stories.",
+
   "achStreak3": "3 Day Streak",
   "achStreak3Desc": "Maintain a 3-day activity streak.",
   "achStreak7": "Week Warrior",

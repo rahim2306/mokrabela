@@ -117,6 +117,18 @@ class AppLocalizationsFr extends AppLocalizations {
   String get dailyProgress => 'Progrès quotidien';
 
   @override
+  String get todaysCalmTime => 'Temps calme aujourd\'hui';
+
+  @override
+  String get minutes => 'minutes';
+
+  @override
+  String get dailyCalmGoal => 'Objectif quotidien de calme';
+
+  @override
+  String get goalReached => 'Objectif atteint!';
+
+  @override
   String tasksRemaining(int count) {
     return '$count tâches restantes';
   }
@@ -159,9 +171,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get reset => 'Réinitialiser';
-
-  @override
-  String get minutes => 'minutes';
 
   @override
   String get taskTitle => 'Titre de la tâche';
@@ -897,6 +906,63 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get achStoryMaster => 'Fanatique de Fables';
+
+  @override
+  String weekLabel(int count) {
+    return 'Semaine $count sur 5';
+  }
+
+  @override
+  String get weekPrefix => 'SEMAINE';
+
+  @override
+  String get continueTraining => 'Continue les habitudes d\'entraînement';
+
+  @override
+  String get focusQuest => 'Quête de concentration';
+
+  @override
+  String get mindfulStories => 'Histoires de pleine conscience';
+
+  @override
+  String get calmingRhythms => 'Rythmes apaisants';
+
+  @override
+  String get finalDiscoveryDashboard => 'Tableau de bord de découverte final';
+
+  @override
+  String get protocolAnalytics => 'Analytique du protocole';
+
+  @override
+  String get avgStressLevel => 'Niveau de stress moyen';
+
+  @override
+  String get avgActivityLevel => 'Niveau d\'activité moyen';
+
+  @override
+  String get weeklyBreakdown => 'Répartition hebdomadaire';
+
+  @override
+  String get noProtocolData => 'Pas encore de données de protocole';
+
+  @override
+  String get noProtocolDataDesc =>
+      'Les statistiques apparaîtront au fur et à mesure de l\'achèvement des activités.';
+
+  @override
+  String weekDetail(int index) {
+    return 'Semaine $index';
+  }
+
+  @override
+  String sessionsCount(int count) {
+    return '$count sessions';
+  }
+
+  @override
+  String stressPercentage(int percentage) {
+    return '$percentage% Stress';
+  }
 
   @override
   String get achStoryMasterDesc => 'Écoutez 15 histoires.';

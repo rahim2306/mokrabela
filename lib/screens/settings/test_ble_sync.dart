@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:mokrabela/services/realtime_sync_service.dart';
@@ -6,6 +8,8 @@ import 'package:mokrabela/services/auth_service.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
+
+import 'package:mokrabela/services/protocol_service.dart';
 
 class TestBleSyncScreen extends StatefulWidget {
   const TestBleSyncScreen({super.key});
@@ -18,9 +22,11 @@ class _TestBleSyncScreenState extends State<TestBleSyncScreen> {
   final _bleService = BleService();
   final _syncService = RealtimeSyncService();
   final _authService = AuthService();
+  final _protocolService = ProtocolService();
 
   double _simulatedActivity = 0.0;
   int _simulatedAlerts = 0;
+  int _simulatedProtocolWeek = 1;
   bool _isSyncRunning = false;
   String _currentUid = "Detecting...";
   final List<String> _logs = [];
@@ -108,6 +114,24 @@ class _TestBleSyncScreenState extends State<TestBleSyncScreen> {
               setState(() => _simulatedAlerts = val);
               _updateSimulation();
             }),
+            _buildSlider(
+              "Force Protocol Week",
+              _simulatedProtocolWeek.toDouble(),
+              (val) {
+                setState(() => _simulatedProtocolWeek = val.toInt());
+                final user = _authService.currentUser;
+                if (user != null) {
+                  _protocolService.debugForceWeek(
+                    user.uid,
+                    _simulatedProtocolWeek,
+                  );
+                  _addLog("Force set Protocol to Week $_simulatedProtocolWeek");
+                }
+              },
+              min: 1,
+              max: 5,
+              divisions: 4,
+            ),
             SizedBox(height: 3.h),
             Text(
               "Live Data Logs",
@@ -243,8 +267,11 @@ class _TestBleSyncScreenState extends State<TestBleSyncScreen> {
   Widget _buildSlider(
     String label,
     double value,
-    ValueChanged<double> onChanged,
-  ) {
+    ValueChanged<double> onChanged, {
+    double min = 0,
+    double max = 100,
+    int? divisions,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -259,7 +286,7 @@ class _TestBleSyncScreenState extends State<TestBleSyncScreen> {
               ),
             ),
             Text(
-              "${value.toStringAsFixed(1)}%",
+              max == 100 ? "${value.toStringAsFixed(1)}%" : "W${value.toInt()}",
               style: GoogleFonts.spaceGrotesk(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.bold,
@@ -270,8 +297,9 @@ class _TestBleSyncScreenState extends State<TestBleSyncScreen> {
         ),
         Slider(
           value: value,
-          max: 100,
-          divisions: 100,
+          min: min,
+          max: max,
+          divisions: divisions ?? 100,
           activeColor: AppTheme.primary,
           onChanged: onChanged,
         ),

@@ -6,7 +6,12 @@ import 'package:mokrabela/screens/child/protocol/daily_tasks_screen.dart';
 import 'package:mokrabela/screens/protocol/self_awareness_screen.dart';
 import 'package:mokrabela/screens/protocol/self_regulation_screen.dart';
 import 'package:mokrabela/screens/protocol/psychological_calming_screen.dart';
+import 'package:mokrabela/screens/child/focus/focus_games_menu_screen.dart';
+import 'package:mokrabela/screens/child/music/music_menu_screen.dart';
+import 'package:mokrabela/screens/child/stories/story_menu_screen.dart';
+import 'package:mokrabela/screens/child/protocol/missing_square_dashboard_screen.dart';
 import 'package:mokrabela/theme/app_theme.dart';
+
 import 'package:mokrabela/services/protocol_service.dart';
 import 'package:sizer/sizer.dart';
 
@@ -64,228 +69,402 @@ class _KidsProtocolScreenState extends State<KidsProtocolScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final user = _authService.currentUser;
 
-    return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          SizedBox(height: 1.h),
-          SizedBox(height: 1.h),
-          // Hub-style Header
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 2.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                // "Hello"
-                Text(
-                  l10n.helloLabel,
-                  style: GoogleFonts.spaceGrotesk(
-                    fontSize: (26 / 1.2).sp,
-                    fontWeight: FontWeight.w600,
-                    color: AppTheme.deepBlue.withValues(alpha: 0.6),
-                    height: 1.0,
-                  ),
-                ),
-                // Name
-                Text(
-                  _firstName,
-                  style: GoogleFonts.spaceGrotesk(
-                    fontSize: 26.sp,
-                    fontWeight: FontWeight.w800,
-                    color: AppTheme.deepBlue,
-                    letterSpacing: -0.5,
-                    height: 1.0,
-                  ),
-                ),
-                SizedBox(height: 1.h),
-                // "Let's start protocol"
-                Text(
-                  l10n.letsStartProtocol,
-                  style: GoogleFonts.spaceGrotesk(
-                    fontSize: 13.sp,
-                    fontWeight: FontWeight.w600,
-                    color: AppTheme.deepBlue.withValues(alpha: 0.7),
-                    height: 1.4,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 0.h),
-          // 4 Squares Grid
-          GridView.count(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            crossAxisCount: 2,
-            mainAxisSpacing: 3.h,
-            crossAxisSpacing: 4.w,
-            childAspectRatio: 1.0,
+    if (user == null) return const SizedBox.shrink();
+
+    return StreamBuilder(
+      stream: _protocolService.getEnrollmentStream(user.uid),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        final enrollment = snapshot.data!;
+        final currentWeek = enrollment.calculateCurrentWeek(DateTime.now());
+
+        return SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _buildSquareCard(
-                context,
-                title: l10n.square1Title,
-                description: l10n.square1Desc,
-                icon: Icons.psychology_rounded,
-                gradient: const [Color(0xFF4ECDC4), Color(0xFF44A08D)],
-                heroTag: 'awareness_card',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SelfAwarenessScreen(),
+              _buildHeader(l10n, currentWeek),
+              SizedBox(height: 3.h),
+              _buildTimeline(context, l10n, currentWeek, enrollment),
+              SizedBox(height: 14.h), // Space for bottom nav
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildHeader(AppLocalizations l10n, int currentWeek) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 2.w),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    l10n.helloLabel,
+                    style: GoogleFonts.spaceGrotesk(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w600,
+                      color: AppTheme.deepBlue.withValues(alpha: 0.6),
                     ),
-                  );
-                },
+                  ),
+                  Text(
+                    _firstName,
+                    style: GoogleFonts.spaceGrotesk(
+                      fontSize: 24.sp,
+                      fontWeight: FontWeight.w800,
+                      color: AppTheme.deepBlue,
+                    ),
+                  ),
+                ],
               ),
-              _buildSquareCard(
-                context,
-                title: l10n.square2Title,
-                description: l10n.square2Desc,
-                icon: Icons.air_rounded,
-                gradient: const [Color(0xFF667EEA), Color(0xFF764BA2)],
-                heroTag: 'regulation_card',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SelfRegulationScreen(),
-                    ),
-                  );
-                },
-              ),
-              _buildSquareCard(
-                context,
-                title: l10n.square3Title,
-                description: l10n.square3Desc,
-                icon: Icons.task_alt_rounded,
-                gradient: const [Color(0xFFFFE259), Color(0xFFFFA751)],
-                heroTag: 'daily_tasks_card',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const DailyTasksScreen(),
-                    ),
-                  );
-                },
-              ),
-              _buildSquareCard(
-                context,
-                title: l10n.square4Title,
-                description: l10n.square4Desc,
-                icon: Icons.self_improvement_rounded,
-                gradient: const [Color(0xFFF093FB), Color(0xFFF5576C)],
-                heroTag: 'calming_card',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const PsychologicalCalmingScreen(),
-                    ),
-                  );
-                },
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
+                decoration: BoxDecoration(
+                  color: AppTheme.primary.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text(
+                  l10n.weekLabel(currentWeek),
+                  style: GoogleFonts.spaceGrotesk(
+                    fontWeight: FontWeight.bold,
+                    color: AppTheme.primary,
+                  ),
+                ),
               ),
             ],
           ),
-          SizedBox(height: 14.h), // Space for bottom nav
+          SizedBox(height: 1.h),
+          Text(
+            l10n.letsStartProtocol,
+            style: GoogleFonts.spaceGrotesk(
+              fontSize: 13.sp,
+              fontWeight: FontWeight.w600,
+              color: AppTheme.deepBlue.withValues(alpha: 0.7),
+            ),
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildSquareCard(
-    BuildContext context, {
-    required String title,
-    required String description,
-    required IconData icon,
-    required List<Color> gradient,
-    required VoidCallback onTap,
-    String? heroTag,
+  Widget _buildTimeline(
+    BuildContext context,
+    AppLocalizations l10n,
+    int currentWeek,
+    dynamic enrollment,
+  ) {
+    return Column(
+      children: List.generate(5, (index) {
+        final weekIndex = index + 1;
+        final isUnlocked = weekIndex <= currentWeek;
+        final isNext = weekIndex == currentWeek;
+
+        return _buildWeekStep(
+          context,
+          l10n,
+          weekIndex: weekIndex,
+          isUnlocked: isUnlocked,
+          isNext: isNext,
+          currentWeek: currentWeek,
+        );
+      }),
+    );
+  }
+
+  Widget _buildWeekStep(
+    BuildContext context,
+    AppLocalizations l10n, {
+    required int weekIndex,
+    required bool isUnlocked,
+    required bool isNext,
+    required int currentWeek,
   }) {
-    Widget cardContent = Ink(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: gradient,
+    // Map of which squares unlock in which week - Strictly 5-Week Roadmap
+    final Map<int, List<Widget>> weeklySquares = {
+      1: [
+        // Week 1 — Regulation & Safety
+        _buildSquareShortCard(
+          l10n.square2Title, // Breathing (Square 2)
+          Icons.air_rounded,
+          const [Color(0xFF667EEA), Color(0xFF764BA2)],
+          () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const SelfRegulationScreen(),
+            ),
+          ),
         ),
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: gradient.first.withValues(alpha: 0.4),
-            blurRadius: 16,
-            offset: const Offset(0, 8),
-            spreadRadius: -4,
+        _buildSquareShortCard(
+          l10n.square1Title, // Body Scan (Square 1)
+          Icons.psychology_rounded,
+          const [Color(0xFF4ECDC4), Color(0xFF44A08D)],
+          () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const SelfAwarenessScreen(),
+            ),
+          ),
+        ),
+        _buildSquareShortCard(
+          l10n.square3Title, // Daily Tasks (Square 3)
+          Icons.task_alt_rounded,
+          const [Color(0xFFFFE259), Color(0xFFFFA751)],
+          () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const DailyTasksScreen()),
+          ),
+        ),
+      ],
+
+      2: [
+        // Week 2 — Focus & Emotional Control
+        _buildSquareShortCard(
+          l10n.focusQuest, // Focus Game
+          Icons.games_rounded,
+          const [Color(0xFFF6D365), Color(0xFFFDA085)],
+          () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  const FocusGamesMenuScreen(protocolSquare: 2),
+            ),
+          ),
+        ),
+        _buildSquareShortCard(
+          l10n.mindfulStories, // Stories
+          Icons.auto_stories_rounded,
+          const [Color(0xFFA1C4FD), Color(0xFFC2E9FB)],
+          () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const StoryMenuScreen(protocolSquare: 2),
+            ),
+          ),
+        ),
+      ],
+
+      3: [
+        // Week 3 — Self-Regulation & Daily Structure
+        _buildSquareShortCard(
+          l10n.square3Title, // Daily Tasks
+          Icons.task_alt_rounded,
+          const [Color(0xFFFFE259), Color(0xFFFFA751)],
+          () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const DailyTasksScreen()),
+          ),
+        ),
+        _buildSquareShortCard(
+          l10n.square2Title, // Self-Regulation Screen
+          Icons.air_rounded,
+          const [Color(0xFF667EEA), Color(0xFF764BA2)],
+          () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const SelfRegulationScreen(),
+            ),
+          ),
+        ),
+      ],
+      4: [
+        // Week 4 — Creative Calm & Expression
+        _buildSquareShortCard(
+          l10n.square4Title, // Psychological Calming (Drawing)
+          Icons.self_improvement_rounded,
+          const [Color(0xFFF093FB), Color(0xFFF5576C)],
+          () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const PsychologicalCalmingScreen(),
+            ),
+          ),
+        ),
+        _buildSquareShortCard(
+          l10n.calmingRhythms, // Music
+          Icons.music_note_rounded,
+          const [Color(0xFF84FAB0), Color(0xFF8FD3F4)],
+          () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const MusicMenuScreen()),
+          ),
+        ),
+      ],
+      5: [
+        // Week 5 — Integration & Evaluation
+        _buildSquareShortCard(
+          l10n.finalDiscoveryDashboard, // Progress/Dashboard
+          Icons.dashboard_customize_rounded,
+          const [Color(0xFFFACD68), Color(0xFF0897B4)],
+          () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const MissingSquareDashboardScreen(),
+            ),
+          ),
+        ),
+      ],
+    };
+
+    final content = weeklySquares[weekIndex] ?? [];
+
+    return IntrinsicHeight(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Vertical Line & Dot
+          Column(
+            children: [
+              Container(
+                width: 14.sp,
+                height: 14.sp,
+                decoration: BoxDecoration(
+                  color: isUnlocked ? AppTheme.primary : Colors.grey[300],
+                  shape: BoxShape.circle,
+                  border: isNext
+                      ? Border.all(
+                          color: AppTheme.primary.withValues(alpha: 0.3),
+                          width: 4,
+                        )
+                      : null,
+                ),
+              ),
+              if (weekIndex < 5)
+                Expanded(
+                  child: Container(
+                    width: 2,
+                    color: weekIndex < currentWeek
+                        ? AppTheme.primary
+                        : Colors.grey[300],
+                  ),
+                ),
+            ],
+          ),
+          SizedBox(width: 4.w),
+          // Week Content
+          Expanded(
+            child: Opacity(
+              opacity: isUnlocked ? 1.0 : 0.5,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "${l10n.weekPrefix} $weekIndex",
+                    style: GoogleFonts.spaceGrotesk(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w900,
+                      color: isUnlocked ? AppTheme.deepBlue : Colors.grey,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                  if (content.isNotEmpty) ...[
+                    SizedBox(height: 1.5.h),
+                    ...content.map(
+                      (card) => Padding(
+                        padding: EdgeInsets.only(bottom: 2.h),
+                        child: isUnlocked ? card : _buildLockedCard(card),
+                      ),
+                    ),
+                  ] else
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 2.h),
+                      child: Text(
+                        l10n.continueTraining,
+                        style: GoogleFonts.spaceGrotesk(
+                          fontSize: 11.sp,
+                          color: Colors.grey[600],
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ),
+                  SizedBox(height: 3.h),
+                ],
+              ),
+            ),
           ),
         ],
       ),
-      child: Container(
-        padding: EdgeInsets.all(3.h),
-        child: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    );
+  }
+
+  Widget _buildSquareShortCard(
+    String title,
+    IconData icon,
+    List<Color> gradient,
+    VoidCallback onTap,
+  ) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(20),
+        child: Ink(
+          padding: EdgeInsets.all(2.h),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(colors: gradient),
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: gradient.first.withValues(alpha: 0.3),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Row(
             children: [
-              // Icon
-              Container(
-                padding: EdgeInsets.all(1.5.h),
-                decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.25),
-                  borderRadius: BorderRadius.circular(16),
+              Icon(icon, color: Colors.white, size: 20.sp),
+              SizedBox(width: 4.w),
+              Expanded(
+                child: Text(
+                  title,
+                  style: GoogleFonts.spaceGrotesk(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
-                child: Icon(icon, size: 28.sp, color: Colors.white),
               ),
-              SizedBox(height: 2.h),
-              // Title
-              Text(
-                title,
-                style: GoogleFonts.spaceGrotesk(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w800,
-                  color: Colors.white,
-                  letterSpacing: -0.3,
-                  height: 1.2,
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-              SizedBox(height: 0.8.h),
-              // Description
-              Text(
-                description,
-                style: GoogleFonts.spaceGrotesk(
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white.withValues(alpha: 0.9),
-                  height: 1.3,
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
+              const Icon(Icons.chevron_right_rounded, color: Colors.white),
             ],
           ),
         ),
       ),
     );
+  }
 
-    if (heroTag != null) {
-      cardContent = Hero(
-        tag: heroTag,
-        child: Material(color: Colors.transparent, child: cardContent),
-      );
-    }
-
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(24),
-        splashColor: Colors.white.withValues(alpha: 0.3),
-        highlightColor: Colors.white.withValues(alpha: 0.1),
-        child: cardContent,
+  Widget _buildLockedCard(Widget card) {
+    return AbsorbPointer(
+      child: Stack(
+        children: [
+          card,
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.2),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: const Center(
+                child: Icon(
+                  Icons.lock_outline_rounded,
+                  color: Colors.white,
+                  size: 30,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

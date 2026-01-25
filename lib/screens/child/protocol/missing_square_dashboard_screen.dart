@@ -1,22 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mokrabela/l10n/app_localizations.dart';
+import 'package:mokrabela/services/auth_service.dart';
+import 'package:mokrabela/services/session_service.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 import 'package:sizer/sizer.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-/// Missing Square Protocol Dashboard - 4 therapeutic squares
 class MissingSquareDashboardScreen extends StatelessWidget {
   const MissingSquareDashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final authService = AuthService();
+    final sessionService = SessionService();
+    final userId = authService.currentUser?.uid;
+
+    if (userId == null) {
+      return const Scaffold(body: Center(child: Text("Please login")));
+    }
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text(
-          l10n.missingSquareProtocol,
+          l10n.protocolAnalytics,
           style: GoogleFonts.spaceGrotesk(
             color: AppTheme.deepBlue,
             fontWeight: FontWeight.w900,
@@ -27,209 +35,264 @@ class MissingSquareDashboardScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new, color: AppTheme.deepBlue),
+          icon: const Icon(Icons.arrow_back_ios_new, color: AppTheme.deepBlue),
           onPressed: () => Navigator.pop(context),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.info_outline, color: AppTheme.deepBlue),
-            onPressed: () => _showProtocolExplanation(context, l10n),
-          ),
-        ],
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Color(0xFFFAFAFA), Color(0xFFE1F5FE), Color(0xFFFAFAFA)],
-            stops: [0.0, 0.5, 1.0],
-          ),
-        ),
-        child: SafeArea(
-          child: Column(
-            children: [
-              SizedBox(height: 2.h),
-              // Subtitle
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 6.w),
-                child: Text(
-                  l10n.protocolExplanation,
+      body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+        stream: sessionService.getProtocolSessionsStream(userId),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          final docs = snapshot.data?.docs ?? [];
+
+          // Debug: Print what we got
+          print('📊 Dashboard: Found ${docs.length} total sessions');
+          for (var doc in docs.take(3)) {
+            final data = doc.data();
+            print(
+              '  Session: type=${data['type']}, protocolSquare=${data['protocolSquare']}, hasStress=${data['stressLevelAfter'] != null}',
+            );
+          }
+
+          // Filter to only protocol sessions (protocolSquare 1-4)
+          final protocolDocs = docs.where((doc) {
+            final square = doc.data()['protocolSquare'] as int?;
+            return square != null && square >= 1 && square <= 4;
+          }).toList();
+
+          print(
+            '📊 Dashboard: Filtered to ${protocolDocs.length} protocol sessions',
+          );
+
+          // Temporarily show all sessions if no protocol sessions found
+          final displayDocs = protocolDocs.isEmpty ? docs : protocolDocs;
+
+          if (displayDocs.isEmpty) {
+            return _buildEmptyState(l10n);
+          }
+
+          // Aggregate data per week
+          final Map<int, List<double>> weeklyStress = {};
+          final Map<int, List<double>> weeklyActivity = {};
+
+          for (var doc in displayDocs) {
+            final data = doc.data();
+            // Use protocolSquare if available, fallback to protocolWeek
+            final week =
+                (data['protocolSquare'] as int?) ??
+                (data['protocolWeek'] as int?);
+            if (week == null) continue;
+
+            // Biometric fields are at root level per schema
+            final stress = data['stressLevelAfter']?.toDouble() ?? 0.0;
+            final activity = data['avgMotionIntensity']?.toDouble() ?? 0.0;
+
+            weeklyStress.putIfAbsent(week, () => []).add(stress);
+            weeklyActivity.putIfAbsent(week, () => []).add(activity);
+          }
+
+          return SingleChildScrollView(
+            padding: EdgeInsets.all(5.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildSummaryCard(
+                  weeklyStress,
+                  l10n.avgStressLevel,
+                  Icons.favorite_rounded,
+                  Colors.redAccent,
+                ),
+                SizedBox(height: 3.h),
+                _buildSummaryCard(
+                  weeklyActivity,
+                  l10n.avgActivityLevel,
+                  Icons.directions_run_rounded,
+                  Colors.orangeAccent,
+                ),
+                SizedBox(height: 4.h),
+                Text(
+                  l10n.weeklyBreakdown,
                   style: GoogleFonts.spaceGrotesk(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w600,
-                    color: AppTheme.deepBlue.withValues(alpha: 0.7),
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.bold,
+                    color: AppTheme.deepBlue,
                   ),
-                  textAlign: TextAlign.center,
                 ),
-              ),
-              SizedBox(height: 3.h),
-              // 4 Squares Grid
-              Expanded(
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  padding: EdgeInsets.symmetric(horizontal: 4.w),
-                  mainAxisSpacing: 3.h,
-                  crossAxisSpacing: 3.w,
-                  children: [
-                    _buildSquareCard(
-                      context,
-                      title: l10n.square1Title,
-                      description: l10n.square1Desc,
-                      icon: Icons.psychology,
-                      gradient: const [Color(0xFF4ECDC4), Color(0xFF44A08D)],
-                      onTap: () {
-                        // TODO: Navigate to Self Awareness Screen
-                        _showComingSoon(context, l10n.square1Title);
-                      },
-                    ),
-                    _buildSquareCard(
-                      context,
-                      title: l10n.square2Title,
-                      description: l10n.square2Desc,
-                      icon: Icons.air,
-                      gradient: const [Color(0xFF667EEA), Color(0xFF764BA2)],
-                      onTap: () {
-                        // TODO: Navigate to Self Regulation Screen
-                        _showComingSoon(context, l10n.square2Title);
-                      },
-                    ),
-                    _buildSquareCard(
-                      context,
-                      title: l10n.square3Title,
-                      description: l10n.square3Desc,
-                      icon: Icons.task_alt,
-                      gradient: const [Color(0xFFFFE259), Color(0xFFFFA751)],
-                      onTap: () {
-                        // TODO: Navigate to Daily Tasks Screen
-                        _showComingSoon(context, l10n.square3Title);
-                      },
-                    ),
-                    _buildSquareCard(
-                      context,
-                      title: l10n.square4Title,
-                      description: l10n.square4Desc,
-                      icon: Icons.self_improvement,
-                      gradient: const [Color(0xFFF093FB), Color(0xFFF5576C)],
-                      onTap: () {
-                        // TODO: Navigate to Psychological Calming Screen
-                        _showComingSoon(context, l10n.square4Title);
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
+                SizedBox(height: 2.h),
+                ...List.generate(5, (index) {
+                  final week = index + 1;
+                  final stressList = weeklyStress[week] ?? [];
+                  final avgStress = stressList.isEmpty
+                      ? 0.0
+                      : stressList.reduce((a, b) => a + b) / stressList.length;
+
+                  return _buildWeekDetailRow(
+                    l10n,
+                    week,
+                    avgStress,
+                    stressList.length,
+                  );
+                }),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
 
-  Widget _buildSquareCard(
-    BuildContext context, {
-    required String title,
-    required String description,
-    required IconData icon,
-    required List<Color> gradient,
-    required VoidCallback onTap,
-  }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: gradient,
-          ),
-          borderRadius: BorderRadius.circular(24),
-          boxShadow: [
-            BoxShadow(
-              color: gradient.first.withValues(alpha: 0.4),
-              blurRadius: 20,
-              offset: const Offset(0, 10),
-              spreadRadius: -5,
+  Widget _buildEmptyState(AppLocalizations l10n) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.analytics_outlined, size: 60.sp, color: Colors.grey[300]),
+          SizedBox(height: 2.h),
+          Text(
+            l10n.noProtocolData,
+            style: GoogleFonts.spaceGrotesk(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.bold,
+              color: Colors.grey,
             ),
-          ],
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(3.h),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          ),
+          SizedBox(height: 1.h),
+          Text(
+            l10n.noProtocolDataDesc,
+            style: GoogleFonts.spaceGrotesk(
+              fontSize: 12.sp,
+              color: Colors.grey[400],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSummaryCard(
+    Map<int, List<double>> data,
+    String title,
+    IconData icon,
+    Color color,
+  ) {
+    return Container(
+      padding: EdgeInsets.all(4.w),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
             children: [
-              // Icon
-              Container(
-                padding: EdgeInsets.all(2.h),
-                decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.25),
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Icon(icon, size: 32.sp, color: Colors.white),
-              ),
-              SizedBox(height: 2.h),
-              // Title
+              Icon(icon, color: color, size: 20.sp),
+              SizedBox(width: 3.w),
               Text(
                 title,
                 style: GoogleFonts.spaceGrotesk(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w800,
-                  color: Colors.white,
-                  letterSpacing: -0.3,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14.sp,
                 ),
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-              SizedBox(height: 0.5.h),
-              // Description
-              Text(
-                description,
-                style: GoogleFonts.spaceGrotesk(
-                  fontSize: 11.sp,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white.withValues(alpha: 0.85),
-                ),
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
+          SizedBox(height: 3.h),
+          SizedBox(
+            height: 15.h,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: List.generate(5, (index) {
+                final week = index + 1;
+                final list = data[week] ?? [];
+                final avg = list.isEmpty
+                    ? 0.0
+                    : list.reduce((a, b) => a + b) / list.length;
+                final heightFactor = (avg / 100).clamp(0.05, 1.0);
 
-  void _showProtocolExplanation(BuildContext context, AppLocalizations l10n) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(
-          l10n.missingSquareProtocol,
-          style: GoogleFonts.spaceGrotesk(fontWeight: FontWeight.w800),
-        ),
-        content: Text(
-          l10n.protocolExplanation,
-          style: GoogleFonts.spaceGrotesk(),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('OK', style: GoogleFonts.spaceGrotesk()),
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      width: 8.w,
+                      height: 10.h * heightFactor,
+                      decoration: BoxDecoration(
+                        color: list.isEmpty
+                            ? Colors.grey[100]
+                            : color.withValues(alpha: 0.8),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    SizedBox(height: 1.h),
+                    Text(
+                      "W$week",
+                      style: GoogleFonts.spaceGrotesk(
+                        fontSize: 10.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                );
+              }),
+            ),
           ),
         ],
       ),
     );
   }
 
-  void _showComingSoon(BuildContext context, String feature) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('$feature - Coming soon!'),
-        backgroundColor: AppTheme.info,
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+  Widget _buildWeekDetailRow(
+    AppLocalizations l10n,
+    int week,
+    double avgStress,
+    int sessionCount,
+  ) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 1.5.h),
+      padding: EdgeInsets.all(3.w),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.grey[100]!),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            l10n.weekDetail(week),
+            style: GoogleFonts.spaceGrotesk(fontWeight: FontWeight.bold),
+          ),
+          Row(
+            children: [
+              Text(
+                l10n.sessionsCount(sessionCount),
+                style: GoogleFonts.spaceGrotesk(
+                  color: Colors.grey,
+                  fontSize: 11.sp,
+                ),
+              ),
+              SizedBox(width: 4.w),
+              Text(
+                l10n.stressPercentage(avgStress.toInt()),
+                style: GoogleFonts.spaceGrotesk(
+                  fontWeight: FontWeight.w900,
+                  color: AppTheme.primary,
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

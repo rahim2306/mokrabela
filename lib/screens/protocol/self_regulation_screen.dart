@@ -7,6 +7,7 @@ import 'package:sizer/sizer.dart';
 import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:mokrabela/services/auth_service.dart';
 import 'package:mokrabela/services/protocol_service.dart';
+import 'package:mokrabela/services/session_service.dart';
 
 class SelfRegulationScreen extends StatefulWidget {
   const SelfRegulationScreen({super.key});
@@ -19,13 +20,34 @@ class _SelfRegulationScreenState extends State<SelfRegulationScreen> {
   int _currentStopStep = 0;
   final ProtocolService _protocolService = ProtocolService();
   final AuthService _authService = AuthService();
+  final SessionService _sessionService = SessionService();
   bool _isSaving = false;
+  late DateTime _screenStartTime;
+
+  @override
+  void initState() {
+    super.initState();
+    _screenStartTime = DateTime.now();
+  }
 
   Future<void> _completeSession() async {
     setState(() => _isSaving = true);
     try {
       final user = _authService.currentUser;
       if (user != null) {
+        // Record session (includes biometrics)
+        await _sessionService.saveSession(
+          childId: user.uid,
+          type: 'breathing',
+          exerciseName: 'Self Regulation',
+          exerciseType: 'stop_technique',
+          protocolSquare: 2,
+          startTime: _screenStartTime,
+          endTime: DateTime.now(),
+          completed: true,
+          context: context,
+        );
+
         await _protocolService.updateProtocolProgress(user.uid, 2);
         if (mounted) {
           Navigator.pop(context);

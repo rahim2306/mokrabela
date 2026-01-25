@@ -158,16 +158,7 @@ class BleService extends ChangeNotifier {
 
         if (!allGranted) {
           _lastErrorMessage =
-              "Missing permissions: " +
-              (statuses[Permission.bluetoothScan] != PermissionStatus.granted
-                  ? "Scan, "
-                  : "") +
-              (statuses[Permission.bluetoothConnect] != PermissionStatus.granted
-                  ? "Connect, "
-                  : "") +
-              (statuses[Permission.location] != PermissionStatus.granted
-                  ? "Location"
-                  : "");
+              "Missing permissions: ${statuses[Permission.bluetoothScan] != PermissionStatus.granted ? "Scan, " : ""}${statuses[Permission.bluetoothConnect] != PermissionStatus.granted ? "Connect, " : ""}${statuses[Permission.location] != PermissionStatus.granted ? "Location" : ""}";
           _logger.w(_lastErrorMessage);
           return false;
         }

@@ -31,6 +31,7 @@ class AuthService {
       if (user != null) {
         final profile = UserProfile(name: name);
         final watchSettings = WatchSettings(); // Default settings
+        final appSettings = AppSettings(); // Default app settings
 
         // Create user doc in Firestore
         await _firestore.collection('users').doc(user.uid).set({
@@ -38,8 +39,8 @@ class AuthService {
           'role': role.toString().split('.').last,
           'profile': profile.toMap(),
           'watchSettings': watchSettings.toMap(),
+          'appSettings': appSettings.toMap(),
           'createdAt': FieldValue.serverTimestamp(),
-          // 'email': email, // kept only if debugging needed, but removed from official schema model
         });
 
         return UserModel(
@@ -47,6 +48,7 @@ class AuthService {
           role: role,
           profile: profile,
           watchSettings: watchSettings,
+          appSettings: appSettings,
         );
       }
       return null;
@@ -105,5 +107,17 @@ class AuthService {
   // Sign Out
   Future<void> signOut() async {
     await _auth.signOut();
+  }
+
+  // Update App Settings
+  Future<void> updateAppSettings(String uid, AppSettings settings) async {
+    try {
+      await _firestore.collection('users').doc(uid).update({
+        'appSettings': settings.toMap(),
+      });
+    } catch (e) {
+      debugPrint('UpdateAppSettings Error: ${e.toString()}');
+      rethrow;
+    }
   }
 }

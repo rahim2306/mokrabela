@@ -9,7 +9,8 @@ import 'package:mokrabela/theme/app_theme.dart';
 import 'package:sizer/sizer.dart';
 
 class StoryMenuScreen extends StatefulWidget {
-  const StoryMenuScreen({super.key});
+  final int? protocolSquare;
+  const StoryMenuScreen({super.key, this.protocolSquare});
 
   @override
   State<StoryMenuScreen> createState() => _StoryMenuScreenState();
@@ -128,11 +129,14 @@ class _StoryMenuScreenState extends State<StoryMenuScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        StoryReaderScreen(story: story),
+                                    builder: (context) => StoryReaderScreen(
+                                      story: story,
+                                      protocolSquare: widget.protocolSquare,
+                                    ),
                                   ),
                                 );
                               },
+
                               child: Padding(
                                 padding: EdgeInsets.all(3.h),
                                 child: Row(

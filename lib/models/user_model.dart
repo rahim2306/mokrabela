@@ -64,27 +64,41 @@ class WatchSettings {
   }
 }
 
+class AppSettings {
+  final int dailyCalmGoalMinutes;
+
+  AppSettings({
+    this.dailyCalmGoalMinutes = 30, // Default 30 minutes
+  });
+
+  factory AppSettings.fromMap(Map<String, dynamic> data) {
+    return AppSettings(
+      dailyCalmGoalMinutes: data['dailyCalmGoalMinutes'] as int? ?? 30,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {'dailyCalmGoalMinutes': dailyCalmGoalMinutes};
+  }
+}
+
 class UserModel {
   final String uid;
   final UserRole role;
   final UserProfile profile;
   final WatchSettings watchSettings;
+  final AppSettings appSettings;
 
   // Shortcuts for UI convenience
   String get name => profile.name ?? '';
-  String get email =>
-      ''; // Email is generally auth-level, not strictly in doc per schema, but can keep if needed. Schema didn't list email in doc, only auth. Assuming removed or fetched via Auth.
-  // Wait, legacy code used email. Schema: "uid: string, role: ..., profile: ..., watchSettings: ...". No email in doc.
-  // I will keep email as a passing field from Auth if available, or empty if not in doc.
-  // Actually, existing code relies on email. I'll check if I should keep it in the class but not parse it from doc if it's not there.
-  // Schema does NOT show email in the document.
-  // I will add email to the model class but not require it from Firestore map if not present.
+  String get email => '';
 
   UserModel({
     required this.uid,
     required this.role,
     required this.profile,
     required this.watchSettings,
+    required this.appSettings,
   });
 
   factory UserModel.fromFirestore(DocumentSnapshot doc) {
@@ -101,6 +115,9 @@ class UserModel {
       ),
       watchSettings: WatchSettings.fromMap(
         data['watchSettings'] as Map<String, dynamic>? ?? {},
+      ),
+      appSettings: AppSettings.fromMap(
+        data['appSettings'] as Map<String, dynamic>? ?? {},
       ),
     );
   }

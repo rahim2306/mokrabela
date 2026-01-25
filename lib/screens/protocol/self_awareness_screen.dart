@@ -6,7 +6,9 @@ import 'package:mokrabela/screens/protocol/body_scan_screen.dart';
 import 'package:mokrabela/services/auth_service.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 import 'package:mokrabela/services/protocol_service.dart';
+import 'package:mokrabela/services/session_service.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:sizer/sizer.dart';
 
 class SelfAwarenessScreen extends StatefulWidget {
@@ -19,9 +21,11 @@ class SelfAwarenessScreen extends StatefulWidget {
 class _SelfAwarenessScreenState extends State<SelfAwarenessScreen> {
   final AuthService _authService = AuthService();
   final ProtocolService _protocolService = ProtocolService();
+  final SessionService _sessionService = SessionService();
   String? _selectedEmotion;
   double _activityScale = 5.0;
   bool _isSaving = false;
+  late DateTime _screenStartTime;
 
   List<Map<String, dynamic>> _getEmotions(AppLocalizations l10n) => [
     {'label': l10n.emotionHappy, 'emoji': '😊', 'key': 'Happy'},
@@ -35,6 +39,7 @@ class _SelfAwarenessScreenState extends State<SelfAwarenessScreen> {
   @override
   void initState() {
     super.initState();
+    _screenStartTime = DateTime.now();
   }
 
   Future<void> _saveReport() async {
@@ -44,6 +49,24 @@ class _SelfAwarenessScreenState extends State<SelfAwarenessScreen> {
     try {
       final user = _authService.currentUser;
       if (user != null) {
+        // Record as a formal session (automatically captures watch biometrics)
+        await _sessionService.saveSession(
+          childId: user.uid,
+          type: 'focus',
+          exerciseName: 'Self Awareness',
+          exerciseType: 'body_check_log',
+          protocolSquare: 1,
+          startTime: _screenStartTime,
+          endTime: DateTime.now(),
+          completed: true,
+          exerciseData: {
+            'selectedEmotion': _selectedEmotion,
+            'userReportedActivityScale': _activityScale,
+          },
+          context: context,
+        );
+
+        // Also ensure protocol state is updated
         await _protocolService.updateProtocolProgress(user.uid, 1);
 
         if (mounted) {

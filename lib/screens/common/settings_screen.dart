@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:mokrabela/services/auth_service.dart';
+import 'package:mokrabela/models/user_model.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 import 'package:mokrabela/components/buttons/primary_button.dart';
 import 'package:sizer/sizer.dart';
@@ -24,17 +25,43 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   late Locale _selectedLocale;
+  int _selectedGoal = 30; // Default
+  final AuthService _authService = AuthService();
 
   @override
   void initState() {
     super.initState();
     _selectedLocale = widget.currentLocale;
+    _loadCurrentGoal();
+  }
+
+  Future<void> _loadCurrentGoal() async {
+    final user = await _authService.currentUser;
+    if (user != null) {
+      final userDetails = await _authService.getUserDetails(user.uid);
+      if (userDetails != null && mounted) {
+        setState(() {
+          // Default to 30 if not set
+          _selectedGoal = userDetails.appSettings.dailyCalmGoalMinutes;
+        });
+      }
+    }
+  }
+
+  Future<void> _updateGoal(int newGoal) async {
+    setState(() => _selectedGoal = newGoal);
+    final user = await _authService.currentUser; // Await the Future<User?>
+    if (user != null) {
+      // Update settings
+      final settings = AppSettings(dailyCalmGoalMinutes: newGoal);
+      await _authService.updateAppSettings(user.uid, settings);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final authService = AuthService();
+    // final authService = AuthService(); // Removed as _authService is now a state variable
 
     return Scaffold(
       body: Container(
@@ -119,6 +146,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         title: l10n.language,
                         trailing: _buildLanguageDropdown(context),
                       ),
+
+                      const Divider(height: 30),
+
+                      // Daily Calm Goal selector
+                      _buildSettingTile(
+                        icon: Icons.timer,
+                        title: l10n.dailyCalmGoal,
+                        trailing: _buildCalmGoalDropdown(context),
+                      ),
                     ],
                   ),
                 ),
@@ -133,7 +169,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     Color(0xFFFF9B9B), // Light coral
                   ],
                   onPressed: () async {
-                    await authService.signOut();
+                    await _authService.signOut();
                     // Pop settings screen so AuthGate can navigate to onboarding
                     if (context.mounted) {
                       Navigator.of(context).pop();
@@ -212,6 +248,45 @@ class _SettingsScreenState extends State<SettingsScreen> {
               _selectedLocale = Locale(newValue);
             });
             widget.onLanguageChanged(Locale(newValue));
+          }
+        },
+      ),
+    );
+  }
+
+  Widget _buildCalmGoalDropdown(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final goals = [10, 15, 20, 30, 45, 60];
+
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 0.5.h),
+      decoration: BoxDecoration(
+        color: AppTheme.primary.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: AppTheme.primary.withValues(alpha: 0.3),
+          width: 1,
+        ),
+      ),
+      child: DropdownButton<int>(
+        value: _selectedGoal,
+        dropdownColor: Colors.white,
+        underline: const SizedBox(),
+        icon: Icon(Icons.arrow_drop_down, color: AppTheme.primary),
+        style: TextStyle(
+          fontSize: 14.sp,
+          color: AppTheme.deepBlue,
+          fontWeight: FontWeight.w600,
+        ),
+        items: goals.map((minutes) {
+          return DropdownMenuItem<int>(
+            value: minutes,
+            child: Text('$minutes ${l10n.minutes}'),
+          );
+        }).toList(),
+        onChanged: (int? newValue) {
+          if (newValue != null) {
+            _updateGoal(newValue);
           }
         },
       ),

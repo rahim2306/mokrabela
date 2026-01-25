@@ -6,7 +6,9 @@ import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:mokrabela/models/daily_task.dart';
 import 'package:mokrabela/services/auth_service.dart';
 import 'package:mokrabela/services/task_service.dart';
+import 'package:mokrabela/services/session_service.dart';
 import 'dart:async';
+
 import 'package:mokrabela/services/protocol_service.dart';
 import 'package:uuid/uuid.dart';
 
@@ -21,12 +23,14 @@ class _DailyTasksScreenState extends State<DailyTasksScreen> {
   final TaskService _taskService = TaskService();
   final AuthService _authService = AuthService();
   final ProtocolService _protocolService = ProtocolService();
+  final SessionService _sessionService = SessionService();
   final Uuid _uuid = const Uuid();
 
   // Timer State
   Timer? _timer;
   int _remainingSeconds = 25 * 60; // 25 minutes default
   bool _isRunning = false;
+  DateTime? _sessionStartTime;
 
   String? _childId;
   Stream<List<DailyTask>>? _tasksStream;
@@ -55,6 +59,7 @@ class _DailyTasksScreenState extends State<DailyTasksScreen> {
 
   void _startTimer() {
     if (_isRunning) return;
+    _sessionStartTime ??= DateTime.now();
     setState(() => _isRunning = true);
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (_remainingSeconds > 0) {
@@ -100,6 +105,25 @@ class _DailyTasksScreenState extends State<DailyTasksScreen> {
 
   Future<void> _saveSession() async {
     if (_childId != null) {
+      // Record full session (includes biometrics)
+      await _sessionService.saveSession(
+        childId: _childId!,
+        type: 'focus',
+        exerciseName: 'Daily Tasks',
+        exerciseType: 'focus_timer',
+        protocolSquare: 3,
+        startTime:
+            _sessionStartTime ??
+            DateTime.now().subtract(const Duration(minutes: 25)),
+        endTime: DateTime.now(),
+        completed: true,
+        exerciseData: {'durationMinutes': 25},
+        context: context,
+      );
+
+      // Reset start time for next run
+      _sessionStartTime = null;
+
       await _protocolService.updateProtocolProgress(_childId!, 3);
     }
   }

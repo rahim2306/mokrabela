@@ -114,6 +114,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get dailyProgress => 'التقدم اليومي';
 
   @override
+  String get todaysCalmTime => 'وقت الهدوء اليوم';
+
+  @override
+  String get minutes => 'دقيقة';
+
+  @override
+  String get dailyCalmGoal => 'هدف الهدوء اليومي';
+
+  @override
+  String get goalReached => 'تم الوصول للهدف!';
+
+  @override
   String tasksRemaining(int count) {
     return '$count مهام متبقية';
   }
@@ -156,9 +168,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get reset => 'إعادة ضبط';
-
-  @override
-  String get minutes => 'دقيقة';
 
   @override
   String get taskTitle => 'عنوان المهمة';
@@ -365,7 +374,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get forestBreathDesc => 'تمرين لطيف (7 ثوانٍ) للتوازن الطبيعي.';
 
   @override
-  String get seconds => 'ثواني';
+  String get seconds => 'seconds';
 
   @override
   String startExercise(String exercise) {
@@ -877,6 +886,62 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get achStoryMaster => 'عاشق الحكايات';
+
+  @override
+  String weekLabel(int count) {
+    return 'الأسبوع $count من 5';
+  }
+
+  @override
+  String get weekPrefix => 'الأسبوع';
+
+  @override
+  String get continueTraining => 'استمر في عادات التدريب';
+
+  @override
+  String get focusQuest => 'مهمة التركيز';
+
+  @override
+  String get mindfulStories => 'قصص واعية';
+
+  @override
+  String get calmingRhythms => 'إيقاعات مهدئة';
+
+  @override
+  String get finalDiscoveryDashboard => 'لوحة الاستكشاف النهائية';
+
+  @override
+  String get protocolAnalytics => 'تحليلات البروتوكول';
+
+  @override
+  String get avgStressLevel => 'متوسط مستوى التوتر';
+
+  @override
+  String get avgActivityLevel => 'متوسط مستوى النشاط';
+
+  @override
+  String get weeklyBreakdown => 'التقسيم الأسبوعي';
+
+  @override
+  String get noProtocolData => 'لا توجد بيانات بروتوكول بعد';
+
+  @override
+  String get noProtocolDataDesc => 'ستظهر الإحصائيات عند إكمال الأنشطة.';
+
+  @override
+  String weekDetail(int index) {
+    return 'الأسبوع $index';
+  }
+
+  @override
+  String sessionsCount(int count) {
+    return '$count جلسات';
+  }
+
+  @override
+  String stressPercentage(int percentage) {
+    return '$percentage% توتر';
+  }
 
   @override
   String get achStoryMasterDesc => 'استمع إلى 15 قصة.';

@@ -115,6 +115,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dailyProgress => 'Daily Progress';
 
   @override
+  String get todaysCalmTime => 'Today\'s Calm Time';
+
+  @override
+  String get minutes => 'minutes';
+
+  @override
+  String get dailyCalmGoal => 'Daily Calm Goal';
+
+  @override
+  String get goalReached => 'Goal reached!';
+
+  @override
   String tasksRemaining(int count) {
     return '$count Tasks Remaining';
   }
@@ -157,9 +169,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reset => 'Reset';
-
-  @override
-  String get minutes => 'minutes';
 
   @override
   String get taskTitle => 'Task Title';
@@ -399,7 +408,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get whyFocusGamesDesc =>
-      'Focus games help improve concentration, memory, and cognitive skills. They\'re a fun way to train your brain and boost mental agility!';
+      'Focus games help improve concentration, memory, and cognitive skills. It\'s a fun way to train your brain and boost mental agility!';
 
   @override
   String get breatheIn => 'Breathe In';
@@ -880,6 +889,63 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get achStoryMaster => 'Fable Fanatic';
+
+  @override
+  String weekLabel(int count) {
+    return 'Week $count of 5';
+  }
+
+  @override
+  String get weekPrefix => 'WEEK';
+
+  @override
+  String get continueTraining => 'Continue training habits';
+
+  @override
+  String get focusQuest => 'Focus Quest';
+
+  @override
+  String get mindfulStories => 'Mindful Stories';
+
+  @override
+  String get calmingRhythms => 'Calming Rhythms';
+
+  @override
+  String get finalDiscoveryDashboard => 'Final Discovery Dashboard';
+
+  @override
+  String get protocolAnalytics => 'Protocol Analytics';
+
+  @override
+  String get avgStressLevel => 'Avg Stress Level';
+
+  @override
+  String get avgActivityLevel => 'Avg Activity Level';
+
+  @override
+  String get weeklyBreakdown => 'Weekly Breakdown';
+
+  @override
+  String get noProtocolData => 'No Protocol Data Yet';
+
+  @override
+  String get noProtocolDataDesc =>
+      'Stats will appear as you complete activities.';
+
+  @override
+  String weekDetail(int index) {
+    return 'Week $index';
+  }
+
+  @override
+  String sessionsCount(int count) {
+    return '$count sessions';
+  }
+
+  @override
+  String stressPercentage(int percentage) {
+    return '$percentage% Stress';
+  }
 
   @override
   String get achStoryMasterDesc => 'Listen to 15 stories.';

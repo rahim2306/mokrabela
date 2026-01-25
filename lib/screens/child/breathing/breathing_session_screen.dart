@@ -122,24 +122,25 @@ class _BreathingSessionScreenState extends State<BreathingSessionScreen>
     final user = _authService.currentUser;
     if (user != null && mounted) {
       try {
+        // Record session (includes biometrics automatically)
+        await _sessionService.saveSession(
+          childId: user.uid,
+          type: 'breathing',
+          exerciseName: widget.exercise.title,
+          exerciseType: widget.exercise.id,
+          protocolSquare: widget.protocolSquare,
+          startTime: _sessionStartTime,
+          endTime: DateTime.now(),
+          completed: true,
+          exerciseData: {'breathingCycles': _currentCycle},
+          context: context,
+        );
+
         if (widget.protocolSquare != null) {
-          // Protocol activity: Update progress only
+          // Update protocol roadmap progress
           await _protocolService.updateProtocolProgress(
             user.uid,
             widget.protocolSquare!,
-          );
-        } else {
-          // Hub activity: Save full session
-          await _sessionService.saveSession(
-            childId: user.uid,
-            type: 'breathing',
-            exerciseName: widget.exercise.title,
-            exerciseType: widget.exercise.id,
-            startTime: _sessionStartTime,
-            endTime: DateTime.now(),
-            completed: true,
-            exerciseData: {'breathingCycles': _currentCycle},
-            context: context,
           );
         }
       } catch (error) {
@@ -368,9 +369,9 @@ class _BreathingSessionScreenState extends State<BreathingSessionScreen>
   String _getPhaseText(AppLocalizations l10n) {
     switch (_currentPhase) {
       case BreathPhase.inhale:
-        return 'Breathe In'; // TODO: Localize
+        return l10n.breatheIn;
       case BreathPhase.exhale:
-        return 'Breathe Out';
+        return l10n.breatheOut;
     }
   }
 }

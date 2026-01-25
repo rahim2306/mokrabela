@@ -9,8 +9,13 @@ import 'package:sizer/sizer.dart';
 
 class StoryReaderScreen extends StatefulWidget {
   final Story story;
+  final int? protocolSquare;
 
-  const StoryReaderScreen({super.key, required this.story});
+  const StoryReaderScreen({
+    super.key,
+    required this.story,
+    this.protocolSquare,
+  });
 
   @override
   State<StoryReaderScreen> createState() => _StoryReaderScreenState();
@@ -67,6 +72,7 @@ class _StoryReaderScreenState extends State<StoryReaderScreen> {
         type: 'story',
         exerciseName: widget.story.getTitle(l10n.localeName),
         exerciseType: widget.story.id,
+        protocolSquare: widget.protocolSquare,
         startTime: now,
         endTime: now,
         completed: true,

@@ -6,7 +6,9 @@ import 'package:mokrabela/screens/child/stories/story_menu_screen.dart';
 import 'package:mokrabela/screens/protocol/drawing_canvas_screen.dart';
 import 'package:mokrabela/services/auth_service.dart';
 import 'package:mokrabela/services/protocol_service.dart';
+import 'package:mokrabela/services/session_service.dart';
 import 'package:mokrabela/theme/app_theme.dart';
+
 import 'package:sizer/sizer.dart';
 
 class PsychologicalCalmingScreen extends StatefulWidget {
@@ -21,13 +23,34 @@ class _PsychologicalCalmingScreenState
     extends State<PsychologicalCalmingScreen> {
   final ProtocolService _protocolService = ProtocolService();
   final AuthService _authService = AuthService();
+  final SessionService _sessionService = SessionService();
   bool _isSaving = false;
+  late DateTime _screenStartTime;
+
+  @override
+  void initState() {
+    super.initState();
+    _screenStartTime = DateTime.now();
+  }
 
   Future<void> _completeSession() async {
     setState(() => _isSaving = true);
     try {
       final user = _authService.currentUser;
       if (user != null) {
+        // Record session (includes biometrics)
+        await _sessionService.saveSession(
+          childId: user.uid,
+          type: 'drawing',
+          exerciseName: 'Psychological Calming',
+          exerciseType: 'mindfulness_hub',
+          protocolSquare: 4,
+          startTime: _screenStartTime,
+          endTime: DateTime.now(),
+          completed: true,
+          context: context,
+        );
+
         await _protocolService.updateProtocolProgress(user.uid, 4);
 
         if (mounted) {

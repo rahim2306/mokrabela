@@ -146,6 +146,10 @@
   "@dailyProgress": {
     "description": "Titre de la section progrès quotidien"
   },
+  "todaysCalmTime": "Temps calme aujourd'hui",
+  "minutes": "min",
+  "dailyCalmGoal": "Objectif quotidien de calme",
+  "goalReached": "Objectif atteint!",
   "tasksRemaining": "{count} tâches restantes",
   "@tasksRemaining": {
     "description": "Nombre de tâches restantes",
@@ -490,6 +494,10 @@
     "description": "Titre de la carte d'info sur les jeux de concentration"
   },
   "whyFocusGamesDesc": "Les jeux de concentration aident à améliorer la concentration, la mémoire et les capacités cognitives. C'est une façon amusante d'entraîner votre cerveau et de booster votre agilité mentale !",
+  "breatheIn": "Inspire",
+  "breatheOut": "Expire",
+  "cycle": "Cycle",
+  "complete": "Terminé !",
   "@whyFocusGamesDesc": {
     "description": "Description de la carte d'info sur les jeux de concentration"
   },
@@ -737,6 +745,23 @@
   "achStoryStarterDesc": "Écoutez 3 histoires.",
   "achStoryMaster": "Fanatique de Fables",
   "achStoryMasterDesc": "Écoutez 15 histoires.",
+  "weekLabel": "Semaine {count} sur 5",
+  "weekPrefix": "SEMAINE",
+  "continueTraining": "Continue les habitudes d'entraînement",
+  "focusQuest": "Quête de concentration",
+  "mindfulStories": "Histoires de pleine conscience",
+  "calmingRhythms": "Rythmes apaisants",
+  "finalDiscoveryDashboard": "Tableau de bord de découverte final",
+  "protocolAnalytics": "Analytique du protocole",
+  "avgStressLevel": "Niveau de stress moyen",
+  "avgActivityLevel": "Niveau d'activité moyen",
+  "weeklyBreakdown": "Répartition hebdomadaire",
+  "noProtocolData": "Pas encore de données de protocole",
+  "noProtocolDataDesc": "Les statistiques apparaîtront au fur et à mesure de l'achèvement des activités.",
+  "weekDetail": "Semaine {index}",
+  "sessionsCount": "{count} sessions",
+  "stressPercentage": "{percentage}% Stress",
+
   "achStreak3": "Série de 3 Jours",
   "achStreak3Desc": "Maintenez une série d'activité de 3 jours.",
   "achStreak7": "Guerrier de la Semaine",

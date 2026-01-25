@@ -292,6 +292,30 @@ abstract class AppLocalizations {
   /// **'Daily Progress'**
   String get dailyProgress;
 
+  /// Title for daily calm time tracking
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Calm Time'**
+  String get todaysCalmTime;
+
+  /// Abbreviation for minutes
+  ///
+  /// In en, this message translates to:
+  /// **'minutes'**
+  String get minutes;
+
+  /// Setting title for daily calm goal
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Calm Goal'**
+  String get dailyCalmGoal;
+
+  /// Message when daily goal is reached
+  ///
+  /// In en, this message translates to:
+  /// **'Goal reached!'**
+  String get goalReached;
+
   /// Number of tasks remaining
   ///
   /// In en, this message translates to:
@@ -375,12 +399,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Reset'**
   String get reset;
-
-  /// No description provided for @minutes.
-  ///
-  /// In en, this message translates to:
-  /// **'minutes'**
-  String get minutes;
 
   /// No description provided for @taskTitle.
   ///
@@ -841,7 +859,7 @@ abstract class AppLocalizations {
   /// Description for focus games info card
   ///
   /// In en, this message translates to:
-  /// **'Focus games help improve concentration, memory, and cognitive skills. They\'re a fun way to train your brain and boost mental agility!'**
+  /// **'Focus games help improve concentration, memory, and cognitive skills. It\'s a fun way to train your brain and boost mental agility!'**
   String get whyFocusGamesDesc;
 
   /// Inhale phase indicator
@@ -1725,6 +1743,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Fable Fanatic'**
   String get achStoryMaster;
+
+  /// No description provided for @weekLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Week {count} of 5'**
+  String weekLabel(int count);
+
+  /// No description provided for @weekPrefix.
+  ///
+  /// In en, this message translates to:
+  /// **'WEEK'**
+  String get weekPrefix;
+
+  /// No description provided for @continueTraining.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue training habits'**
+  String get continueTraining;
+
+  /// No description provided for @focusQuest.
+  ///
+  /// In en, this message translates to:
+  /// **'Focus Quest'**
+  String get focusQuest;
+
+  /// No description provided for @mindfulStories.
+  ///
+  /// In en, this message translates to:
+  /// **'Mindful Stories'**
+  String get mindfulStories;
+
+  /// No description provided for @calmingRhythms.
+  ///
+  /// In en, this message translates to:
+  /// **'Calming Rhythms'**
+  String get calmingRhythms;
+
+  /// No description provided for @finalDiscoveryDashboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Final Discovery Dashboard'**
+  String get finalDiscoveryDashboard;
+
+  /// No description provided for @protocolAnalytics.
+  ///
+  /// In en, this message translates to:
+  /// **'Protocol Analytics'**
+  String get protocolAnalytics;
+
+  /// No description provided for @avgStressLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Avg Stress Level'**
+  String get avgStressLevel;
+
+  /// No description provided for @avgActivityLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Avg Activity Level'**
+  String get avgActivityLevel;
+
+  /// No description provided for @weeklyBreakdown.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly Breakdown'**
+  String get weeklyBreakdown;
+
+  /// No description provided for @noProtocolData.
+  ///
+  /// In en, this message translates to:
+  /// **'No Protocol Data Yet'**
+  String get noProtocolData;
+
+  /// No description provided for @noProtocolDataDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Stats will appear as you complete activities.'**
+  String get noProtocolDataDesc;
+
+  /// No description provided for @weekDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Week {index}'**
+  String weekDetail(int index);
+
+  /// No description provided for @sessionsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} sessions'**
+  String sessionsCount(int count);
+
+  /// No description provided for @stressPercentage.
+  ///
+  /// In en, this message translates to:
+  /// **'{percentage}% Stress'**
+  String stressPercentage(int percentage);
 
   /// No description provided for @achStoryMasterDesc.
   ///

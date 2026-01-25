@@ -9,7 +9,8 @@ import 'package:mokrabela/theme/app_theme.dart';
 import 'package:sizer/sizer.dart';
 
 class MemoryGameScreen extends StatefulWidget {
-  const MemoryGameScreen({super.key});
+  final int? protocolSquare;
+  const MemoryGameScreen({super.key, this.protocolSquare});
 
   @override
   State<MemoryGameScreen> createState() => _MemoryGameScreenState();
@@ -40,6 +41,7 @@ class _MemoryGameScreenState extends State<MemoryGameScreen> {
             type: 'focus',
             exerciseName: 'Memory Flip',
             exerciseType: 'memory_flip',
+            protocolSquare: widget.protocolSquare,
             startTime: _sessionStartTime,
             endTime: DateTime.now(),
             completed: true,

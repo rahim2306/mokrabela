@@ -7,7 +7,8 @@ import 'package:mokrabela/theme/app_theme.dart';
 import 'package:sizer/sizer.dart';
 
 class FocusGamesMenuScreen extends StatelessWidget {
-  const FocusGamesMenuScreen({super.key});
+  final int? protocolSquare;
+  const FocusGamesMenuScreen({super.key, this.protocolSquare});
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +62,9 @@ class FocusGamesMenuScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const MemoryGameScreen(),
+                              builder: (context) => MemoryGameScreen(
+                                protocolSquare: protocolSquare,
+                              ),
                             ),
                           );
                         },

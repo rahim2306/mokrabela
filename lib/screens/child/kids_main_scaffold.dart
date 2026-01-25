@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_floating_bottom_bar/flutter_floating_bottom_bar.dart';
 import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:mokrabela/screens/child/kids_hub_screen.dart';
@@ -39,8 +40,10 @@ class _KidsMainScaffoldState extends State<KidsMainScaffold>
   int _currentIndex = 0;
   bool _isWatchConnected = false;
   String _firstName = 'Friend';
-  int _completedTasks = 0;
   List<int> _completedSquares = [];
+  int _calmMinutes = 0;
+  int _dailyGoalMinutes = 30; // Default
+  StreamSubscription? _calmTimeSubscription;
 
   @override
   void initState() {
@@ -53,12 +56,70 @@ class _KidsMainScaffoldState extends State<KidsMainScaffold>
     });
     _loadUserName();
     _initProgressStream();
+    _initCalmTimeTracking();
     RealtimeSyncService().startSync();
+  }
+
+  void _initCalmTimeTracking() {
+    final user = _authService.currentUser;
+    if (user != null) {
+      // 1. Fetch daily goal setting
+      _fetchDailyGoal(user.uid);
+
+      // 2. Listen to today's sessions to calculate calm time
+      final todayStr = DateTime.now().toIso8601String().split('T')[0];
+
+      // We listen to sessions collection directly for today's sessions
+      // Or we can use dailyProtocols if we trust it's updated correctly
+      // Let's use dailyProtocols since we have an index for it now and it stores totalFocusTime
+      _calmTimeSubscription = FirebaseFirestore.instance
+          .collection('dailyProtocols')
+          .doc('${user.uid}_$todayStr')
+          .snapshots()
+          .listen((snapshot) {
+            if (snapshot.exists && snapshot.data() != null) {
+              final data = snapshot.data()!;
+              final seconds = data['totalFocusTime'] as int? ?? 0;
+              if (mounted) {
+                setState(() {
+                  _calmMinutes = (seconds / 60).floor();
+                });
+              }
+            } else {
+              if (mounted) {
+                setState(() {
+                  _calmMinutes = 0;
+                });
+              }
+            }
+          });
+    }
+  }
+
+  Future<void> _fetchDailyGoal(String uid) async {
+    final userDetails = await _authService.getUserDetails(uid);
+    if (userDetails != null && mounted) {
+      setState(() {
+        _dailyGoalMinutes = userDetails.appSettings.dailyCalmGoalMinutes;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    _progressSubscription?.cancel();
+    _calmTimeSubscription?.cancel();
+    RealtimeSyncService().stopSync();
+    super.dispose();
   }
 
   void _initProgressStream() {
     final user = _authService.currentUser;
     if (user != null) {
+      // Ensure the child is enrolled in the 6-week protocol journey
+      _protocolService.ensureEnrollment(user.uid);
+
       _progressSubscription = _protocolService
           .getProgressStream(user.uid)
           .listen((snapshot) {
@@ -69,14 +130,12 @@ class _KidsMainScaffoldState extends State<KidsMainScaffold>
               );
               if (mounted) {
                 setState(() {
-                  _completedTasks = completed.length;
                   _completedSquares = completed;
                 });
               }
             } else {
               if (mounted) {
                 setState(() {
-                  _completedTasks = 0;
                   _completedSquares = [];
                 });
               }
@@ -115,12 +174,11 @@ class _KidsMainScaffoldState extends State<KidsMainScaffold>
     );
   }
 
-  @override
-  void dispose() {
-    _tabController.dispose();
-    _progressSubscription?.cancel();
-    RealtimeSyncService().stopSync();
-    super.dispose();
+  void _showWatchConnectionDialog(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const WatchConnectionScreen()),
+    );
   }
 
   @override
@@ -138,14 +196,7 @@ class _KidsMainScaffoldState extends State<KidsMainScaffold>
             // Persistent floating top bar with progress, watch status, and settings
             FloatingTopBar(
               isWatchConnected: _isWatchConnected,
-              onWatchTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const WatchConnectionScreen(),
-                  ),
-                );
-              },
+              onWatchTap: () => _showWatchConnectionDialog(context),
               onSettingsTap: () {
                 Navigator.push(
                   context,
@@ -156,11 +207,17 @@ class _KidsMainScaffoldState extends State<KidsMainScaffold>
                       userName: _firstName,
                     ),
                   ),
-                );
+                ).then((_) {
+                  // Reload goal when returning from settings
+                  final user = _authService.currentUser;
+                  if (user != null) _fetchDailyGoal(user.uid);
+                });
               },
               onProgressTap: _showProtocolStatus,
-              completedTasks: _completedTasks,
-              totalTasks: 4,
+              // New Calm Time Props
+              completedTasks: _calmMinutes,
+              totalTasks: _dailyGoalMinutes,
+              // We are reusing the existing props but we should rename them in FloatingTopBar next
             ),
             // Main content with bottom bar
             Expanded(
