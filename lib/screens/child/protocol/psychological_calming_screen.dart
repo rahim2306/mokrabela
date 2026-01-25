@@ -3,9 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:mokrabela/screens/child/music/music_menu_screen.dart';
 import 'package:mokrabela/screens/child/stories/story_menu_screen.dart';
-import 'package:mokrabela/screens/protocol/drawing_canvas_screen.dart';
+import 'package:mokrabela/screens/child/protocol/drawing_canvas_screen.dart';
 import 'package:mokrabela/services/auth_service.dart';
-import 'package:mokrabela/services/protocol_service.dart';
 import 'package:mokrabela/services/session_service.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 
@@ -21,7 +20,6 @@ class PsychologicalCalmingScreen extends StatefulWidget {
 
 class _PsychologicalCalmingScreenState
     extends State<PsychologicalCalmingScreen> {
-  final ProtocolService _protocolService = ProtocolService();
   final AuthService _authService = AuthService();
   final SessionService _sessionService = SessionService();
   bool _isSaving = false;
@@ -50,8 +48,6 @@ class _PsychologicalCalmingScreenState
           completed: true,
           context: context,
         );
-
-        await _protocolService.updateProtocolProgress(user.uid, 4);
 
         if (mounted) {
           Navigator.pop(context);

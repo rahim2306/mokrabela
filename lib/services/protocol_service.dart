@@ -7,68 +7,6 @@ class ProtocolService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   /// Update protocol progress for a child
-  Future<void> updateProtocolProgress(String childId, int squareNumber) async {
-    final progressRef = _firestore.collection('protocolProgress').doc(childId);
-
-    await _firestore.runTransaction((transaction) async {
-      final doc = await transaction.get(progressRef);
-      final timestamp = FieldValue.serverTimestamp();
-      final now = DateTime.now();
-
-      if (doc.exists) {
-        final data = doc.data()!;
-        final Timestamp? lastUpdated = data['lastUpdated'] as Timestamp?;
-
-        bool isNewDay = false;
-        if (lastUpdated != null) {
-          final lastDate = lastUpdated.toDate();
-          isNewDay =
-              lastDate.year != now.year ||
-              lastDate.month != now.month ||
-              lastDate.day != now.day;
-        }
-
-        if (isNewDay) {
-          // Reset for the new day and add the current square
-          transaction.update(progressRef, {
-            'completedSquares': [squareNumber],
-            'square1Complete': squareNumber == 1,
-            'square2Complete': squareNumber == 2,
-            'square3Complete': squareNumber == 3,
-            'square4Complete': squareNumber == 4,
-            'lastUpdated': timestamp,
-            'currentSquare': squareNumber,
-          });
-        } else {
-          final List<int> completed = List<int>.from(
-            data['completedSquares'] ?? [],
-          );
-          if (!completed.contains(squareNumber)) {
-            completed.add(squareNumber);
-          }
-
-          transaction.update(progressRef, {
-            'completedSquares': completed,
-            'square${squareNumber}Complete': true,
-            'lastUpdated': timestamp,
-            'currentSquare': squareNumber,
-          });
-        }
-      } else {
-        transaction.set(progressRef, {
-          'childId': childId,
-          'currentSquare': squareNumber,
-          'completedSquares': [squareNumber],
-          'square1Complete': squareNumber == 1,
-          'square2Complete': squareNumber == 2,
-          'square3Complete': squareNumber == 3,
-          'square4Complete': squareNumber == 4,
-          'lastUpdated': timestamp,
-          'startedAt': timestamp,
-        });
-      }
-    });
-  }
 
   /// Checks if the progress was last updated on a different day and resets if so.
   /// This is useful to call when the user first enters the protocol hub.

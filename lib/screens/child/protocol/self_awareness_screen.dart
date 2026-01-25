@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:mokrabela/components/selectors/emotion_selector.dart';
 import 'package:mokrabela/components/cards/live_sensor_card.dart';
-import 'package:mokrabela/screens/protocol/body_scan_screen.dart';
+import 'package:mokrabela/screens/child/protocol/body_scan_screen.dart';
 import 'package:mokrabela/services/auth_service.dart';
 import 'package:mokrabela/theme/app_theme.dart';
-import 'package:mokrabela/services/protocol_service.dart';
 import 'package:mokrabela/services/session_service.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -20,7 +19,6 @@ class SelfAwarenessScreen extends StatefulWidget {
 
 class _SelfAwarenessScreenState extends State<SelfAwarenessScreen> {
   final AuthService _authService = AuthService();
-  final ProtocolService _protocolService = ProtocolService();
   final SessionService _sessionService = SessionService();
   String? _selectedEmotion;
   double _activityScale = 5.0;
@@ -65,9 +63,6 @@ class _SelfAwarenessScreenState extends State<SelfAwarenessScreen> {
           },
           context: context,
         );
-
-        // Also ensure protocol state is updated
-        await _protocolService.updateProtocolProgress(user.uid, 1);
 
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(

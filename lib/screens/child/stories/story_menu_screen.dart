@@ -62,7 +62,6 @@ class _StoryMenuScreenState extends State<StoryMenuScreen> {
                   }
 
                   if (snapshot.hasError) {
-                    print('Story stream error: ${snapshot.error}');
                     return Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -84,7 +83,6 @@ class _StoryMenuScreenState extends State<StoryMenuScreen> {
                   }
 
                   final stories = snapshot.data ?? Story.getAllStories();
-                  print('Stories loaded: ${stories.length}');
 
                   if (stories.isEmpty) {
                     return Center(child: Text(l10n.noStoriesAvailable));

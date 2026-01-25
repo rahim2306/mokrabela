@@ -54,7 +54,7 @@ class SessionService {
       final enrollment = await _protocolService.ensureEnrollment(childId);
       protocolWeek = enrollment.calculateCurrentWeek(DateTime.now());
     } catch (e) {
-      print('Error fetching enrollment for session: $e');
+      // Error fetching enrollment - continue without protocol week
     }
 
     // Create session document
@@ -124,7 +124,7 @@ class SessionService {
                   AchievementUnlockDialog(achievement: achievement),
             );
           } catch (e) {
-            print('Error showing achievement unlock dialog: $e');
+            // Error showing achievement dialog - continue
           }
         }
       }

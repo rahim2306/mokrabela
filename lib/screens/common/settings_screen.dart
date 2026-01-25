@@ -28,32 +28,67 @@ class _SettingsScreenState extends State<SettingsScreen> {
   int _selectedGoal = 30; // Default
   final AuthService _authService = AuthService();
 
+  UserRole? _userRole; // To store user role
+
   @override
   void initState() {
     super.initState();
     _selectedLocale = widget.currentLocale;
-    _loadCurrentGoal();
+    _loadSettings();
   }
 
-  Future<void> _loadCurrentGoal() async {
-    final user = await _authService.currentUser;
+  Future<void> _loadSettings() async {
+    final user = _authService.currentUser;
     if (user != null) {
       final userDetails = await _authService.getUserDetails(user.uid);
       if (userDetails != null && mounted) {
         setState(() {
-          // Default to 30 if not set
+          _userRole = userDetails.role; // Store role
           _selectedGoal = userDetails.appSettings.dailyCalmGoalMinutes;
+          // Only update locale if it differs from current to avoid override on init if passed from parent
+          if (userDetails.appSettings.languageCode.isNotEmpty) {
+            _selectedLocale = Locale(userDetails.appSettings.languageCode);
+            widget.onLanguageChanged(_selectedLocale);
+          }
         });
       }
     }
   }
 
+  // Format name: Last Name capitalized (e.g. "John Doe" -> "Doe")
+  String _getDisplayName(String fullName) {
+    if (fullName.isEmpty) return '';
+    final parts = fullName.trim().split(' ');
+    // If multiple parts, take the last one (Family Name)
+    final lastName = parts.length > 1 ? parts.last : parts.first;
+
+    if (lastName.isEmpty) return '';
+    // Capitalize first letter, lowercase rest
+    return lastName[0].toUpperCase() + lastName.substring(1).toLowerCase();
+  }
+
   Future<void> _updateGoal(int newGoal) async {
     setState(() => _selectedGoal = newGoal);
-    final user = await _authService.currentUser; // Await the Future<User?>
+    final user = _authService.currentUser;
     if (user != null) {
-      // Update settings
-      final settings = AppSettings(dailyCalmGoalMinutes: newGoal);
+      final settings = AppSettings(
+        dailyCalmGoalMinutes: newGoal,
+        languageCode: _selectedLocale.languageCode,
+      );
+      await _authService.updateAppSettings(user.uid, settings);
+    }
+  }
+
+  Future<void> _updateLanguage(Locale newLocale) async {
+    setState(() => _selectedLocale = newLocale);
+    widget.onLanguageChanged(newLocale);
+
+    final user = _authService.currentUser;
+    if (user != null) {
+      final settings = AppSettings(
+        dailyCalmGoalMinutes: _selectedGoal,
+        languageCode: newLocale.languageCode,
+      );
       await _authService.updateAppSettings(user.uid, settings);
     }
   }
@@ -112,7 +147,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ),
                 Text(
-                  widget.userName,
+                  _getDisplayName(widget.userName), // Use formatted name
                   style: TextStyle(
                     fontSize: 26.sp,
                     fontWeight: FontWeight.w800,
@@ -147,14 +182,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         trailing: _buildLanguageDropdown(context),
                       ),
 
-                      const Divider(height: 30),
-
-                      // Daily Calm Goal selector
-                      _buildSettingTile(
-                        icon: Icons.timer,
-                        title: l10n.dailyCalmGoal,
-                        trailing: _buildCalmGoalDropdown(context),
-                      ),
+                      if (_userRole == UserRole.child) ...[
+                        const Divider(height: 30),
+                        // Daily Calm Goal selector - Only for children
+                        _buildSettingTile(
+                          icon: Icons.timer,
+                          title: l10n.dailyCalmGoal,
+                          trailing: _buildCalmGoalDropdown(context),
+                        ),
+                      ],
                     ],
                   ),
                 ),
@@ -244,10 +280,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         }).toList(),
         onChanged: (String? newValue) {
           if (newValue != null) {
-            setState(() {
-              _selectedLocale = Locale(newValue);
-            });
-            widget.onLanguageChanged(Locale(newValue));
+            _updateLanguage(Locale(newValue));
           }
         },
       ),

@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:mokrabela/models/breathing_exercise_model.dart';
 import 'package:mokrabela/services/session_service.dart';
-import 'package:mokrabela/services/protocol_service.dart';
 import 'package:mokrabela/services/auth_service.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 import 'package:sizer/sizer.dart';
@@ -27,7 +26,6 @@ class BreathingSessionScreen extends StatefulWidget {
 
 class _BreathingSessionScreenState extends State<BreathingSessionScreen>
     with SingleTickerProviderStateMixin {
-  final ProtocolService _protocolService = ProtocolService();
   final SessionService _sessionService = SessionService();
   final AuthService _authService = AuthService();
 
@@ -135,16 +133,8 @@ class _BreathingSessionScreenState extends State<BreathingSessionScreen>
           exerciseData: {'breathingCycles': _currentCycle},
           context: context,
         );
-
-        if (widget.protocolSquare != null) {
-          // Update protocol roadmap progress
-          await _protocolService.updateProtocolProgress(
-            user.uid,
-            widget.protocolSquare!,
-          );
-        }
       } catch (error) {
-        print('Error saving session: $error');
+        // Error saving session - silently fail
       }
     }
 

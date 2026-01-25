@@ -5,7 +5,7 @@ import 'package:mokrabela/components/snackbars/custom_snackbar.dart';
 import 'package:mokrabela/screens/child/kids_main_scaffold.dart';
 import 'package:mokrabela/screens/common/status_screens.dart';
 import 'package:mokrabela/screens/onboarding/onboarding_flow.dart';
-import 'package:mokrabela/screens/parent/parent_dashboard.dart';
+import 'package:mokrabela/screens/parent/parent_main_scaffold.dart';
 import 'package:mokrabela/screens/teacher/teacher_dashboard.dart';
 
 class AuthGate extends StatelessWidget {
@@ -95,6 +95,21 @@ class _RoleBasedRouterState extends State<RoleBasedRouter> {
           return const LoadingScreen();
         }
 
+        // Check for language sync
+        if (data.containsKey('appSettings')) {
+          final appSettings = data['appSettings'] as Map<String, dynamic>;
+          if (appSettings.containsKey('languageCode')) {
+            final savedLang = appSettings['languageCode'] as String;
+            if (savedLang.isNotEmpty &&
+                savedLang != widget.currentLocale.languageCode) {
+              // Schedule update to avoid build conflicts
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                widget.onLanguageChange(Locale(savedLang));
+              });
+            }
+          }
+        }
+
         // Fix: Read role directly from root, not 'profile' map
         final role = data['role'] as String?;
         if (role == null) {
@@ -106,8 +121,6 @@ class _RoleBasedRouterState extends State<RoleBasedRouter> {
             );
           });
           // Show loading screen while waiting or stuck
-          // Ideally we should offer a way out if it persists, but for now LoadingScreen satisfies requirement
-          // + the snackbar.
           return const LoadingScreen();
         }
 
@@ -119,7 +132,7 @@ class _RoleBasedRouterState extends State<RoleBasedRouter> {
               currentLocale: widget.currentLocale,
             );
           case 'parent':
-            return const ParentDashboard();
+            return const ParentMainScaffold();
           case 'teacher':
             return const TeacherDashboard();
           default:

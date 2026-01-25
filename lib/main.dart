@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mokrabela/firebase_options.dart';
-//import 'package:mokrabela/scripts/seed_test_breathing.dart';
 import 'package:mokrabela/services/auth_gate.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 //import 'package:mokrabela/scripts/seed_test_story.dart';
+//import 'package:mokrabela/scripts/seed_test_breathing.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

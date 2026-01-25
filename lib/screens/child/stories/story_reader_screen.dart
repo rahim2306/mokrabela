@@ -83,7 +83,7 @@ class _StoryReaderScreenState extends State<StoryReaderScreen> {
         context: context,
       );
     } catch (e) {
-      print('Error recording story completion: $e');
+      // Error recording story completion - silently fail
     }
   }
 

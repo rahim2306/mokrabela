@@ -8,8 +8,6 @@ import 'package:mokrabela/services/auth_service.dart';
 import 'package:mokrabela/services/task_service.dart';
 import 'package:mokrabela/services/session_service.dart';
 import 'dart:async';
-
-import 'package:mokrabela/services/protocol_service.dart';
 import 'package:uuid/uuid.dart';
 
 class DailyTasksScreen extends StatefulWidget {
@@ -22,7 +20,6 @@ class DailyTasksScreen extends StatefulWidget {
 class _DailyTasksScreenState extends State<DailyTasksScreen> {
   final TaskService _taskService = TaskService();
   final AuthService _authService = AuthService();
-  final ProtocolService _protocolService = ProtocolService();
   final SessionService _sessionService = SessionService();
   final Uuid _uuid = const Uuid();
 
@@ -123,8 +120,6 @@ class _DailyTasksScreenState extends State<DailyTasksScreen> {
 
       // Reset start time for next run
       _sessionStartTime = null;
-
-      await _protocolService.updateProtocolProgress(_childId!, 3);
     }
   }
 
@@ -697,7 +692,7 @@ class _DailyTasksScreenState extends State<DailyTasksScreen> {
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
                                   itemCount: tasks.length,
-                                  separatorBuilder: (_, __) =>
+                                  separatorBuilder: (_, _) =>
                                       SizedBox(height: 1.5.h),
                                   itemBuilder: (context, index) {
                                     final task = tasks[index];

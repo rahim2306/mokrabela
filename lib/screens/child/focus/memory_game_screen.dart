@@ -52,7 +52,7 @@ class _MemoryGameScreenState extends State<MemoryGameScreen> {
             context: context,
           );
         } catch (error) {
-          print('Error saving session: $error');
+          // Error saving session - silently fail
         }
       }
 

@@ -66,19 +66,25 @@ class WatchSettings {
 
 class AppSettings {
   final int dailyCalmGoalMinutes;
+  final String languageCode;
 
   AppSettings({
     this.dailyCalmGoalMinutes = 30, // Default 30 minutes
+    this.languageCode = 'en', // Default English
   });
 
   factory AppSettings.fromMap(Map<String, dynamic> data) {
     return AppSettings(
       dailyCalmGoalMinutes: data['dailyCalmGoalMinutes'] as int? ?? 30,
+      languageCode: data['languageCode'] as String? ?? 'en',
     );
   }
 
   Map<String, dynamic> toMap() {
-    return {'dailyCalmGoalMinutes': dailyCalmGoalMinutes};
+    return {
+      'dailyCalmGoalMinutes': dailyCalmGoalMinutes,
+      'languageCode': languageCode,
+    };
   }
 }
 

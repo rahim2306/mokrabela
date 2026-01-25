@@ -456,7 +456,7 @@ class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
             Navigator.of(context).push(
               PageRouteBuilder(
                 opaque: false,
-                pageBuilder: (context, _, __) => AchievementDetailDialog(
+                pageBuilder: (context, _, _) => AchievementDetailDialog(
                   achievement: filteredAchievements[index],
                 ),
               ),

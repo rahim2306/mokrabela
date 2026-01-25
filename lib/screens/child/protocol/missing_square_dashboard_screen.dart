@@ -48,24 +48,11 @@ class MissingSquareDashboardScreen extends StatelessWidget {
 
           final docs = snapshot.data?.docs ?? [];
 
-          // Debug: Print what we got
-          print('📊 Dashboard: Found ${docs.length} total sessions');
-          for (var doc in docs.take(3)) {
-            final data = doc.data();
-            print(
-              '  Session: type=${data['type']}, protocolSquare=${data['protocolSquare']}, hasStress=${data['stressLevelAfter'] != null}',
-            );
-          }
-
           // Filter to only protocol sessions (protocolSquare 1-4)
           final protocolDocs = docs.where((doc) {
             final square = doc.data()['protocolSquare'] as int?;
             return square != null && square >= 1 && square <= 4;
           }).toList();
-
-          print(
-            '📊 Dashboard: Filtered to ${protocolDocs.length} protocol sessions',
-          );
 
           // Temporarily show all sessions if no protocol sessions found
           final displayDocs = protocolDocs.isEmpty ? docs : protocolDocs;
