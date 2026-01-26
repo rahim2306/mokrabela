@@ -908,8 +908,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get achStoryMaster => 'Fanatique de Fables';
 
   @override
-  String weekLabel(int count) {
-    return 'Semaine $count sur 5';
+  String weekLabel(int weekNum) {
+    return 'Semaine $weekNum';
   }
 
   @override
@@ -1177,4 +1177,47 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get noAchievementsFound => 'Aucun trophée trouvé';
+
+  @override
+  String get parentOverview => 'Vue d\'ensemble';
+
+  @override
+  String get protocolRoadmap => 'Feuille de route du protocole';
+
+  @override
+  String get thisWeek => 'Cette semaine';
+
+  @override
+  String get sessions => 'Séances';
+
+  @override
+  String get calmTime => 'Temps de calme';
+
+  @override
+  String get streak => 'Série';
+
+  @override
+  String get recentActivity => 'Activité récente';
+
+  @override
+  String get noRecentActivity => 'Aucune activité récente';
+
+  @override
+  String get weekTitleRegulationSafety => 'Régulation et\\nsécurité';
+
+  @override
+  String get weekTitleFocusControl => 'Focus et\\ncontrôle';
+
+  @override
+  String get weekTitleDailyStructure => 'Structure\\nquotidienne';
+
+  @override
+  String get weekTitleCreativeCalm => 'Calme\\ncréatif';
+
+  @override
+  String get weekTitleIntegrationReview => 'Intégration et\\nrévision';
+
+  @override
+  String get selectChildToView =>
+      'Sélectionnez un enfant pour voir ses progrès';
 }

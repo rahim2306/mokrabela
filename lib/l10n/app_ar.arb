@@ -552,5 +552,20 @@
   "categoryMilestones": "إنجازات رئيسية",
   "categorySpecial": "خاص",
   "showOnlyUnlocked": "إظهار المفتوحة فقط",
-  "noAchievementsFound": "لم يتم العثور على إنجازات"
+  "noAchievementsFound": "لم يتم العثور على إنجازات",
+  "parentOverview": "نظرة عامة",
+  "protocolRoadmap": "خارطة البروتوكول",
+  "weekLabel": "الأسبوع {weekNum}",
+  "thisWeek": "هذا الأسبوع",
+  "sessions": "الجلسات",
+  "calmTime": "وقت الهدوء",
+  "streak": "التسلسل",
+  "recentActivity": "النشاط الأخير",
+  "noRecentActivity": "لا يوجد نشاط حديث",
+  "weekTitleRegulationSafety": "التنظيم والأمان",
+  "weekTitleFocusControl": "التركيز والتحكم",
+  "weekTitleDailyStructure": "الهيكل اليومي",
+  "weekTitleCreativeCalm": "الهدوء الإبداعي",
+  "weekTitleIntegrationReview": "التكامل والمراجعة",
+  "selectChildToView": "اختر طفلاً لعرض تقدمه"
 }

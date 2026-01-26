@@ -826,5 +826,20 @@
   "categoryMilestones": "Étapes",
   "categorySpecial": "Spécial",
   "showOnlyUnlocked": "Voir uniquement débloqués",
-  "noAchievementsFound": "Aucun trophée trouvé"
+  "noAchievementsFound": "Aucun trophée trouvé",
+  "parentOverview": "Vue d'ensemble",
+  "protocolRoadmap": "Feuille de route du protocole",
+  "weekLabel": "Semaine {weekNum}",
+  "thisWeek": "Cette semaine",
+  "sessions": "Séances",
+  "calmTime": "Temps de calme",
+  "streak": "Série",
+  "recentActivity": "Activité récente",
+  "noRecentActivity": "Aucune activité récente",
+  "weekTitleRegulationSafety": "Régulation et\\nsécurité",
+  "weekTitleFocusControl": "Focus et\\ncontrôle",
+  "weekTitleDailyStructure": "Structure\\nquotidienne",
+  "weekTitleCreativeCalm": "Calme\\ncréatif",
+  "weekTitleIntegrationReview": "Intégration et\\nrévision",
+  "selectChildToView": "Sélectionnez un enfant pour voir ses progrès"
 }

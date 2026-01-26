@@ -888,8 +888,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get achStoryMaster => 'عاشق الحكايات';
 
   @override
-  String weekLabel(int count) {
-    return 'الأسبوع $count من 5';
+  String weekLabel(int weekNum) {
+    return 'الأسبوع $weekNum';
   }
 
   @override
@@ -1148,4 +1148,46 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noAchievementsFound => 'لم يتم العثور على إنجازات';
+
+  @override
+  String get parentOverview => 'نظرة عامة';
+
+  @override
+  String get protocolRoadmap => 'خارطة البروتوكول';
+
+  @override
+  String get thisWeek => 'هذا الأسبوع';
+
+  @override
+  String get sessions => 'الجلسات';
+
+  @override
+  String get calmTime => 'وقت الهدوء';
+
+  @override
+  String get streak => 'التسلسل';
+
+  @override
+  String get recentActivity => 'النشاط الأخير';
+
+  @override
+  String get noRecentActivity => 'لا يوجد نشاط حديث';
+
+  @override
+  String get weekTitleRegulationSafety => 'التنظيم والأمان';
+
+  @override
+  String get weekTitleFocusControl => 'التركيز والتحكم';
+
+  @override
+  String get weekTitleDailyStructure => 'الهيكل اليومي';
+
+  @override
+  String get weekTitleCreativeCalm => 'الهدوء الإبداعي';
+
+  @override
+  String get weekTitleIntegrationReview => 'التكامل والمراجعة';
+
+  @override
+  String get selectChildToView => 'اختر طفلاً لعرض تقدمه';
 }

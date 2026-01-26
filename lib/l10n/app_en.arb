@@ -951,5 +951,71 @@
   "categoryMilestones": "Milestones",
   "categorySpecial": "Special",
   "showOnlyUnlocked": "Show only unlocked",
-  "noAchievementsFound": "No achievements found"
+  "noAchievementsFound": "No achievements found",
+  "parentOverview": "Overview",
+  "@parentOverview": {
+    "description": "Parent dashboard overview tab title"
+  },
+  "protocolRoadmap": "Protocol Roadmap",
+  "@protocolRoadmap": {
+    "description": "Protocol roadmap card title"
+  },
+  "weekLabel": "Week {weekNum}",
+  "@weekLabel": {
+    "description": "Week label with number",
+    "placeholders": {
+      "weekNum": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "thisWeek": "This Week",
+  "@thisWeek": {
+    "description": "This week label for stats card"
+  },
+  "sessions": "Sessions",
+  "@sessions": {
+    "description": "Sessions stat label"
+  },
+  "calmTime": "Calm Time",
+  "@calmTime": {
+    "description": "Calm time stat label"
+  },
+  "streak": "Streak",
+  "@streak": {
+    "description": "Streak stat label"
+  },
+  "recentActivity": "Recent Activity",
+  "@recentActivity": {
+    "description": "Recent activity feed title"
+  },
+  "noRecentActivity": "No recent activity",
+  "@noRecentActivity": {
+    "description": "Empty state for recent activity"
+  },
+  "weekTitleRegulationSafety": "Regulation &\\nSafety",
+  "@weekTitleRegulationSafety": {
+    "description": "Week 1 title"
+  },
+  "weekTitleFocusControl": "Focus &\\nControl",
+  "@weekTitleFocusControl": {
+    "description": "Week 2 title"
+  },
+  "weekTitleDailyStructure": "Daily\\nStructure",
+  "@weekTitleDailyStructure": {
+    "description": "Week 3 title"
+  },
+  "weekTitleCreativeCalm": "Creative\\nCalm",
+  "@weekTitleCreativeCalm": {
+    "description": "Week 4 title"
+  },
+  "weekTitleIntegrationReview": "Integration &\\nReview",
+  "@weekTitleIntegrationReview": {
+    "description": "Week 5 title"
+  },
+  "selectChildToView": "Select a child to view their progress",
+  "@selectChildToView": {
+    "description": "Empty state message when no child is selected"
+  }
 }

@@ -891,8 +891,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get achStoryMaster => 'Fable Fanatic';
 
   @override
-  String weekLabel(int count) {
-    return 'Week $count of 5';
+  String weekLabel(int weekNum) {
+    return 'Week $weekNum';
   }
 
   @override
@@ -1155,4 +1155,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noAchievementsFound => 'No achievements found';
+
+  @override
+  String get parentOverview => 'Overview';
+
+  @override
+  String get protocolRoadmap => 'Protocol Roadmap';
+
+  @override
+  String get thisWeek => 'This Week';
+
+  @override
+  String get sessions => 'Sessions';
+
+  @override
+  String get calmTime => 'Calm Time';
+
+  @override
+  String get streak => 'Streak';
+
+  @override
+  String get recentActivity => 'Recent Activity';
+
+  @override
+  String get noRecentActivity => 'No recent activity';
+
+  @override
+  String get weekTitleRegulationSafety => 'Regulation &\\nSafety';
+
+  @override
+  String get weekTitleFocusControl => 'Focus &\\nControl';
+
+  @override
+  String get weekTitleDailyStructure => 'Daily\\nStructure';
+
+  @override
+  String get weekTitleCreativeCalm => 'Creative\\nCalm';
+
+  @override
+  String get weekTitleIntegrationReview => 'Integration &\\nReview';
+
+  @override
+  String get selectChildToView => 'Select a child to view their progress';
 }

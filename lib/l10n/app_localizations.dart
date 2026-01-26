@@ -1744,11 +1744,11 @@ abstract class AppLocalizations {
   /// **'Fable Fanatic'**
   String get achStoryMaster;
 
-  /// No description provided for @weekLabel.
+  /// Week label with number
   ///
   /// In en, this message translates to:
-  /// **'Week {count} of 5'**
-  String weekLabel(int count);
+  /// **'Week {weekNum}'**
+  String weekLabel(int weekNum);
 
   /// No description provided for @weekPrefix.
   ///
@@ -2235,6 +2235,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No achievements found'**
   String get noAchievementsFound;
+
+  /// Parent dashboard overview tab title
+  ///
+  /// In en, this message translates to:
+  /// **'Overview'**
+  String get parentOverview;
+
+  /// Protocol roadmap card title
+  ///
+  /// In en, this message translates to:
+  /// **'Protocol Roadmap'**
+  String get protocolRoadmap;
+
+  /// This week label for stats card
+  ///
+  /// In en, this message translates to:
+  /// **'This Week'**
+  String get thisWeek;
+
+  /// Sessions stat label
+  ///
+  /// In en, this message translates to:
+  /// **'Sessions'**
+  String get sessions;
+
+  /// Calm time stat label
+  ///
+  /// In en, this message translates to:
+  /// **'Calm Time'**
+  String get calmTime;
+
+  /// Streak stat label
+  ///
+  /// In en, this message translates to:
+  /// **'Streak'**
+  String get streak;
+
+  /// Recent activity feed title
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Activity'**
+  String get recentActivity;
+
+  /// Empty state for recent activity
+  ///
+  /// In en, this message translates to:
+  /// **'No recent activity'**
+  String get noRecentActivity;
+
+  /// Week 1 title
+  ///
+  /// In en, this message translates to:
+  /// **'Regulation &\\nSafety'**
+  String get weekTitleRegulationSafety;
+
+  /// Week 2 title
+  ///
+  /// In en, this message translates to:
+  /// **'Focus &\\nControl'**
+  String get weekTitleFocusControl;
+
+  /// Week 3 title
+  ///
+  /// In en, this message translates to:
+  /// **'Daily\\nStructure'**
+  String get weekTitleDailyStructure;
+
+  /// Week 4 title
+  ///
+  /// In en, this message translates to:
+  /// **'Creative\\nCalm'**
+  String get weekTitleCreativeCalm;
+
+  /// Week 5 title
+  ///
+  /// In en, this message translates to:
+  /// **'Integration &\\nReview'**
+  String get weekTitleIntegrationReview;
+
+  /// Empty state message when no child is selected
+  ///
+  /// In en, this message translates to:
+  /// **'Select a child to view their progress'**
+  String get selectChildToView;
 }
 
 class _AppLocalizationsDelegate
