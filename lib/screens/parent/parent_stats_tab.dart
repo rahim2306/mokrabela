@@ -1,56 +1,314 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:mokrabela/components/parent/charts/sessions_bar_chart.dart';
+import 'package:mokrabela/components/parent/charts/stress_line_chart.dart';
+import 'package:mokrabela/components/parent/protocol_completion_table.dart';
+import 'package:mokrabela/components/parent/time_range_selector.dart';
+import 'package:mokrabela/l10n/app_localizations.dart';
+import 'package:mokrabela/models/stats_models.dart';
+import 'package:mokrabela/services/export_service.dart';
+import 'package:mokrabela/services/stats_service.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 import 'package:sizer/sizer.dart';
 
-/// Parent Stats Tab - Analytics and reports
-class ParentStatsTab extends StatelessWidget {
+class ParentStatsTab extends StatefulWidget {
   final String? selectedChildId;
 
   const ParentStatsTab({super.key, required this.selectedChildId});
 
   @override
+  State<ParentStatsTab> createState() => _ParentStatsTabState();
+}
+
+class _ParentStatsTabState extends State<ParentStatsTab> {
+  final StatsService _statsService = StatsService();
+  TimeRange _selectedRange = TimeRange.week;
+
+  @override
   Widget build(BuildContext context) {
-    if (selectedChildId == null) {
+    if (widget.selectedChildId == null) {
       return Center(
         child: Text(
-          'Select a child to view statistics',
+          AppLocalizations.of(context)!.selectChildToView,
           style: TextStyle(fontSize: 14.sp, color: AppTheme.textSecondary),
         ),
       );
     }
 
-    return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
+    final dateRange = _getDateRange(_selectedRange);
+
+    return FutureBuilder<
+      (
+        StatsData,
+        List<DailySessionCount>,
+        List<StressDataPoint>,
+        List<WeekProgress>,
+      )
+    >(
+      future:
+          Future.wait([
+            _statsService.getStats(
+              widget.selectedChildId!,
+              dateRange.start,
+              dateRange.end,
+            ),
+            _statsService.getDailySessionCounts(
+              widget.selectedChildId!,
+              dateRange.start,
+              dateRange.end,
+            ),
+            _statsService.getStressHistory(
+              widget.selectedChildId!,
+              dateRange.start,
+              dateRange.end,
+            ),
+            _statsService.getProtocolCompletion(widget.selectedChildId!),
+          ]).then(
+            (results) => (
+              results[0] as StatsData,
+              results[1] as List<DailySessionCount>,
+              results[2] as List<StressDataPoint>,
+              results[3] as List<WeekProgress>,
+            ),
+          ),
+      builder: (context, snapshot) {
+        return SingleChildScrollView(
+          padding: EdgeInsets.symmetric(vertical: 2.h),
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Header with Time Selector
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Statistics & Reports',
+                      style: GoogleFonts.spaceGrotesk(
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w800,
+                        color: AppTheme.deepBlue,
+                      ),
+                    ),
+                    SizedBox(height: 2.h),
+                    TimeRangeSelector(
+                      selected: _selectedRange,
+                      onChanged: (range) {
+                        setState(() {
+                          _selectedRange = range;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(height: 3.h),
+
+              // Summary Stats Cards
+              if (snapshot.hasData)
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5.w),
+                  child: _buildSummaryCards(snapshot.data!.$1),
+                )
+              else if (snapshot.hasError)
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5.w),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Error loading stats',
+                        style: GoogleFonts.spaceGrotesk(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.red,
+                        ),
+                      ),
+                      SizedBox(height: 1.h),
+                      Text(
+                        snapshot.error.toString(),
+                        style: GoogleFonts.spaceGrotesk(
+                          fontSize: 10.sp,
+                          color: AppTheme.textSecondary,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              else
+                const Center(child: CircularProgressIndicator()),
+
+              SizedBox(height: 3.h),
+
+              // Charts
+              if (snapshot.hasData) ...[
+                _buildChartSection(
+                  'Activity Trends',
+                  'Daily total sessions and time',
+                  SessionsBarChart(dailyData: snapshot.data!.$2),
+                ),
+
+                SizedBox(height: 2.h),
+
+                _buildChartSection(
+                  'Stress Regulation',
+                  'Stress levels before vs after sessions',
+                  StressLineChart(dataPoints: snapshot.data!.$3),
+                ),
+
+                SizedBox(height: 2.h),
+
+                _buildChartSection(
+                  'Protocol Progress',
+                  '5-Week therapeutic journey status',
+                  ProtocolCompletionTable(weeks: snapshot.data!.$4),
+                ),
+
+                SizedBox(height: 3.h),
+
+                _buildExportSection(
+                  context,
+                  snapshot.data!.$1,
+                  snapshot.data!.$2,
+                  snapshot.data!.$4,
+                  dateRange,
+                ),
+              ] else if (!snapshot.hasError)
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5.w),
+                  child: const CircularProgressIndicator(),
+                ),
+
+              SizedBox(height: 10.h), // Space for bottom nav
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildExportSection(
+    BuildContext context,
+    StatsData stats,
+    List<DailySessionCount> dailyStats,
+    List<WeekProgress> weeks,
+    ({DateTime start, DateTime end}) dateRange,
+  ) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 5.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header
           Text(
-            'Statistics & Reports',
-            style: TextStyle(
-              fontSize: 20.sp,
-              fontWeight: FontWeight.w800,
+            'Export Reports',
+            style: GoogleFonts.spaceGrotesk(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w700,
               color: AppTheme.deepBlue,
             ),
           ),
-          SizedBox(height: 2.h),
-
-          // Placeholder cards
-          _buildPlaceholderCard('Aggregate Stats', Icons.pie_chart),
-          SizedBox(height: 2.h),
-          _buildPlaceholderCard('Weekly Chart', Icons.show_chart),
-          SizedBox(height: 2.h),
-          _buildPlaceholderCard('Export Reports', Icons.file_download),
-
-          SizedBox(height: 10.h), // Space for bottom nav
+          SizedBox(height: 1.5.h),
+          Row(
+            children: [
+              Expanded(
+                child: _buildExportButton(
+                  context,
+                  'PDF Report',
+                  Icons.picture_as_pdf,
+                  const Color(0xFFE57373),
+                  () async {
+                    try {
+                      await ExportService().exportToPDF(
+                        stats,
+                        dailyStats,
+                        weeks,
+                        'Child Name', // TODO: Get real child name
+                      );
+                    } catch (e) {
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Error exporting PDF: $e')),
+                        );
+                      }
+                    }
+                  },
+                ),
+              ),
+              SizedBox(width: 3.w),
+              Expanded(
+                child: _buildExportButton(
+                  context,
+                  'CSV Data',
+                  Icons.table_chart,
+                  const Color(0xFF4DB6AC),
+                  () async {
+                    try {
+                      final sessions = await _statsService.getRawSessions(
+                        widget.selectedChildId!,
+                        dateRange.start,
+                        dateRange.end,
+                      );
+                      await ExportService().exportToCSV(
+                        sessions,
+                        widget.selectedChildId!,
+                      );
+                    } catch (e) {
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Error exporting CSV: $e')),
+                        );
+                      }
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildPlaceholderCard(String title, IconData icon) {
+  Widget _buildExportButton(
+    BuildContext context,
+    String label,
+    IconData icon,
+    Color color,
+    VoidCallback onTap,
+  ) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 1.5.h),
+        decoration: BoxDecoration(
+          color: color.withValues(alpha: 0.1),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: color.withValues(alpha: 0.3)),
+        ),
+        child: Column(
+          children: [
+            Icon(icon, color: color, size: 24),
+            SizedBox(height: 1.h),
+            Text(
+              label,
+              style: GoogleFonts.spaceGrotesk(
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w600,
+                color: color,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildChartSection(String title, String subtitle, Widget chart) {
     return Container(
-      padding: EdgeInsets.all(4.w),
+      margin: EdgeInsets.symmetric(horizontal: 5.w),
+      padding: EdgeInsets.all(2.h),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -62,35 +320,128 @@ class ParentStatsTab extends StatelessWidget {
           ),
         ],
       ),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, size: 32.sp, color: AppTheme.primary),
-          SizedBox(width: 4.w),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w700,
-                    color: AppTheme.deepBlue,
-                  ),
-                ),
-                SizedBox(height: 0.5.h),
-                Text(
-                  'Coming soon...',
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    color: AppTheme.textSecondary,
-                  ),
-                ),
-              ],
+          Text(
+            title,
+            style: GoogleFonts.spaceGrotesk(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w700,
+              color: AppTheme.deepBlue,
+            ),
+          ),
+          Text(
+            subtitle,
+            style: TextStyle(fontSize: 10.sp, color: AppTheme.textSecondary),
+          ),
+          SizedBox(height: 2.h),
+          chart,
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSummaryCards(StatsData stats) {
+    return Row(
+      children: [
+        Expanded(
+          child: _buildStatCard(
+            'Sessions',
+            stats.totalSessions.toString(),
+            Icons.check_circle_outline,
+            const Color(0xFF667EEA),
+          ),
+        ),
+        SizedBox(width: 3.w),
+        Expanded(
+          child: _buildStatCard(
+            'Calm Time',
+            '${stats.totalMinutes}m',
+            Icons.timer_outlined,
+            const Color(0xFF8B7FEA),
+          ),
+        ),
+        SizedBox(width: 3.w),
+        Expanded(
+          child: _buildStatCard(
+            'Avg Stress ↓',
+            stats.avgStressReduction.toStringAsFixed(1),
+            Icons.trending_down,
+            const Color(0xFFFF9B9B),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildStatCard(
+    String label,
+    String value,
+    IconData icon,
+    Color color,
+  ) {
+    return Container(
+      padding: EdgeInsets.all(2.h),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Icon(icon, color: color, size: 20.sp),
+          SizedBox(height: 1.h),
+          Text(
+            value,
+            style: GoogleFonts.spaceGrotesk(
+              fontSize: 20.sp,
+              fontWeight: FontWeight.w800,
+              color: AppTheme.deepBlue,
+            ),
+          ),
+          SizedBox(height: 0.5.h),
+          Text(
+            label,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.spaceGrotesk(
+              fontSize: 10.sp,
+              color: AppTheme.textSecondary,
             ),
           ),
         ],
       ),
     );
+  }
+
+  ({DateTime start, DateTime end}) _getDateRange(TimeRange range) {
+    final now = DateTime.now();
+
+    switch (range) {
+      case TimeRange.week:
+        final start = now.subtract(Duration(days: now.weekday - 1));
+        return (
+          start: DateTime(start.year, start.month, start.day),
+          end: DateTime(now.year, now.month, now.day, 23, 59, 59),
+        );
+
+      case TimeRange.month:
+        return (
+          start: DateTime(now.year, now.month, 1),
+          end: DateTime(now.year, now.month, now.day, 23, 59, 59),
+        );
+
+      case TimeRange.all:
+        return (
+          start: DateTime(2020, 1, 1), // Far past date
+          end: DateTime(now.year, now.month, now.day, 23, 59, 59),
+        );
+    }
   }
 }
