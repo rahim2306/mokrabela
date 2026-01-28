@@ -831,6 +831,65 @@ class AppLocalizationsAr extends AppLocalizations {
   String get liveTag => 'مباشر';
 
   @override
+  String get statsAndReports => 'الإحصائيات والتقارير';
+
+  @override
+  String get errorLoadingStats => 'خطأ في تحميل الإحصائيات';
+
+  @override
+  String get activityTrends => 'اتجاهات النشاط';
+
+  @override
+  String get activityTrendsDesc => 'إجمالي الجلسات والوقت اليومي';
+
+  @override
+  String get stressRegulation => 'تنظيم التوتر';
+
+  @override
+  String get stressRegulationDesc => 'مستويات التوتر قبل وبعد الجلسات';
+
+  @override
+  String get protocolProgressTitle => 'تقدم البروتوكول';
+
+  @override
+  String get protocolProgressDesc => 'حالة الرحلة العلاجية لمدة 5 أسابيع';
+
+  @override
+  String get exportReports => 'تصدير التقارير';
+
+  @override
+  String get pdfReport => 'تقرير PDF';
+
+  @override
+  String get csvData => 'بيانات CSV';
+
+  @override
+  String get sessions => 'الجلسات';
+
+  @override
+  String get calmTime => 'وقت الهدوء';
+
+  @override
+  String get avgStressReduction => 'متوسط خفض التوتر';
+
+  @override
+  String get timeRangeWeek => 'أسبوع';
+
+  @override
+  String get timeRangeMonth => 'شهر';
+
+  @override
+  String get timeRangeFiveWeeks => '5 أسابيع';
+
+  @override
+  String get noProtocolData => 'لا تتوفر بيانات البروتوكول';
+
+  @override
+  String errorExporting(String type, String error) {
+    return 'خطأ في تصدير $type: $error';
+  }
+
+  @override
   String get achFirstBreathing => 'النفس الأول';
 
   @override
@@ -921,9 +980,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get weeklyBreakdown => 'التقسيم الأسبوعي';
-
-  @override
-  String get noProtocolData => 'لا توجد بيانات بروتوكول بعد';
 
   @override
   String get noProtocolDataDesc => 'ستظهر الإحصائيات عند إكمال الأنشطة.';
@@ -1157,12 +1213,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get thisWeek => 'هذا الأسبوع';
-
-  @override
-  String get sessions => 'الجلسات';
-
-  @override
-  String get calmTime => 'وقت الهدوء';
 
   @override
   String get streak => 'التسلسل';

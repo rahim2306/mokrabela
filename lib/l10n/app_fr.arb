@@ -841,5 +841,22 @@
   "weekTitleDailyStructure": "Structure\\nquotidienne",
   "weekTitleCreativeCalm": "Calme\\ncréatif",
   "weekTitleIntegrationReview": "Intégration et\\nrévision",
-  "selectChildToView": "Sélectionnez un enfant pour voir ses progrès"
+  "selectChildToView": "Sélectionnez un enfant pour voir ses progrès",
+  "statsAndReports": "Statistiques et Rapports",
+  "errorLoadingStats": "Erreur lors du chargement des statistiques",
+  "activityTrends": "Tendances d'activité",
+  "activityTrendsDesc": "Sessions totales et temps quotidien",
+  "stressRegulation": "Régulation du stress",
+  "stressRegulationDesc": "Niveaux de stress avant et après",
+  "protocolProgressTitle": "Progrès du protocole",
+  "protocolProgressDesc": "Statut du parcours de 5 semaines",
+  "exportReports": "Exporter des rapports",
+  "pdfReport": "Rapport PDF",
+  "csvData": "Données CSV",
+  "avgStressReduction": "Réduction moyenne du stress",
+  "timeRangeWeek": "Semaine",
+  "timeRangeMonth": "Mois",
+  "timeRangeFiveWeeks": "5 Semaines",
+  "noProtocolData": "Pas encore de données de protocole",
+  "errorExporting": "Erreur d'exportation {type}: {error}"
 }

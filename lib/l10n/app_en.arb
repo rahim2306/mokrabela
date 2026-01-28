@@ -798,6 +798,35 @@
   "motionZ": "Motion (Z)",
   "energy": "Energy",
   "liveTag": "LIVE",
+  "statsAndReports": "Statistics & Reports",
+  "errorLoadingStats": "Error loading stats",
+  "activityTrends": "Activity Trends",
+  "activityTrendsDesc": "Daily total sessions and time",
+  "stressRegulation": "Stress Regulation",
+  "stressRegulationDesc": "Stress levels before vs after sessions",
+  "protocolProgressTitle": "Protocol Progress",
+  "protocolProgressDesc": "5-Week therapeutic journey status",
+  "exportReports": "Export Reports",
+  "pdfReport": "PDF Report",
+  "csvData": "CSV Data",
+  "sessions": "Sessions",
+  "calmTime": "Calm Time",
+  "avgStressReduction": "Avg Stress ↓",
+  "timeRangeWeek": "Week",
+  "timeRangeMonth": "Month",
+  "timeRangeFiveWeeks": "5 Weeks",
+  "noProtocolData": "No protocol data available",
+  "errorExporting": "Error exporting {type}: {error}",
+  "@errorExporting": {
+    "placeholders": {
+      "type": {
+        "type": "String"
+      },
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "achFirstBreathing": "First Breath",
   "achFirstBreathingDesc": "Complete your first breathing exercise.",
   "achBreathing5": "Breathing Steady",

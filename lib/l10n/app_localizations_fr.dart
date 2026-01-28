@@ -849,6 +849,65 @@ class AppLocalizationsFr extends AppLocalizations {
   String get liveTag => 'DIRECT';
 
   @override
+  String get statsAndReports => 'Statistiques et Rapports';
+
+  @override
+  String get errorLoadingStats => 'Erreur lors du chargement des statistiques';
+
+  @override
+  String get activityTrends => 'Tendances d\'activité';
+
+  @override
+  String get activityTrendsDesc => 'Sessions totales et temps quotidien';
+
+  @override
+  String get stressRegulation => 'Régulation du stress';
+
+  @override
+  String get stressRegulationDesc => 'Niveaux de stress avant et après';
+
+  @override
+  String get protocolProgressTitle => 'Progrès du protocole';
+
+  @override
+  String get protocolProgressDesc => 'Statut du parcours de 5 semaines';
+
+  @override
+  String get exportReports => 'Exporter des rapports';
+
+  @override
+  String get pdfReport => 'Rapport PDF';
+
+  @override
+  String get csvData => 'Données CSV';
+
+  @override
+  String get sessions => 'Séances';
+
+  @override
+  String get calmTime => 'Temps de calme';
+
+  @override
+  String get avgStressReduction => 'Réduction moyenne du stress';
+
+  @override
+  String get timeRangeWeek => 'Semaine';
+
+  @override
+  String get timeRangeMonth => 'Mois';
+
+  @override
+  String get timeRangeFiveWeeks => '5 Semaines';
+
+  @override
+  String get noProtocolData => 'Pas encore de données de protocole';
+
+  @override
+  String errorExporting(String type, String error) {
+    return 'Erreur d\'exportation $type: $error';
+  }
+
+  @override
   String get achFirstBreathing => 'Premier Souffle';
 
   @override
@@ -941,9 +1000,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get weeklyBreakdown => 'Répartition hebdomadaire';
-
-  @override
-  String get noProtocolData => 'Pas encore de données de protocole';
 
   @override
   String get noProtocolDataDesc =>
@@ -1186,12 +1242,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get thisWeek => 'Cette semaine';
-
-  @override
-  String get sessions => 'Séances';
-
-  @override
-  String get calmTime => 'Temps de calme';
 
   @override
   String get streak => 'Série';

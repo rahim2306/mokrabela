@@ -15,7 +15,7 @@ class ProtocolCompletionTable extends StatelessWidget {
     if (weeks.isEmpty) {
       return Center(
         child: Text(
-          'No protocol data available',
+          AppLocalizations.of(context)!.noProtocolData,
           style: TextStyle(color: AppTheme.textSecondary),
         ),
       );

@@ -13,15 +13,30 @@ import 'package:sizer/sizer.dart';
 /// Parent Home Tab - Protocol overview and recent activity
 class ParentHomeTab extends StatefulWidget {
   final String? selectedChildId;
+  final ProtocolService? protocolService;
+  final FirebaseFirestore? firestore;
 
-  const ParentHomeTab({super.key, required this.selectedChildId});
+  const ParentHomeTab({
+    super.key,
+    required this.selectedChildId,
+    this.protocolService,
+    this.firestore,
+  });
 
   @override
   State<ParentHomeTab> createState() => _ParentHomeTabState();
 }
 
 class _ParentHomeTabState extends State<ParentHomeTab> {
-  final ProtocolService _protocolService = ProtocolService();
+  late final ProtocolService _protocolService;
+  late final FirebaseFirestore _firestore;
+
+  @override
+  void initState() {
+    super.initState();
+    _protocolService = widget.protocolService ?? ProtocolService();
+    _firestore = widget.firestore ?? FirebaseFirestore.instance;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +59,7 @@ class _ParentHomeTabState extends State<ParentHomeTab> {
         // or we can use a direct Firestore query in a FutureBuilder
 
         return StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance
+          stream: _firestore
               .collection('sessions')
               .where('childId', isEqualTo: widget.selectedChildId)
               .orderBy('startTime', descending: true)

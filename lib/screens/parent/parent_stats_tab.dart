@@ -13,23 +13,38 @@ import 'package:sizer/sizer.dart';
 
 class ParentStatsTab extends StatefulWidget {
   final String? selectedChildId;
+  final StatsService? statsService;
 
-  const ParentStatsTab({super.key, required this.selectedChildId});
+  const ParentStatsTab({
+    super.key,
+    required this.selectedChildId,
+    this.statsService,
+  });
 
   @override
   State<ParentStatsTab> createState() => _ParentStatsTabState();
 }
 
 class _ParentStatsTabState extends State<ParentStatsTab> {
-  final StatsService _statsService = StatsService();
+  late final StatsService _statsService;
   TimeRange _selectedRange = TimeRange.week;
 
   @override
+  void initState() {
+    super.initState();
+    _statsService = widget.statsService ?? StatsService();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    // ... (previous code)
+
+    final l10n = AppLocalizations.of(context)!;
+
     if (widget.selectedChildId == null) {
       return Center(
         child: Text(
-          AppLocalizations.of(context)!.selectChildToView,
+          l10n.selectChildToView,
           style: TextStyle(fontSize: 14.sp, color: AppTheme.textSecondary),
         ),
       );
@@ -85,7 +100,7 @@ class _ParentStatsTabState extends State<ParentStatsTab> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Statistics & Reports',
+                      l10n.statsAndReports,
                       style: GoogleFonts.spaceGrotesk(
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w800,
@@ -111,7 +126,7 @@ class _ParentStatsTabState extends State<ParentStatsTab> {
               if (snapshot.hasData)
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 5.w),
-                  child: _buildSummaryCards(snapshot.data!.$1),
+                  child: _buildSummaryCards(snapshot.data!.$1, l10n),
                 )
               else if (snapshot.hasError)
                 Padding(
@@ -119,7 +134,7 @@ class _ParentStatsTabState extends State<ParentStatsTab> {
                   child: Column(
                     children: [
                       Text(
-                        'Error loading stats',
+                        l10n.errorLoadingStats,
                         style: GoogleFonts.spaceGrotesk(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
@@ -145,24 +160,24 @@ class _ParentStatsTabState extends State<ParentStatsTab> {
               // Charts
               if (snapshot.hasData) ...[
                 _buildChartSection(
-                  'Activity Trends',
-                  'Daily total sessions and time',
+                  l10n.activityTrends,
+                  l10n.activityTrendsDesc,
                   SessionsBarChart(dailyData: snapshot.data!.$2),
                 ),
 
                 SizedBox(height: 2.h),
 
                 _buildChartSection(
-                  'Stress Regulation',
-                  'Stress levels before vs after sessions',
+                  l10n.stressRegulation,
+                  l10n.stressRegulationDesc,
                   StressLineChart(dataPoints: snapshot.data!.$3),
                 ),
 
                 SizedBox(height: 2.h),
 
                 _buildChartSection(
-                  'Protocol Progress',
-                  '5-Week therapeutic journey status',
+                  l10n.protocolProgressTitle,
+                  l10n.protocolProgressDesc,
                   ProtocolCompletionTable(weeks: snapshot.data!.$4),
                 ),
 
@@ -174,6 +189,7 @@ class _ParentStatsTabState extends State<ParentStatsTab> {
                   snapshot.data!.$2,
                   snapshot.data!.$4,
                   dateRange,
+                  l10n,
                 ),
               ] else if (!snapshot.hasError)
                 Padding(
@@ -181,7 +197,7 @@ class _ParentStatsTabState extends State<ParentStatsTab> {
                   child: const CircularProgressIndicator(),
                 ),
 
-              SizedBox(height: 10.h), // Space for bottom nav
+              SizedBox(height: 13.h), // Space for bottom nav
             ],
           ),
         );
@@ -195,6 +211,7 @@ class _ParentStatsTabState extends State<ParentStatsTab> {
     List<DailySessionCount> dailyStats,
     List<WeekProgress> weeks,
     ({DateTime start, DateTime end}) dateRange,
+    AppLocalizations l10n,
   ) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 5.w),
@@ -202,7 +219,7 @@ class _ParentStatsTabState extends State<ParentStatsTab> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Export Reports',
+            l10n.exportReports,
             style: GoogleFonts.spaceGrotesk(
               fontSize: 16.sp,
               fontWeight: FontWeight.w700,
@@ -215,7 +232,7 @@ class _ParentStatsTabState extends State<ParentStatsTab> {
               Expanded(
                 child: _buildExportButton(
                   context,
-                  'PDF Report',
+                  l10n.pdfReport,
                   Icons.picture_as_pdf,
                   const Color(0xFFE57373),
                   () async {
@@ -229,7 +246,11 @@ class _ParentStatsTabState extends State<ParentStatsTab> {
                     } catch (e) {
                       if (context.mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Error exporting PDF: $e')),
+                          SnackBar(
+                            content: Text(
+                              l10n.errorExporting('PDF', e.toString()),
+                            ),
+                          ),
                         );
                       }
                     }
@@ -240,7 +261,7 @@ class _ParentStatsTabState extends State<ParentStatsTab> {
               Expanded(
                 child: _buildExportButton(
                   context,
-                  'CSV Data',
+                  l10n.csvData,
                   Icons.table_chart,
                   const Color(0xFF4DB6AC),
                   () async {
@@ -257,7 +278,11 @@ class _ParentStatsTabState extends State<ParentStatsTab> {
                     } catch (e) {
                       if (context.mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Error exporting CSV: $e')),
+                          SnackBar(
+                            content: Text(
+                              l10n.errorExporting('CSV', e.toString()),
+                            ),
+                          ),
                         );
                       }
                     }
@@ -326,7 +351,7 @@ class _ParentStatsTabState extends State<ParentStatsTab> {
           Text(
             title,
             style: GoogleFonts.spaceGrotesk(
-              fontSize: 14.sp,
+              fontSize: 18.sp, // Increased from 14.sp
               fontWeight: FontWeight.w700,
               color: AppTheme.deepBlue,
             ),
@@ -342,12 +367,12 @@ class _ParentStatsTabState extends State<ParentStatsTab> {
     );
   }
 
-  Widget _buildSummaryCards(StatsData stats) {
+  Widget _buildSummaryCards(StatsData stats, AppLocalizations l10n) {
     return Row(
       children: [
         Expanded(
           child: _buildStatCard(
-            'Sessions',
+            l10n.sessions,
             stats.totalSessions.toString(),
             Icons.check_circle_outline,
             const Color(0xFF667EEA),
@@ -356,7 +381,7 @@ class _ParentStatsTabState extends State<ParentStatsTab> {
         SizedBox(width: 3.w),
         Expanded(
           child: _buildStatCard(
-            'Calm Time',
+            l10n.calmTime,
             '${stats.totalMinutes}m',
             Icons.timer_outlined,
             const Color(0xFF8B7FEA),
@@ -365,7 +390,7 @@ class _ParentStatsTabState extends State<ParentStatsTab> {
         SizedBox(width: 3.w),
         Expanded(
           child: _buildStatCard(
-            'Avg Stress ↓',
+            l10n.avgStressReduction,
             stats.avgStressReduction.toStringAsFixed(1),
             Icons.trending_down,
             const Color(0xFFFF9B9B),
@@ -401,7 +426,7 @@ class _ParentStatsTabState extends State<ParentStatsTab> {
           Text(
             value,
             style: GoogleFonts.spaceGrotesk(
-              fontSize: 20.sp,
+              fontSize: 24.sp, // Increased from 20.sp
               fontWeight: FontWeight.w800,
               color: AppTheme.deepBlue,
             ),
@@ -411,7 +436,7 @@ class _ParentStatsTabState extends State<ParentStatsTab> {
             label,
             textAlign: TextAlign.center,
             style: GoogleFonts.spaceGrotesk(
-              fontSize: 10.sp,
+              fontSize: 11.5.sp, // Increased from 10.sp
               color: AppTheme.textSecondary,
             ),
           ),
@@ -437,9 +462,10 @@ class _ParentStatsTabState extends State<ParentStatsTab> {
           end: DateTime(now.year, now.month, now.day, 23, 59, 59),
         );
 
-      case TimeRange.all:
+      case TimeRange.fiveWeeks:
+        final start = now.subtract(const Duration(days: 35)); // 5 weeks
         return (
-          start: DateTime(2020, 1, 1), // Far past date
+          start: DateTime(start.year, start.month, start.day),
           end: DateTime(now.year, now.month, now.day, 23, 59, 59),
         );
     }

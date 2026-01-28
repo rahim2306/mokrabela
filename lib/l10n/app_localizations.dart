@@ -1630,6 +1630,120 @@ abstract class AppLocalizations {
   /// **'LIVE'**
   String get liveTag;
 
+  /// No description provided for @statsAndReports.
+  ///
+  /// In en, this message translates to:
+  /// **'Statistics & Reports'**
+  String get statsAndReports;
+
+  /// No description provided for @errorLoadingStats.
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading stats'**
+  String get errorLoadingStats;
+
+  /// No description provided for @activityTrends.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity Trends'**
+  String get activityTrends;
+
+  /// No description provided for @activityTrendsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily total sessions and time'**
+  String get activityTrendsDesc;
+
+  /// No description provided for @stressRegulation.
+  ///
+  /// In en, this message translates to:
+  /// **'Stress Regulation'**
+  String get stressRegulation;
+
+  /// No description provided for @stressRegulationDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Stress levels before vs after sessions'**
+  String get stressRegulationDesc;
+
+  /// No description provided for @protocolProgressTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Protocol Progress'**
+  String get protocolProgressTitle;
+
+  /// No description provided for @protocolProgressDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'5-Week therapeutic journey status'**
+  String get protocolProgressDesc;
+
+  /// No description provided for @exportReports.
+  ///
+  /// In en, this message translates to:
+  /// **'Export Reports'**
+  String get exportReports;
+
+  /// No description provided for @pdfReport.
+  ///
+  /// In en, this message translates to:
+  /// **'PDF Report'**
+  String get pdfReport;
+
+  /// No description provided for @csvData.
+  ///
+  /// In en, this message translates to:
+  /// **'CSV Data'**
+  String get csvData;
+
+  /// Sessions stat label
+  ///
+  /// In en, this message translates to:
+  /// **'Sessions'**
+  String get sessions;
+
+  /// Calm time stat label
+  ///
+  /// In en, this message translates to:
+  /// **'Calm Time'**
+  String get calmTime;
+
+  /// No description provided for @avgStressReduction.
+  ///
+  /// In en, this message translates to:
+  /// **'Avg Stress ↓'**
+  String get avgStressReduction;
+
+  /// No description provided for @timeRangeWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Week'**
+  String get timeRangeWeek;
+
+  /// No description provided for @timeRangeMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Month'**
+  String get timeRangeMonth;
+
+  /// No description provided for @timeRangeFiveWeeks.
+  ///
+  /// In en, this message translates to:
+  /// **'5 Weeks'**
+  String get timeRangeFiveWeeks;
+
+  /// No description provided for @noProtocolData.
+  ///
+  /// In en, this message translates to:
+  /// **'No Protocol Data Yet'**
+  String get noProtocolData;
+
+  /// No description provided for @errorExporting.
+  ///
+  /// In en, this message translates to:
+  /// **'Error exporting {type}: {error}'**
+  String errorExporting(String type, String error);
+
   /// No description provided for @achFirstBreathing.
   ///
   /// In en, this message translates to:
@@ -1809,12 +1923,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Weekly Breakdown'**
   String get weeklyBreakdown;
-
-  /// No description provided for @noProtocolData.
-  ///
-  /// In en, this message translates to:
-  /// **'No Protocol Data Yet'**
-  String get noProtocolData;
 
   /// No description provided for @noProtocolDataDesc.
   ///
@@ -2253,18 +2361,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This Week'**
   String get thisWeek;
-
-  /// Sessions stat label
-  ///
-  /// In en, this message translates to:
-  /// **'Sessions'**
-  String get sessions;
-
-  /// Calm time stat label
-  ///
-  /// In en, this message translates to:
-  /// **'Calm Time'**
-  String get calmTime;
 
   /// Streak stat label
   ///

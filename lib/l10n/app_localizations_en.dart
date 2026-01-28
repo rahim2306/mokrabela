@@ -834,6 +834,65 @@ class AppLocalizationsEn extends AppLocalizations {
   String get liveTag => 'LIVE';
 
   @override
+  String get statsAndReports => 'Statistics & Reports';
+
+  @override
+  String get errorLoadingStats => 'Error loading stats';
+
+  @override
+  String get activityTrends => 'Activity Trends';
+
+  @override
+  String get activityTrendsDesc => 'Daily total sessions and time';
+
+  @override
+  String get stressRegulation => 'Stress Regulation';
+
+  @override
+  String get stressRegulationDesc => 'Stress levels before vs after sessions';
+
+  @override
+  String get protocolProgressTitle => 'Protocol Progress';
+
+  @override
+  String get protocolProgressDesc => '5-Week therapeutic journey status';
+
+  @override
+  String get exportReports => 'Export Reports';
+
+  @override
+  String get pdfReport => 'PDF Report';
+
+  @override
+  String get csvData => 'CSV Data';
+
+  @override
+  String get sessions => 'Sessions';
+
+  @override
+  String get calmTime => 'Calm Time';
+
+  @override
+  String get avgStressReduction => 'Avg Stress ↓';
+
+  @override
+  String get timeRangeWeek => 'Week';
+
+  @override
+  String get timeRangeMonth => 'Month';
+
+  @override
+  String get timeRangeFiveWeeks => '5 Weeks';
+
+  @override
+  String get noProtocolData => 'No Protocol Data Yet';
+
+  @override
+  String errorExporting(String type, String error) {
+    return 'Error exporting $type: $error';
+  }
+
+  @override
   String get achFirstBreathing => 'First Breath';
 
   @override
@@ -924,9 +983,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get weeklyBreakdown => 'Weekly Breakdown';
-
-  @override
-  String get noProtocolData => 'No Protocol Data Yet';
 
   @override
   String get noProtocolDataDesc =>
@@ -1164,12 +1220,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get thisWeek => 'This Week';
-
-  @override
-  String get sessions => 'Sessions';
-
-  @override
-  String get calmTime => 'Calm Time';
 
   @override
   String get streak => 'Streak';

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 import 'package:sizer/sizer.dart';
 
-enum TimeRange { week, month, all }
+enum TimeRange { week, month, fiveWeeks }
 
 class TimeRangeSelector extends StatelessWidget {
   final TimeRange selected;
@@ -17,20 +18,24 @@ class TimeRangeSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
-      padding: EdgeInsets.all(0.5.h),
+      width: double.infinity, // extend all the way
+      padding: EdgeInsets.all(0.8.h), // Slightly more padding container
       decoration: BoxDecoration(
         color: Colors.grey.shade100,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16), // Slightly more rounded
       ),
       child: Row(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _buildOption('Week', TimeRange.week),
-          SizedBox(width: 1.w),
-          _buildOption('Month', TimeRange.month),
-          SizedBox(width: 1.w),
-          _buildOption('All Time', TimeRange.all),
+          Expanded(child: _buildOption(l10n.timeRangeWeek, TimeRange.week)),
+          SizedBox(width: 2.w), // More spacing
+          Expanded(child: _buildOption(l10n.timeRangeMonth, TimeRange.month)),
+          SizedBox(width: 2.w),
+          Expanded(
+            child: _buildOption(l10n.timeRangeFiveWeeks, TimeRange.fiveWeeks),
+          ),
         ],
       ),
     );
@@ -44,10 +49,10 @@ class TimeRangeSelector extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         curve: Curves.easeOut,
-        padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
+        padding: EdgeInsets.symmetric(vertical: 1.8.h), // Bigger vertically
         decoration: BoxDecoration(
           color: isSelected ? const Color(0xFF8B7FEA) : Colors.transparent,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(12),
           boxShadow: isSelected
               ? [
                   BoxShadow(
@@ -58,13 +63,17 @@ class TimeRangeSelector extends StatelessWidget {
                 ]
               : null,
         ),
+        alignment: Alignment.center, // Center text
         child: Text(
           label,
           style: GoogleFonts.spaceGrotesk(
-            fontSize: 12.sp,
+            fontSize: 13.sp, // Bigger text
             fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
             color: isSelected ? Colors.white : AppTheme.textSecondary,
           ),
+          textAlign: TextAlign.center,
+          maxLines: 1, // Prevent overflow
+          overflow: TextOverflow.ellipsis,
         ),
       ),
     );
