@@ -228,6 +228,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get achievements => 'Achievements';
 
   @override
+  String get trophiesTab => 'Trophies';
+
+  @override
+  String get mailboxTab => 'Mailbox';
+
+  @override
   String get tapToStart => 'Tap to start';
 
   @override

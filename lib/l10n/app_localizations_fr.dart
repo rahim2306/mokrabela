@@ -230,6 +230,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get achievements => 'Réussites';
 
   @override
+  String get trophiesTab => 'Trophies';
+
+  @override
+  String get mailboxTab => 'Mailbox';
+
+  @override
   String get tapToStart => 'Appuyez pour commencer';
 
   @override

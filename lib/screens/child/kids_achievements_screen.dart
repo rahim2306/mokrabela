@@ -6,6 +6,8 @@ import 'package:mokrabela/components/cards/achievement_card.dart';
 import 'package:mokrabela/components/dialogs/achievement_detail_dialog.dart';
 import 'package:mokrabela/services/achievement_service.dart';
 import 'package:mokrabela/services/auth_service.dart';
+import 'package:mokrabela/components/parent/rewards/reward_feed_widget.dart';
+import 'package:mokrabela/models/reward_model.dart';
 import 'package:mokrabela/utils/localization_helpers.dart';
 import 'package:sizer/sizer.dart';
 
@@ -91,20 +93,74 @@ class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
       );
     }
 
+    return DefaultTabController(
+      length: 2,
+      child: Column(
+        children: [
+          // Custom Tab Bar
+          Container(
+            margin: EdgeInsets.fromLTRB(6.w, 4.h, 6.w, 2.h),
+            height: 6.5.h, // Slightly taller to accommodate padding
+            padding: EdgeInsets.all(1.w), // Padding for the floating effect
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(30),
+              boxShadow: [
+                BoxShadow(
+                  color: AppTheme.deepBlue.withValues(alpha: 0.05),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: TabBar(
+              indicator: BoxDecoration(
+                color: AppTheme.primary,
+                borderRadius: BorderRadius.circular(25),
+              ),
+              indicatorSize: TabBarIndicatorSize.tab,
+              dividerColor: Colors.transparent,
+              labelColor: Colors.white,
+              unselectedLabelColor: AppTheme.textSecondary,
+              labelStyle: TextStyle(
+                fontSize: 15.sp,
+                fontWeight: FontWeight.w700,
+                fontFamily: 'Outfit',
+              ),
+              tabs: [
+                Tab(text: l10n.trophiesTab),
+                Tab(text: l10n.mailboxTab),
+              ],
+            ),
+          ),
+
+          // Tab Views
+          Expanded(
+            child: TabBarView(
+              children: [
+                // Trophies Tab (Existing Achievements View)
+                _buildTrophiesTab(user.uid, l10n),
+
+                // Mailbox Tab (New Rewards View)
+                _buildMailboxTab(user.uid, l10n),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTrophiesTab(String userId, AppLocalizations l10n) {
     return StreamBuilder<List<Achievement>>(
-      stream: _achievementService.getAchievements(user.uid),
+      stream: _achievementService.getAchievements(userId),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         }
 
         if (snapshot.hasError) {
-          return Center(
-            child: Text(
-              l10n.errorLoadingAchievements,
-              style: TextStyle(fontSize: 16.sp),
-            ),
-          );
+          return Center(child: Text(l10n.errorLoadingAchievements));
         }
 
         final achievements = snapshot.data ?? [];
@@ -115,12 +171,10 @@ class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
         final levelProgress = _getLevelProgress(totalPoints);
 
         return SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 3.h),
+          padding: EdgeInsets.symmetric(horizontal: 6.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 2.h),
-
               // Stats Header
               _buildStatsHeader(
                 l10n,
@@ -146,7 +200,7 @@ class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
               // Achievements Grid
               _buildAchievementsGrid(l10n, filteredAchievements),
 
-              SizedBox(height: 10.h), // Space for bottom nav
+              SizedBox(height: 12.h), // Space for bottom nav
             ],
           ),
         );
@@ -462,6 +516,28 @@ class _KidsAchievementsScreenState extends State<KidsAchievementsScreen> {
               ),
             );
           },
+        );
+      },
+    );
+  }
+
+  Widget _buildMailboxTab(String userId, AppLocalizations l10n) {
+    return StreamBuilder<List<Reward>>(
+      stream: _achievementService.getRewardsStream(userId),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        final rewards = snapshot.data ?? [];
+
+        return Column(
+          children: [
+            Expanded(
+              child: RewardFeedWidget(rewards: rewards, currentUserId: userId),
+            ),
+            SizedBox(height: 10.h), // Space for bottom nav
+          ],
         );
       },
     );

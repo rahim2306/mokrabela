@@ -8,6 +8,7 @@ class Reward {
   final String id;
   final String childId;
   final String senderId;
+  final String senderName;
   final SenderRole senderRole;
   final RewardType type;
   final String content;
@@ -18,6 +19,7 @@ class Reward {
     required this.id,
     required this.childId,
     required this.senderId,
+    required this.senderName,
     required this.senderRole,
     required this.type,
     required this.content,
@@ -29,6 +31,7 @@ class Reward {
     return {
       'childId': childId,
       'senderId': senderId,
+      'senderName': senderName,
       'senderRole': senderRole.name,
       'type': type.name, // 'message' or 'sticker'
       'content': content,
@@ -43,6 +46,9 @@ class Reward {
       id: doc.id,
       childId: data['childId'] ?? '',
       senderId: data['senderId'] ?? '',
+      senderName:
+          data['senderName'] ??
+          (data['senderRole'] == 'teacher' ? 'Teacher' : 'Parent'),
       senderRole: SenderRole.values.firstWhere(
         (e) => e.name == (data['senderRole'] ?? 'parent'),
         orElse: () => SenderRole.parent,
@@ -61,6 +67,7 @@ class Reward {
     String? id,
     String? childId,
     String? senderId,
+    String? senderName,
     SenderRole? senderRole,
     RewardType? type,
     String? content,
@@ -71,6 +78,7 @@ class Reward {
       id: id ?? this.id,
       childId: childId ?? this.childId,
       senderId: senderId ?? this.senderId,
+      senderName: senderName ?? this.senderName,
       senderRole: senderRole ?? this.senderRole,
       type: type ?? this.type,
       content: content ?? this.content,

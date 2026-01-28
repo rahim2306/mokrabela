@@ -55,13 +55,43 @@ class RewardFeedWidget extends StatelessWidget {
                 ? CrossAxisAlignment.end
                 : CrossAxisAlignment.start,
             children: [
-              _buildRewardBubble(reward, isMe),
+              if (!isMe)
+                Padding(
+                  padding: EdgeInsetsDirectional.only(
+                    bottom: 0.5.h,
+                    start: 2.w,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        reward.senderRole == SenderRole.teacher
+                            ? Icons.school_rounded
+                            : Icons.face_rounded,
+                        size: 16.sp,
+                        color: AppTheme.primary,
+                      ),
+                      SizedBox(width: 1.5.w),
+                      Text(
+                        reward.senderName,
+                        style: TextStyle(
+                          fontSize: 13.sp, // Bigger and readable
+                          fontWeight: FontWeight.w700,
+                          color: AppTheme.primary,
+                          fontFamily: 'Outfit',
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              _buildRewardBubble(context, reward, isMe),
               SizedBox(height: 0.5.h),
               Text(
                 DateFormat.MMMd().add_jm().format(reward.timestamp),
                 style: TextStyle(
-                  fontSize: 10.sp,
-                  color: AppTheme.textSecondary.withValues(alpha: 0.7),
+                  fontSize: 11.sp, // Bigger timestamp
+                  fontWeight: FontWeight.w500,
+                  color: AppTheme.textSecondary.withValues(alpha: 0.6),
                 ),
               ),
             ],
@@ -71,7 +101,7 @@ class RewardFeedWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildRewardBubble(Reward reward, bool isMe) {
+  Widget _buildRewardBubble(BuildContext context, Reward reward, bool isMe) {
     if (reward.type == RewardType.sticker) {
       return Container(
         padding: EdgeInsets.all(3.w),
@@ -86,8 +116,8 @@ class RewardFeedWidget extends StatelessWidget {
         ),
         child: Image.asset(
           reward.content,
-          width: 80,
-          height: 80,
+          width: 100, // Bigger sticker
+          height: 100,
           errorBuilder: (context, error, stackTrace) {
             return const Icon(Icons.broken_image, size: 40, color: Colors.grey);
           },
@@ -96,21 +126,31 @@ class RewardFeedWidget extends StatelessWidget {
     }
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
-      constraints: BoxConstraints(maxWidth: 70.w),
+      padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.5.h),
+      constraints: BoxConstraints(maxWidth: 75.w),
       decoration: BoxDecoration(
-        color: isMe ? AppTheme.primary : Colors.grey[200],
-        borderRadius: BorderRadius.only(
-          topLeft: const Radius.circular(20),
-          topRight: const Radius.circular(20),
-          bottomLeft: Radius.circular(isMe ? 20 : 4),
-          bottomRight: Radius.circular(isMe ? 4 : 20),
-        ),
+        color: isMe
+            ? AppTheme.primary
+            : const Color(0xFFF0F4F8), // Lighter grey for better contrast
+        borderRadius: BorderRadiusDirectional.only(
+          topStart: const Radius.circular(24),
+          topEnd: const Radius.circular(24),
+          bottomStart: Radius.circular(isMe ? 24 : 6),
+          bottomEnd: Radius.circular(isMe ? 6 : 24),
+        ).resolve(Directionality.of(context)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 5,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: Text(
         reward.content,
         style: TextStyle(
-          fontSize: 12.sp,
+          fontSize: 14.sp, // significantly bigger for kids
+          fontWeight: FontWeight.w600, // bolder text
           color: isMe ? Colors.white : AppTheme.deepBlue,
           height: 1.4,
         ),

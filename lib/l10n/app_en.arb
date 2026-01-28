@@ -267,6 +267,14 @@
   "@achievements": {
     "description": "Achievements button label"
   },
+  "trophiesTab": "Trophies",
+  "@trophiesTab": {
+    "description": "Tab label for achievements view"
+  },
+  "mailboxTab": "Mailbox",
+  "@mailboxTab": {
+    "description": "Tab label for rewards view"
+  },
   "tapToStart": "Tap to start",
   "@tapToStart": {
     "description": "Tap to start instruction"

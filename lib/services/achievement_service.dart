@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mokrabela/models/achievement_model.dart';
+import 'package:mokrabela/models/reward_model.dart';
 import 'package:mokrabela/data/achievements_list.dart';
 
 /// Service for managing achievements in Firestore
@@ -58,6 +59,18 @@ class AchievementService {
           }
 
           return achievements;
+        });
+  }
+
+  /// Get rewards stream for a child (Mailbox)
+  Stream<List<Reward>> getRewardsStream(String childId) {
+    return _firestore
+        .collection('rewards')
+        .where('childId', isEqualTo: childId)
+        .orderBy('timestamp', descending: true)
+        .snapshots()
+        .map((snapshot) {
+          return snapshot.docs.map((doc) => Reward.fromFirestore(doc)).toList();
         });
   }
 

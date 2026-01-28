@@ -227,6 +227,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get achievements => 'الإنجازات';
 
   @override
+  String get trophiesTab => 'الجوائز';
+
+  @override
+  String get mailboxTab => 'صندوق البريد';
+
+  @override
   String get tapToStart => 'اضغط للبدء';
 
   @override

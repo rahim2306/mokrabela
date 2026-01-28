@@ -508,6 +508,18 @@ abstract class AppLocalizations {
   /// **'Achievements'**
   String get achievements;
 
+  /// Tab label for achievements view
+  ///
+  /// In en, this message translates to:
+  /// **'Trophies'**
+  String get trophiesTab;
+
+  /// Tab label for rewards view
+  ///
+  /// In en, this message translates to:
+  /// **'Mailbox'**
+  String get mailboxTab;
+
   /// Tap to start instruction
   ///
   /// In en, this message translates to:
