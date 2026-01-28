@@ -23,13 +23,15 @@
 
 ## Key Features
 
-### For Children 🧸
+### For Children
+
 - **Gamified Biofeedback**: Real-time heart rate and HRV visualization channeled through interactive exercises.
 - **5-Week Protocol**: A clinically-structured path to building long-term emotional resilience.
 - **Dynamic Reward System**: Achievement-based progression with points, badges, and milestones.
 - **Seamless Connectivity**: Automatic BLE pairing with compatible biometric sensors.
 
-### For Parents & Teachers 👨‍👩‍👧‍👦
+### For Parents & Teachers
+
 - **Advanced Analytics**:
   - **Activity Trends**: Heatmaps and bar charts of session frequency.
   - **Stress Regulation**: Before/After stress reduction analysis using regression trends.
@@ -55,6 +57,7 @@
 ## Hardware Integration
 
 Mokrabela is optimized for low-latency biofeedback via **Bluetooth Low Energy (BLE)**.
+
 - **Supported Sensors**: Polar H10, Garmin HRM-Pro, and most standard BLE Heart Rate Monitors.
 - **Metrics Tracked**: BPM, R-R Intervals (HRV), and signal stability.
 
@@ -63,19 +66,26 @@ Mokrabela is optimized for low-latency biofeedback via **Bluetooth Low Energy (B
 ## Getting Started
 
 ### Prerequisites
+
 - [Flutter SDK v3.x](https://flutter.dev/docs/get-started/install)
 - [Firebase project](https://console.firebase.google.com/) configuration.
 
 ### Installation
+
 1. **Clone the Repo**
+
    ```bash
    git clone https://github.com/rahim2306/mokrabela.git
    ```
+
 2. **Setup Dependencies**
+
    ```bash
    flutter pub get
    ```
+
 3. **Configurations**
+
    Add your `google-services.json` (Android) and `GoogleService-Info.plist` (iOS) to the respective platform folders.
 
 ---
@@ -98,6 +108,7 @@ flutter test test/parent_home_tab_test.dart
 ## Project Architecture
 
 The project follows a modular architecture designed for scalability:
+
 - **`lib/services/`**: Independent service layer for Firebase, BLE, and Stats aggregation.
 - **`lib/models/`**: Strongly-typed data definitions ensuring type safety.
 - **`lib/screens/`**: Clean UI separation for Parent, Child, and Teacher roles.
