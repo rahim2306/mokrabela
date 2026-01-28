@@ -6,6 +6,7 @@ import 'package:mokrabela/data/achievements_list.dart';
 import 'package:mokrabela/firebase_options.dart';
 import 'package:mokrabela/models/achievement_model.dart';
 
+import 'package:mokrabela/models/reward_model.dart';
 import 'package:mokrabela/models/user_model.dart';
 import 'package:mokrabela/services/protocol_service.dart';
 
@@ -220,6 +221,34 @@ class ParentService {
       debugPrint('Error checking parent role: $e');
       return false;
     }
+  }
+
+  /// Send a reward (message or sticker) to a child
+  Future<void> sendReward(Reward reward) async {
+    try {
+      // Create new document with auto-generated ID if not provided
+      final docRef = _firestore.collection('rewards').doc();
+
+      final newReward = reward.copyWith(id: docRef.id);
+
+      await docRef.set(newReward.toFirestore());
+      debugPrint('Reward sent: ${newReward.id}');
+    } catch (e) {
+      debugPrint('Error sending reward: $e');
+      rethrow;
+    }
+  }
+
+  /// Get simplified rewards stream for a child
+  Stream<List<Reward>> getRewardsStream(String childId) {
+    return _firestore
+        .collection('rewards')
+        .where('childId', isEqualTo: childId)
+        .orderBy('timestamp', descending: true)
+        .snapshots()
+        .map((snapshot) {
+          return snapshot.docs.map((doc) => Reward.fromFirestore(doc)).toList();
+        });
   }
 
   /// Get recent achievements for a child (unlocked in the last 7 days)

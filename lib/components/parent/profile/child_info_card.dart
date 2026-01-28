@@ -7,15 +7,13 @@ import 'package:sizer/sizer.dart';
 class ChildInfoCard extends StatelessWidget {
   final UserModel child;
   final VoidCallback onTap;
-  final VoidCallback? onSendMessage;
-  final VoidCallback? onSendSticker;
+  final VoidCallback? onSendReward;
 
   const ChildInfoCard({
     super.key,
     required this.child,
     required this.onTap,
-    this.onSendMessage,
-    this.onSendSticker,
+    this.onSendReward,
   });
 
   @override
@@ -116,26 +114,12 @@ class ChildInfoCard extends StatelessWidget {
           // Action Buttons Section
           Padding(
             padding: EdgeInsets.fromLTRB(5.w, 0, 5.w, 4.w),
-            child: Row(
-              children: [
-                Expanded(
-                  child: _buildActionButton(
-                    icon: Icons.message_rounded,
-                    label: l10n.sendMessage,
-                    color: AppTheme.primary,
-                    onTap: onSendMessage ?? () {},
-                  ),
-                ),
-                SizedBox(width: 3.w),
-                Expanded(
-                  child: _buildActionButton(
-                    icon: Icons.emoji_emotions_rounded,
-                    label: l10n.sendSticker,
-                    color: const Color(0xFF8B7FEA),
-                    onTap: onSendSticker ?? () {},
-                  ),
-                ),
-              ],
+            child: _buildActionButton(
+              icon: Icons.stars_rounded,
+              label: l10n.rewardsAndEncouragement,
+              color: AppTheme.primary,
+              onTap: onSendReward ?? () {},
+              isFullWidth: true,
             ),
           ),
         ],
@@ -148,6 +132,7 @@ class ChildInfoCard extends StatelessWidget {
     required String label,
     required Color color,
     required VoidCallback onTap,
+    bool isFullWidth = false,
   }) {
     return Material(
       color: Colors.transparent,
@@ -161,24 +146,40 @@ class ChildInfoCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: color.withValues(alpha: 0.3), width: 1.5),
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(icon, color: color, size: 20.sp),
-              SizedBox(height: 0.5.h),
-              Text(
-                label,
-                style: TextStyle(
-                  fontSize: 11.sp,
-                  fontWeight: FontWeight.w700,
-                  color: color,
+          child: isFullWidth
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(icon, color: color, size: 20.sp),
+                    SizedBox(width: 2.w),
+                    Text(
+                      label,
+                      style: TextStyle(
+                        fontSize: 11.sp,
+                        fontWeight: FontWeight.w700,
+                        color: color,
+                      ),
+                    ),
+                  ],
+                )
+              : Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(icon, color: color, size: 20.sp),
+                    SizedBox(height: 0.5.h),
+                    Text(
+                      label,
+                      style: TextStyle(
+                        fontSize: 11.sp,
+                        fontWeight: FontWeight.w700,
+                        color: color,
+                      ),
+                      textAlign: TextAlign.center,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
                 ),
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
-          ),
         ),
       ),
     );

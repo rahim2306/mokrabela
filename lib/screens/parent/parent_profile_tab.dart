@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mokrabela/components/dialogs/reward_dialogs.dart';
 import 'package:mokrabela/components/parent/profile/child_info_card.dart';
 import 'package:mokrabela/components/parent/profile/recent_achievements_card.dart';
 import 'package:mokrabela/components/parent/profile/watch_status_card.dart';
@@ -96,22 +97,11 @@ class ParentProfileTab extends StatelessWidget {
                         ),
                       );
                     },
-                    onSendMessage: () {
-                      // TODO: Navigate to messaging screen
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(l10n.sendMessageDesc),
-                          behavior: SnackBarBehavior.floating,
-                        ),
-                      );
-                    },
-                    onSendSticker: () {
-                      // TODO: Show sticker selector dialog
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(l10n.sendStickerDesc),
-                          behavior: SnackBarBehavior.floating,
-                        ),
+                    onSendReward: () {
+                      RewardDialogs.showHistory(
+                        context,
+                        childId: child.uid,
+                        childName: child.name,
                       );
                     },
                   ),
