@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mokrabela/models/stats_models.dart';
+import 'package:logger/logger.dart';
 
 /// Service for aggregating session statistics from Firestore
 class StatsService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final _logger = Logger();
 
   Future<StatsData> getStats(
     String childId,
@@ -49,8 +51,11 @@ class StatsService {
         currentStreak: streak,
       );
     } catch (e, stackTrace) {
-      print('StatsService.getStats ERROR: $e');
-      print('Stack trace: $stackTrace');
+      _logger.e(
+        'StatsService.getStats ERROR',
+        error: e,
+        stackTrace: stackTrace,
+      );
       rethrow;
     }
   }
@@ -217,7 +222,7 @@ class StatsService {
 
       return filtered;
     } catch (e) {
-      print('StatsService._getSessions ERROR: $e');
+      _logger.e('StatsService._getSessions ERROR', error: e);
       rethrow;
     }
   }

@@ -1,11 +1,6 @@
 # Mokrabela
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Flutter-v3.10.7-blue.svg" alt="Flutter Version">
-  <img src="https://img.shields.io/badge/Firebase-Supported-orange.svg" alt="Firebase Support">
-  <img src="https://img.shields.io/badge/Platforms-Android%20%7C%20iOS%20%7C%20Windows-green.svg" alt="Platform Support">
-  <img src="https://img.shields.io/badge/Localizations-EN%20%7C%20AR%20%7C%20FR-blueviolet.svg" alt="Localizations">
-</p>
+![Flutter Version](https://img.shields.io/badge/Flutter-v3.10.7-blue.svg) ![Firebase Support](https://img.shields.io/badge/Firebase-Supported-orange.svg) ![Platform Support](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS%20%7C%20Windows-green.svg) ![Localizations](https://img.shields.io/badge/Localizations-EN%20%7C%20AR%20%7C%20FR-blueviolet.svg)
 
 **Mokrabela** is a state-of-the-art Flutter application designed to empower children with emotional self-regulation. By combining gamified breathing exercises with real-time biofeedback and structured therapeutic protocols, Mokrabela bridges the gap between clinical monitoring and child-friendly engagement.
 
@@ -126,6 +121,4 @@ The project follows a modular architecture designed for scalability:
 
 ---
 
-<p align="center">
-  <b>built with tears by Abderrahim Hadj-Slimane.</b>
-</p>
+**built with tears by Abderrahim Hadj-Slimane.**

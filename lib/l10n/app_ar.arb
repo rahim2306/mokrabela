@@ -586,5 +586,43 @@
   "timeRangeMonth": "شهر",
   "timeRangeFiveWeeks": "5 أسابيع",
   "noProtocolData": "لا تتوفر بيانات البروتوكول",
-  "errorExporting": "خطأ في تصدير {type}: {error}"
+  "errorExporting": "خطأ في تصدير {type}: {error}",
+  "childProfile": "ملف تعريف الطفل",
+  "noChildSelected": "لم يتم اختيار طفل",
+  "createChildToStart": "أنشئ حساباً للطفل للبدء",
+  "createChildAccountLabel": "إنشاء حساب طفل",
+  "manageChild": "إدارة الطفل",
+  "rewardsAndEncouragement": "المكافآت والتشجيع",
+  "sendMessage": "إرسال رسالة",
+  "sendMessageDesc": "إرسال رسالة لطفلك",
+  "recentAchievements": "الإنجازات الأخيرة",
+  "noAchievementsYet": "لا توجد إنجازات بعد. استمر!",
+  "sendSticker": "إرسال ملصق",
+  "sendStickerDesc": "إرسال شارة تحفيزية",
+  "accountSafety": "أمان الحساب",
+  "resetPassword": "إعادة تعيين كلمة المرور",
+  "resetPasswordDesc": "إرسال بريد إلكتروني للاسترداد للطفل",
+  "removeChild": "حذف الطفل",
+  "removeChildDesc": "فك ارتباط الحساب عن الوالد",
+  "watchStatus": "حالة الساعة",
+  "online": "متصل",
+  "offline": "غير متصل",
+  "device": "الجهاز",
+  "battery": "البطارية",
+  "lastSyncedAt": "آخر مزامنة: {timestamp}",
+  "@lastSyncedAt": {
+    "placeholders": {
+      "timestamp": {
+        "type": "String"
+      }
+    }
+  },
+  "ageYearsOld": "العمر {age} سنوات",
+  "@ageYearsOld": {
+    "placeholders": {
+      "age": {
+        "type": "String"
+      }
+    }
+  }
 }

@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:mokrabela/data/achievements_list.dart';
 import 'package:mokrabela/firebase_options.dart';
+import 'package:mokrabela/models/achievement_model.dart';
+
 import 'package:mokrabela/models/user_model.dart';
 import 'package:mokrabela/services/protocol_service.dart';
 
@@ -216,6 +219,106 @@ class ParentService {
     } catch (e) {
       debugPrint('Error checking parent role: $e');
       return false;
+    }
+  }
+
+  /// Get recent achievements for a child (unlocked in the last 7 days)
+  Stream<List<Achievement>> getRecentAchievements(String childId) {
+    debugPrint('START: Fetching recent achievements for child: $childId');
+    try {
+      final sevenDaysAgo = DateTime.now().subtract(const Duration(days: 7));
+      debugPrint('Looking for achievements unlocked after: $sevenDaysAgo');
+
+      return _firestore
+          .collection('achievements')
+          .where('childId', isEqualTo: childId)
+          // Removed orderBy to avoid needing a composite index
+          // .orderBy('unlockedAt', descending: true)
+          .snapshots()
+          .map((snapshot) {
+            debugPrint(
+              'FIRESTORE: Fetched ${snapshot.docs.length} raw achievement documents',
+            );
+
+            final achievements = snapshot.docs.map((doc) {
+              final data = doc.data();
+              final type = data['achievementType'] as String? ?? 'unknown';
+
+              // Get static definition from the shared list
+              final template = AchievementsList.getById(type);
+
+              if (template != null) {
+                return Achievement(
+                  id: doc.id,
+                  titleKey: template.titleKey,
+                  descriptionKey: template.descriptionKey,
+                  category: template.category,
+                  icon: template.icon,
+                  gradientColors: template.gradientColors,
+                  points: template.points,
+                  rarity: template.rarity,
+
+                  // Dynamic data from Firestore
+                  targetValue:
+                      (data['targetValue'] as num?)?.toInt() ??
+                      template.targetValue,
+                  currentValue: (data['currentValue'] as num?)?.toInt() ?? 0,
+                  isUnlocked: data['isUnlocked'] ?? true,
+                  unlockedAt: (data['unlockedAt'] as Timestamp?)?.toDate(),
+                );
+              } else {
+                // Fallback for unknown/test achievements that aren't in the list
+                return Achievement(
+                  id: doc.id,
+                  titleKey: type, // Show raw type as title if unknown
+                  descriptionKey: '',
+                  category: AchievementCategory.special,
+                  icon: Icons.star,
+                  gradientColors: Achievement.getGradientForRarity(
+                    AchievementRarity.common,
+                  ),
+                  points: 0,
+                  rarity: AchievementRarity.common,
+
+                  targetValue: (data['targetValue'] as num?)?.toInt() ?? 100,
+                  currentValue: (data['currentValue'] as num?)?.toInt() ?? 0,
+                  isUnlocked: data['isUnlocked'] ?? true,
+                  unlockedAt: (data['unlockedAt'] as Timestamp?)?.toDate(),
+                );
+              }
+            }).toList();
+
+            // Filter in memory to bypass index requirement
+            final recent = achievements.where((a) {
+              final isRecent =
+                  a.isUnlocked &&
+                  a.unlockedAt != null &&
+                  a.unlockedAt!.isAfter(sevenDaysAgo);
+
+              if (!isRecent) {
+                debugPrint(
+                  '  Skipping ${a.id} (Unlocked: ${a.isUnlocked}, Date: ${a.unlockedAt})',
+                );
+              }
+              return isRecent;
+            }).toList();
+
+            debugPrint(
+              'FILTER: returning ${recent.length} valid recent achievements',
+            );
+
+            // Sort in memory since we removed the Firestore orderBy
+            recent.sort((a, b) {
+              final aDate = a.unlockedAt ?? DateTime(0);
+              final bDate = b.unlockedAt ?? DateTime(0);
+              return bDate.compareTo(aDate); // Descending
+            });
+
+            return recent;
+          });
+    } catch (e) {
+      debugPrint('ERROR getting recent achievements: $e');
+      return Stream.value([]);
     }
   }
 

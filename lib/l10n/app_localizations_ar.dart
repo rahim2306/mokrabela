@@ -1240,4 +1240,80 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get selectChildToView => 'اختر طفلاً لعرض تقدمه';
+
+  @override
+  String get childProfile => 'ملف تعريف الطفل';
+
+  @override
+  String get noChildSelected => 'لم يتم اختيار طفل';
+
+  @override
+  String get createChildToStart => 'أنشئ حساباً للطفل للبدء';
+
+  @override
+  String get createChildAccountLabel => 'إنشاء حساب طفل';
+
+  @override
+  String get manageChild => 'إدارة الطفل';
+
+  @override
+  String get rewardsAndEncouragement => 'المكافآت والتشجيع';
+
+  @override
+  String get sendMessage => 'إرسال رسالة';
+
+  @override
+  String get sendMessageDesc => 'إرسال رسالة لطفلك';
+
+  @override
+  String get recentAchievements => 'الإنجازات الأخيرة';
+
+  @override
+  String get noAchievementsYet => 'لا توجد إنجازات بعد. استمر!';
+
+  @override
+  String get sendSticker => 'إرسال ملصق';
+
+  @override
+  String get sendStickerDesc => 'إرسال شارة تحفيزية';
+
+  @override
+  String get accountSafety => 'أمان الحساب';
+
+  @override
+  String get resetPassword => 'إعادة تعيين كلمة المرور';
+
+  @override
+  String get resetPasswordDesc => 'إرسال بريد إلكتروني للاسترداد للطفل';
+
+  @override
+  String get removeChild => 'حذف الطفل';
+
+  @override
+  String get removeChildDesc => 'فك ارتباط الحساب عن الوالد';
+
+  @override
+  String get watchStatus => 'حالة الساعة';
+
+  @override
+  String get online => 'متصل';
+
+  @override
+  String get offline => 'غير متصل';
+
+  @override
+  String get device => 'الجهاز';
+
+  @override
+  String get battery => 'البطارية';
+
+  @override
+  String lastSyncedAt(String timestamp) {
+    return 'آخر مزامنة: $timestamp';
+  }
+
+  @override
+  String ageYearsOld(String age) {
+    return 'العمر $age سنوات';
+  }
 }

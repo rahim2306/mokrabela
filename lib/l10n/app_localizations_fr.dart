@@ -1270,4 +1270,81 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get selectChildToView =>
       'Sélectionnez un enfant pour voir ses progrès';
+
+  @override
+  String get childProfile => 'Profil de l\'enfant';
+
+  @override
+  String get noChildSelected => 'Aucun enfant sélectionné';
+
+  @override
+  String get createChildToStart => 'Créez un compte enfant pour commencer';
+
+  @override
+  String get createChildAccountLabel => 'Créer un compte enfant';
+
+  @override
+  String get manageChild => 'Gérer l\'enfant';
+
+  @override
+  String get rewardsAndEncouragement => 'Récompenses et Encouragements';
+
+  @override
+  String get sendMessage => 'Envoyer un message';
+
+  @override
+  String get sendMessageDesc => 'Envoyer un message à votre enfant';
+
+  @override
+  String get recentAchievements => 'Réalisations récentes';
+
+  @override
+  String get noAchievementsYet => 'Pas encore de réalisations. Continuez!';
+
+  @override
+  String get sendSticker => 'Envoyer un sticker';
+
+  @override
+  String get sendStickerDesc => 'Envoyer un badge de motivation';
+
+  @override
+  String get accountSafety => 'Sécurité du compte';
+
+  @override
+  String get resetPassword => 'Réinitialiser le mot de passe';
+
+  @override
+  String get resetPasswordDesc =>
+      'Envoyer un e-mail de récupération à l\'enfant';
+
+  @override
+  String get removeChild => 'Supprimer l\'enfant';
+
+  @override
+  String get removeChildDesc => 'Dissocier le compte du parent';
+
+  @override
+  String get watchStatus => 'Statut de la montre';
+
+  @override
+  String get online => 'En ligne';
+
+  @override
+  String get offline => 'Hors ligne';
+
+  @override
+  String get device => 'Appareil';
+
+  @override
+  String get battery => 'Batterie';
+
+  @override
+  String lastSyncedAt(String timestamp) {
+    return 'Dernière synchro : $timestamp';
+  }
+
+  @override
+  String ageYearsOld(String age) {
+    return '$age ans';
+  }
 }

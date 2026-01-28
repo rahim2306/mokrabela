@@ -8,8 +8,10 @@ import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:mokrabela/models/stats_models.dart';
 import 'package:mokrabela/services/export_service.dart';
 import 'package:mokrabela/services/stats_service.dart';
+import 'package:mokrabela/services/parent_service.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 import 'package:sizer/sizer.dart';
+import 'package:mokrabela/models/user_model.dart';
 
 class ParentStatsTab extends StatefulWidget {
   final String? selectedChildId;
@@ -27,12 +29,14 @@ class ParentStatsTab extends StatefulWidget {
 
 class _ParentStatsTabState extends State<ParentStatsTab> {
   late final StatsService _statsService;
+  late final ParentService _parentService;
   TimeRange _selectedRange = TimeRange.week;
 
   @override
   void initState() {
     super.initState();
     _statsService = widget.statsService ?? StatsService();
+    _parentService = ParentService();
   }
 
   @override
@@ -58,6 +62,7 @@ class _ParentStatsTabState extends State<ParentStatsTab> {
         List<DailySessionCount>,
         List<StressDataPoint>,
         List<WeekProgress>,
+        UserModel?,
       )
     >(
       future:
@@ -78,12 +83,14 @@ class _ParentStatsTabState extends State<ParentStatsTab> {
               dateRange.end,
             ),
             _statsService.getProtocolCompletion(widget.selectedChildId!),
+            _parentService.getChildDetails(widget.selectedChildId!),
           ]).then(
             (results) => (
               results[0] as StatsData,
               results[1] as List<DailySessionCount>,
               results[2] as List<StressDataPoint>,
               results[3] as List<WeekProgress>,
+              results[4] as UserModel?,
             ),
           ),
       builder: (context, snapshot) {
@@ -188,6 +195,7 @@ class _ParentStatsTabState extends State<ParentStatsTab> {
                   snapshot.data!.$1,
                   snapshot.data!.$2,
                   snapshot.data!.$4,
+                  snapshot.data!.$5?.name ?? 'Child',
                   dateRange,
                   l10n,
                 ),
@@ -210,6 +218,7 @@ class _ParentStatsTabState extends State<ParentStatsTab> {
     StatsData stats,
     List<DailySessionCount> dailyStats,
     List<WeekProgress> weeks,
+    String childName,
     ({DateTime start, DateTime end}) dateRange,
     AppLocalizations l10n,
   ) {
@@ -241,7 +250,7 @@ class _ParentStatsTabState extends State<ParentStatsTab> {
                         stats,
                         dailyStats,
                         weeks,
-                        'Child Name', // TODO: Get real child name
+                        childName,
                       );
                     } catch (e) {
                       if (context.mounted) {

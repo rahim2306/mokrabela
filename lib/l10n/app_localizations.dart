@@ -2410,11 +2410,155 @@ abstract class AppLocalizations {
   /// **'Integration &\\nReview'**
   String get weekTitleIntegrationReview;
 
-  /// Empty state message when no child is selected
+  /// No description provided for @selectChildToView.
   ///
   /// In en, this message translates to:
   /// **'Select a child to view their progress'**
   String get selectChildToView;
+
+  /// No description provided for @childProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Child Profile'**
+  String get childProfile;
+
+  /// No description provided for @noChildSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'No Child Selected'**
+  String get noChildSelected;
+
+  /// No description provided for @createChildToStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a child account to get started'**
+  String get createChildToStart;
+
+  /// No description provided for @createChildAccountLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Child Account'**
+  String get createChildAccountLabel;
+
+  /// No description provided for @manageChild.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage Child'**
+  String get manageChild;
+
+  /// No description provided for @rewardsAndEncouragement.
+  ///
+  /// In en, this message translates to:
+  /// **'Rewards & Encouragement'**
+  String get rewardsAndEncouragement;
+
+  /// No description provided for @sendMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Message'**
+  String get sendMessage;
+
+  /// No description provided for @sendMessageDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Send a message to your child'**
+  String get sendMessageDesc;
+
+  /// No description provided for @recentAchievements.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Achievements'**
+  String get recentAchievements;
+
+  /// No description provided for @noAchievementsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No achievements yet. Keep going!'**
+  String get noAchievementsYet;
+
+  /// No description provided for @sendSticker.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Sticker'**
+  String get sendSticker;
+
+  /// No description provided for @sendStickerDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Send a motivational badge'**
+  String get sendStickerDesc;
+
+  /// No description provided for @accountSafety.
+  ///
+  /// In en, this message translates to:
+  /// **'Account Safety'**
+  String get accountSafety;
+
+  /// No description provided for @resetPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Password'**
+  String get resetPassword;
+
+  /// No description provided for @resetPasswordDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Send recovery email to child'**
+  String get resetPasswordDesc;
+
+  /// No description provided for @removeChild.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove Child'**
+  String get removeChild;
+
+  /// No description provided for @removeChildDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlink account from parent'**
+  String get removeChildDesc;
+
+  /// No description provided for @watchStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch Status'**
+  String get watchStatus;
+
+  /// No description provided for @online.
+  ///
+  /// In en, this message translates to:
+  /// **'Online'**
+  String get online;
+
+  /// No description provided for @offline.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline'**
+  String get offline;
+
+  /// No description provided for @device.
+  ///
+  /// In en, this message translates to:
+  /// **'Device'**
+  String get device;
+
+  /// No description provided for @battery.
+  ///
+  /// In en, this message translates to:
+  /// **'Battery'**
+  String get battery;
+
+  /// No description provided for @lastSyncedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Last synced: {timestamp}'**
+  String lastSyncedAt(String timestamp);
+
+  /// No description provided for @ageYearsOld.
+  ///
+  /// In en, this message translates to:
+  /// **'{age} years old'**
+  String ageYearsOld(String age);
 }
 
 class _AppLocalizationsDelegate

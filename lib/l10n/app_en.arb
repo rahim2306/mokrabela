@@ -1044,7 +1044,42 @@
     "description": "Week 5 title"
   },
   "selectChildToView": "Select a child to view their progress",
-  "@selectChildToView": {
-    "description": "Empty state message when no child is selected"
+  "childProfile": "Child Profile",
+  "noChildSelected": "No Child Selected",
+  "createChildToStart": "Create a child account to get started",
+  "createChildAccountLabel": "Create Child Account",
+  "manageChild": "Manage Child",
+  "rewardsAndEncouragement": "Rewards & Encouragement",
+  "sendMessage": "Send Message",
+  "sendMessageDesc": "Send a message to your child",
+  "recentAchievements": "Recent Achievements",
+  "noAchievementsYet": "No achievements yet. Keep going!",
+  "sendSticker": "Send Sticker",
+  "sendStickerDesc": "Send a motivational badge",
+  "accountSafety": "Account Safety",
+  "resetPassword": "Reset Password",
+  "resetPasswordDesc": "Send recovery email to child",
+  "removeChild": "Remove Child",
+  "removeChildDesc": "Unlink account from parent",
+  "watchStatus": "Watch Status",
+  "online": "Online",
+  "offline": "Offline",
+  "device": "Device",
+  "battery": "Battery",
+  "lastSyncedAt": "Last synced: {timestamp}",
+  "@lastSyncedAt": {
+    "placeholders": {
+      "timestamp": {
+        "type": "String"
+      }
+    }
+  },
+  "ageYearsOld": "{age} years old",
+  "@ageYearsOld": {
+    "placeholders": {
+      "age": {
+        "type": "String"
+      }
+    }
   }
 }

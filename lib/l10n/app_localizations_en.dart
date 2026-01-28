@@ -1247,4 +1247,80 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get selectChildToView => 'Select a child to view their progress';
+
+  @override
+  String get childProfile => 'Child Profile';
+
+  @override
+  String get noChildSelected => 'No Child Selected';
+
+  @override
+  String get createChildToStart => 'Create a child account to get started';
+
+  @override
+  String get createChildAccountLabel => 'Create Child Account';
+
+  @override
+  String get manageChild => 'Manage Child';
+
+  @override
+  String get rewardsAndEncouragement => 'Rewards & Encouragement';
+
+  @override
+  String get sendMessage => 'Send Message';
+
+  @override
+  String get sendMessageDesc => 'Send a message to your child';
+
+  @override
+  String get recentAchievements => 'Recent Achievements';
+
+  @override
+  String get noAchievementsYet => 'No achievements yet. Keep going!';
+
+  @override
+  String get sendSticker => 'Send Sticker';
+
+  @override
+  String get sendStickerDesc => 'Send a motivational badge';
+
+  @override
+  String get accountSafety => 'Account Safety';
+
+  @override
+  String get resetPassword => 'Reset Password';
+
+  @override
+  String get resetPasswordDesc => 'Send recovery email to child';
+
+  @override
+  String get removeChild => 'Remove Child';
+
+  @override
+  String get removeChildDesc => 'Unlink account from parent';
+
+  @override
+  String get watchStatus => 'Watch Status';
+
+  @override
+  String get online => 'Online';
+
+  @override
+  String get offline => 'Offline';
+
+  @override
+  String get device => 'Device';
+
+  @override
+  String get battery => 'Battery';
+
+  @override
+  String lastSyncedAt(String timestamp) {
+    return 'Last synced: $timestamp';
+  }
+
+  @override
+  String ageYearsOld(String age) {
+    return '$age years old';
+  }
 }

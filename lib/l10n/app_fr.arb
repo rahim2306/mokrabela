@@ -858,5 +858,43 @@
   "timeRangeMonth": "Mois",
   "timeRangeFiveWeeks": "5 Semaines",
   "noProtocolData": "Pas encore de données de protocole",
-  "errorExporting": "Erreur d'exportation {type}: {error}"
+  "errorExporting": "Erreur d'exportation {type}: {error}",
+  "childProfile": "Profil de l'enfant",
+  "noChildSelected": "Aucun enfant sélectionné",
+  "createChildToStart": "Créez un compte enfant pour commencer",
+  "createChildAccountLabel": "Créer un compte enfant",
+  "manageChild": "Gérer l'enfant",
+  "rewardsAndEncouragement": "Récompenses et Encouragements",
+  "sendMessage": "Envoyer un message",
+  "sendMessageDesc": "Envoyer un message à votre enfant",
+  "recentAchievements": "Réalisations récentes",
+  "noAchievementsYet": "Pas encore de réalisations. Continuez!",
+  "sendSticker": "Envoyer un sticker",
+  "sendStickerDesc": "Envoyer un badge de motivation",
+  "accountSafety": "Sécurité du compte",
+  "resetPassword": "Réinitialiser le mot de passe",
+  "resetPasswordDesc": "Envoyer un e-mail de récupération à l'enfant",
+  "removeChild": "Supprimer l'enfant",
+  "removeChildDesc": "Dissocier le compte du parent",
+  "watchStatus": "Statut de la montre",
+  "online": "En ligne",
+  "offline": "Hors ligne",
+  "device": "Appareil",
+  "battery": "Batterie",
+  "lastSyncedAt": "Dernière synchro : {timestamp}",
+  "@lastSyncedAt": {
+    "placeholders": {
+      "timestamp": {
+        "type": "String"
+      }
+    }
+  },
+  "ageYearsOld": "{age} ans",
+  "@ageYearsOld": {
+    "placeholders": {
+      "age": {
+        "type": "String"
+      }
+    }
+  }
 }
