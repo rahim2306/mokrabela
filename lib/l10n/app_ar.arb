@@ -626,5 +626,8 @@
         "type": "String"
       }
     }
-  }
+  },
+  "finalDiscoveryDashboard": "لوحة تحكم بروتوكول المربع المفقود",
+  "selfReportedActivity": "النشاط المُبلغ عنه ذاتياً",
+  "dominantMood": "المزاج السائد"
 }

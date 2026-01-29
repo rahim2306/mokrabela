@@ -973,7 +973,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get calmingRhythms => 'إيقاعات مهدئة';
 
   @override
-  String get finalDiscoveryDashboard => 'لوحة الاستكشاف النهائية';
+  String get finalDiscoveryDashboard => 'لوحة تحكم بروتوكول المربع المفقود';
 
   @override
   String get protocolAnalytics => 'تحليلات البروتوكول';
@@ -1245,6 +1245,21 @@ class AppLocalizationsAr extends AppLocalizations {
   String get weekTitleIntegrationReview => 'التكامل والمراجعة';
 
   @override
+  String get weekDesc1 => 'Breathing, Body Scan, Daily Tasks';
+
+  @override
+  String get weekDesc2 => 'Memory Flip, Stories';
+
+  @override
+  String get weekDesc3 => 'Daily Tasks, Self-Regulation';
+
+  @override
+  String get weekDesc4 => 'Drawing, Music';
+
+  @override
+  String get weekDesc5 => 'Math Puzzle, Memory Sequence';
+
+  @override
   String get selectChildToView => 'اختر طفلاً لعرض تقدمه';
 
   @override
@@ -1322,4 +1337,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String ageYearsOld(String age) {
     return 'العمر $age سنوات';
   }
+
+  @override
+  String get selfReportedActivity => 'النشاط المُبلغ عنه ذاتياً';
+
+  @override
+  String get dominantMood => 'المزاج السائد';
 }

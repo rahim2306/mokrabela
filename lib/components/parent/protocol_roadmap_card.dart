@@ -139,9 +139,21 @@ class _ProtocolRoadmapCardState extends State<ProtocolRoadmapCard> {
       AppLocalizations.of(context)!.weekTitleIntegrationReview,
     ];
 
+    final descriptions = [
+      AppLocalizations.of(context)!.weekDesc1,
+      AppLocalizations.of(context)!.weekDesc2,
+      AppLocalizations.of(context)!.weekDesc3,
+      AppLocalizations.of(context)!.weekDesc4,
+      AppLocalizations.of(context)!.weekDesc5,
+    ];
+
     final title = (weekNum <= titles.length)
         ? titles[weekNum - 1]
         : 'Week $weekNum';
+
+    final description = (weekNum <= descriptions.length)
+        ? descriptions[weekNum - 1]
+        : '';
 
     // Styling
     Color bgGradientStart;
@@ -219,11 +231,28 @@ class _ProtocolRoadmapCardState extends State<ProtocolRoadmapCard> {
             title,
             style: GoogleFonts.spaceGrotesk(
               fontSize: 14.sp,
-              height: 1.3,
+              height: 1.2,
               fontWeight: FontWeight.w800,
               color: isActive ? Colors.white : AppTheme.deepBlue,
             ),
           ),
+          SizedBox(height: 0.5.h),
+          Expanded(
+            child: Text(
+              description,
+              style: GoogleFonts.spaceGrotesk(
+                fontSize: 10.sp,
+                height: 1.2,
+                fontWeight: FontWeight.w500,
+                color: isActive
+                    ? Colors.white.withValues(alpha: 0.9)
+                    : AppTheme.textSecondary,
+              ),
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          SizedBox(height: 1.h),
 
           // Progress bar - fetch real progress from Firestore
           _buildProgressBar(weekNum, isCompleted, isActive),

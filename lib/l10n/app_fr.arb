@@ -836,11 +836,11 @@
   "streak": "Série",
   "recentActivity": "Activité récente",
   "noRecentActivity": "Aucune activité récente",
-  "weekTitleRegulationSafety": "Régulation et\\nsécurité",
-  "weekTitleFocusControl": "Focus et\\ncontrôle",
-  "weekTitleDailyStructure": "Structure\\nquotidienne",
-  "weekTitleCreativeCalm": "Calme\\ncréatif",
-  "weekTitleIntegrationReview": "Intégration et\\nrévision",
+  "weekTitleRegulationSafety": "Régulation et\nsécurité",
+  "weekTitleFocusControl": "Focus et\ncontrôle",
+  "weekTitleDailyStructure": "Structure\nquotidienne",
+  "weekTitleCreativeCalm": "Calme\ncréatif",
+  "weekTitleIntegrationReview": "Intégration et\nrévision",
   "selectChildToView": "Sélectionnez un enfant pour voir ses progrès",
   "statsAndReports": "Statistiques et Rapports",
   "errorLoadingStats": "Erreur lors du chargement des statistiques",
@@ -896,5 +896,8 @@
         "type": "String"
       }
     }
-  }
+  },
+  "finalDiscoveryDashboard": "Tableau de bord du protocole Carré Manquant",
+  "selfReportedActivity": "Activité auto-déclarée",
+  "dominantMood": "Humeur dominante"
 }

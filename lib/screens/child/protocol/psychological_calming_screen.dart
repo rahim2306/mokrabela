@@ -186,7 +186,8 @@ class _PsychologicalCalmingScreenState
                             () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const MusicMenuScreen(),
+                                builder: (context) =>
+                                    const MusicMenuScreen(protocolSquare: 4),
                               ),
                             ),
                           ),

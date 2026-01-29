@@ -1909,7 +1909,7 @@ abstract class AppLocalizations {
   /// No description provided for @finalDiscoveryDashboard.
   ///
   /// In en, this message translates to:
-  /// **'Final Discovery Dashboard'**
+  /// **'Missing Square Protocol dashboard'**
   String get finalDiscoveryDashboard;
 
   /// No description provided for @protocolAnalytics.
@@ -2395,32 +2395,62 @@ abstract class AppLocalizations {
   /// Week 1 title
   ///
   /// In en, this message translates to:
-  /// **'Regulation &\\nSafety'**
+  /// **'Regulation &\nSafety'**
   String get weekTitleRegulationSafety;
 
   /// Week 2 title
   ///
   /// In en, this message translates to:
-  /// **'Focus &\\nControl'**
+  /// **'Focus &\nControl'**
   String get weekTitleFocusControl;
 
   /// Week 3 title
   ///
   /// In en, this message translates to:
-  /// **'Daily\\nStructure'**
+  /// **'Daily\nStructure'**
   String get weekTitleDailyStructure;
 
   /// Week 4 title
   ///
   /// In en, this message translates to:
-  /// **'Creative\\nCalm'**
+  /// **'Creative\nCalm'**
   String get weekTitleCreativeCalm;
 
   /// Week 5 title
   ///
   /// In en, this message translates to:
-  /// **'Integration &\\nReview'**
+  /// **'Mastery &\nAssessment'**
   String get weekTitleIntegrationReview;
+
+  /// No description provided for @weekDesc1.
+  ///
+  /// In en, this message translates to:
+  /// **'Breathing, Body Scan, Daily Tasks'**
+  String get weekDesc1;
+
+  /// No description provided for @weekDesc2.
+  ///
+  /// In en, this message translates to:
+  /// **'Memory Flip, Stories'**
+  String get weekDesc2;
+
+  /// No description provided for @weekDesc3.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Tasks, Self-Regulation'**
+  String get weekDesc3;
+
+  /// No description provided for @weekDesc4.
+  ///
+  /// In en, this message translates to:
+  /// **'Drawing, Music'**
+  String get weekDesc4;
+
+  /// No description provided for @weekDesc5.
+  ///
+  /// In en, this message translates to:
+  /// **'Math Puzzle, Memory Sequence'**
+  String get weekDesc5;
 
   /// No description provided for @selectChildToView.
   ///
@@ -2571,6 +2601,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{age} years old'**
   String ageYearsOld(String age);
+
+  /// No description provided for @selfReportedActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Self-Reported Activity'**
+  String get selfReportedActivity;
+
+  /// No description provided for @dominantMood.
+  ///
+  /// In en, this message translates to:
+  /// **'Dominant Mood'**
+  String get dominantMood;
 }
 
 class _AppLocalizationsDelegate

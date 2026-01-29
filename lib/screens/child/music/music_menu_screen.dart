@@ -8,7 +8,8 @@ import 'package:mokrabela/theme/app_theme.dart';
 import 'package:sizer/sizer.dart';
 
 class MusicMenuScreen extends StatelessWidget {
-  const MusicMenuScreen({super.key});
+  final int? protocolSquare;
+  const MusicMenuScreen({super.key, this.protocolSquare});
 
   @override
   Widget build(BuildContext context) {
@@ -83,8 +84,10 @@ class MusicMenuScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    CalmMusicScreen(initialTrackIndex: index),
+                                builder: (context) => CalmMusicScreen(
+                                  initialTrackIndex: index,
+                                  protocolSquare: protocolSquare,
+                                ),
                               ),
                             );
                           },

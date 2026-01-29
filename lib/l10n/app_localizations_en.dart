@@ -976,7 +976,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get calmingRhythms => 'Calming Rhythms';
 
   @override
-  String get finalDiscoveryDashboard => 'Final Discovery Dashboard';
+  String get finalDiscoveryDashboard => 'Missing Square Protocol dashboard';
 
   @override
   String get protocolAnalytics => 'Protocol Analytics';
@@ -1237,19 +1237,34 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noRecentActivity => 'No recent activity';
 
   @override
-  String get weekTitleRegulationSafety => 'Regulation &\\nSafety';
+  String get weekTitleRegulationSafety => 'Regulation &\nSafety';
 
   @override
-  String get weekTitleFocusControl => 'Focus &\\nControl';
+  String get weekTitleFocusControl => 'Focus &\nControl';
 
   @override
-  String get weekTitleDailyStructure => 'Daily\\nStructure';
+  String get weekTitleDailyStructure => 'Daily\nStructure';
 
   @override
-  String get weekTitleCreativeCalm => 'Creative\\nCalm';
+  String get weekTitleCreativeCalm => 'Creative\nCalm';
 
   @override
-  String get weekTitleIntegrationReview => 'Integration &\\nReview';
+  String get weekTitleIntegrationReview => 'Mastery &\nAssessment';
+
+  @override
+  String get weekDesc1 => 'Breathing, Body Scan, Daily Tasks';
+
+  @override
+  String get weekDesc2 => 'Memory Flip, Stories';
+
+  @override
+  String get weekDesc3 => 'Daily Tasks, Self-Regulation';
+
+  @override
+  String get weekDesc4 => 'Drawing, Music';
+
+  @override
+  String get weekDesc5 => 'Math Puzzle, Memory Sequence';
 
   @override
   String get selectChildToView => 'Select a child to view their progress';
@@ -1329,4 +1344,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String ageYearsOld(String age) {
     return '$age years old';
   }
+
+  @override
+  String get selfReportedActivity => 'Self-Reported Activity';
+
+  @override
+  String get dominantMood => 'Dominant Mood';
 }

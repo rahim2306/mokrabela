@@ -12,8 +12,13 @@ import 'package:sizer/sizer.dart';
 
 class CalmMusicScreen extends StatefulWidget {
   final int initialTrackIndex;
+  final int? protocolSquare;
 
-  const CalmMusicScreen({super.key, this.initialTrackIndex = 0});
+  const CalmMusicScreen({
+    super.key,
+    this.initialTrackIndex = 0,
+    this.protocolSquare,
+  });
 
   @override
   State<CalmMusicScreen> createState() => _CalmMusicScreenState();
@@ -127,6 +132,7 @@ class _CalmMusicScreenState extends State<CalmMusicScreen> {
         type: 'music',
         exerciseName: tracks[_currentTrackIndex].titleKey,
         exerciseType: 'calm_music',
+        protocolSquare: widget.protocolSquare,
         startTime: _sessionStartTime!,
         endTime: DateTime.now(),
         completed: true,

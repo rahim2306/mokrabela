@@ -10,47 +10,10 @@ class ProtocolService {
 
   /// Checks if the progress was last updated on a different day and resets if so.
   /// This is useful to call when the user first enters the protocol hub.
-  Future<void> checkAndResetDailyProgress(String childId) async {
-    final progressRef = _firestore.collection('protocolProgress').doc(childId);
-    final doc = await progressRef.get();
-
-    if (doc.exists) {
-      final data = doc.data()!;
-      final Timestamp? lastUpdated = data['lastUpdated'] as Timestamp?;
-      final now = DateTime.now();
-
-      if (lastUpdated != null) {
-        final lastDate = lastUpdated.toDate();
-        bool isNewDay =
-            lastDate.year != now.year ||
-            lastDate.month != now.month ||
-            lastDate.day != now.day;
-
-        if (isNewDay) {
-          await progressRef.update({
-            'completedSquares': [],
-            'square1Complete': false,
-            'square2Complete': false,
-            'square3Complete': false,
-            'square4Complete': false,
-            'lastUpdated': FieldValue.serverTimestamp(),
-          });
-        }
-      }
-    }
-  }
+  // Method checkAndResetDailyProgress removed as protocolProgress is deprecated
 
   /// Get protocol progress stream for a child
-  Stream<DocumentSnapshot<Map<String, dynamic>>> getProgressStream(
-    String childId,
-  ) {
-    return _firestore.collection('protocolProgress').doc(childId).snapshots();
-  }
-
-  /// Reset protocol progress (optional but useful for testing)
-  Future<void> resetProgress(String childId) async {
-    await _firestore.collection('protocolProgress').doc(childId).delete();
-  }
+  // Methods getProgressStream and resetProgress removed as protocolProgress is deprecated
 
   // --- 6-Week Protocol Extensions ---
 

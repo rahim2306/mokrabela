@@ -1031,26 +1031,31 @@
   "@noRecentActivity": {
     "description": "Empty state for recent activity"
   },
-  "weekTitleRegulationSafety": "Regulation &\\nSafety",
+  "weekTitleRegulationSafety": "Regulation &\nSafety",
   "@weekTitleRegulationSafety": {
     "description": "Week 1 title"
   },
-  "weekTitleFocusControl": "Focus &\\nControl",
+  "weekTitleFocusControl": "Focus &\nControl",
   "@weekTitleFocusControl": {
     "description": "Week 2 title"
   },
-  "weekTitleDailyStructure": "Daily\\nStructure",
+  "weekTitleDailyStructure": "Daily\nStructure",
   "@weekTitleDailyStructure": {
     "description": "Week 3 title"
   },
-  "weekTitleCreativeCalm": "Creative\\nCalm",
+  "weekTitleCreativeCalm": "Creative\nCalm",
   "@weekTitleCreativeCalm": {
     "description": "Week 4 title"
   },
-  "weekTitleIntegrationReview": "Integration &\\nReview",
+  "weekTitleIntegrationReview": "Mastery &\nAssessment",
   "@weekTitleIntegrationReview": {
     "description": "Week 5 title"
   },
+  "weekDesc1": "Breathing, Body Scan, Daily Tasks",
+  "weekDesc2": "Memory Flip, Stories",
+  "weekDesc3": "Daily Tasks, Self-Regulation",
+  "weekDesc4": "Drawing, Music",
+  "weekDesc5": "Math Puzzle, Memory Sequence",
   "selectChildToView": "Select a child to view their progress",
   "childProfile": "Child Profile",
   "noChildSelected": "No Child Selected",
@@ -1089,5 +1094,8 @@
         "type": "String"
       }
     }
-  }
+  },
+  "finalDiscoveryDashboard": "Missing Square Protocol dashboard",
+  "selfReportedActivity": "Self-Reported Activity",
+  "dominantMood": "Dominant Mood"
 }

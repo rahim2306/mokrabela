@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mokrabela/components/cards/sticky_info_card.dart';
 import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:mokrabela/screens/child/focus/memory_game_screen.dart';
+import 'package:mokrabela/screens/child/focus/math_puzzle_game.dart';
+import 'package:mokrabela/screens/child/focus/memory_sequence_game.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 import 'package:sizer/sizer.dart';
 
@@ -48,26 +50,75 @@ class FocusGamesMenuScreen extends StatelessWidget {
               CustomScrollView(
                 physics: const BouncingScrollPhysics(),
                 slivers: [
-                  // Memory Flip Game Card
+                  // Game Cards List
                   SliverPadding(
                     padding: EdgeInsets.fromLTRB(6.w, 4.h, 6.w, 25.h),
                     sliver: SliverToBoxAdapter(
-                      child: _buildGameCard(
-                        context,
-                        title: l10n.memoryFlipTitle,
-                        description: l10n.memoryFlipDesc,
-                        icon: Icons.flip,
-                        gradient: [Color(0xFF667EEA), Color(0xFF764BA2)],
-                        onTap: () {
-                          Navigator.push(
+                      child: Column(
+                        children: [
+                          _buildGameCard(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => MemoryGameScreen(
-                                protocolSquare: protocolSquare,
-                              ),
-                            ),
-                          );
-                        },
+                            title: l10n.memoryFlipTitle,
+                            description: l10n.memoryFlipDesc,
+                            icon: Icons.flip,
+                            gradient: const [
+                              Color(0xFF667EEA),
+                              Color(0xFF764BA2),
+                            ],
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MemoryGameScreen(
+                                    protocolSquare: protocolSquare,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          SizedBox(height: 3.h),
+                          _buildGameCard(
+                            context,
+                            title: "Math Puzzle",
+                            description: "Solve math problems against time!",
+                            icon: Icons.calculate_rounded,
+                            gradient: const [
+                              Color(0xFFFF9A9E),
+                              Color(0xFFFECFEF),
+                            ],
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MathPuzzleGame(
+                                    protocolSquare: protocolSquare,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          SizedBox(height: 3.h),
+                          _buildGameCard(
+                            context,
+                            title: "Memory Sequence",
+                            description: "Remember and repeat the sequence!",
+                            icon: Icons.psychology_rounded,
+                            gradient: const [
+                              Color(0xFFA18CD1),
+                              Color(0xFFFBC2EB),
+                            ],
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MemorySequenceGame(
+                                    protocolSquare: protocolSquare,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
                       ),
                     ),
                   ),

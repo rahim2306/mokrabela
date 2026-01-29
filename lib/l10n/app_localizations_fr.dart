@@ -993,7 +993,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get calmingRhythms => 'Rythmes apaisants';
 
   @override
-  String get finalDiscoveryDashboard => 'Tableau de bord de découverte final';
+  String get finalDiscoveryDashboard =>
+      'Tableau de bord du protocole Carré Manquant';
 
   @override
   String get protocolAnalytics => 'Analytique du protocole';
@@ -1259,19 +1260,34 @@ class AppLocalizationsFr extends AppLocalizations {
   String get noRecentActivity => 'Aucune activité récente';
 
   @override
-  String get weekTitleRegulationSafety => 'Régulation et\\nsécurité';
+  String get weekTitleRegulationSafety => 'Régulation et\nsécurité';
 
   @override
-  String get weekTitleFocusControl => 'Focus et\\ncontrôle';
+  String get weekTitleFocusControl => 'Focus et\ncontrôle';
 
   @override
-  String get weekTitleDailyStructure => 'Structure\\nquotidienne';
+  String get weekTitleDailyStructure => 'Structure\nquotidienne';
 
   @override
-  String get weekTitleCreativeCalm => 'Calme\\ncréatif';
+  String get weekTitleCreativeCalm => 'Calme\ncréatif';
 
   @override
-  String get weekTitleIntegrationReview => 'Intégration et\\nrévision';
+  String get weekTitleIntegrationReview => 'Intégration et\nrévision';
+
+  @override
+  String get weekDesc1 => 'Breathing, Body Scan, Daily Tasks';
+
+  @override
+  String get weekDesc2 => 'Memory Flip, Stories';
+
+  @override
+  String get weekDesc3 => 'Daily Tasks, Self-Regulation';
+
+  @override
+  String get weekDesc4 => 'Drawing, Music';
+
+  @override
+  String get weekDesc5 => 'Math Puzzle, Memory Sequence';
 
   @override
   String get selectChildToView =>
@@ -1353,4 +1369,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String ageYearsOld(String age) {
     return '$age ans';
   }
+
+  @override
+  String get selfReportedActivity => 'Activité auto-déclarée';
+
+  @override
+  String get dominantMood => 'Humeur dominante';
 }

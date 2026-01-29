@@ -6,10 +6,12 @@ import 'package:mokrabela/screens/child/protocol/daily_tasks_screen.dart';
 import 'package:mokrabela/screens/child/protocol/self_awareness_screen.dart';
 import 'package:mokrabela/screens/child/protocol/self_regulation_screen.dart';
 import 'package:mokrabela/screens/child/protocol/psychological_calming_screen.dart';
-import 'package:mokrabela/screens/child/focus/focus_games_menu_screen.dart';
+import 'package:mokrabela/screens/child/focus/memory_game_screen.dart';
 import 'package:mokrabela/screens/child/music/music_menu_screen.dart';
 import 'package:mokrabela/screens/child/stories/story_menu_screen.dart';
 import 'package:mokrabela/screens/child/protocol/missing_square_dashboard_screen.dart';
+import 'package:mokrabela/screens/child/focus/math_puzzle_game.dart';
+import 'package:mokrabela/screens/child/focus/memory_sequence_game.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 
 import 'package:mokrabela/services/protocol_service.dart';
@@ -38,7 +40,8 @@ class _KidsProtocolScreenState extends State<KidsProtocolScreen> {
     final user = _authService.currentUser;
     if (user != null) {
       // Check and reset daily progress if needed
-      await _protocolService.checkAndResetDailyProgress(user.uid);
+      // Check and reset daily progress if needed - DEPRECATED
+      // await _protocolService.checkAndResetDailyProgress(user.uid);
 
       final userModel = await _authService.getUserDetails(user.uid);
       if (userModel != null && userModel.name.isNotEmpty) {
@@ -91,6 +94,8 @@ class _KidsProtocolScreenState extends State<KidsProtocolScreen> {
               _buildHeader(l10n, currentWeek),
               SizedBox(height: 3.h),
               _buildTimeline(context, l10n, currentWeek, enrollment),
+              SizedBox(height: 4.h),
+              _buildPrizeSection(context, currentWeek),
               SizedBox(height: 14.h), // Space for bottom nav
             ],
           ),
@@ -237,8 +242,7 @@ class _KidsProtocolScreenState extends State<KidsProtocolScreen> {
           () => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-                  const FocusGamesMenuScreen(protocolSquare: 2),
+              builder: (context) => const MemoryGameScreen(protocolSquare: 2),
             ),
           ),
         ),
@@ -297,21 +301,30 @@ class _KidsProtocolScreenState extends State<KidsProtocolScreen> {
           const [Color(0xFF84FAB0), Color(0xFF8FD3F4)],
           () => Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const MusicMenuScreen()),
+            MaterialPageRoute(
+              builder: (context) => const MusicMenuScreen(protocolSquare: 4),
+            ),
           ),
         ),
       ],
       5: [
-        // Week 5 — Integration & Evaluation
+        // Week 5 — Mastery & Assessment
         _buildSquareShortCard(
-          l10n.finalDiscoveryDashboard, // Progress/Dashboard
-          Icons.dashboard_customize_rounded,
-          const [Color(0xFFFACD68), Color(0xFF0897B4)],
+          "Math Puzzle",
+          Icons.calculate_rounded,
+          const [Color(0xFFFF9A9E), Color(0xFFFECFEF)],
           () => Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => const MissingSquareDashboardScreen(),
-            ),
+            MaterialPageRoute(builder: (context) => const MathPuzzleGame()),
+          ),
+        ),
+        _buildSquareShortCard(
+          "Memory Sequence",
+          Icons.psychology_rounded,
+          const [Color(0xFFA18CD1), const Color(0xFFFBC2EB)],
+          () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const MemorySequenceGame()),
           ),
         ),
       ],
@@ -466,6 +479,109 @@ class _KidsProtocolScreenState extends State<KidsProtocolScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildPrizeSection(BuildContext context, int currentWeek) {
+    // Unlock when reaching Week 5 (Mastery & Assessment)
+    final isUnlocked = currentWeek >= 5;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Goal",
+          style: GoogleFonts.spaceGrotesk(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.bold,
+            color: AppTheme.deepBlue,
+          ),
+        ),
+        SizedBox(height: 1.5.h),
+        GestureDetector(
+          onTap: () {
+            if (isUnlocked) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const MissingSquareDashboardScreen(),
+                ),
+              );
+            }
+          },
+          child: Opacity(
+            opacity: isUnlocked ? 1.0 : 0.6,
+            child: Container(
+              height: 12.h,
+              padding: EdgeInsets.all(4.w),
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [Color(0xFFFACD68), Color(0xFFFBAB7E)],
+                ),
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFFFACD68).withValues(alpha: 0.3),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(3.w),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.2),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      Icons.emoji_events_rounded,
+                      color: Colors.white,
+                      size: 24.sp,
+                    ),
+                  ),
+                  SizedBox(width: 4.w),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          AppLocalizations.of(context)!.finalDiscoveryDashboard,
+                          style: GoogleFonts.spaceGrotesk(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        if (!isUnlocked)
+                          Text(
+                            "Complete all weeks to unlock",
+                            style: GoogleFonts.spaceGrotesk(
+                              fontSize: 10.sp,
+                              color: Colors.white.withValues(alpha: 0.8),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                  if (!isUnlocked)
+                    Icon(
+                      Icons.lock_rounded,
+                      color: Colors.white.withValues(alpha: 0.5),
+                    )
+                  else
+                    const Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      color: Colors.white,
+                    ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
