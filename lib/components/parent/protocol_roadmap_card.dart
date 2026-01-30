@@ -173,7 +173,7 @@ class _ProtocolRoadmapCardState extends State<ProtocolRoadmapCard> {
 
     return Container(
       width: 32.w,
-      padding: EdgeInsets.all(2.5.h),
+      padding: EdgeInsets.all(1.8.h),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -208,7 +208,7 @@ class _ProtocolRoadmapCardState extends State<ProtocolRoadmapCard> {
                 child: Text(
                   '$weekNum',
                   style: GoogleFonts.spaceGrotesk(
-                    fontSize: 15.sp,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w900,
                     color: isActive ? Colors.white : AppTheme.deepBlue,
                   ),
@@ -230,7 +230,7 @@ class _ProtocolRoadmapCardState extends State<ProtocolRoadmapCard> {
           Text(
             title,
             style: GoogleFonts.spaceGrotesk(
-              fontSize: 14.sp,
+              fontSize: 15.sp,
               height: 1.2,
               fontWeight: FontWeight.w800,
               color: isActive ? Colors.white : AppTheme.deepBlue,
@@ -241,7 +241,7 @@ class _ProtocolRoadmapCardState extends State<ProtocolRoadmapCard> {
             child: Text(
               description,
               style: GoogleFonts.spaceGrotesk(
-                fontSize: 10.sp,
+                fontSize: 11.5.sp,
                 height: 1.2,
                 fontWeight: FontWeight.w500,
                 color: isActive

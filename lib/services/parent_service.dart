@@ -116,6 +116,7 @@ class ParentService {
 
       await _firestore.collection('users').doc(user.uid).set({
         'uid': user.uid,
+        'email': email,
         'role': 'child',
         'profile': profile.toMap(),
         'watchSettings': watchSettings.toMap(),
@@ -204,6 +205,16 @@ class ParentService {
       });
     } catch (e) {
       debugPrint('Error updating child profile: $e');
+      rethrow;
+    }
+  }
+
+  /// Send password reset email
+  Future<void> resetChildPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    } catch (e) {
+      debugPrint('Error sending password reset email: $e');
       rethrow;
     }
   }

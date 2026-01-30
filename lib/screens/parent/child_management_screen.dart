@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mokrabela/l10n/app_localizations.dart';
 import 'package:mokrabela/models/user_model.dart';
 import 'package:mokrabela/theme/app_theme.dart';
+import 'package:mokrabela/services/parent_service.dart';
 import 'package:sizer/sizer.dart';
 
 class ChildManagementScreen extends StatelessWidget {
@@ -183,7 +184,7 @@ class ChildManagementScreen extends StatelessWidget {
                       l10n.resetPasswordDesc,
                       AppTheme.deepBlue,
                       () {
-                        // TODO: Implement password reset
+                        _showResetPasswordDialog(context, l10n);
                       },
                     ),
                     SizedBox(height: 2.h),
@@ -193,7 +194,7 @@ class ChildManagementScreen extends StatelessWidget {
                       l10n.removeChildDesc,
                       const Color(0xFFFF9B9B),
                       () {
-                        // TODO: Implement remove child with confirmation
+                        _showDeleteConfirmation(context, l10n);
                       },
                       isDanger: true,
                     ),
@@ -215,7 +216,7 @@ class ChildManagementScreen extends StatelessWidget {
       child: Text(
         title,
         style: TextStyle(
-          fontSize: 15.sp,
+          fontSize: 18.sp,
           fontWeight: FontWeight.w700,
           color: AppTheme.textSecondary,
         ),
@@ -270,7 +271,7 @@ class ChildManagementScreen extends StatelessWidget {
                       Text(
                         title,
                         style: TextStyle(
-                          fontSize: 15.sp,
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.w800,
                           color: isDanger ? color : AppTheme.deepBlue,
                           letterSpacing: -0.2,
@@ -279,7 +280,7 @@ class ChildManagementScreen extends StatelessWidget {
                       Text(
                         subtitle,
                         style: TextStyle(
-                          fontSize: 10.5.sp,
+                          fontSize: 12.sp,
                           color: AppTheme.textSecondary,
                           fontWeight: FontWeight.w500,
                         ),
@@ -296,6 +297,140 @@ class ChildManagementScreen extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  void _showResetPasswordDialog(
+    BuildContext parentContext,
+    AppLocalizations l10n,
+  ) {
+    // If we know the email, don't pre-fill it to force manual verification
+    // Otherwise leave it empty for user to type
+    final emailController = TextEditingController();
+    String? errorText;
+
+    showDialog(
+      context: parentContext,
+      builder: (dialogContext) => StatefulBuilder(
+        // Renamed to dialogContext
+        builder: (context, setState) {
+          // 'context' here is the StatefulBuilder's context (can affect UI within dialog)
+          // But we need parentContext for SnackBar after dialog closes
+
+          return AlertDialog(
+            title: Text(l10n.resetPassword),
+            scrollable: true, // Handle scrolling natively
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(l10n.resetPasswordDesc),
+                SizedBox(height: 2.h),
+                TextField(
+                  controller: emailController,
+                  onChanged: (value) {
+                    if (errorText != null) {
+                      setState(() {
+                        errorText = null;
+                      });
+                    }
+                  },
+                  decoration: InputDecoration(
+                    labelText: l10n.enterChildEmail,
+                    errorText: errorText,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(dialogContext),
+                child: Text(l10n.cancel),
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  final email = emailController.text.trim();
+                  if (email.isEmpty) return;
+
+                  // Verification Logic
+                  if (child.email.isNotEmpty && email != child.email) {
+                    setState(() {
+                      errorText = l10n.invalidEmail;
+                    });
+                    return;
+                  }
+
+                  Navigator.pop(
+                    dialogContext,
+                  ); // Close dialog using dialogContext
+
+                  try {
+                    await ParentService().resetChildPassword(email);
+
+                    // Use parentContext for SnackBar since dialog is closed
+                    if (parentContext.mounted) {
+                      ScaffoldMessenger.of(parentContext).showSnackBar(
+                        SnackBar(content: Text(l10n.emailSentSuccess)),
+                      );
+                    }
+                  } catch (e) {
+                    if (parentContext.mounted) {
+                      ScaffoldMessenger.of(
+                        parentContext,
+                      ).showSnackBar(SnackBar(content: Text('Error: $e')));
+                    }
+                  }
+                },
+                child: Text(l10n.sendResetLink),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  void _showDeleteConfirmation(BuildContext context, AppLocalizations l10n) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.areYouSureDelete),
+        content: Text(l10n.deleteChildWarning),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(l10n.cancel),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+            onPressed: () async {
+              Navigator.pop(context); // Close dialog
+              try {
+                await ParentService().deleteChildAccount(child.uid);
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(l10n.childRemovedSuccess)),
+                  );
+                  Navigator.pop(context); // Go back to management list
+                }
+              } catch (e) {
+                if (context.mounted) {
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text('Error: $e')));
+                }
+              }
+            },
+            child: Text(
+              l10n.delete,
+              style: const TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
       ),
     );
   }

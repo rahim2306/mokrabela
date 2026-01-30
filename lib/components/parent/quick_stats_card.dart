@@ -53,7 +53,7 @@ class _QuickStatsCardState extends State<QuickStatsCard> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(2.5.h),
+      padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 3.h),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
@@ -74,7 +74,7 @@ class _QuickStatsCardState extends State<QuickStatsCard> {
               Text(
                 AppLocalizations.of(context)!.thisWeek,
                 style: GoogleFonts.spaceGrotesk(
-                  fontSize: 16.sp,
+                  fontSize: 18.sp,
                   fontWeight: FontWeight.w700,
                   color: AppTheme.deepBlue,
                 ),
@@ -148,7 +148,7 @@ class _QuickStatsCardState extends State<QuickStatsCard> {
               value: numericValue,
               suffix: suffix.isNotEmpty ? suffix : null,
               style: GoogleFonts.spaceGrotesk(
-                fontSize: 22.sp,
+                fontSize: 24.sp,
                 fontWeight: FontWeight.w800,
                 color: AppTheme.deepBlue,
                 height: 1.0,
@@ -165,7 +165,7 @@ class _QuickStatsCardState extends State<QuickStatsCard> {
         Text(
           label,
           style: GoogleFonts.spaceGrotesk(
-            fontSize: 11.sp,
+            fontSize: 13.sp,
             color: AppTheme.textSecondary,
             fontWeight: FontWeight.w500,
           ),

@@ -1231,19 +1231,19 @@ abstract class AppLocalizations {
   /// No description provided for @connectWatch.
   ///
   /// In en, this message translates to:
-  /// **'Connect Your Watch'**
+  /// **'Connect Watch'**
   String get connectWatch;
 
   /// No description provided for @watchScanning.
   ///
   /// In en, this message translates to:
-  /// **'Searching for your watch...'**
+  /// **'Scanning for devices...'**
   String get watchScanning;
 
   /// No description provided for @watchFound.
   ///
   /// In en, this message translates to:
-  /// **'Watch found!'**
+  /// **'Device found!'**
   String get watchFound;
 
   /// No description provided for @watchConnecting.
@@ -1273,13 +1273,13 @@ abstract class AppLocalizations {
   /// No description provided for @noDevicesFound.
   ///
   /// In en, this message translates to:
-  /// **'No devices found nearby.'**
+  /// **'No devices found'**
   String get noDevicesFound;
 
   /// No description provided for @retryScan.
   ///
   /// In en, this message translates to:
-  /// **'Scan Again'**
+  /// **'Retry Scan'**
   String get retryScan;
 
   /// No description provided for @stopTechnique.
@@ -2613,6 +2613,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Dominant Mood'**
   String get dominantMood;
+
+  /// No description provided for @areYouSureDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to remove this child?'**
+  String get areYouSureDelete;
+
+  /// No description provided for @deleteChildWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'This action cannot be undone. All data will be permanently deleted.'**
+  String get deleteChildWarning;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @sendResetLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Reset Link'**
+  String get sendResetLink;
+
+  /// No description provided for @enterChildEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter child\'s email'**
+  String get enterChildEmail;
+
+  /// No description provided for @emailSentSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset link sent successfully'**
+  String get emailSentSuccess;
+
+  /// No description provided for @childRemovedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Child account removed successfully'**
+  String get childRemovedSuccess;
+
+  /// No description provided for @bluetoothOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Bluetooth is Off'**
+  String get bluetoothOff;
+
+  /// No description provided for @turnOnBluetooth.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn On Bluetooth'**
+  String get turnOnBluetooth;
+
+  /// No description provided for @bluetoothOffDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Please turn on Bluetooth to connect to your child\'s watch.'**
+  String get bluetoothOffDesc;
+
+  /// No description provided for @openSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Settings'**
+  String get openSettings;
 }
 
 class _AppLocalizationsDelegate

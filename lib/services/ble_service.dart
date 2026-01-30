@@ -165,10 +165,11 @@ class BleService extends ChangeNotifier {
 
         // Check if Location services are enabled (Required for BLE on some Android versions)
         if (!await Permission.location.serviceStatus.isEnabled) {
-          _lastErrorMessage =
-              "Please enable Location services to scan for devices.";
-          _logger.w(_lastErrorMessage);
-          return false;
+          _logger.w(
+            "Location services are disabled. complying with Android requirements, scanning might fail.",
+          );
+          // We do NOT return false here anymore. We let the scan attempt happen.
+          // On Android 12+ with 'neverForLocation', this is valid.
         }
       }
 
@@ -233,8 +234,9 @@ class BleService extends ChangeNotifier {
 
         // Start the scan non-blocking
         FlutterBluePlus.startScan(
-          timeout: const Duration(seconds: 60),
-          androidUsesFineLocation: true,
+          timeout: const Duration(seconds: 15),
+          androidScanMode: AndroidScanMode.lowLatency,
+          androidUsesFineLocation: true, // Explicitly use fine location
           continuousUpdates: true,
         ).catchError((e) {
           _logger.e("Error during FlutterBluePlus.startScan: $e");

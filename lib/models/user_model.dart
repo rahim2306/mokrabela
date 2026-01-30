@@ -90,6 +90,7 @@ class AppSettings {
 
 class UserModel {
   final String uid;
+  final String email; // Stored in Firestore for child accounts
   final UserRole role;
   final UserProfile profile;
   final WatchSettings watchSettings;
@@ -97,10 +98,10 @@ class UserModel {
 
   // Shortcuts for UI convenience
   String get name => profile.name ?? '';
-  String get email => '';
 
   UserModel({
     required this.uid,
+    this.email = '',
     required this.role,
     required this.profile,
     required this.watchSettings,
@@ -112,6 +113,7 @@ class UserModel {
 
     return UserModel(
       uid: data['uid'] ?? doc.id,
+      email: data['email'] as String? ?? '',
       role: UserRole.values.firstWhere(
         (e) => e.toString().split('.').last == (data['role'] as String?),
         orElse: () => UserRole.child,

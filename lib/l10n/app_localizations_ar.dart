@@ -1343,4 +1343,39 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get dominantMood => 'المزاج السائد';
+
+  @override
+  String get areYouSureDelete => 'Are you sure you want to remove this child?';
+
+  @override
+  String get deleteChildWarning =>
+      'This action cannot be undone. All data will be permanently deleted.';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get sendResetLink => 'Send Reset Link';
+
+  @override
+  String get enterChildEmail => 'Enter child\'s email';
+
+  @override
+  String get emailSentSuccess => 'Reset link sent successfully';
+
+  @override
+  String get childRemovedSuccess => 'Child account removed successfully';
+
+  @override
+  String get bluetoothOff => 'Bluetooth is Off';
+
+  @override
+  String get turnOnBluetooth => 'Turn On Bluetooth';
+
+  @override
+  String get bluetoothOffDesc =>
+      'Please turn on Bluetooth to connect to your child\'s watch.';
+
+  @override
+  String get openSettings => 'Open Settings';
 }
