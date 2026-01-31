@@ -89,11 +89,7 @@ class _ParentHomeTabState extends State<ParentHomeTab> {
               .snapshots(),
           builder: (context, sessionSnapshot) {
             // Note: We don't necessarily show skeleton here if enrollment is loaded,
-            // but we might want to shimmer just the feed part?
-            // Actually, for a clean look, if the main dashboard is loading, show full skeleton.
-            // But if only sessions are lagging, maybe just the bottom part.
-            // Let's stick to full skeleton if sessions are critical, but they are just one part.
-            // Let's handle waiting state for sessions gracefully inside the layout.
+            // handle waiting state for sessions gracefully inside the layout.
 
             final isLoadingSessions =
                 sessionSnapshot.connectionState == ConnectionState.waiting;

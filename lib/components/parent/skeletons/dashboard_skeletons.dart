@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mokrabela/components/common/shimmer_loading.dart';
-import 'package:mokrabela/theme/app_theme.dart';
 import 'package:sizer/sizer.dart';
 
 class QuickStatsSkeleton extends StatelessWidget {
@@ -167,14 +166,26 @@ class StatsTabSkeleton extends StatelessWidget {
           // Header
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 5.w),
-             child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                   Shimmer(child: ShimmerLoadingBlock(width: 40.w, height: 24, borderRadius: 4)), // Title
-                   SizedBox(height: 2.h),
-                   Shimmer(child: ShimmerLoadingBlock(width: 90.w, height: 40, borderRadius: 20)), // Time Selector
-                ],
-             ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Shimmer(
+                  child: ShimmerLoadingBlock(
+                    width: 40.w,
+                    height: 24,
+                    borderRadius: 4,
+                  ),
+                ), // Title
+                SizedBox(height: 2.h),
+                Shimmer(
+                  child: ShimmerLoadingBlock(
+                    width: 90.w,
+                    height: 40,
+                    borderRadius: 20,
+                  ),
+                ), // Time Selector
+              ],
+            ),
           ),
           SizedBox(height: 3.h),
 
@@ -182,15 +193,15 @@ class StatsTabSkeleton extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 5.w),
             child: Shimmer(
-               child: Row(
-                 children: [
-                   Expanded(child: _buildSummaryCardSkeleton()),
-                   SizedBox(width: 3.w),
-                   Expanded(child: _buildSummaryCardSkeleton()),
-                   SizedBox(width: 3.w),
-                   Expanded(child: _buildSummaryCardSkeleton()),
-                 ],
-               ),
+              child: Row(
+                children: [
+                  Expanded(child: _buildSummaryCardSkeleton()),
+                  SizedBox(width: 3.w),
+                  Expanded(child: _buildSummaryCardSkeleton()),
+                  SizedBox(width: 3.w),
+                  Expanded(child: _buildSummaryCardSkeleton()),
+                ],
+              ),
             ),
           ),
           SizedBox(height: 3.h),
@@ -219,10 +230,10 @@ class StatsTabSkeleton extends StatelessWidget {
       child: Container(
         height: 30.h,
         margin: EdgeInsets.symmetric(horizontal: 5.w),
-         decoration: BoxDecoration(
-           color: Colors.white,
-           borderRadius: BorderRadius.circular(20),
-         ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+        ),
       ),
     );
   }
