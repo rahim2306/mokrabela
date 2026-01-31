@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:mokrabela/models/classroom_model.dart';
 import 'package:mokrabela/models/user_model.dart';
 import 'package:mokrabela/services/auth_service.dart';
@@ -14,7 +15,13 @@ class TeacherService {
     FirebaseDatabase? database,
     AuthService? authService,
   }) : _firestore = firestore ?? FirebaseFirestore.instance,
-       _database = database ?? FirebaseDatabase.instance,
+       _database =
+           database ??
+           FirebaseDatabase.instanceFor(
+             app: Firebase.app(),
+             databaseURL:
+                 'https://mokrabela-31058-default-rtdb.europe-west1.firebasedatabase.app',
+           ),
        _authService = authService ?? AuthService();
 
   /// Fetch all classrooms assigned to the current teacher
@@ -65,6 +72,59 @@ class TeacherService {
         return null;
       }
     });
+  }
+
+  /// Launch a group activity for a specific classroom
+  Future<void> launchClassActivity({
+    required String classroomId,
+    required String type, // 'breathing', 'stop_technique'
+    required String contentId, // 'ocean_breath'
+  }) async {
+    final user = _authService.currentUser;
+    if (user == null) {
+      print('❌ TeacherService: No user user logged in');
+      return;
+    }
+
+    print('🚀 TeacherService: Launching activity for classroom $classroomId');
+    print('   Type: $type, Content: $contentId');
+
+    final activityId = DateTime.now().millisecondsSinceEpoch.toString();
+
+    try {
+      await _database.ref('activeGroupActivity/$classroomId').set({
+        'activityId': activityId,
+        'type': type,
+        'contentId': contentId,
+        'startedAt': ServerValue.timestamp,
+        'status': 'active',
+        'teacherId': user.uid,
+      });
+      print('✅ TeacherService: ACTIVITY LAUNCHED SUCCESSFULLY: $activityId');
+    } catch (e) {
+      print('❌ TeacherService: Failed to launch activity: $e');
+      rethrow;
+    }
+  }
+
+  /// End the current group activity
+  Future<void> endClassActivity(String classroomId) async {
+    await _database.ref('activeGroupActivity/$classroomId').remove();
+  }
+
+  /// Stream participation count for an active activity
+  Stream<int> streamActivityParticipationCount(
+    String classroomId,
+    String activityId,
+  ) {
+    return _database
+        .ref('groupActivityParticipants/$classroomId/$activityId')
+        .onValue
+        .map((event) {
+          final data = event.snapshot.value;
+          if (data == null) return 0;
+          return (data as Map).length;
+        });
   }
 
   /// DEBUG: Create a classroom with all existing children

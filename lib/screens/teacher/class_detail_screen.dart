@@ -163,7 +163,151 @@ class _ClassDetailScreenState extends State<ClassDetailScreen> {
           ],
         ),
       ),
+
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => _showLaunchDialog(context),
+        backgroundColor: AppTheme.primary,
+        icon: Icon(Icons.rocket_launch_rounded, color: Colors.white),
+        label: Text(
+          "Launch Activity",
+          style: GoogleFonts.spaceGrotesk(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+      ),
     );
+  }
+
+  void _showLaunchDialog(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        ),
+        padding: EdgeInsets.all(5.w),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Launch Group Activity",
+              style: GoogleFonts.spaceGrotesk(
+                fontSize: 18.sp,
+                fontWeight: FontWeight.bold,
+                color: AppTheme.deepBlue,
+              ),
+            ),
+            SizedBox(height: 1.h),
+            Text(
+              "Select an activity to start for the whole class.",
+              style: TextStyle(fontSize: 12.sp, color: AppTheme.textSecondary),
+            ),
+            SizedBox(height: 3.h),
+            _buildActivityOption(
+              context,
+              title: "Ocean Breath",
+              subtitle: "Calming breathing exercise (10s)",
+              icon: Icons.waves,
+              color: Colors.blueAccent,
+              onTap: () => _launchActivity("breathing", "ocean_breath"),
+            ),
+            _buildActivityOption(
+              context,
+              title: "STOP Technique",
+              subtitle: "Emergency grounding (6s)",
+              icon: Icons.pan_tool_rounded,
+              color: Colors.redAccent,
+              onTap: () => _launchActivity("stop_technique", "stop_technique"),
+            ),
+            _buildActivityOption(
+              context,
+              title: "Focus Time",
+              subtitle: "Silent focus timer (Coming Soon)",
+              icon: Icons.timer,
+              color: Colors.purpleAccent,
+              isComingSoon: true,
+              onTap: () {},
+            ),
+            SizedBox(height: 2.h),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildActivityOption(
+    BuildContext context, {
+    required String title,
+    required String subtitle,
+    required IconData icon,
+    required Color color,
+    required VoidCallback onTap,
+    bool isComingSoon = false,
+  }) {
+    return ListTile(
+      onTap: onTap,
+      leading: Container(
+        padding: EdgeInsets.all(3.w),
+        decoration: BoxDecoration(
+          color: color.withValues(alpha: 0.1),
+          shape: BoxShape.circle,
+        ),
+        child: Icon(icon, color: color),
+      ),
+      title: Text(
+        title,
+        style: GoogleFonts.spaceGrotesk(
+          fontWeight: FontWeight.bold,
+          color: isComingSoon ? Colors.grey : AppTheme.deepBlue,
+        ),
+      ),
+      subtitle: Text(subtitle),
+      trailing: isComingSoon
+          ? Container(
+              padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 0.5.h),
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                "Soon",
+                style: TextStyle(fontSize: 10.sp, color: Colors.grey),
+              ),
+            )
+          : Icon(Icons.arrow_forward_ios, size: 12.sp, color: Colors.grey),
+    );
+  }
+
+  Future<void> _launchActivity(String type, String contentId) async {
+    Navigator.pop(context); // Close dialog
+    try {
+      await _teacherService.launchClassActivity(
+        classroomId: widget.classroom.id,
+        type: type,
+        contentId: contentId,
+      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("🚀 Activity Launched!"),
+            backgroundColor: AppTheme.successGreen,
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Failed to launch: $e"),
+            backgroundColor: AppTheme.errorRed,
+          ),
+        );
+      }
+    }
   }
 
   Widget _buildStudentTile(UserModel student) {
