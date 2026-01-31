@@ -11,7 +11,19 @@ import 'package:sizer/sizer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  if (Firebase.apps.isEmpty) {
+    try {
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+    } catch (e) {
+      if (!e.toString().contains('duplicate-app')) {
+        rethrow;
+      }
+      // If duplicate, ignore and proceed
+      debugPrint('Firebase already initialized: $e');
+    }
+  }
   // await addTestBreathingExercise();
   //await addTestStory();
   runApp(const MyApp());
