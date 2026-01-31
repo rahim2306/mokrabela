@@ -2679,6 +2679,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Open Settings'**
   String get openSettings;
+
+  /// No description provided for @noActivityYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No Activity Yet'**
+  String get noActivityYet;
+
+  /// No description provided for @noActivityYetDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Your child hasn\'t started any sessions yet. Check back once they begin their journey!'**
+  String get noActivityYetDesc;
+
+  /// No description provided for @noChildSelectedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No Child Selected'**
+  String get noChildSelectedTitle;
+
+  /// No description provided for @noChildSelectedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a child from the top dropdown to view their progress.'**
+  String get noChildSelectedMessage;
+
+  /// No description provided for @noStatsAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No Statistics Available'**
+  String get noStatsAvailable;
+
+  /// No description provided for @noStatsAvailableDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete some activities to see insights here.'**
+  String get noStatsAvailableDesc;
 }
 
 class _AppLocalizationsDelegate

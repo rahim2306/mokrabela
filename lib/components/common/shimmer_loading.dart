@@ -1,39 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
-/// Shimmer loading effect for skeleton screens
-class ShimmerLoading extends StatefulWidget {
+class Shimmer extends StatefulWidget {
   final Widget child;
-  final bool isLoading;
   final Color baseColor;
   final Color highlightColor;
+  final Duration period;
 
-  const ShimmerLoading({
+  const Shimmer({
     super.key,
     required this.child,
-    this.isLoading = true,
     this.baseColor = const Color(0xFFE0E0E0),
     this.highlightColor = const Color(0xFFF5F5F5),
+    this.period = const Duration(milliseconds: 1500),
   });
 
   @override
-  State<ShimmerLoading> createState() => _ShimmerLoadingState();
+  State<Shimmer> createState() => _ShimmerState();
 }
 
-class _ShimmerLoadingState extends State<ShimmerLoading>
-    with SingleTickerProviderStateMixin {
+class _ShimmerState extends State<Shimmer> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1500),
-    )..repeat();
-
-    _animation = Tween<double>(begin: -2, end: 2).animate(
+    _controller = AnimationController(vsync: this, duration: widget.period)
+      ..repeat();
+    _animation = Tween<double>(begin: -1.0, end: 2.0).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeInOutSine),
     );
   }
@@ -46,56 +40,72 @@ class _ShimmerLoadingState extends State<ShimmerLoading>
 
   @override
   Widget build(BuildContext context) {
-    if (!widget.isLoading) {
-      return widget.child;
-    }
-
     return AnimatedBuilder(
       animation: _animation,
       builder: (context, child) {
         return ShaderMask(
+          blendMode: BlendMode.srcATop,
           shaderCallback: (bounds) {
             return LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
               colors: [
                 widget.baseColor,
                 widget.highlightColor,
                 widget.baseColor,
               ],
               stops: [
-                _animation.value - 0.3,
-                _animation.value,
-                _animation.value + 0.3,
-              ].map((e) => e.clamp(0.0, 1.0)).toList(),
+                0.0,
+                0.5, // Highlight in middle
+                1.0,
+              ],
+              transform: _SlidingGradientTransform(_animation.value),
             ).createShader(bounds);
           },
-          blendMode: BlendMode.srcATop,
-          child: widget.child,
+          child: child,
         );
       },
+      child: widget.child,
     );
   }
 }
 
-/// Pre-built shimmer skeleton for cards
-class ShimmerCard extends StatelessWidget {
-  final double? width;
-  final double? height;
-  final BorderRadius? borderRadius;
+class _SlidingGradientTransform extends GradientTransform {
+  final double slidePercent;
+  const _SlidingGradientTransform(this.slidePercent);
 
-  const ShimmerCard({super.key, this.width, this.height, this.borderRadius});
+  @override
+  Matrix4? transform(Rect bounds, {TextDirection? textDirection}) {
+    return Matrix4.translationValues(bounds.width * slidePercent, 0.0, 0.0);
+  }
+}
+
+/// A simple colored block to use within Shimmer
+class ShimmerLoadingBlock extends StatelessWidget {
+  final double width;
+  final double height;
+  final double borderRadius;
+  final Color? color;
+
+  const ShimmerLoadingBlock({
+    super.key,
+    required this.width,
+    required this.height,
+    this.borderRadius = 8,
+    this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return ShimmerLoading(
-      child: Container(
-        width: width ?? double.infinity,
-        height: height ?? 15.h,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: borderRadius ?? BorderRadius.circular(20),
-        ),
+    return Container(
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        color:
+            color ??
+            Colors
+                .black, // Color doesn't matter much as Shimmer overrides it usually, but black is good base
+        borderRadius: BorderRadius.circular(borderRadius),
       ),
     );
   }

@@ -230,10 +230,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get achievements => 'Réussites';
 
   @override
-  String get trophiesTab => 'Trophies';
+  String get trophiesTab => 'Trophées';
 
   @override
-  String get mailboxTab => 'Mailbox';
+  String get mailboxTab => 'Boîte aux lettres';
 
   @override
   String get tapToStart => 'Appuyez pour commencer';
@@ -1275,19 +1275,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get weekTitleIntegrationReview => 'Intégration et\nrévision';
 
   @override
-  String get weekDesc1 => 'Breathing, Body Scan, Daily Tasks';
+  String get weekDesc1 => 'Compréhension de soi et sécurité émotionnelle.';
 
   @override
-  String get weekDesc2 => 'Memory Flip, Stories';
+  String get weekDesc2 => 'Développement de la concentration.';
 
   @override
-  String get weekDesc3 => 'Daily Tasks, Self-Regulation';
+  String get weekDesc3 => 'Mise en place d\'habitudes saines.';
 
   @override
-  String get weekDesc4 => 'Drawing, Music';
+  String get weekDesc4 => 'Créativité et calme intérieur.';
 
   @override
-  String get weekDesc5 => 'Math Puzzle, Memory Sequence';
+  String get weekDesc5 => 'Intégration et bilan.';
 
   @override
   String get selectChildToView =>
@@ -1377,37 +1377,58 @@ class AppLocalizationsFr extends AppLocalizations {
   String get dominantMood => 'Humeur dominante';
 
   @override
-  String get areYouSureDelete => 'Are you sure you want to remove this child?';
+  String get areYouSureDelete => 'Êtes-vous sûr de vouloir supprimer ?';
 
   @override
   String get deleteChildWarning =>
-      'This action cannot be undone. All data will be permanently deleted.';
+      'Cette action est irréversible. Toutes les données de l\'enfant seront perdues.';
 
   @override
-  String get delete => 'Delete';
+  String get delete => 'Supprimer';
 
   @override
-  String get sendResetLink => 'Send Reset Link';
+  String get sendResetLink => 'Envoyer le lien';
 
   @override
-  String get enterChildEmail => 'Enter child\'s email';
+  String get enterChildEmail => 'Entrez l\'e-mail de l\'enfant';
 
   @override
-  String get emailSentSuccess => 'Reset link sent successfully';
+  String get emailSentSuccess => 'E-mail envoyé avec succès !';
 
   @override
-  String get childRemovedSuccess => 'Child account removed successfully';
+  String get childRemovedSuccess => 'Enfant supprimé avec succès.';
 
   @override
-  String get bluetoothOff => 'Bluetooth is Off';
+  String get bluetoothOff => 'Bluetooth désactivé';
 
   @override
-  String get turnOnBluetooth => 'Turn On Bluetooth';
+  String get turnOnBluetooth => 'Activer le Bluetooth';
 
   @override
   String get bluetoothOffDesc =>
-      'Please turn on Bluetooth to connect to your child\'s watch.';
+      'Veuillez activer le Bluetooth pour vous connecter à la montre.';
 
   @override
-  String get openSettings => 'Open Settings';
+  String get openSettings => 'Ouvrir les paramètres';
+
+  @override
+  String get noActivityYet => 'Aucune activité pour le moment';
+
+  @override
+  String get noActivityYetDesc =>
+      'Votre enfant n\'a pas encore commencé de session. Revenez vérifier une fois qu\'il aura commencé son voyage !';
+
+  @override
+  String get noChildSelectedTitle => 'Aucun enfant sélectionné';
+
+  @override
+  String get noChildSelectedMessage =>
+      'Veuillez sélectionner un enfant dans le menu déroulant ci-dessus pour voir ses progrès.';
+
+  @override
+  String get noStatsAvailable => 'Aucune statistique disponible';
+
+  @override
+  String get noStatsAvailableDesc =>
+      'Terminez quelques activités pour voir les aperçus ici.';
 }

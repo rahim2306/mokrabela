@@ -12,6 +12,7 @@ import 'package:mokrabela/services/parent_service.dart';
 import 'package:mokrabela/theme/app_theme.dart';
 import 'package:sizer/sizer.dart';
 import 'package:mokrabela/models/user_model.dart';
+import 'package:mokrabela/components/parent/skeletons/dashboard_skeletons.dart';
 
 class ParentStatsTab extends StatefulWidget {
   final String? selectedChildId;
@@ -160,7 +161,7 @@ class _ParentStatsTabState extends State<ParentStatsTab> {
                   ),
                 )
               else
-                const Center(child: CircularProgressIndicator()),
+                const StatsTabSkeleton(),
 
               SizedBox(height: 3.h),
 

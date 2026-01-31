@@ -1115,5 +1115,11 @@
   "bluetoothOff": "Bluetooth is Off",
   "turnOnBluetooth": "Turn On Bluetooth",
   "bluetoothOffDesc": "Please turn on Bluetooth to connect to your child's watch.",
-  "openSettings": "Open Settings"
+  "openSettings": "Open Settings",
+  "noActivityYet": "No Activity Yet",
+  "noActivityYetDesc": "Your child hasn't started any sessions yet. Check back once they begin their journey!",
+  "noChildSelectedTitle": "No Child Selected",
+  "noChildSelectedMessage": "Please select a child from the top dropdown to view their progress.",
+  "noStatsAvailable": "No Statistics Available",
+  "noStatsAvailableDesc": "Complete some activities to see insights here."
 }

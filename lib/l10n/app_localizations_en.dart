@@ -1385,4 +1385,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get openSettings => 'Open Settings';
+
+  @override
+  String get noActivityYet => 'No Activity Yet';
+
+  @override
+  String get noActivityYetDesc =>
+      'Your child hasn\'t started any sessions yet. Check back once they begin their journey!';
+
+  @override
+  String get noChildSelectedTitle => 'No Child Selected';
+
+  @override
+  String get noChildSelectedMessage =>
+      'Please select a child from the top dropdown to view their progress.';
+
+  @override
+  String get noStatsAvailable => 'No Statistics Available';
+
+  @override
+  String get noStatsAvailableDesc =>
+      'Complete some activities to see insights here.';
 }

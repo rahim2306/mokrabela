@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mokrabela/components/common/empty_states.dart';
+import 'package:mokrabela/components/parent/skeletons/dashboard_skeletons.dart';
 import 'package:mokrabela/components/parent/activity_feed.dart';
 import 'package:mokrabela/components/parent/protocol_roadmap_card.dart';
 import 'package:mokrabela/components/parent/quick_stats_card.dart';
@@ -52,11 +54,31 @@ class _ParentHomeTabState extends State<ParentHomeTab> {
     return StreamBuilder<ProtocolEnrollment?>(
       stream: _protocolService.getEnrollmentStream(widget.selectedChildId!),
       builder: (context, enrollmentSnapshot) {
-        final enrollment = enrollmentSnapshot.data;
+        // SKELETON: Roadmap
+        if (enrollmentSnapshot.connectionState == ConnectionState.waiting) {
+          return SingleChildScrollView(
+            padding: EdgeInsets.symmetric(vertical: 2.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildHeader(context),
+                const ProtocolRoadmapSkeleton(),
+                SizedBox(height: 3.h),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5.w),
+                  child: const QuickStatsSkeleton(),
+                ),
+                SizedBox(height: 3.h),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5.w),
+                  child: const RecentActivitySkeleton(),
+                ),
+              ],
+            ),
+          );
+        }
 
-        // In a real app, we would also stream sessions here
-        // For now, we mock the session data until StatsService is fully ready
-        // or we can use a direct Firestore query in a FutureBuilder
+        final enrollment = enrollmentSnapshot.data;
 
         return StreamBuilder<QuerySnapshot>(
           stream: _firestore
@@ -66,20 +88,18 @@ class _ParentHomeTabState extends State<ParentHomeTab> {
               .limit(5)
               .snapshots(),
           builder: (context, sessionSnapshot) {
+            // Note: We don't necessarily show skeleton here if enrollment is loaded,
+            // but we might want to shimmer just the feed part?
+            // Actually, for a clean look, if the main dashboard is loading, show full skeleton.
+            // But if only sessions are lagging, maybe just the bottom part.
+            // Let's stick to full skeleton if sessions are critical, but they are just one part.
+            // Let's handle waiting state for sessions gracefully inside the layout.
+
+            final isLoadingSessions =
+                sessionSnapshot.connectionState == ConnectionState.waiting;
             final sessions =
                 sessionSnapshot.data?.docs.map((doc) => doc.data()).toList() ??
                 [];
-
-            // Calculate quick stats locally for MVP
-            // Ideally should be pre-aggregated
-            final totalSessions =
-                sessionSnapshot.data?.docs.length ??
-                0; // This only counts last 5 if limited, need aggregate query for total
-            // For MVP quick stats, we'll just show placeholders if we don't have the aggregate service yet
-            // Or we can assume the user has < 100 sessions and query all (careful with reads)
-
-            // Let's use dummy stats for "Total" but real for "Recent Activity" to avoid read spikes
-            // Real implementation comes in Phase 3
 
             return SingleChildScrollView(
               padding: EdgeInsets.symmetric(vertical: 2.h),
@@ -87,18 +107,7 @@ class _ParentHomeTabState extends State<ParentHomeTab> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Header
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 5.w),
-                    child: Text(
-                      AppLocalizations.of(context)!.parentOverview,
-                      style: GoogleFonts.spaceGrotesk(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w800,
-                        color: AppTheme.deepBlue,
-                      ),
-                    ),
-                  ),
+                  _buildHeader(context),
 
                   // Protocol Roadmap (Horizontal Scroll)
                   ProtocolRoadmapCard(enrollment: enrollment),
@@ -106,22 +115,22 @@ class _ParentHomeTabState extends State<ParentHomeTab> {
                   SizedBox(height: 3.h),
 
                   // Quick Stats
-                  // Calculate real stats from sessions or show 0 if empty
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 5.w),
-                    child: QuickStatsCard(
-                      totalSessions: sessions.length,
-                      totalMinutes: sessions.isEmpty
-                          ? 0
-                          : sessions.fold<int>(0, (total, s) {
-                              final data = s as Map<String, dynamic>;
-                              final duration = data['duration'] as int? ?? 0;
-                              return total + (duration ~/ 60);
-                            }),
-                      streakDays: sessions.isEmpty
-                          ? 0
-                          : (enrollment?.currentWeek ?? 1),
-                    ),
+                    child: isLoadingSessions
+                        ? const QuickStatsSkeleton()
+                        : QuickStatsCard(
+                            totalSessions: sessions.length, // Placeholder logic
+                            totalMinutes: sessions.isEmpty
+                                ? 0
+                                : sessions.fold<int>(0, (total, s) {
+                                    final data = s as Map<String, dynamic>;
+                                    final duration =
+                                        data['duration'] as int? ?? 0;
+                                    return total + (duration ~/ 60);
+                                  }),
+                            streakDays: enrollment?.currentWeek ?? 1,
+                          ),
                   ),
 
                   SizedBox(height: 3.h),
@@ -129,7 +138,11 @@ class _ParentHomeTabState extends State<ParentHomeTab> {
                   // Recent Activity Feed
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 5.w),
-                    child: RecentActivityFeed(recentSessions: sessions),
+                    child: isLoadingSessions
+                        ? const RecentActivitySkeleton()
+                        : (sessions.isEmpty
+                              ? EmptyStateWidget.noSessions(context)
+                              : RecentActivityFeed(recentSessions: sessions)),
                   ),
 
                   SizedBox(height: 12.h), // Space for bottom nav
@@ -139,6 +152,23 @@ class _ParentHomeTabState extends State<ParentHomeTab> {
           },
         );
       },
+    );
+  }
+
+  Widget _buildHeader(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: 5.w,
+        vertical: 0.h,
+      ).copyWith(bottom: 2.h),
+      child: Text(
+        AppLocalizations.of(context)!.parentOverview,
+        style: GoogleFonts.spaceGrotesk(
+          fontSize: 20.sp,
+          fontWeight: FontWeight.w800,
+          color: AppTheme.deepBlue,
+        ),
+      ),
     );
   }
 }

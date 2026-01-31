@@ -76,7 +76,7 @@ class _ProtocolRoadmapCardState extends State<ProtocolRoadmapCard> {
               Text(
                 AppLocalizations.of(context)!.protocolRoadmap,
                 style: GoogleFonts.spaceGrotesk(
-                  fontSize: 18.sp,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w800,
                   color: AppTheme.deepBlue,
                 ),
